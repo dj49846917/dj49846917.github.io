@@ -86,7 +86,7 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: /img/avatar.png
+  img: /images/index/avater.jpg
   effect: false
 
 # the banner image of home page
@@ -100,7 +100,7 @@ archive_img:
 
 # the banner image of tag page
 # tag page, look like https://xxxxxxxxx.com/tags/butterfly
-tag_img:
+tag_img: 
 
 # the banner image of category page
 # category page, look like https://xxxxxxxxx.com/categories/butterfly
@@ -138,9 +138,9 @@ error_404:
 
 post_meta:
   page: # Home Page
-    date_type: created # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
+    date_type: both # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
     categories: true # true or false 主頁是否顯示分類
-    tags: false # true or false 主頁是否顯示標籤
+    tags: true # true or false 主頁是否顯示標籤
   post:
     date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
     categories: true # true or false 文章頁是否顯示分類
@@ -354,7 +354,7 @@ gitter:
 
 since: 2020
 
-footer_custom_text:
+footer_custom_text: Hi, welcome to my <a href="https://dj49846917.github.io/">blog</a>!
 
 footer_copyright: true
 
@@ -606,8 +606,8 @@ busuanzi:
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
-  enable: false
-  publish_date:
+  enable: true
+  publish_date: 2020/6/21 12:00:00
 
 # Bottom right button (右下角按鈕)
 # --------------------------------------
