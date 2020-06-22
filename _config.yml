@@ -4,7 +4,7 @@
 
 # Site
 title: 杜江的博客
-subtitle: '如果没人认可你，那就自己认可自己；如果没人欣赏你，那就自己欣赏自己；如果没人祝福你，那就自己祝福自己。与其用泪水悔恨昨天，不如用汗水拼搏明天。'
+subtitle: ''
 description: ''
 keywords:
 author: 杜江
@@ -41,7 +41,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:

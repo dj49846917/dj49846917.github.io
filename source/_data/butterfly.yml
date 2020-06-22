@@ -36,8 +36,8 @@ copy:
 # formal:
 #   icon: link || the description
 social:
-  fab fa-github: https://github.com/xxxxx || Github
-  fas fa-envelope: mailto:xxxxxx@gmail.com || Email
+  fab fa-github: https://github.com/dj49846917 || Github
+  fas fa-envelope: 821084785@qq.com || Email
 
 # search (搜索)
 # --------------------------------------
@@ -516,7 +516,7 @@ display_mode: light
 
 # Beautify (美化頁面顯示)
 beautify:
-  enable: false
+  enable: true
   field: post # site/post
   title-prefix-icon: '\f0c1'
   title-prefix-icon-color: '#F47466'
@@ -559,8 +559,7 @@ subtitle:
   # 開頭不允許轉義字元，如需要，請把整個句子用雙引號包住
   # 如果關閉打字效果，subtitle只會顯示sub的第一行文字
   sub:
-    - 今日事&#44;今日畢
-    - Never put off till tomorrow what you can do today
+    - 如果没人认可你，那就自己认可自己；如果没人欣赏你，那就自己欣赏自己；如果没人祝福你，那就自己祝福自己。与其用泪水悔恨昨天，不如用汗水拼搏明天。
 
 # Loading Animation (加載動畫)
 preloader: false
