@@ -7,15 +7,15 @@
 #   name || link || icon
 
 menu:
-  Home: / || fas fa-home
-  Archives: /archives/ || fas fa-archive
-  Tags: /tags/ || fas fa-tags
-  Categories: /categories/ || fas fa-folder-open
-  List||fas fa-list:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  清单||fas fa-list:
     - Music || /music/ || fas fa-music
     - Movie || /movies/ || fas fa-video
-  Link: /link/ || fas fa-link
-  About: /about/ || fas fa-heart
+  友情链接: /link/ || fas fa-link
+  关于: /about/ || fas fa-heart
 
 # Code Blocks (代碼相關)
 # --------------------------------------
@@ -130,10 +130,10 @@ error_img:
   flink: /img/friend_404.gif
   post_page: /img/404.jpg
 
-# A simple 404 page
+# A simple 404 page（配置404页面）
 error_404:
-  enable: false
-  subtitle: 'Page Not Found'
+  enable: true
+  subtitle: '頁面沒有找到'
   background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
 
 post_meta:

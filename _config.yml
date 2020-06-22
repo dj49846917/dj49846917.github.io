@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: 杜江的博客
+subtitle: '如果没人认可你，那就自己认可自己；如果没人欣赏你，那就自己欣赏自己；如果没人祝福你，那就自己祝福自己。与其用泪水悔恨昨天，不如用汗水拼搏明天。'
 description: ''
 keywords:
-author: John Doe
-language: en
+author: 杜江
+language: zh-CN
 timezone: ''
 
 # URL

@@ -132,8 +132,8 @@ error_img:
 
 # A simple 404 page
 error_404:
-  enable: false
-  subtitle: 'Page Not Found'
+  enable: true
+  subtitle: '頁面沒有找到'
   background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
 
 post_meta:
@@ -267,7 +267,7 @@ gitalk:
   repo:
   owner:
   admin:
-  language: en # en, zh-CN, zh-TW, es-ES, fr, ru
+  language: zh-CN # en, zh-CN, zh-TW, es-ES, fr, ru
   perPage: 10 # Pagination size, with maximum 100.
   distractionFreeMode: false # Facebook-like distraction free mode.
   pagerDirection: last # Comment sorting direction, available values are last and first.
@@ -282,7 +282,7 @@ valine:
   appKey: # leancloud application app key
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
-  lang: en # i18n: zh-CN/zh-TW/en/ja
+  lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
   placeholder: Please leave your footprints # valine comment input placeholder(like: Please leave your footprints )
   guest_info: nick,mail,link #valine comment header info (nick/mail/link)
   recordIP: false # Record reviewer IP
