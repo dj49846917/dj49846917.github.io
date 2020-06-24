@@ -255,8 +255,8 @@ disqusjs:
 # livere(來必力)
 # https://www.livere.com/
 livere:
-  enable: false
-  uid:
+  enable: true
+  uid: MTAyMC81MDYyNy8yNzExMA==
 
 # gitalk
 # https://github.com/gitalk/gitalk

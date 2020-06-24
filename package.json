@@ -22,6 +22,7 @@
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-pug": "^1.0.0",
     "hexo-renderer-stylus": "^1.1.0",
-    "hexo-server": "^1.0.0"
+    "hexo-server": "^1.0.0",
+    "hexo-tag-aplayer": "^3.0.4"
   }
 }
