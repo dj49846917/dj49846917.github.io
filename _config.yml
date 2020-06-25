@@ -106,3 +106,12 @@ deploy:
 aplayer:
   meting: true
   asset_inject: false
+
+# 豆瓣
+douban:
+  user: 218573595
+  builtin: true
+  movie:
+    title: '那些年, 我看过的电影'
+    quote: '过去，现在，未来'
+  timeout: 10000
