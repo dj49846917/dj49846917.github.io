@@ -12,8 +12,8 @@ menu:
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
   清单||fas fa-list:
-    - Music || /music/ || fas fa-music
-    - Movie || /movies/ || fas fa-video
+    - 音乐 || /music/ || fas fa-music
+    - 电影 || /movies/ || fas fa-video
   友情链接: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
 
@@ -86,7 +86,7 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: /images/index/avater.jpg
+  img: /images/hexo/avater.jpg
   effect: false
 
 # the banner image of home page
@@ -464,7 +464,7 @@ rightside-bottom:
 # canvas_ribbon (靜止彩帶背景)
 # See: https://github.com/hustcc/ribbon.js
 canvas_ribbon:
-  enable: true
+  enable: false
   size: 150
   alpha: 0.6
   zIndex: -1

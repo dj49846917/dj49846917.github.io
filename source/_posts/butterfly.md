@@ -37,6 +37,22 @@ theme: butterfly
   如果你沒有 pug 以及 stylus 的渲染器，請下載安裝： npm install hexo-renderer-pug hexo-renderer-stylus --save or yarn add hexo-renderer-pug hexo-renderer-stylus
 {% endnote %}
 
+## 使用音乐
+  * 输入命令：cnpm install --save hexo-tag-aplayer
+  * 在根路径的_config.yml中修改
+    ```
+      aplayer:
+        meting: true
+    ```
+  * 在你需要引入音乐的页面，
+    ```
+        ---
+        aplayer: true
+        ---
+
+        {% meting "60198" "netease" "playlist" "autoplay" "listmaxheight:340px" "preload:none" "theme:#ad7a86"%}
+    ```
+
 # 详细配置攻略请看butterfly的官网
 ## 地址：
   * 官网地址：[https://demo.jerryc.me/](https://demo.jerryc.me/)
