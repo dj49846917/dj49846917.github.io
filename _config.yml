@@ -114,4 +114,4 @@ douban:
   movie:
     title: '那些年, 我看过的电影'
     quote: '过去，现在，未来'
-  timeout: 10000
+  timeout: 100000
