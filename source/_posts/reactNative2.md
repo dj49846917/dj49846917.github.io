@@ -54,7 +54,7 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
   3. createAppContainer 函数对createStackNavigator 进行包裹
   4. 导出createAppContainer 创建的组件 作为应用程序的根组件
   5. [详细代码请看:https://github.com/dj49846917/react-native-study/blob/master/docs/example/%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC/createStackNavigator/App.js](https://github.com/dj49846917/react-native-study/blob/master/docs/example/%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC/createStackNavigator/App.js)
-  6. ![展示效果](/images/reactNative/images/普通导航.gif)
+  6. 展示效果: ![展示效果](/images/reactNative/images/普通导航.gif)
 
 
 {% note warning %}
@@ -78,6 +78,8 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
     console.log(navigation.state.params);
   ```
 {% endnote %}
+
+***
 
 # createMaterialTopTabNavigator: 顶部选项卡
 
@@ -107,4 +109,35 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
   3. createAppContainer 函数对createMaterialTopTabNavigator 进行包裹
   4. 导出createAppContainer 创建的组件 作为应用程序的根组件
   5. [详细代码请看:https://github.com/dj49846917/react-native-study/blob/master/docs/example/%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC/createMaterialTopTabNavigator/App.js](https://github.com/dj49846917/react-native-study/blob/master/docs/example/%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC/createMaterialTopTabNavigator/App.js)
-  6. ![展示效果](/images/reactNative/images/顶部导航栏效果.jpg)
+  6. 展示效果: ![展示效果](/images/reactNative/images/顶部导航栏效果.jpg)
+***
+
+# createBottomTabNavigator: 底部导航栏
+
+## 使用步骤
+### 核心包：react-navigation
+  ```
+    npm install react-navigation
+  ```
+
+### 依赖项目：
+  ```
+    npm install react-native-reanimated 
+                react-native-gesture-handler 
+                react-native-screens 
+                react-native-safe-area-context 
+                @react-native-community/masked-view
+  ```
+
+### 使用createBottomTabNavigator 顶部选项卡 前置安装
+  ```
+    npm install --save react-navigation-tabs
+  ```
+
+### 使用createBottomTabNavigator 具体
+  1. 导入 createAppContainer createBottomTabNavigator
+  2. 定义导航
+  3. createAppContainer 函数对createBottomTabNavigator 进行包裹
+  4. 导出createAppContainer 创建的组件 作为应用程序的根组件
+  5. [详细代码请看:https://github.com/dj49846917/react-native-study/blob/master/docs/example/%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC/createBottomTabNavigator/App.js](https://github.com/dj49846917/react-native-study/blob/master/docs/example/%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC/createBottomTabNavigator/App.js)
+  6. 展示效果: ![展示效果](/images/reactNative/images/底部导航栏效果.gif)
