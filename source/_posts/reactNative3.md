@@ -370,3 +370,165 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
         >
       ```
 {% endnote %}
+
+## 底部导航栏
+  1. 安装核心包：
+    ```
+      yarn add @react-navigation/bottom-tabs
+    ```
+
+  2. 创建底部导航器
+    * createBottomTabNavigator标签包含两个子组件Screen和Navigator
+      ```
+        import React, { Component } from 'react'
+        import { NavigationContainer } from '@react-navigation/native'
+        import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+        import Home from '@/pages/Home'
+        import Account from '@/pages/Account'
+        import Found from '@/pages/Found'
+        import Listen from '@/pages/Listen'
+
+        export type BottomTabParamList = {
+          Home: undefined,
+          Found: undefined,
+          Listen: undefined,
+          Account: undefined
+        }
+
+        const Tab = createBottomTabNavigator<BottomTabParamList>()
+
+
+        export default class BottomTabs extends Component {
+          render() {
+            return (
+              <NavigationContainer>
+                <Tab.Navigator tabBarOptions={{
+                  activeTintColor: '#c71622'
+                }}>
+                  <Tab.Screen name='Home' component={Home} options={{ tabBarLabel: '首页' }}></Tab.Screen>
+                  <Tab.Screen name='Listen' component={Listen} options={{ tabBarLabel: '我听' }}></Tab.Screen>
+                  <Tab.Screen name='Found' component={Found} options={{ tabBarLabel: '发现' }}></Tab.Screen>
+                  <Tab.Screen name='Account' component={Account} options={{ tabBarLabel: '用户' }}></Tab.Screen>
+                </Tab.Navigator>
+              </NavigationContainer>
+            )
+          }
+        }
+
+        # 最后在根路径引入即可
+      ```
+
+  3. 堆栈导航器嵌套底部导航栏
+    * 在router/index.tsx里：
+      ```
+        import React, { Component } from 'react'
+        import { NavigationContainer } from '@react-navigation/native'
+        import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
+        import Detail from '@/pages/Home/Detail'
+        import BottomTabs from '@/router/BottomTabs'
+
+        export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
+          Tab: {
+            screen?: string
+          },
+          Detail: {
+            id: string
+          }
+        }
+
+        // 该类型申明约束每一个页面组件的props
+        export type RootStackNavigation = StackNavigationProp<RootStackList>
+
+        let Stack = createStackNavigator<RootStackList>()
+
+        export default class Navigator extends Component {
+          render() {
+            return (
+              <NavigationContainer>
+                <Stack.Navigator
+                  headerMode='screen'
+                  screenOptions={{
+                    headerTitleAlign: 'center', // 标题内容居中
+                    // 下面两句是统一ios和安卓的页面切换效果
+                    headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                    // 开启安卓的切换手势
+                    gestureEnabled: true,
+                    gestureDirection: 'horizontal'
+                  }}
+                >
+                  <Stack.Screen
+                    name="Tab"
+                    component={BottomTabs}
+                  />
+                  <Stack.Screen 
+                    name="Detail" 
+                    component={Detail}
+                    options={{
+                      headerTitle: '详情'
+                    }}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
+            )
+          }
+        }
+      ```
+
+    * 在router/BottomTabs.tsx里：
+      ```
+        import React, { Component } from 'react'
+        import { NavigationContainer } from '@react-navigation/native'
+        import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
+        import Detail from '@/pages/Home/Detail'
+        import BottomTabs from '@/router/BottomTabs'
+
+        export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
+          Tab: {
+            screen?: string
+          },
+          Detail: {
+            id: string
+          }
+        }
+
+        // 该类型申明约束每一个页面组件的props
+        export type RootStackNavigation = StackNavigationProp<RootStackList>
+
+        let Stack = createStackNavigator<RootStackList>()
+
+        export default class Navigator extends Component {
+          render() {
+            return (
+              <NavigationContainer>
+                <Stack.Navigator
+                  headerMode='screen'
+                  screenOptions={{
+                    headerTitleAlign: 'center', // 标题内容居中
+                    // 下面两句是统一ios和安卓的页面切换效果
+                    headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                    // 开启安卓的切换手势
+                    gestureEnabled: true,
+                    gestureDirection: 'horizontal'
+                  }}
+                >
+                  <Stack.Screen
+                    name="Tab"
+                    component={BottomTabs}
+                  />
+                  <Stack.Screen 
+                    name="Detail" 
+                    component={Detail}
+                    options={{
+                      headerTitle: '详情'
+                    }}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
+            )
+          }
+        }
+      ```
+
+    * 在根路径的index.js中，引入Navigator即可
