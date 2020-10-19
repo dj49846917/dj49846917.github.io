@@ -46,7 +46,8 @@
   ```
 
 6. hexo常见命令
-   * hexo clean（清除缓存） 
+   * hexo clean（清除缓存）
+   * hexo douban(安装了hexo-douban的，生成数据) 
    * hexo g（生成对应的文件）
    * hexo d（发布）
 

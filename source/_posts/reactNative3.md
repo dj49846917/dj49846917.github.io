@@ -532,3 +532,57 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
       ```
 
     * 在根路径的index.js中，引入Navigator即可
+
+# 时间选择组件：rmc-date-picker
+
+## 安装：
+  ```
+    npm install --save rmc-date-picker
+  ```
+
+## 使用：
+  ```
+    import DatePicker from 'rmc-date-picker'
+
+    <DatePicker
+      defaultDate={moment(new Date()).toDate()}
+      locale={lang}
+      mode={props.modeType}
+      maxDate={moment().add(30, 'y').toDate()}
+      minDate={moment([1980, 1, 1, 1, 1, 1]).toDate()}
+      onDateChange={(v) => {
+        console.log('v', v)
+      }}
+    />
+  ```
+
+## 详细文档:
+  https://www.npmjs.com/package/rmc-date-picker
+
+# 下拉选择组件：Picker
+
+## 安装：
+  ```
+    npm install --save @react-native-community/picker
+
+    ios一定要进入ios文件夹，执行pod install
+  ```
+
+## 使用：
+  ```
+    import {Picker} from '@react-native-community/picker';
+
+    <Picker
+      selectedValue={this.state.language}
+      style={{height: 50, width: 100}}
+      onValueChange={(itemValue, itemIndex) =>
+        console.log(itemValue, itemIndex)
+        this.setState({language: itemValue})
+      }>
+      <Picker.Item label="Java" value="java" />
+      <Picker.Item label="JavaScript" value="js" />
+    </Picker>
+  ```
+
+## 详细文档：
+  https://www.npmjs.com/package/@react-native-community/picker
