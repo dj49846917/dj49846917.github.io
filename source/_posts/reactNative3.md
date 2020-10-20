@@ -533,6 +533,8 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
 
     * 在根路径的index.js中，引入Navigator即可
 
+***
+
 # 时间选择组件：rmc-date-picker
 
 ## 安装：
@@ -559,6 +561,8 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
 ## 详细文档:
   https://www.npmjs.com/package/rmc-date-picker
 
+***
+
 # 下拉选择组件：Picker
 
 ## 安装：
@@ -583,6 +587,41 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
       <Picker.Item label="JavaScript" value="js" />
     </Picker>
   ```
+***
+
+# 文字提示组件: react-native-root-toast
+## 下载核心包:
+  ```
+    yarn add react-native-root-toast 或者 npm install --save react-native-root-toast
+  ```
+
+## 当react-native的版本>0.62时，需要在根路径src/index.tsx或者App.tsx中，加入以下代码：
+  ```
+    import { RootSiblingParent } from 'react-native-root-siblings';
+
+    return (
+      <RootSiblingParent>  // <- use RootSiblingParent to wrap your root component
+        <App />
+      </RootSiblingParent>
+    );
+  ```
+
+## 具体使用:
+  ```
+    import Toast from 'react-native-root-toast';
+
+    Toast.show('This is a message', {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0,
+    });
+  ```
+
+## 详细说明文档
+  详细说明文档请看：https://github.com/magicismight/react-native-root-toast
 
 ## 详细文档：
   https://www.npmjs.com/package/@react-native-community/picker
