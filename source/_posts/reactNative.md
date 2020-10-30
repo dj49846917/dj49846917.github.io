@@ -74,3 +74,22 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
   const navHeight = Header.HEIGHT;
   console.log(navHeight)
 ```
+
+# react-navigation重置路由(5.x版本)
+  1. 需求：app第一次进来先判断是否登录，如果没有登录，就跳转到登录页面，登录了就跳转到首页，但是返回的时候，登录和启动页都不要显示
+  
+  2. 实现方法：
+    ```
+      使用CommonActions的reset方法重置路由
+
+      import { useNavigation, CommonActions } from '@react-navigation/native';
+
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'Login' },
+          ],
+        })
+      );
+    ```  

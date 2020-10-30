@@ -625,3 +625,115 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
 
 ## 详细文档：
   https://www.npmjs.com/package/@react-native-community/picker
+
+***
+
+# 弹窗组件:react-native-modalbox
+## 下载核心包:
+  ```
+    npm install react-native-modalbox@latest --save
+    npm install --save-dev @types/react-native-modalbox
+  ```
+
+## 使用:
+  ```
+      import Modal from 'react-native-modalbox'
+
+      <Modal
+        isOpen={this.state.visible}
+        style={{height: UnitConvert.dpi(300)}}
+        position='top'
+        startOpen
+        onClosed={()=>{
+          this.setState({
+            visible: false
+          })
+        }}
+      >
+        <Text>2222</Text>
+      </Modal>
+  ```
+
+## 详细文档:
+  https://github.com/maxs15/react-native-modalbox#readme
+
+***
+
+# 缓存组件: async-storage
+## 下载核心包:
+  ```
+    npm install -- save @react-native-community/async-storage
+  ```
+## 封装及使用：
+  ```
+    import AsyncStorage from "@react-native-community/async-storage";
+
+    export default class Storage {
+      // 获取key的值
+      static async get(key: string) {
+        return AsyncStorage.getItem(key)
+      }
+
+      // 设置Key的值
+      static async set(key: string, value: any) {
+        return AsyncStorage.setItem(key, value)
+      }
+
+      // 删除Key的值
+      static async delete(key: string) {
+        return AsyncStorage.removeItem(key)
+      }
+
+      // 删除所有的值
+      static async deleteAll() {
+        return AsyncStorage.clear()
+      }
+    }
+
+    调用：
+      设置值: 
+        Storage.set('user', '张三')
+
+      获取值: 
+        Storage.get('user').then(res=>{
+          console.log(res)
+        })
+      
+      删除值:
+        Storage.remove('user')
+  ```
+
+## 详细文档请看：https://github.com/react-native-async-storage/async-storage
+
+***
+
+# 图片选择组件(可多选): react-native-image-crop-picker
+## 下载核心包：
+    ```
+      npm install --save react-native-image-crop-picker
+
+      注意：低版本的sdk，不识别标签导致项目跑不起来，我选的是0.30.0的版本，最新的0.35.1有问题
+    ```
+
+## 使用：
+      ```
+        # 在android\app\src\main\AndroidManifest.xml添加相机权限
+
+          <!-- 获取拍照权限 -->
+          <uses-permission android:name="android.permission.CAMERA" />
+
+
+        使用：
+          import ImagePicker from 'react-native-image-crop-picker';
+
+          ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+          }).then(image => {
+            console.log(image);
+          });
+      ```
+
+## 详细文档：
+https://github.com/ivpusic/react-native-image-crop-picker

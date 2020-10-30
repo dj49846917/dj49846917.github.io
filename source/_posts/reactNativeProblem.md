@@ -1,5 +1,5 @@
 ---
-title: react-native navigationOptions中不能获取this、state
+title: react native日常开发遇到的问题
 date: 2020-10-09 09:18:25
 tags: 
   - react-native
@@ -15,7 +15,8 @@ categories:
 cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593147695326&di=534e080eedb76452ae129c102cd04798&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fq_mini%2Cc_zoom%2Cw_640%2Fupload%2F20161228%2Fb2da1d0b3e1247d9b570eea5a531fa52_th.jpg                 # 文章的缩略图（用在首页）
 ---
 
-# 场景：在createStackNavigator路由过来的页面，navigationOptions的header中添加搜索框
+# react-native navigationOptions中不能获取this、state
+## 场景：在createStackNavigator路由过来的页面，navigationOptions的header中添加搜索框
   * 如下图：![如下图](/images/reactNative/images/problem/001.png)
 
     ```
@@ -38,7 +39,7 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
     因为this对象为null，所以找不到setState方法
   {% endnote %}
 
-# 解决办法：外部引用
+## 解决办法：外部引用
   * 在最外部申明：
     ```
       let that;
@@ -84,5 +85,10 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
     参考：https://www.cnblogs.com/yuxingxingstar/p/9804170.html
     https://blog.csdn.net/qq_35324309/article/details/88848315
   {% endnote %}
+
+***
+
+# textInput在android中，如果字体大小太小，垂直方向无法居中
+##  解决办法：在textInput中的设置padding: 0
 
   
