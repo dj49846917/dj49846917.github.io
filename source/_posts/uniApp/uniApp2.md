@@ -68,4 +68,76 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
 ***
 
 # 在uni-app中使用iconfont
+## nvue运行在app中
+  1. iconfont官网：https://www.iconfont.cn/
+  2. 登录
+  3. 选择你要的图标添加到项目中
+    * ![添加图标到项目](/images/uniApp/添加到项目.jpg)
+    * 点击查看在线链接按钮，看到一串代码, ![添加图标到项目2](/images/uniApp/添加到项目2.jpg)
+  4. 在需要用到的nvue页面或者在App.vue中的onLaunch事件中写入以下代码:
+    ```
+      // App.vue中
 
+      onLaunch: function() {
+			  // #ifdef APP-PLUS-NVUE
+			  // 引入iconfont
+			  const domModule = weex.requireModule('dom');
+        domModule.addRule('fontFace', {
+          fontFamily: 'iconfont',
+          src: "url('https://at.alicdn.com/t/font_2199095_voz8fueyab.ttf')"
+        });
+        // #endif
+      },
+    ```
+
+{% note warning %}
+  代码中的src的路径就是你项目中iconfont的ttf文件路径
+{% endnote %}
+
+  5. 在代码中用text组件
+    ```
+      <text class="iconfont">
+        &#xe649;
+      </text>
+    ```
+{% note warning %}
+  * class的内容必须是iconfont，和步骤4的fontFamily保持一致
+  * 必须要text标签，其他标签都没有效果
+  * text的内容不能有任何的空格，或者换行
+  * 可以通过css控制样式
+{% endnote %}
+
+## 兼容其他端
+  1. iconfont官网：https://www.iconfont.cn/
+  2. 登录
+  3. 选择你要的图标添加到项目中
+    * ![添加图标到项目](/images/uniApp/添加到项目.jpg)
+    * 点击查看在线链接按钮，看到一串代码, ![添加图标到项目2](/images/uniApp/添加到项目2.jpg)
+  4. 新建icon.css文件，然后在App.vue中引入,用到条件编译
+    ```
+      /* #ifndef APP-PLUS-NVUE */
+      @import "./common/css/icon.css";
+      /* #endif */
+    ```
+  5. 回到iconfont,点击下载至本地，然后拿到iconfont.css,把里面的内容复制到新建的icon.css中
+    * ![添加图标到项目](/images/uniApp/添加到项目3.jpg)
+    * 在icon.css中只留下以下代码即可:
+      ``` 
+        @font-face {font-family: "iconfont";
+          src: url('//at.alicdn.com/t/font_2199095_voz8fueyab.ttf?t=1606396700079') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+        }
+
+        .iconfont {
+          font-family: iconfont !important;
+          font-size: 16px;
+          font-style: normal;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      ```
+    * 将app.vue中的ttf路径放到icon.css中
+      ```
+        @font-face {font-family: "iconfont";
+          src: url('https://at.alicdn.com/t/font_2199095_voz8fueyab.ttf') format('truetype'),
+        }
+      ```
