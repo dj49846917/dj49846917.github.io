@@ -56,3 +56,6 @@
 # 如何添加页面
    * hexo new page
 
+# 如何添加文章
+   * hexo new post
+

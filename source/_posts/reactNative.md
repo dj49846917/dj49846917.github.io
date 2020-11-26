@@ -7,13 +7,13 @@ tags:
 type: hexo                                                                         # 标签、分类和友情链接三個页面需要配置(必填)
 description: 快速、简洁且高效的博客框架                                                            # 描述
 keywords: hexo的搭建                                                                       # 关键词，便于搜索
-top_img: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593147695326&di=534e080eedb76452ae129c102cd04798&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fq_mini%2Cc_zoom%2Cw_640%2Fupload%2F20161228%2Fb2da1d0b3e1247d9b570eea5a531fa52_th.jpg             # 文章的顶部图片
+top_img: /images/reactNative/images/logo.jpg             # 文章的顶部图片
 aside: true                                                                         # 展示文章侧边栏(默认为true)
 categories: 
   - 教程
   - react-native                                                                 # 文章标签
   - 适配
-cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593147695326&di=534e080eedb76452ae129c102cd04798&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fq_mini%2Cc_zoom%2Cw_640%2Fupload%2F20161228%2Fb2da1d0b3e1247d9b570eea5a531fa52_th.jpg                 # 文章的缩略图（用在首页）
+cover: /images/reactNative/images/logo.jpg                 # 文章的缩略图（用在首页）
 ---
 
 # 开发环境的搭建

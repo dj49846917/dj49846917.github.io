@@ -5,7 +5,7 @@ updated: 2020年6月22日                                                       
 type: hexo                                                                         # 标签、分类和友情链接三個页面需要配置(必填)
 description: 快速、简洁且高效的博客框架                                                            # 描述
 keywords: hexo的搭建                                                                       # 关键词，便于搜索
-top_img: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592955098372&di=3a5c3a61faf47869b3656df83ea232a2&imgtype=0&src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-f9654b817205f6af3e472af284ecc2b2_1200x500.jpg             # 文章的顶部图片
+top_img: /images/hexo/hexo_logo.jpg                                           # 文章的顶部图片
 # comments: false                                                                     # 评论模块(默认为false)
 # mathjax: false                                                                      # 显示mathjax(默认为false)
 # katex: false                                                                        # 显示katex(默认为false)
@@ -17,7 +17,7 @@ categories:
 tags: 
   - 教程     
   - Hexo                                                                       # 文章标签
-cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592955098372&di=3a5c3a61faf47869b3656df83ea232a2&imgtype=0&src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-f9654b817205f6af3e472af284ecc2b2_1200x500.jpg                 # 文章的缩略图（用在首页）
+cover: /images/hexo/hexo_logo.jpg                                              # 文章的缩略图（用在首页）
 ---
 
 # 环境搭建

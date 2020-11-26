@@ -5,7 +5,7 @@ updated: 2020年6月24日                                                       
 type: hexo                                                                         # 标签、分类和友情链接三個页面需要配置(必填)
 description: 一款漂亮的hexo主题                                                            # 描述
 keywords: hexo主题                                                                       # 关键词，便于搜索
-top_img: https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/hexo-theme-butterfly-doc-cover.jpg             # 文章的顶部图片
+top_img: /images/hexo/hexo-theme-butterfly-doc-cover.jpg             # 文章的顶部图片
 # comments: false                                                                     # 评论模块(默认为false)
 # mathjax: false                                                                      # 显示mathjax(默认为false)
 # katex: false                                                                        # 显示katex(默认为false)
@@ -17,7 +17,7 @@ categories:
 tags: 
   - 教程     
   - Hexo                                                                       # 文章标签
-cover: https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/hexo-theme-butterfly-doc-cover.jpg                 # 文章的缩略图（用在首页）
+cover: /images/hexo/hexo-theme-butterfly-doc-cover.jpg                 # 文章的缩略图（用在首页）
 ---
 
 # butterfly的安装与下载
