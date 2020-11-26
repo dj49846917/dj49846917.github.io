@@ -91,4 +91,31 @@ cover: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=15931
 # textInput在android中，如果字体大小太小，垂直方向无法居中
 ##  解决办法：在textInput中的设置padding: 0
 
+# react-native 在ios中，图片不显示的问题
+## 解决办法：
+  * 在node_modules/react-native/Libraries/RCTUIImageViewAnimated.m中273行修改以下代码：
+    ```
+      # 修改前：
+      - (void)displayLayer:(CALayer *)layer
+      {
+        if (_currentFrame) {
+          layer.contentsScale = self.animatedImageScale;
+          layer.contents = (__bridge id)_currentFrame.CGImage;
+        }
+      }
+
+      # 修改后：
+      - (void)displayLayer:(CALayer *)layer
+      {
+        if (_currentFrame) {
+          layer.contentsScale = self.animatedImageScale;
+          layer.contents = (__bridge id)_currentFrame.CGImage;
+        } else {
+          [super displayLayer:layer];
+        }
+      }
+    ```
+
+  * [详细解决方案](https://www.jianshu.com/p/97c89d566ae4)
+
   

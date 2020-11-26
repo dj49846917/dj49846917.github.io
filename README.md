@@ -49,7 +49,7 @@
    * hexo clean（清除缓存）
    * hexo douban(安装了hexo-douban的，生成数据) 
    * hexo g（生成对应的文件）
-   * hexo d（发布）
+   * hexo deploy（发布）
 
 # 注意： 在部署github时，项目名称最好是：dj49846917/github.io,因为展示是master分支，而不是gh-pages，所以，不这样设置项目名称，打开github pages就会报404
 
