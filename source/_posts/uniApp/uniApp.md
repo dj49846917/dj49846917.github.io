@@ -59,3 +59,112 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
   2. nvue还不支持百分比单位。
   3. App端，在 pages.json 里的 titleNView 或页面里写的 plus api 中涉及的单位，只支持 px。**注意此时不支持 rpx**
 {% endnote %}
+
+### 详细文档请看
+  * 详细文档请看: https://uniapp.dcloud.io/frame?id=%e5%b0%ba%e5%af%b8%e5%8d%95%e4%bd%8d
+
+*** 
+
+# uni-app设置底部导航栏
+  * 详细文档请看: https://uniapp.dcloud.io/collocation/pages?id=tabbar
+  * 代码配置如下:
+    ```
+      "tabBar": {
+          "color": "#000000",
+          "selectedColor": "#07c261",
+          "backgroundColor": "#ffffff",
+          "list": [{
+              "pagePath": "pages/home/home",
+              "iconPath": "static/images/index.png",
+              "selectedIconPath": "static/images/index-select.png",
+              "text": "微信"
+          }, 
+        {
+              "pagePath": "pages/chat/chat",
+              "iconPath": "static/images/mail.png",
+              "selectedIconPath": "static/images/mail-select.png",
+              "text": "通讯录"
+          },
+        {
+            "pagePath": "pages/look/look",
+            "iconPath": "static/images/find.png",
+            "selectedIconPath": "static/images/find-select.png",
+            "text": "发现"
+        },
+        {
+            "pagePath": "pages/account/account",
+            "iconPath": "static/images/my.png",
+            "selectedIconPath": "static/images/my-select.png",
+            "text": "我"
+        }]
+      }
+    ```
+
+# uni-app隐藏顶部导航栏
+  * 在pages.json中，设置globalStyle的navigationStyle: custom
+    ```
+      // pages.json
+
+      "globalStyle": {
+        ...
+        "navigationStyle":"custom",
+      },
+    ```
+
+  * 在pages.json中，设置globalStyle的app-plus
+    ```
+      // pages.json
+    
+      "globalStyle": {
+        ...
+        "app-plus": {
+          "titleNView": false,
+          "scrollIndicator": "none"
+        }
+      },
+    ```
+
+{% note warning %}
+  navigationStyle设置成custom之后，所有端的原生导航栏都没有了，包括app和小程序，如果只想app端去掉导航栏，使用app-plus
+{% endnote %}
+
+# uni-app中获取状态栏的高度
+  1. 使用plus.navigator.getStatusbarHeight()
+    * **注意，该api只在nvue里有效，一定要用条件编译**
+      ```
+        <view class="tipBar" :style="'height'+ tipBarHeight + 'px'">
+          <text>{{ tipBarHeight }}</text>
+        </view>
+
+        export default {
+          data() {
+            return {
+              tipBarHeight: 0
+            }
+          },
+          onLoad() {
+            // #ifdef APP-PLUS-NVUE
+              this.tipBarHeight = plus.navigator.getStatusbarHeight()   // 获取状态栏的高度
+            // #endif
+          },
+        }
+      ```
+
+  2. 使用uni.getSystemInfoSync().statusBarHeight
+    * 该api可以在所有端都有用
+      ```
+        <view class="tipBar" :style="'height'+ tipBarHeight + 'px'">
+          <text>{{ tipBarHeight }}</text>
+        </view>
+
+        export default {
+          data() {
+            return {
+              tipBarHeight: 0
+            }
+          },
+          onLoad() {
+            this.tipBarHeight = uni.getSystemInfoSync().statusBarHeight // 获取状态栏高度
+          },
+        }
+      ```
