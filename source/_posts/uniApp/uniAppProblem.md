@@ -69,9 +69,28 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
       </style>
     ```
 
+***
+
+## 在nvue中，绑定style计算值的时候一定要放在computed里，放在生命周期里没有效果
+  * 举例：动态设置状态栏的高度
+      ```
+        <view class="tipBar" :style="getStatusBarHeight"></view>
+
+        computed: {	
+          getStatusBarHeight() {
+            // #ifdef APP-PLUS-NVUE
+            return `height: ${plus.navigator.getStatusbarHeight()}px`
+            // #endif
+          }
+        },
+      ```
+
+***
+
 ## 不可用css收集
 ### display
   * 在nvue中，默认就是display: flex,所以在nvue中，不支持display属性，写了在app端不支持，其他端可以
+  * display: none不能使用，要想隐藏dom只能用v-if
 
 ### border
   * 在vue中，border的3个属性需要分开写，不能像vue那样

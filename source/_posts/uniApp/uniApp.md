@@ -168,3 +168,93 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
           },
         }
       ```
+
+*** 
+
+# uni-app集成vuex
+## 集成步骤
+  1. 在根路径下创建store文件夹，并创建modules文件夹和index.js
+  2. 在modules文件夹下随意新建一个js文件，写入以下代码
+      ```
+        const home = {
+          state: {
+            user: "张三"
+          },
+          mutations: {
+            
+          },
+          actions: {
+            
+          }
+        }
+
+        export default home;
+      ```
+  3. index.js中写入以下代码:
+      ```
+        import Vue from 'vue'
+        import Vuex from 'vuex'
+
+        Vue.use(Vuex)
+
+        import home from "./modules/home.js"
+
+        export default new Vuex.Store({
+          modules:{
+            home
+          }
+        })
+      ```
+
+  4. 在main.js中引入store
+      ```
+        import store from "./store/index.js"
+
+        Vue.prototype.$store = store
+      ```
+
+  5. 使用：通过this.$store.state就能获取store里的值
+
+## mapState的使用
+  * 通过vuex存储和获取状态栏的高度
+    ```
+      // 在App.vue中：
+      
+      onLaunch: function() {
+        // #ifdef APP-PLUS-NVUE
+       
+        // 获取状态栏的高度
+        this.$store.commit("app/setTipBarHeight", plus.navigator.getStatusbarHeight())
+        // #endif
+      },
+
+      
+      // 在store/app.js中：
+      
+      const App = {
+        namespaced: true,
+        state: {
+          tipBarHeight: 0
+        },
+        mutations: {
+          setTipBarHeight: (state, payload) => {
+            state.tipBarHeight = payload
+          }
+        },
+      }
+      export default App
+
+
+      // 调用，在home.nvue中：
+
+      <view class="tipBar" :style="getStatusBarHeight"></view>
+
+      computed: {
+        ...mapState({
+          getStatusBarHeight: (state) => {
+            return `height: ${state.app.tipBarHeight}px`
+          }
+        }),
+      },
+    ```
+
