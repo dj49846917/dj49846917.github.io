@@ -37,7 +37,7 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
 
 ***
 
-# 日常nvue开发总结
+# 使用nvue
 ## 开启纯原生渲染模式
   * 启用纯原生渲染模式，可以减少App端的包体积、减少使用时的内存占用。因为webview渲染模式的相关模块将被移除。
   * 在manifest.json源码视图的"app-plus"下配置"renderer":"native"，即代表App端启用纯原生渲染模式。此时pages.json注册的vue页面将被忽略，vue组件也将被原生渲染引擎来渲染。写入以下代码：
@@ -142,3 +142,34 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
         }
       ```
 ***
+
+# nvue中文本内容超出显示...
+## app端
+    ```
+      <text class="list_space">aqwqwqwqwqwqwqaqwqwqwqwqwqwqaqwqwqwqwqwqwqaqwqwqwqwqwqwqaqwqwqwqwqwqwq</text>
+
+      .list_space {
+        width: 360rpx;
+        /* #ifdef APP-PLUS-NVUE */
+        lines: 1;
+        text-overflow: ellipsis;
+        /* #endif */
+      }
+    ```
+
+## 兼容其他端(h5和小程序)
+    ```
+      <text class="list_space">aqwqwqwqwqwqwqaqwqwqwqwqwqwqaqwqwqwqwqwqwqaqwqwqwqwqwqwqaqwqwqwqwqwqwq</text>
+
+      .list_space {
+       		width: 360rpx;          
+          /* #ifndef APP-PLUS-NVUE */
+          display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+          overflow: hidden;
+          word-break: break-all;  /* break-all(允许在单词内换行。) */
+          text-overflow: ellipsis;  /* 超出部分省略号 */
+          -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+          -webkit-line-clamp: 1; /** 显示的行数 **/
+          /* #endif */
+      }
+    ```

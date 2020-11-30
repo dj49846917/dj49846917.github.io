@@ -104,3 +104,135 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
         border-width: 1px;
         border-style: solid;
     ```
+
+## uni-app中，解决iconfont图标 unicode转换为字符串
+  * 举例：
+    * iconfont图标: `&#xe649;`
+    * 转成字符串是: \ue649
+
+## 在uni-app中，使用scroll-view组件，动态获取滚动高度
+  * 小程序端：屏幕高度 - 状态栏 - 导航栏 - 底部导航栏(有的情况下)
+  * 其他端: 屏幕高度 - 状态栏 - 导航栏
+  * 详细代码:
+      ```
+        computed: {
+          ...mapState({
+            // 获取状态栏的高度
+            getStatusBarHeight: (state) => {
+              return `height: ${state.app.tipBarHeight}px`
+            },
+            // 获取可滚动区域的高度
+            getScrollHeight: (state)=>{
+              const navBarHeight = uni.upx2px(90)
+              const tabBarHeight = uni.upx2px(110)
+              // #ifndef MP
+              const scrollHeight = state.app.height - state.app.tipBarHeight - navBarHeight - tabBarHeight;
+              return `height: ${scrollHeight}px`;
+              // #endif
+              
+              // #ifdef MP
+              const scrollHeight2 = state.app.height - state.app.tipBarHeight - navBarHeight;
+              return `height: ${scrollHeight2}px`;
+              // #endif
+            }
+          }),
+        },
+      ```
+
+## nvue布局bug：定位问题
+  1. app端：
+    * ![布局bug](/images/uniApp/布局bug_app端.jpg)
+  
+  2. 小程序端和h5端:
+    * ![布局bug](/images/uniApp/布局bug_h5和小程序端.jpg)
+
+  3. bug布局代码:
+      ```
+      <view class="list">
+        <view class="list_left_box">
+          <image src="@/static/images/userpic.jpg" class="list_icon"></image>
+          <view class="list_left_tip">
+            <text class="list_left_tip_num">2</text>
+          </view>
+        </view>
+      </view>
+
+      # style部分
+        .list {
+          width: 750rpx;
+          height: 135rpx;
+          flex-direction: row;
+          align-items: center;
+        }
+        .list_left_box {
+          width: 92rpx;
+          height: 92rpx;
+          margin-left: 30rpx;
+          margin-right: 20rpx;
+        }
+        .list_left_tip {
+          padding: 0 10rpx;
+          border-radius: 18rpx;
+          background-color: red;
+          position: absolute;
+          right: -16rpx;
+          top: -16rpx;
+          @include center;
+        }
+        .list_icon {
+          width: 92rpx;
+          height: 92rpx;
+          border-radius: 10rpx;
+        }
+        .list_left_tip_num {
+          font-size: 26rpx;
+          color: #fff;
+        }
+      ```
+
+  4. 分析原因：在app端，由于图标盒子的宽高只有92rpx，60rpx的margin, 而整个list的高度是135rpx
+   
+  5. 解决方法: 布局不变，将盒子的宽度设成92+60, 高度=list的高度
+      ```
+        <view class="list">
+          <view class="list_left_box">
+            <image src="@/static/images/userpic.jpg" class="list_icon"></image>
+            <view class="list_left_tip">
+              <text class="list_left_tip_num">2</text>
+            </view>
+          </view>
+        </view>
+
+        # style部分
+
+        .list {
+          width: 750rpx;
+          height: 135rpx;
+          flex-direction: row;
+          align-items: center;
+        }
+        .list_left_box {
+          width: 152rpx;
+          height: 135rpx;
+          padding: 0 30rpx;
+          padding-top: 21.5rpx;
+        }
+        .list_left_tip {
+          padding: 0 10rpx;
+          border-radius: 18rpx;
+          background-color: red;
+          position: absolute;
+          right: 16rpx;
+          top: 10rpx;
+          @include center;
+        }
+        .list_icon {
+          width: 92rpx;
+          height: 92rpx;
+          border-radius: 10rpx;
+        }
+        .list_left_tip_num {
+          font-size: 26rpx;
+          color: #fff;
+        }
+      ```

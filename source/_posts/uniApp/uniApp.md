@@ -258,3 +258,6 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
       },
     ```
 
+# uni-app 在js中rpx转换为px
+  * 使用uni.upx2px(value)
+
