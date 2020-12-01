@@ -173,3 +173,51 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
           /* #endif */
       }
     ```
+
+## nvue中，longpress长按事件，小程序，h5和app的坐标取值
+  * App端：
+    ```
+      <div class="flex align-stretch" @click="onClick" @longpress="long"></div>
+
+      	long(e){
+          let x = 0
+          let y = 0
+          
+          // #ifdef APP-PLUS-NVUE
+          if (Array.isArray(e.changedTouches) && e.changedTouches.length > 0) {
+            x = e.changedTouches[0].screenX
+            y = e.changedTouches[0].screenY
+          }
+          // #endif
+        }
+    ```
+
+  * 小程序端：
+    ```
+      <div class="flex align-stretch" @click="onClick" @longpress="long"></div>
+
+      	long(e){
+          let x = 0
+          let y = 0
+          
+          // #ifdef MP
+          x = e.detail.x
+          y = e.detail.y
+          // #endif
+        }
+    ```
+
+  * H5端：
+    ```
+      <div class="flex align-stretch" @click="onClick" @longpress="long"></div>
+
+      	long(e){
+          let x = 0
+          let y = 0
+          
+          // #ifdef MP
+          x = e.changedTouches[0].pageX
+				  y = e.changedTouches[0].pageY
+          // #endif
+        }
+    ```
