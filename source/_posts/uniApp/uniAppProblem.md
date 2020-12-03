@@ -236,3 +236,22 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
           color: #fff;
         }
       ```
+
+## 在uni-app中，要在模板中给函数传值，要写成箭头函数，不然在小程序中获取不到值
+  * 错误写法：
+    ```
+      <view class="alphabet" :style="getAlphabetPos">
+        <view class="alphabet_item" v-for="(piece, index) in chatList" :key="piece.id" @click="handleAlphabet(piece)">
+          <text class="alphabet_item_text">{{ piece.title }}</text>
+        </view>
+      </view>
+    ```
+
+  * 正确写法：
+    ```
+      <view class="alphabet" :style="getAlphabetPos">
+        <view class="alphabet_item" v-for="(piece, index) in chatList" :key="piece.id" @click="()=>handleAlphabet(piece)">
+          <text class="alphabet_item_text">{{ piece.title }}</text>
+        </view>
+      </view>
+    ```

@@ -221,3 +221,73 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
           // #endif
         }
     ```
+
+## nvue中获取view的高度
+  * app端：获取box的高度
+    ```
+      <template>
+        <view class="wrapper">
+          <view ref="box" class="box">
+            <text class="info">Width: {{size.width}}</text>
+            <text class="info">Height: {{size.height}}</text>
+            <text class="info">Top: {{size.top}}</text>
+            <text class="info">Bottom: {{size.bottom}}</text>
+            <text class="info">Left: {{size.left}}</text>
+            <text class="info">Right: {{size.right}}</text>
+          </view>
+        </view>
+      </template>
+
+      <script>
+        // 注意平台差异
+        // #ifdef APP-NVUE
+        const dom = weex.requireModule('dom')
+        // #endif
+
+        export default {
+          data () {
+            return {
+              height: 0,
+            }
+          },
+          onReady () {
+            const result = dom.getComponentRect(this.$refs.box, option => {
+              console.log('getComponentRect:', option)
+              this.height = option.size.height
+            })
+          }
+        }
+    ```
+
+  * h5和小程序端：获取box的高度
+    ```
+      <template>
+        <view class="wrapper">
+          <view ref="box" class="box">
+            <text class="info">Width: {{size.width}}</text>
+            <text class="info">Height: {{size.height}}</text>
+            <text class="info">Top: {{size.top}}</text>
+            <text class="info">Bottom: {{size.bottom}}</text>
+            <text class="info">Left: {{size.left}}</text>
+            <text class="info">Right: {{size.right}}</text>
+          </view>
+        </view>
+      </template>
+
+      <script>
+        export default {
+          data () {
+            return {
+              height: 0
+            }
+          },
+          mounted() {
+            // #ifndef APP-PLUS-NVUE
+            let view = uni.createSelectorQuery().in(this).select(".box");
+            view.boundingClientRect(data => {
+              this.size.height = data.height
+            }).exec();
+            // #endif
+          },
+        }
+    ```
