@@ -255,3 +255,6 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
         </view>
       </view>
     ```
+
+## uni-app中，使用uni.getSystemInfoSync()获取高度的时候，小程序不算tabbar的高度
+  * 举例：如果你是在有tabbar的时候算的屏幕高度，那么在跳转进没有tabbar的高度的时候，一定要使用uni.getSystemInfoSync()重新算一次，不要将就之前算的

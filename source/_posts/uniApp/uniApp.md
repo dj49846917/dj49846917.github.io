@@ -261,3 +261,36 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
 # uni-app 在js中rpx转换为px
   * 使用uni.upx2px(value)
 
+# uni-app 跳转页面并传递参数
+## uni.navigateTo(OBJECT)
+  * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
+  * 举例：
+    ```
+      //在起始页面跳转到test.vue页面并传递参数
+      uni.navigateTo({
+          url: 'test?id=1&name=uniapp'
+      });
+    ```
+
+  * 接收参数：
+    ```
+      // 在test.vue页面接受参数
+      export default {
+          onLoad: function (option) { //option为object类型，会序列化上个页面传递的参数
+              console.log(option.id); //打印出上个页面传递的参数。
+              console.log(option.name); //打印出上个页面传递的参数。
+          }
+      }
+    ```
+
+  * url有长度限制，太长的字符串会传递失败，可使用窗体通信、全局变量，或encodeURIComponent等多种方式解决，如下为encodeURIComponent示例。
+    ```
+      <navigator :url="'/pages/test/test?item='+ encodeURIComponent(JSON.stringify(item))"></navigator>  
+
+
+      // 在test.vue页面接受参数
+      onLoad: function (option) {
+          const item = JSON.parse(decodeURIComponent(option.item));
+      }
+    ```
+
