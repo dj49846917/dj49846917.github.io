@@ -261,3 +261,12 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
 # uni-app 在js中rpx转换为px
   * 使用uni.upx2px(value)
 
+# uni-app 监听键盘变化
+  ```
+    // 监听键盘高度变化
+			uni.onKeyboardHeightChange(res => {
+				this.$store.commit("app/setKeyBoardHeight", res.height)
+				this.keyBoardHeight = res.height
+			})
+  ```
+

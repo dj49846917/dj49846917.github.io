@@ -255,3 +255,22 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
         </view>
       </view>
     ```
+
+## 在uni-app中，解决输入框输入内容整体上移的问题
+  * 设置input的adjust-position=false即可
+
+## 在uni-app中，在scroll-view中，直接绑定click事件在app端是没有效果的，只能在他里面再建一个view绑定事件，在scoll-view外面绑定也不行
+  ```
+    <scroll-view scroll-y="true" :style="getScrollHeight">
+			<view :style="getScrollHeight" @click="closeKeyBoard">
+				<view class="chat_item">
+					<chat-item-list></chat-item-list>
+				</view>
+			</view>
+		</scroll-view>
+  ```
+
+## uni-app中，button组件，三端的兼容性很差，布局用view+text代替
+
+## uni-app中，主动弹出键盘，或者在初始化的时候自动弹出键盘
+  * 解决办法，设置input的focus属性即可
