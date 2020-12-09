@@ -276,3 +276,17 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
   * 解决办法，设置input的focus属性即可
 ## uni-app中，使用uni.getSystemInfoSync()获取高度的时候，小程序不算tabbar的高度
   * 举例：如果你是在有tabbar的时候算的屏幕高度，那么在跳转进没有tabbar的高度的时候，一定要使用uni.getSystemInfoSync()重新算一次，不要将就之前算的
+
+## 在uni-app中，使用template或者block做循环的时候，不能把key绑定在上面
+  ```
+    <view class="menu_list">
+      <template v-for="item in list">
+        <view v-if="item.id < 8" class="menu_list_item1" :key="item.id">
+          <view class="menu_list_item_box">
+            <text class="iconfont menu_list_item_box_icon">{{ item.icon }}</text>
+          </view>
+          <text class="menu_list_item_text">{{ item.text }}</text>
+        </view>
+      </template>
+    </view>
+  ```
