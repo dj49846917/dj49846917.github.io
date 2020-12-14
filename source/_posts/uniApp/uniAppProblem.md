@@ -290,3 +290,25 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
       </template>
     </view>
   ```
+
+## 将scroll-view组件初始化在最底部的方法:
+  * 使用scroll-view的scroll-into-view属性，给循环体一个id
+  * 通过计算获取循环体的length -1赋值即可
+    ```
+      <scroll-view scroll-y="true" :style="getScrollStyle" :scroll-into-view="scrollIntoView">
+        <view @click="closeKeyBoard">
+          <view class="chat_item" v-for="(item, index) in list" :key="index" :id="'chatItem_'+index">
+            <chat-item-list ref="list"></chat-item-list>
+          </view>
+        </view>
+      </scroll-view>
+
+
+      // 回到底部
+			pageToBottom(){
+				this.$nextTick(function(){
+					let lastIndex = this.list.length - 1
+					this.scrollIntoView = 'chatItem_'+lastIndex
+				})
+			},
+    ```

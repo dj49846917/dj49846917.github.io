@@ -302,3 +302,69 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
       }
     ```
 
+## uni-app调取相册
+  * 使用uni.chooseImage
+    ```
+      uni.chooseImage({
+          count: 6, //默认9
+          sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['album'], //从相册选择
+          success: function (res) {
+              console.log(JSON.stringify(res.tempFilePaths));
+          }
+      });
+    ```
+
+  * 动态的自适应图片大小(保真)，最大宽度510，最大高度360
+    ```
+      <image 
+        v-else-if="data.type==='image'" 
+        :src="data.data" 
+        :style="chatImg" 
+        class="chat_item_other_box_content_img" 
+        @load="loadImg"
+      />
+
+      export default {
+        data() {
+          return {
+            h: 360,
+            w: 510
+          };
+        },
+        computed: {
+          // 对图片做自适应，高度最大不高于360，宽度最大不大于510
+          chatImg() {
+            return `width: ${this.w}px; height: ${this.h}px;`
+          }
+        },
+        methods: {
+          // 动态根据图片原始宽高比计算图片的缩放宽高
+          loadImg(e) {
+            // 原图的宽高比
+            const compares = e.detail.width / e.detail.height
+            const maxHeight = uni.upx2px(360)
+            const maxWidth = uni.upx2px(510)
+            if(e.detail.height > maxHeight) {
+              if(maxHeight * compares > maxWidth) {
+                this.w = maxWidth
+                this.h = this.w / compares
+              } else {
+                this.h = maxHeight
+                this.w = compares * maxHeight
+              }
+            } else {
+              // 原始高度<=360并且宽度大于510
+              if(e.detail.width > maxWidth) {
+                this.w = maxWidth
+                this.h = maxWidth / compares
+              } else {
+                this.h = e.detail.height
+                this.w = e.detail.width
+              }
+            }
+          }
+        }
+      }
+    ```
+
