@@ -105,6 +105,10 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
         border-style: solid;
     ```
 
+### max-,min-系列
+  * 在app端，nvue不支持
+  * 其他端支持
+
 ## uni-app中，解决iconfont图标 unicode转换为字符串
   * 举例：
     * iconfont图标: `&#xe649;`
@@ -312,3 +316,87 @@ cover: /images/uniApp/logo.jpg                 # 文章的缩略图（用在首�
 				})
 			},
     ```
+
+
+## 在nvue中，app端不支持gif图
+  * 解决办法: 利用定时器做动态的图片切换模拟gif
+    ```
+      <image :src="now" mode="" class="model_content_icon"></image>
+
+      export default {
+        data() {
+          return {
+            timer: null,
+            pic: ["/static/images/audio1.png", "/static/images/audio2.png", "/static/images/audio3.png"],
+            i: 0,
+            now: "/static/images/audio1.png",
+            timer: null
+          }
+        },
+        mounted: function() {
+          this.now = this.pic[0];
+          let _this = this;
+          clearInterval(this.timer)
+          this.timer = setInterval(function() {
+            _this.i++;
+            _this.now = _this.pic[_this.i];
+            if (_this.i >= _this.pic.length - 1) {
+              _this.i = -1;
+            }
+            console.log("_this.now", _this.now)
+          }, 600)
+        },
+        beforeDestroy() {
+          clearInterval(this.timer);
+          this.timer = null;
+        },
+      }
+    ```
+
+## uni-app中，app端使用uni.getRecorderManager()获取不到录音的时长，在小程序端可以，H5用不了这个组件，只能用第三方插件
+  * 解决办法:
+    * app端: 利用按下和收起两个事件去计算之间的时间差
+      ```
+        data() {
+          return {
+            pressStartTime: 0,	// 按下的时间
+            pressEndTime: 0,	// 松开的时间
+            audioObj: null,		// 录音的对象
+          };
+        },
+
+        methods: {
+          // touchstart语音
+          audioStart() {
+            console.log('11')
+            this.pressStartTime = 0
+            this.pressStartTime = new Date().valueOf()
+            // #ifndef H5
+              this.audioObj = uni.getRecorderManager();
+              this.audioObj.start();
+            // #endif
+          },
+          
+          // touchend语音
+          audioEnd() {
+            // #ifndef H5
+            console.log("this.audioObj", this.audioObj)
+            this.pressEndTime = new Date().valueOf()
+            const duration = this.pressEndTime - this.pressStartTime - 50
+            this.audioObj.stop()
+            this.audioObj.onStop((res)=>{
+              console.log("res", res)
+              // #ifdef MP
+                const params = {
+                  
+                }
+              // #endif
+            })
+            // #endif
+            this.pressEndTime = 0
+            this.audioObj = null
+          },
+        }
+      ```
+
+    * 小程序端使用uni.getRecorderManager()的onStop方法获取得到音频的时长
