@@ -239,3 +239,9 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 
     5. 原理: 浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或者浮动元素的边框停留。
 ---
+
+# 使用过 flex 布局吗？flex-grow 和 flex-shrink 属性有什么用？
+---
+
+# 伪类和伪元素的区别，讲讲伪类有哪些
+---

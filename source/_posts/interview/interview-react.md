@@ -26,6 +26,14 @@ cover: https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510
     <3>.当Redux状态更改时，连接到Redux的组件将接收新的状态作为props。当组件接收到这些props时，它将进入更新阶段并重新渲染 UI。
 ```
 
+# redux 做状态管理和发布订阅模式有什么区别？
+    redux 其实也是一个发布订阅，但是 redux 可以做到数据的可预测和可回溯。
+---
+
+# react-redux 的原理，它是怎么跟 react 关联起来的？
+  * react-redux 的核心组件只有两个，Provider 和 connect，Provider 存放 Redux 里 store 的数据到 context 里，通过 connect 从 context 拿数据，通过 props 传递给 connect 所包裹的组件。
+---
+
 # react 16 生命周期有什么改变？
 ---
 
@@ -157,4 +165,19 @@ cover: https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510
 
 # forceUpdate经历了哪些生命周期，子组件呢?
   * 都有render
+---
+
+# hooks 原理
+  1. 单向链表通过next把hooks串联起来
+  2. memoizedState存在fiber node上，组件之间不会相互影响
+  3. useState和useReducer中通过dispatchAction调度更新任务
+---
+
+# hooks和class Component的区别\
+---
+
+# 了解过 react-router 内部实现机制吗？
+---
+
+# React Native 的运行机制？
 ---

@@ -25,6 +25,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 
 # 简述Vue的响应式原理
   * 当一个Vue实例创建时，vue会遍历data选项的属性，用 Object.defineProperty 将它们转为 getter/setter并且在内部追踪相关依赖，在属性被访问和修改时通知变化。每个组件实例都有相应的 watcher 程序实例，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的 setter 被调用时，会通知 watcher 重新计算，从而致使它关联的组件得以更新。
+  * 简单版：数据劫持收集依赖派发更新
 ---
 
 # v-if 和 v-show 有什么区别？
@@ -214,7 +215,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # vue和react有什么不同？使用场景是什么？ 
-  * vue是双向数据绑定，react是单向数据流。 场景： vue: 主要用于移动端，中小型项目。 react: 主要用于pc端，大型项目。
+  1. 监听数据变化的实现原理不同：Vue通过 getter/setter以及一些函数的劫持，能精确知道数据变化；React默认是通过比较引用的方式（diff）进行的，如果不优化可能导致大量不必要的VDOM的重新渲染。React不精确监听数据变化。
+
+  2. 数据流的不同：Vue1.0中可以实现两种双向绑定；React一直不支持双向绑定，提倡的是单向数据流。
+
+  3. 组件通信的区别：React 本身并不支持自定义事件，而Vue中子组件向父组件传递消息有两种方式：事件和回调函数，但Vue更倾向于使用事件。在React中我们都是使用回调函数的。
+
+  4. 模板渲染方式的不同：在表层上，模板的语法不同，React是通过JSX渲染模板。而Vue是通过一种拓展的HTML语法进行渲染，但其实这只是表面现象，毕竟React并不必须依赖JSX；在深层上，模板的原理不同。React是在组件JS代码中，通过原生JS实现模板中的常见语法，比如插值，条件，循环等，都是通过JS语法实现的，更加纯粹更加原生。而Vue是在和组件JS代码分离的单独的模板中，通过指令来实现的，比如条件语句就需要 v-if 来实现对这一点，这样的做法显得有些独特，会把HTML弄得很乱。
 ---
 
 # 说说你对vue的理解。
@@ -281,7 +288,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   12. 用创建好的实例调用beforeRouteEnter守卫中传给next的回调函数。
 ---
 
-# vuex直接修改state 与 用commit提交mutation来修改state有什么区别?
+# vuex直接修改state 与 用commit提交mutation来修改state有什么区别?(mutation 和 action 有什么区别，怎么用？)
     相同点: 都可以修改state的值，并且是响应式的
     区别: 开启严格模式下，任何修改state的操作，只要不经过mutation的函数，就会报错
 ---
@@ -293,4 +300,33 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * action: 处理外部交互
   * module: 模块化以上四个
 ---
+
+# 对 vuex 的理解，单向数据流
+---
+
+# vue3 的 类似 hooks 的原理是怎么样的
+---
+
+# 路由守卫哪些参数，怎么实现？
+---
+
+# vue3.0 有哪些改动和新特性？
+---
+
+# vue-lazyloader 的原理
+  1. vue-lazyload是通过指令的方式实现的，定义的指令是v-lazy指令；
+
+  2. 指令被bind时会创建一个listener，并将其添加到listener queue里面， 并且搜索target dom节点，为其注册dom事件(如scroll事件)
+
+  3. 上面的dom事件回调中，会遍历 listener queue里的listener，判断此listener绑定的dom是否处于页面中perload的位置，如果处于则加载异步加载当前图片的资源；
+
+  4. 同时listener会在当前图片加载的过程的loading，loaded，error三种状态触发当前dom渲染的函数，分别渲染三种状态下dom的内容；
+---
+
+# vue-router 的原理
+---
+
+# vue是怎么监听数组改变更新视图的
+---
+
 

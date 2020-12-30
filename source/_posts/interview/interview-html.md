@@ -158,6 +158,15 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * dns缓存，cdn缓存，浏览器缓存，服务器缓存。
 ---
 
+# 说一下浏览器缓存；
+  1. 浏览器缓存分为强缓存和协商缓存，强缓存会直接从浏览器里面拿数据，协商缓存会先访问服务器看缓存是否过期，再决定是否从浏览器里面拿数据。
+  2. 控制强缓存的字段有：Expires和Cache-Control，Expires 和 Cache-Control。
+  3. 控制协商缓存的字段是：Last-Modified / If-Modified-Since 和 Etag / If-None-Match，其中 Etag / If-None-Match的优先级比Last-Modified / If-Modified-Since高。
+---
+
+# 强缓存和协商缓存
+---
+
 # HTML与XHTML的区别？
   1. 所有的标记都必须要有一个相应的结束标记
   2. 所有标签的元素和属性的名字都必须使用小写
