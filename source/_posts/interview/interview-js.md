@@ -385,7 +385,19 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 如何解决跨域问题?
-  * jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页面(cors)
+  * 通过jsonp跨域
+  * document.domain + iframe跨域
+  * location.hash + iframe
+  * window.name + iframe跨域
+  * postMessage跨域
+  * 跨域资源共享（CORS）
+  * nginx代理跨域
+  * nodejs中间件代理跨域
+  * WebSocket协议跨域
+  * 详细代码请看:  https://segmentfault.com/a/1190000011145364
+---
+
+# ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
 ---
 
 # 什么是模块化？怎么实现? 对前端模块化的认识
@@ -417,9 +429,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # call和apply有什么区别？
   * call和apply都用于调用函数，第一个参数将用作函数内 this 的值。然而，call接受逗号分隔的参数作为后面的参数，而apply接受一个参数数组作为后面的参数。一个简单的记忆方法是，从call中的 C 联想到逗号分隔（comma-separated），从apply中的 A 联想到数组（array）。
----
-
-# ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
 ---
 
 # 请说明 JSONP 的工作原理

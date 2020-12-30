@@ -42,6 +42,14 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
 # require 引入的模块 webpack 能做 Tree Shaking 吗？
 ---
 
+# webpack的plugins和loaders的实现原理。
+---
+
+# webpack如何优化编译速度?
+---
+
+# webpack 热更新原理
+---
 
 
 
