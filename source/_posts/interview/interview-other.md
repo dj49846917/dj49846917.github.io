@@ -184,6 +184,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   7. 生成DOM树，解析css和js，渲染页面，直至显示完成；
 ---
 
+# dns查询过程，使用的协议
+---
+
 # HTTP request报文结构是怎样的
   * 首行是Request-Line包括：请求方法，请求URI，协议版本，CRLF
   * 首行之后是若干行请求头，包括general-header，request-header或者entity-header，每个一行以CRLF结束
@@ -241,6 +244,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     2. 向服务器发送大量数据（POST 没有数据量限制）
 ---
 
+# x-www-urlecoded-form和application/json在post中的区别
+  * application/x-www-form-urlencoded：我bai们form表单提交就是这个模式，du并且将zhi提交的数据进行daourlencode。默认情况下，我zhuan们所有的表单提交都是通过这种默shu认的方式实现的。最常用的一种。
+
+  * application/json：采用json格式提交，比如我们常用的ajax，dataType:"json"
+---
+
 # 说说TCP传输的三次握手四次挥手策略
   * 三次握手:
     1. 为了准确无误地把数据送达目标处，TCP协议采用了三次握手策略。用TCP协议把数据包送出去后，TCP不会对传送 后的情况置之不理，它一定会向对方确认是否成功送达。握手过程中使用了TCP的标志：SYN和ACK。
@@ -259,26 +268,37 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     4. 第四次挥手：主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。
 ---
 
-# HTTP和HTTPS的区别。
+# HTTP和HTTPS的区别。https怎么实现它的安全性的？
   * HTTP协议通常承载于TCP协议之上，在HTTP和TCP之间添加一个安全协议层（SSL或TSL），这个时候，就成了我们常说的HTTPS。默认HTTP的端口号为80，HTTPS的端口号为443。
 ---
 
 # HTTPS原理及过程
 ---
 
+# HTTP协议有什么特点？
+  1. 简单快速：客户向服务器请求服务时，只    需传送请求方法和路径。请求方法常用的有GET、HEAD、POST等。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。
+
+  2. 灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。
+
+  3. HTTP 0.9和1.0使用非持续连接：限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。HTTP 1.1使用持续连接：不必为每个web对象创建一个新的连接，一个连接可以传送多个对象，采用这种方式可以节省传输时间。
+
+  4. 无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。
+
+  5. 支持B/S(Browser/Server,浏览器/服务器方式的网络结构。)及C/S(Client/Server,客户/服务器方式的网络计算模式)模式。
+---
+
 # WebSocket和HTTP之间的关系
   1. WebSocket和HTTP一样都是基于TCP的应用层协议。
 
   2. WebSocket协议和HTTP协议是两种不同的东西。客户端开始建立WebSocket连接时要发送一个header标记了 Upgrade的HTTP请求，表示请求协议升级。所以服务器端做出响应的简便方法是，直接在现有的HTTP服务器软件和现有的端口上实现WebSocket协议，然后再回一个状态码为101的HTTP响应完成握手，再往后发送数据时就没 HTTP的事了。也就是说WebSocket只是使用HTTP协议来完成一部分握手。
+  
+  3. http无状态、被动；ws一次握手，知道状态，可以双向通信
 ---
 
 # REST是什么, 为什么使用它?
 ---
 
 # 浏览器渲染的整个过程
----
-
-# 浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？
 ---
 
 # 遇到过哪些移动端兼容问题？
@@ -296,6 +316,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # tcp 可以建立多个连接吗？
 ---
 
+# tcp如何保证安全连接
+---
+
+# 怎么知道一个tcp请求数据已经完了呢
+---
+
 # 项目里面的鉴权和图片懒加载怎么实现的
 ---
 
@@ -305,3 +331,28 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   3. 把日志放到WEB目录，通过权限限制外网直接访问，达到浏览器就可以查看日志
 ---
 
+# 组件设计原则。
+  1. 层次结构和 UML 类图；
+  2. 扁平化、面向数据的 state/props；
+  3. 更加纯粹的 State 变化；
+  4. 低耦合；
+  5. 辅助代码分离；
+  6. 及时模块化；
+  7. 集中/统一的状态管理；
+---
+
+# websocket是什么，原理，怎么实现
+---
+
+# web worker有什么用，什么样的场景比较适合？
+---
+
+# 发布订阅模式和观察者模式的异同。
+---
+
+# TCP/IP有几层网络模型，都是做什么的
+---
+
+# 数组和链表的区别
+    数组易读取，链表只能一个个读或者需要额外空间才能易读取；数组增删元素需要照顾index，链表不用
+---

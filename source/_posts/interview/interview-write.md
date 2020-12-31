@@ -35,6 +35,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 手写快排，时间复杂度，优化
 ---
 
+# 手写冒泡排序。
+---
+
 # 实现一个事件发布订阅类，其实就是 eventEmitter
 ---
 
@@ -45,4 +48,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 手写 vue 双向绑定；
+---
+
+# 写一个方法找出字符串中出现次数最多的字母
+---
+
+# 写一个方法获取URL中的查询字符串的参数
+---
+
+# vue原理, 手写实现数据劫持
 ---

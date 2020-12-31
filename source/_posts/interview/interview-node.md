@@ -37,3 +37,18 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
 
 # 介绍一下你对中间件的理解
 ---
+
+# node中的require加载文件的顺序
+  1. 如果some_module 是一个核心模块，直接加载，结束。
+  2. 如果some_module以“ / ”、“ ./ ”或“ …/ ”开头，按路径加载 some_module，结束。
+  3. 假设当前目录为 current_dir，按路径加载 current_dir/node_modules/some_module。
+    * 如果加载成功，结束
+    * 如果加载失败，令current_dir为其父目录。
+    * 重复这一过程，直到遇到根目录，抛出异常，结束。
+---
+
+# node中的模块类型
+  1. 核心模块
+  2. 文件模块
+---
+    

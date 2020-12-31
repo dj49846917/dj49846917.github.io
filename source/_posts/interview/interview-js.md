@@ -388,6 +388,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     5. 获取异步调用返回的数据
     6. 使用JavaScript和DOM实现局部刷新
 ---
+
+# Ajax的工作原理
+  * Ajax的工作原理相当于在用户和服务器之间加了—个中间层(AJAX引擎)，使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器。像—些数据验证和数据处理等都交给Ajax引擎自己来做,，只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。
+---
    
 # Ajax 解决浏览器缓存问题？
   * 在ajax发送请求前加上 anyAjaxObj.setRequestHeader("If-Modified-Since","0")。
@@ -452,6 +456,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * call和apply都用于调用函数，第一个参数将用作函数内 this 的值。然而，call接受逗号分隔的参数作为后面的参数，而apply接受一个参数数组作为后面的参数。一个简单的记忆方法是，从call中的 C 联想到逗号分隔（comma-separated），从apply中的 A 联想到数组（array）。
 ---
 
+# apply、call、bind的区别？
+---
+
 # 请说明 JSONP 的工作原理
   * JSONP（带填充的 JSON）是一种通常用于绕过 Web 浏览器中的跨域限制的方法，因为 Ajax 不允许跨域请求。
 ---
@@ -473,6 +480,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
       2. return false
         $("#hr_three").click(function(event) { return false; });
     ```
+---
+
+# 什么是事件冒泡和事件捕获，区别是什么？
 ---
 
 # 请解释关于 JavaScript 的同源策略。
@@ -498,6 +508,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 缺点:
     1. 轻微地增加了代码的复杂度（这点存在争议）。
     2. 在不支持 ES2015 的旧版浏览器中，需要引入 polyfill 才能使用。
+---
+
+# Promise内部实现原理
 ---
 
 # 什么是事件循环？调用堆栈和任务队列之间有什么区别？
@@ -609,6 +622,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 箭头函数和普通函数的区别
 ---
 
+# 简单说明一下你对ES6中箭头函数的理解
+---
+
 # fastclick 解决点击穿透的原理；
   * 原理是在 目标元素 上绑定touchstart ,touchend事件，然后在touchend结束的时候立马执行click事件，这样就解决了“点透”的问题（实质是事件冒泡导致）以及300ms延迟问题，300ms延迟是因为浏览器为了实现用户双击屏幕放大页面的效果。
 ---
@@ -652,3 +668,26 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # DOM事件的绑定的几种方式
 ---
+
+# weakSet和weakMap的区别
+---
+
+# JS中的async/await的用法和理解
+---
+
+# 说一下Promise和Async的区别。
+---
+
+# jquery选择器实现原理
+  * jquery原型里面有一个init初始化的方法，将传入的值进行解析，比如传入的id还是class还是标签名。然后通过相应的方法返回数组型对象。既可以通过对象直接调用方法，也可以使用数组的length。
+---
+
+# setTimeout和setInterval区别，如何互相实现？
+---
+
+# 问jquery的链式调用原理。
+---
+
+# splice和slice的区别
+---
+

@@ -163,6 +163,9 @@ cover: https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510
   * setState() 是一个异步操作。出于性能原因，React 会对状态更改进行批处理，因此在调用 setState() 方法之后，状态可能不会立即更改。
 ---
 
+# react的setstate过程
+---
+
 # forceUpdate经历了哪些生命周期，子组件呢?
   * 都有render
 ---
@@ -180,4 +183,16 @@ cover: https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510
 ---
 
 # React Native 的运行机制？
+---
+
+# Redux与mobx的区别
+---
+
+# vuex, mobx, redux 各自的特点和区别。
+---
+
+# 为什么两个will生命周期要被标记为danger
+---
+
+# redux为什么每次reducer要返回一个新对象，面对大量节点如何优化
 ---
