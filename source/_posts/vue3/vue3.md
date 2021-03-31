@@ -84,3 +84,172 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     - ![安装时的报错](/images/vue/installError.jpg)
     - 解决办法：
       
+# vite的使用
+## 安装插件
+  * npm init @vitejs/app
+    - ![vite安装](/images/vue/vite安装.jpg)
+    - npm install
+
+## 在vite中使用vue-router
+  1. 安装：
+    - npm install --save vue-router@4
+  2. 使用：
+    - 在src下新建文件夹 router，在router下建立文件index.ts，并写入以下代码
+      ```
+        import { createRouter, createWebHistory } from 'vue-router';
+
+        const routes = [
+          {
+            path: '/',
+            name: 'home',
+            component: () => import('@/views/home.vue'), //路由懒加载
+          }
+        ]
+
+        const router = createRouter({
+          history: createWebHistory("/"), //history模式使用HTML5模式
+          routes,
+        });
+
+        export default router;
+      ```
+    
+    - 在main.ts中引入
+      ```
+        import router from '@/router'
+
+        import { createApp } from 'vue'
+        import App from './App.vue'
+        import router from '@/router'
+
+        const app = createApp(App)
+        app.use(router).mount('#app')
+      ```
+
+    - 在tsconfig.json中添加@对应的映射,目的是取消代码的校验错误
+      ```
+        "baseUrl": ".",
+        "paths": {
+          "@/*": ["src/*"]
+        },
+      ```
+
+    - 在vite.config.ts中添加@对应的映射
+      ```
+        import { defineConfig } from 'vite'
+        import vue from '@vitejs/plugin-vue'
+        import { resolve } from 'path'
+
+        // https://vitejs.dev/config/
+        export default defineConfig({
+          plugins: [vue()],
+          resolve: {
+            alias: {
+              '@': resolve(__dirname, "src") //设置别名
+            }
+          },
+          server: {
+            host: 'localhost',
+            port: 8080,
+            open: true,
+          },
+        })
+      ```
+
+## 在vite中使用vue-router
+  1. 安装
+    - npm install --save vuex@next
+
+  2. 使用
+    - 在store文件夹下，创建index.ts，并写入
+      ```
+        import { createStore } from "vuex";
+        import user from '@/store/modules/user'
+        export default createStore({
+          modules: {
+            user
+          }
+        });
+      ```
+
+    - 在store文件夹下新建modules文件夹，并新建user.ts,写入：
+      ```
+        const state = {
+          num: 1
+        }
+
+        const mutations = {}
+
+        const actions = {}
+
+        export default {
+          namespaced: true,
+          state,
+          mutations,
+          actions,
+        }
+      ```
+
+    - 在main.ts中引入stroe
+      ```
+        import { createApp } from 'vue'
+        import App from './App.vue'
+        import router from '@/router'
+        import store from '@/store'
+
+        const app = createApp(App)
+        app.use(router).use(store).mount('#app')
+      ```
+
+    - 在页面中使用：
+      ```
+        <template>
+          <div>
+            {{ data.count }}
+          </div>
+        </template>
+
+        <script>
+          import { reactive } from 'vue';
+          import { useStore } from "vuex";
+          export default {
+            setup () {
+              const store = useStore()
+              console.log('store',store.state.user.num)
+              let data = reactive({
+                count: store.state.user.num
+              })
+              return {
+                data
+              }
+            }
+          }
+        </script>
+
+        <style scoped></style>
+      ```
+
+## 在vite中使用sass、less、stylus
+  1. 安装
+    - npm install -D sass
+  2. 使用
+    ```
+      <style scoped lang="ts"></style>
+    ```
+
+## 在vite中，使用element-plus
+  1. 安装
+    - npm install element-plus --save
+
+  2. 引入
+    ```
+      import { createApp } from 'vue'
+      import App from './App.vue'
+      import router from '@/router'
+      import store from '@/store'
+      import ElementPlus from 'element-plus'
+      import 'element-plus/lib/theme-chalk/index.css';
+
+      const app = createApp(App)
+      app.use(router).use(store).use(ElementPlus).mount('#app')
+    ```
