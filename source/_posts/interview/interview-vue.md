@@ -60,7 +60,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # Vue.observable你有了解过吗？说说看
-  * ue2.6发布一个新的API，可以处理一些简单的跨组件共享数据状态的问题。
+  * vue2.6发布一个新的API，可以处理一些简单的跨组件共享数据状态的问题。
 ---
 
 # 你知道style加scoped属性的用途和原理吗？
@@ -330,6 +330,19 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # 对 vuex 的理解，单向数据流
+  * Vuex 是适用于 Vue.js 应用的状态管理库，为应用中的所有组件提供集中式的状态存储与操作，保证了所有状态以可预测的方式进行修改。
+
+  * 五大核心属性:
+    1. state：存储数据，存储状态；在根实例中注册了store 后，用 this.$store.state 来访问；对应vue里面的data；存放数据方式为响应式，vue组件从store中读取数据，如数据发生变化，组件也会对应的更新。
+    2. getters：可以认为是 store 的计算属性，相当于 vue中的 computed，依赖于 state里面的值。它的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+    3. mutations：用于修改状态，store里面的数仅能通过mutations里面的方法改变,但是必须是同步的。更改 vuex 的 store 中的状态的唯一方法是提交 mutation，也就是$store.commit。
+    4. actions：包含任意异步操作，用它处理完后再触发mutations来改变状态。
+    5. module：将 store 分割成模块，每个模块都具有state、mutation、action、getter、甚至是嵌套子模块。
+  
+  * vuex的数据传递流程:
+    - 当组件进行数据修改的时候我们需要调用Dispatch来触发Actions里面的方法。
+    - actions里面的每个方法中都会有一个commit方法，当方法执行的时候会通过commit来触发mutations里面的方法进行数据的修改。
+    - mutations里面的每个函数都会有一个state参数，这样就可以在mutations里面进行state的数据修改，当数据修改完毕后，会传导给页面。页面的数据也会发生改变。
 ---
 
 # vue3 的 类似 hooks 的原理是怎么样的
