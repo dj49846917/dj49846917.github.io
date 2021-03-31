@@ -93,7 +93,7 @@ avatar:
 index_img:
 
 # if the banner of page not setting,it will show the top_img
-default_top_img: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593083490514&di=8cf251e0a233c16d9cb25c838951f4aa&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F0d553aebb5c5911e1431d6a7595d39bd5c6d0854.jpg
+default_top_img: /images/hexo/timg.jpg
 
 # the banner image of archive page
 archive_img:
@@ -450,7 +450,7 @@ tag_ui: # 留空或 index
 # The formal of color: '#49B202'
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
 # White color will be shown as default
-background: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593083490514&di=8cf251e0a233c16d9cb25c838951f4aa&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F0d553aebb5c5911e1431d6a7595d39bd5c6d0854.jpg
+background: /images/hexo/timg.jpg
 
 # Show the footer background image (same as top_img)
 footer_bg: false
