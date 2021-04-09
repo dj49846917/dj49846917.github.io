@@ -526,3 +526,51 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
       <style>
       </style>
     ```
+
+# vue3中使用js-cookie
+  - 安装： npm install --save js-cookie
+  - 使用:
+    - Cookies.set('name', 'value');
+    - Cookies.set('name', 'value', { expires: 7 });
+    - Cookies.get('name');
+    - Cookies.get();
+    - Cookies.remove('name');
+
+# vue3中使用computed
+  ```
+    // 注册资本
+    let RegisteredCapital: ComputedRef<string> = computed(() => {
+      return `${Number(userInfo.DealerInfo?.RegisteredCapital) / 10000}`;
+    });
+
+    return {
+      RegisteredCapital,
+    };
+  ```
+
+# vue3中监听路由值的变化
+  - 使用组件内的onBeforeRouteUpdate
+    ```
+      setup() {
+        const route = useRoute();
+        const isLogin = ref(false)
+        if(route.path === "/login" || route.path === "/register") {
+          isLogin.value = true
+        } else {
+          isLogin.value = false
+        }
+
+        // 监听路由值得变化
+        onBeforeRouteUpdate((to): void => {
+          console.log("to.path", to.path)
+          if(to.path === "/login" || to.path === "/register") {
+            isLogin.value = true
+          } else {
+            isLogin.value = false
+          }
+        });
+        return {
+          isLogin,
+        };
+      },
+    ```
