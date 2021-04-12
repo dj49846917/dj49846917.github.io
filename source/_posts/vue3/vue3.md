@@ -574,3 +574,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
         };
       },
     ```
+
+# 在vue3中使用404页面
+  ```
+    { // 设置404页面
+      path: '/:catchAll(.*)',
+      name: '404',
+      component: () => import('@/views/ErrorPage.vue')
+    },
+  ```
