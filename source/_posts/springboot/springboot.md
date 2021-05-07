@@ -1,7 +1,19 @@
 ---
 title: springboot
 date: 2021-05-06 09:07:44
-tags:
+tags: 
+  - springboot
+  - java
+type: java                                                                         # 标签、分类和友情链接三個页面需要配置(必填)
+description: pring Boot 是 Spring 家族中的一个全新的框架，用来简化 Spring 应用程序的创建和开发过程                   # 描述
+keywords: springboot                                                                       # 关键词，便于搜索
+top_img: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632593097&fm=26&gp=0.jpg             # 文章的顶部图片
+aside: true                                                                         # 展示文章侧边栏(默认为true)
+categories: 
+  - 教程
+  - springboot                                                                # 文章标签
+  - java
+cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632593097&fm=26&gp=0.jpg                 # 文章的缩略图（用在首页）
 ---
 
 # springboot学习所遇问题
@@ -291,3 +303,273 @@ tags:
 
   6. 启动
       - ![展示](/images/springboot/集成jsp3.jpg)
+
+# 第4章springboot集成mybaties
+## 数据库准备
+  1. 下载mysql数据库，并安装
+  2. 下载Navcat，并安装
+  3. 使用navcat连接mysql
+    * ![连接mysql](/images/springboot/navcat连接mysql.jpg)
+    * ![连接mysql](/images/springboot/navcat连接mysql2.jpg)
+  4. 右键点击新建数据库springboot
+    * ![连接mysql](/images/springboot/navcat连接mysql3.jpg)
+  5. 右键点击springboot表，选择运行SQL文件，将准备好的sql文件引入，文件放在images/springboot文件夹下
+    * ![连接mysql](/images/springboot/navcat连接mysql4.jpg)
+    * 文件内容为：
+      ```
+        drop table if exists t_student;
+        create table t_student 
+        (
+          id                   int(10)                        not null auto_increment,
+          name                 varchar(20)                    null,
+          age                  int(10)                        null,
+          constraint PK_T_STUDENT primary key clustered (id)
+        );
+
+        insert into t_student(name,age) values("zhangsan",25);
+        insert into t_student(name,age) values("lisi",28);
+        insert into t_student(name,age) values("wangwu",23);
+        insert into t_student(name,age) values("Tom",21);
+        insert into t_student(name,age) values("Jck",55);
+        insert into t_student(name,age) values("Lucy",27);
+        insert into t_student(name,age) values("zhaoliu",75);
+      ```
+
+## 配置pom.xml中的相关jar依赖
+  * 在pom.xml中，添加mysql
+    ```
+      <!--mybatis依赖-->
+      <dependency>
+          <groupId>org.mybatis.spring.boot</groupId>
+          <artifactId>mybatis-spring-boot-starter</artifactId>
+          <version>1.3.2</version>
+      </dependency>
+      <!--mysql驱动-->
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+      </dependency>
+    ```
+## 在application.yml中配置数据源
+  ```
+    server:
+      # 配置内嵌 Tomcat 端口号
+      port: 8081
+      servlet:
+        # 配置项目上下文根
+        context-path: /app
+    # 配置数据库的连接信息
+    # 注意这里的驱动类有变化
+    spring:
+      datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/springboot?useUnicode=t
+          rue&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyD
+          atetimeCode=false&serverTimezone=GMT%2B8
+        username: root
+        password: root
+  ```
+
+## 代码开发
+### 使用 Mybatis 反向工程生成接口、映射文件以及实体 bean
+  1. 在根路径下新建GeneratorMapper.xml，并写入以下代码:
+    ```
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE generatorConfiguration
+              PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+              "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+      <generatorConfiguration>
+          <!-- 指定连接数据库的 JDBC 驱动包所在位置，指定到你本机的完整路径 -->
+          <classPathEntry location="C:\Users\lip\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/>
+          <!-- 配置 table 表信息内容体， targetRuntime 指定采用 MyBatis3 的版本 -->
+          <context id="tables" targetRuntime="MyBatis3">
+              <!-- 抑制生成注释，由于生成的注释都是英文的，可以不让它生成 -->
+              <commentGenerator>
+                  <property name="suppressAllComments" value="true" />
+              </commentGenerator>
+              <!-- 配置数据库连接信息 -->
+              <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                              connectionURL="jdbc:mysql://localhost:3306/springboot"
+                              userId="root"
+                              password="root">
+              </jdbcConnection>
+              <!-- 生成 model 类， targetPackage 指定 model 类的包名， targetProject 指定
+              生成的 model 放在 eclipse 的哪个工程下面-->
+              <javaModelGenerator targetPackage="com.dj.app.springboot.model"
+                                  targetProject="src/main/java">
+                  <property name="enableSubPackages" value="false" />
+                  <property name="trimStrings" value="false" />
+              </javaModelGenerator>
+              <!-- 生成 MyBatis 的 Mapper.xml 文件， targetPackage 指定 mapper.xml 文件的
+              包名， targetProject 指定生成的 mapper.xml 放在 eclipse 的哪个工程下面 -->
+              <sqlMapGenerator targetPackage="com.dj.app.springboot.mapper"
+                              targetProject="src/main/java">
+                  <property name="enableSubPackages" value="false" />
+              </sqlMapGenerator>
+              <!-- 生成 MyBatis 的 Mapper 接口类文件,targetPackage 指定 Mapper 接口类的包
+              名， targetProject 指定生成的 Mapper 接口放在 eclipse 的哪个工程下面 -->
+              <javaClientGenerator type="XMLMAPPER"
+                                  targetPackage="com.dj.app.springboot.mapper" targetProject="src/main/java">
+                  <property name="enableSubPackages" value="false" />
+              </javaClientGenerator>
+              <!-- 数据库表名及对应的 Java 模型类名 -->
+              <table tableName="t_student" domainObjectName="Student"
+                    enableCountByExample="false"
+                    enableUpdateByExample="false"
+                    enableDeleteByExample="false"
+              enableSelectByExample="false"
+              selectByExampleQueryId="false"/>
+          </context>
+      </generatorConfiguration>
+    ```
+  {% note warning %}
+    注意:
+      ➢ 如果使用高版本， 驱动类变为： com.mysql.cj.jdbc.Driver
+      ➢ url 后面应该加属性 nullCatalogMeansCurrent=true，否则生成有问题
+      当前版本 MySQL 数据库为 5.5.60
+  {% endnote %}
+
+  2. 在pom.xml中，添加 mysql 反向工程依赖
+    ```
+      <!--mybatis 代码自动生成插件-->
+      <plugin>
+          <groupId>org.mybatis.generator</groupId>
+          <artifactId>mybatis-generator-maven-plugin</artifactId>
+          <version>1.3.6</version>
+          <configuration>
+              <!--配置文件的位置-->
+              <configurationFile>GeneratorMapper.xml</configurationFile>
+              <verbose>true</verbose>
+              <overwrite>true</overwrite>
+          </configuration>
+      </plugin
+    ```
+  3. 在右侧Maven,找到项目中的Plugins/mybatis-generator/mybatis-generator:generate, 双击红色选中命令，生成相关文件
+    * ![集成mybatis](/images/springboot/集成mybatis.jpg)
+    * ![集成mybatis](/images/springboot/集成mybatis2.jpg)
+    
+### 在web包下创建 StudentController,并写入
+  ```
+    package com.dj.app.springboot.web;
+
+    import com.dj.app.springboot.model.Student;
+    import com.dj.app.springboot.service.StudentService;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.ResponseBody;
+
+    @Controller
+    public class StudentController {
+        // 注入业务层
+        @Autowired
+        private StudentService studentService;
+
+        @RequestMapping(value="/student")
+        public @ResponseBody Object student(Integer id) {
+            Student student = studentService.queryStudentById(id);
+            return student;
+        }
+    }
+  ```
+
+### 在 service 包下创建 service 接口并编写代码
+  ```
+    package com.dj.app.springboot.service;
+    import com.dj.app.springboot.model.Student;
+    public interface StudentService {
+        /**
+        * 根据学生ID查询详情
+        * @param id
+        * @return
+        */
+        Student queryStudentById(Integer id);
+    }
+  ```
+
+### 在service.impl包下创建service接口并编写代码
+  ```
+    package com.dj.app.springboot.service.impl;
+
+    import com.dj.app.springboot.mapper.StudentMapper;
+    import com.dj.app.springboot.model.Student;
+    import com.dj.app.springboot.service.StudentService;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+
+    @Service
+    public class StudentServiceImpl implements StudentService {
+        @Autowired
+        private StudentMapper studentMapper;
+
+        @Override
+        public Student queryStudentById(Integer id) {
+            Student student = studentMapper.selectByPrimaryKey(id);
+            return student;
+        }
+    }
+  ```
+{% note warning %}
+  注意：如果在 web 中导入 service 存在报错，可以尝试进行如下配置解决
+  ![集成mybatis](/images/springboot/集成mybatis3.jpg)
+  
+  ➢ 在 Mybatis 反向工程生成的 StudentMapper 接口上加一个 Mapper 注解
+  @Mapper 作用： mybatis 自动扫描数据持久层的映射文件及 DAO 接口的关系
+    ```
+      @Mapper
+      public interface StudentMapper {
+    ```
+
+  ➢ 默认情况下， Mybatis 的 xml 映射文件不会编译到 target 的 class 目录下，所以我们需要在 pom.xml 文件中配置 resource
+    ```
+      <!--手动指定文件夹为resources-->
+      <resources>
+        <resource>
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.xml</include>
+          </includes>
+        </resource>
+      </resources>
+    ```
+{% endnote %}
+
+### 启动 Application 应用，浏览器访问测试运行
+  * ![集成mybatis](/images/springboot/集成mybatis4.jpg)
+  
+## DAO 其它开发方式
+  1. 在运行的主类上添加注解包扫描@MapperScan("com.abc.springboot.mapper")
+    * 注释掉 StudentMapper 接口上的@Mapper 注解
+      ```
+        // @Mapper // 扫描dao接口到spring容器
+        public interface StudentMapper {
+      ```
+
+    * 在运行主类 Application 上加@MapperScan("com.abc.springboot.mapper")
+      ```
+        @MapperScan(basePackages = "com.dj.app.springboot.mapper")
+        public class Application {
+      ```
+
+  2. 将接口和映射文件分开
+    * 在resources目录下新建目录mapper存放映射文件，将StudentMapper.xml文件移到resources/mapper目录下
+      * ![集成mybatis](/images/springboot/集成mybatis5.jpg)
+    
+    * 在 application.yml 配置文件中指定映射文件的位置，这个配置只有接口和映射文件不在同一个包的情况下，才需要指定
+      ```
+        mybatis:
+          mapper-locations: classpath:mapper/*.xml
+      ```
+    
+    * 这样，pom.xml中手动指定文件夹为resources就可以删掉了
+      ```
+        <!--手动指定文件夹为resources-->
+        <resources>
+          <resource>
+            <directory>src/main/java</directory>
+            <includes>
+              <include>**/*.xml</include>
+            </includes>
+          </resource>
+        </resources>
+      ```
