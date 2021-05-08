@@ -573,3 +573,206 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632
           </resource>
         </resources>
       ```
+
+# springboot使用事务
+  1. 在入口类中使用注解 @EnableTransactionManagement 开启事务支持
+  2. 在访问数据库的 Service 方法上添加注解 @Transactional 即可
+
+## 代码开发:
+  1. 在 StudentController 中添加更新学生的方法：
+    ```
+      package com.dj.app.springboot.web;
+
+      import com.dj.app.springboot.model.Student;
+      import com.dj.app.springboot.service.StudentService;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Controller;
+      import org.springframework.web.bind.annotation.RequestMapping;
+      import org.springframework.web.bind.annotation.ResponseBody;
+
+      @Controller
+      public class StudentController {
+          @Autowired
+          private StudentService studentService;
+
+          @RequestMapping(value = "/springboot/modify")
+
+          public @ResponseBody Object modifyStudent() {
+              int count = 0;
+              try {
+                  Student student = new Student();
+                  student.setId(1);
+                  student.setName("Jack");
+                  student.setAge(33);
+                  count = studentService.modifyStudentById(student);
+              } catch (Exception e) {
+                  e.printStackTrace();
+                  return "fail";
+              }
+              return count;
+          }
+      }
+    ```
+
+  2. 在 StudentService 接口中添加更新学生方法
+    ```
+      package com.dj.app.springboot.service;
+
+      import com.dj.app.springboot.model.Student;
+
+      public interface StudentService {
+          int modifyStudentById(Student student);
+      }
+    ```
+  3. 在 StudentServiceImpl 接口实现类中对更新学生方法进行实现，并构建一个异常，同时在该方法上加@Transactional 注解
+    ```
+      package com.dj.app.springboot.service.impl;
+
+      import com.dj.app.springboot.mapper.StudentMapper;
+      import com.dj.app.springboot.model.Student;
+      import com.dj.app.springboot.service.StudentService;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.stereotype.Service;
+      import org.springframework.transaction.annotation.Transactional;
+
+      @Service
+      public class StudentServiceImpl implements StudentService {
+          @Autowired
+          private StudentMapper studentMapper;
+
+          @Override
+          @Transactional
+          public int modifyStudentById(Student student) {
+              int updateCount = studentMapper.updateByPrimaryKeySelective(student);
+              System.out.println("更新结果： " + updateCount);
+      //在此构造一个除数为 0 的异常，测试事务是否起作用
+              int a = 10/0;
+              return updateCount;
+          }
+      }
+    ```
+
+  4. 在 Application 类上加@EnableTransactionManagement开启事务支持(可选)
+    ```
+      @EnableTransactionManagement
+      public class Application {
+    ```
+  5. 启动
+    * ![事务](/images/springboot/事务.jpg)
+
+# springboot下面的springmvc
+## @Controller
+  Spring MVC 的注解，处理 http 请求
+
+## @RestController
+  等于 @Controller + @ResponseBody
+
+## @RequestMapping
+  支持 Get 请求，也支持 Post 请求
+
+## @GetMapping
+  RequestMapping 和 Get 请求方法的组合。只支持 Get 请求Get 请求。主要用于查询操作
+## @PostMapping
+  RequestMapping 和 Post 请求方法的组合。只支持 Post 请求。Post 请求主要用户新增数据
+## @PutMapping
+  RequestMapping 和 Put 请求方法的组合。只支持 Put 请求。Put 通常用于修改数据
+## @DeleteMapping
+  RequestMapping 和 Delete 请求方法的组合。只支持 Delete 请求。通常用于删除数据
+## 综合练习
+  ```
+    /**
+    * 该案例主要演示了使用 Spring 提供的不同注解接收不同类型的请求
+    */
+    //RestController 注解相当于加了给方法加了@ResponseBody 注解，所以是不能跳转页面的，
+    只能返回字符串或者 json 数据
+    @RestController
+    public class MVCController {
+        @GetMapping(value = "/query")
+            public String get() {
+            return "@GetMapping 注解,通常查询时使用";
+        }
+        @PostMapping(value = "/add")
+        public String add() {
+            return "@PostMapping 注解，通常新增时使用";
+        }
+        @PutMapping(value = "/modify")
+        public String modify() {
+            return "@PutMapping 注解，通常更新数据时使用";
+        }
+        @DeleteMapping(value = "/remove")
+        public String remove() {
+            return "@DeleteMapping 注解，通常删除数据时使用";
+        }
+    }     
+  ```
+
+# springboot实现restfull
+## 概念
+  一种互联网软件架构设计的风格，但它并不是标准，它只是提出了一组客户端和服务器交互时的架构理念和设计原则，基于这种理念和原则设计的接口可以更简洁，更有层次
+
+## Spring Boot 开发 RESTFul
+  1. @PathVariable
+    * 获取 url 中的数据。该注解是实现 RESTFul 最主要的一个注解
+  2. @PostMapping、@GetMapping
+
+## 案例
+  * 创建RestfulController，并编写代码
+    ```
+      package com.dj.app.springboot.web;
+
+      import org.springframework.web.bind.annotation.*;
+      import java.util.HashMap;
+      import java.util.Map;
+
+      @RestController
+      public class RestfullController {
+
+          /**
+          * 添加学生
+          * 请求地址：
+          http://localhost:8081/app/student/wangpeng/23
+          * 请求方式： POST
+          * @param name
+          * @param age
+          * @return
+          */
+          @PostMapping(value = "/student/{name}/{age}")
+          public Object addStudent(@PathVariable("name") String name, @PathVariable("age") Integer age) {
+              Map<String, Object> retMap = new HashMap<String, Object>();
+              retMap.put("name", name);
+              retMap.put("age", age);
+
+              return retMap;
+          }
+
+          /**
+          * 删除学生
+          * 请求地址：
+          http://localhost:8081/app/springBoot/student/1
+          * 请求方式： Delete
+          * @param id
+          * @return
+          */
+          @DeleteMapping(value = "/student/{id}")
+          public Object removeStudent(@PathVariable("id") Integer id) {
+              return "删除的学生 id 为： " + id;
+          }
+
+          /**
+          * 修改学生信息
+          * 请求地址：
+          http://localhost:8081/app/student/2
+          * 请求方式： Put
+          * @param id
+          * @return
+          */
+          @PutMapping(value = "/student/{id}")
+          public Object modifyStudent(@PathVariable("id") Integer id) {
+              return "修改学生的 id 为" + id;
+          }
+          @GetMapping(value = "/student/{id}")
+          public Object queryStudent(@PathVariable("id") Integer id) {
+              return "查询学生的 id 为" + id;
+          }
+      }
+    ```
