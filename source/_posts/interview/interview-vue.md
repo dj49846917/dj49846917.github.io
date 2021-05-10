@@ -26,6 +26,18 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # 简述Vue的响应式原理
   * 当一个Vue实例创建时，vue会遍历data选项的属性，用 Object.defineProperty 将它们转为 getter/setter并且在内部追踪相关依赖，在属性被访问和修改时通知变化。每个组件实例都有相应的 watcher 程序实例，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的 setter 被调用时，会通知 watcher 重新计算，从而致使它关联的组件得以更新。
   * 简单版：数据劫持收集依赖派发更新
+
+  * 缺点:
+    1. 无法监测到对象属性的动态添加和删除
+    2. 无法监测到数组的下标和length属性的变更
+   
+  * 解决方案：
+    1. vue2提供vue.set方法用于动态给对象添加属性
+      * 给对象新增一个属性，页面不会变化，需要使用 vm.$set(对象，key，值)
+    2. vue2提供vue.delete方法用于动态删除对象的属性
+      * 删除对象一个属性delete obj.a页面没有变化，需要使用vm.$delete(对象，key)
+    3. 重写vue中数组的方法，用于监测数组的变更
+      * 给数组适用下标方式新增一项（arr[3] = ‘哈哈’），页面无变化，需要使用 vm.$set(数组，3，‘哈哈’)或者使用push方法
 ---
 
 # v-if 和 v-show 有什么区别？
@@ -137,9 +149,14 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   4. 路由跳转用params传参时，用到的是name
 ---
 
-# 说说你对slot的理解有多少？slot使用场景有哪些？
-  * slot, 插槽, 在使用组件的时候, 在组建内部插入东西.
+# 说说你对slot的理解有多少？slot使用场景有哪些？有什么作用？原理是什么？
+  * slot又名插槽，是Vue的内容分发机制，组件内部的模板引擎使用slot元素作为承载分发内容的出口。插槽slot是子组件的一个模板标签元素，而这一个标签元素是否显示，以及怎么显示是由父组件决定的。
   * 场景：组件封装的时候最常使用到
+  * slot又分三类，默认插槽，具名插槽和作用域插槽。
+    - 默认插槽：又名匿名查抄，当slot没有指定name属性值的时候一个默认显示插槽，一个组件内只有有一个匿名插槽。
+    - 具名插槽：带有具体名字的插槽，也就是带有name属性的slot，一个组件可以出现多个具名插槽。
+    - 作用域插槽：默认插槽、具名插槽的一个变体，可以是匿名插槽，也可以是具名插槽，该插槽的不同点是在子组件渲染作用域插槽时，可以将子组件内部的数据传递给父组件，让父组件根据子组件的传递过来的数据决定如何渲染该插槽。
+  * 实现原理：当子组件vm实例化时，获取到父组件传入的slot标签的内容，存放在vm.$slot中，默认插槽为vm.$slot.default，具名插槽为vm.$slot.xxx，xxx 为插槽名，当组件执行渲染函数时候，遇到slot标签，使用$slot中的内容进行替换，此时可以为插槽传递数据，若存在数据，则可称该插槽为作用域插槽。
 ---
 
 # prop验证的type类型有哪几种？
@@ -178,13 +195,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # vue生命周期
   * 4个阶段：创建前/后， 挂载前/后， 更新前/后， 销毁前/后
 
-  * **beforeCreate**：是new Vue()之后触发的第一个钩子，在当前阶段data、methods、computed以及watch上的数据和方法都不能被访问。
+  * **beforeCreate**：是new Vue()之后触发的第一个钩子，在当前阶段data、methods、computed以及watch上的数据和方法都不能被访问。可以根据路由信息进行重定向等操作
 
-  * **created**： 在实例创建完成后发生，当前阶段已经完成了数据观测，也就是可以使用数据，更改数据，在这里更改数据不会触发updated函数。可以做一些初始数据的获取，在当前阶段无法与Dom进行交互，如果非要想，可以通过vm.$nextTick来访问Dom。
+  * **created**： 在实例创建完成后发生，当前阶段已经完成了数据观测，也就是可以使用数据，更改数据，在这里更改数据不会触发updated函数。可以做一些初始数据的获取，在当前阶段无法与Dom进行交互，如果非要想，可以通过vm.$nextTick来访问Dom。可以进行数据、资源请求；
 
   * **beforeMount**：发生在挂载之前，在这之前template模板已导入渲染函数编译。而当前阶段虚拟Dom已经创建完成，即将开始渲染。在此时也可以对数据进行更改，不会触发updated。
 
-  * **mounted**： 在挂载完成后发生，在当前阶段，真实的Dom挂载完毕，数据完成双向绑定，可以访问到Dom节点，使用$refs属性对Dom进行操作。
+  * **mounted**： 在挂载完成后发生，在当前阶段，真实的Dom挂载完毕，数据完成双向绑定，可以访问到Dom节点，使用$refs属性对Dom进行操作。可以进行一些dom操作；
 
   * **beforeUpdate**： 发生在更新之前，也就是响应式数据发生更新，虚拟dom重新渲染之前被触发，你可以在当前阶段进行更改数据，不会造成重渲染。
 
@@ -317,8 +334,15 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # vuex直接修改state 与 用commit提交mutation来修改state有什么区别?(mutation 和 action 有什么区别，怎么用？)
-    相同点: 都可以修改state的值，并且是响应式的
-    区别: 开启严格模式下，任何修改state的操作，只要不经过mutation的函数，就会报错
+  * 相同点: 都可以修改state的值，并且是响应式的
+  * 区别: 
+    1. action 提交的是 mutation，而不是直接变更状态。mutation可以直接变更状态
+    2. action 可以包含任意异步操作。mutation只能是同步操作
+    3. 提交方式不同
+      * action 是用this.store.dispatch('ACTION_NAME',data)来提交。
+      * mutation是用this.$store.commit('SET_NUMBER',10)来提交
+
+4.接收参数不同，mutation第一个参数是state，而action第一个参数是context.
 ---
 
 # vuex的store有几个属性值？分别讲讲它们的作用是什么？
@@ -345,16 +369,8 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     - mutations里面的每个函数都会有一个state参数，这样就可以在mutations里面进行state的数据修改，当数据修改完毕后，会传导给页面。页面的数据也会发生改变。
 ---
 
-# vue3 的 类似 hooks 的原理是怎么样的
----
-
 # 路由守卫哪些参数，怎么实现？
----
-
-# vue3.0 有哪些改动和新特性？
----
-
-# vue3生命周期新特性
+  有to（去的那个路由）、from（离开的路由）、next（一定要用这个函数才能去到下一个路由，如果不用就拦截）
 ---
 
 # vue-lazyloader 的原理
@@ -394,10 +410,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # Vue模版编译原理知道吗，能简单说一下吗？
-  * 简单说，Vue的编译过程就是将template转化为render函数的过程。会经历以下阶段：
-    1. 生成AST树
-    2. 优化
-    3. codegen
+  * 简单说，Vue的编译过程就是将template转化为render函数的过程。模板编译又分三个阶段，解析parse，优化optimize，生成generate，最终生成可执行函数render。
+    1. parse阶段：使用大量的正则表达式对template字符串进行解析，将标签、指令、属性等转化为抽象语法树AST。
+    2. optimize阶段：遍历AST，找到其中的一些静态节点并进行标记，方便在页面重渲染的时候进行diff比较时，直接跳过这一些静态节点，优化runtime的性能。
+    3. generate阶段：将最终的AST转化为render函数字符串。
 
   * 首先解析模版，生成AST语法树(一种用JavaScript对象的形式来描述整个模板)。 使用大量的正则表达式对模板进行解析，遇到标签、文本的时候都会执行对应的钩子进行相关处理。
  
@@ -414,4 +430,165 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     - 父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount- >子mounted->父mounted
   * 子组件更新过程
     - 父beforeUpdate->子beforeUpdate->子updated->父updated
+---
+
+# assets和static的区别
+  * assets中的文件在运行npm run build的时候会打包，简单来说就是会被压缩体积，代码格式化之类的。打包之后也会放到static中。
+  * static中的文件则不会被打包。
+  * 建议：将图片等未处理的文件放在assets中，打包减少体积。而对于第三方引入的一些资源文件如iconfont.css等可以放在static中，因为这些文件已经经过处理了。
+---
+
+# $route和$router的区别
+  * $router 为 VueRouter 实例，想要导航到不同 URL，则使用 $router.push 方法
+  * $route 为当前 router 跳转对象里面可以获取 name 、 path 、 query 、 params 等
+---
+
+# 父组件和子组件生命周期执行的顺序？
+  1. 加载渲染过程：
+  父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
+
+  2. 子组件更新过程：
+  父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
+
+  3. 父组件更新过程：
+  父 beforeUpdate -> 父 updated
+
+  4. 销毁过程：
+  父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
+---
+
+# vue-loader是什么？使用它的用途有哪些？
+  * 解析.vue文件的一个加载器，跟template/js/style转换成js模块。
+  * 用途：js可以写es6、style样式可以scss或less、template可以加jade等
+---
+
+# template预编译是什么？
+  * 对于 Vue 组件来说，模板编译只会在组件实例化的时候编译一次，生成渲染函数之后在也不会进行编译。因此，编译对组件的 runtime 是一种性能损耗。
+
+  * 而模板编译的目的仅仅是将template转化为render function，这个过程，正好可以在项目构建的过程中完成，这样可以让实际组件在 runtime 时直接跳过模板渲染，进而提升性能，这个在项目构建的编译template的过程，就是预编译。
+---
+
+# template和jsx的有什么分别？
+  * 对于 runtime 来说，只需要保证组件存在 render 函数即可，而我们有了预编译之后，我们只需要保证构建过程中生成 render 函数就可以。
+  * 在 webpack 中，我们使用vue-loader编译.vue文件，内部依赖的vue-template-compiler模块，在 webpack 构建过程中，将template预编译成 render 函数。
+  * 与 react 类似，在添加了jsx的语法糖解析器babel-plugin-transform-vue-jsx之后，就可以直接手写render函数。
+  * 所以，template和jsx的都是render的一种表现形式，不同的是：JSX相对于template而言，具有更高的灵活性，在复杂的组件中，更具有优势，而 template 虽然显得有些呆滞。但是 template 在代码结构上更符合视图与逻辑分离的习惯，更简单、更直观、更好维护。
+---
+
+# Proxy 相对于 Object.defineProperty有哪些优点？
+  * proxy的性能本来比defineproperty好，proxy可以拦截属性的访问、赋值、删除等操作，不需要初始化的时候遍历所有属性，另外有多层属性嵌套的话，只有访问某个属性的时候，才会递归处理下一级的属性。
+
+  * 可以* 监听数组变化
+  * 可以劫持整个对象
+  * 操作时不是对原对象操作,是 new Proxy 返回的一个新对象
+  * 可以劫持的操作有 13 种
+  
+# vue3.0 有哪些改动和新特性？
+## 改动
+  * 速度更快
+    - 重写了虚拟Dom实现
+    - 编译模板的优化
+    - 更高效的组件初始化
+    - undate性能提高1.3~2倍
+    - SSR速度提高了2~3倍
+  
+  * 体积减少
+    - 通过webpack的tree-shaking功能，可以将无用模块“剪辑”，仅打包需要的
+    - 能够tree-shaking，有两大好处：
+      1. 对开发人员，能够对vue实现更多其他的功能，而不必担忧整体体积过大
+      2. 对使用者，打包出来的包体积变小了
+    - vue可以开发出更多其他的功能，而不必担忧vue打包出来的整体体积过多
+
+  * 更易维护
+    * compositon Api
+      - 可与现有的Options API一起使用
+      - 灵活的逻辑组合与复用
+      - Vue3模块可以和其他框架搭配使用
+    * 更好的Typescript支持
+      - VUE3是基于typescipt编写的，可以享受到自动的类型定义提示 
+    * 编译器重写
+  
+  * 更接近原生
+    - 可以自定义渲染 API
+
+  * 更易使用
+    - 响应式 Api 暴露出来  
+
+## 新特性
+  * ![vue面试](/images/vue/vue面试2.png)
+---
+
+# vue3生命周期新特性
+  * ![vue面试](/images/vue/vue面试.png)
+---
+
+# vue3 的 类似 hooks 的原理是怎么样的
+
+  * 优点：
+    1. 可以监测到代理对象属性的动态添加和删除
+    2. 可以监测到数组的下标和length属性的变更
+  * 缺点：
+    1. ES6的proxy语法对于低版本浏览器不支持，ie11
+    2. vue3针对ie11出了一个特殊的版本做兼容
+---
+
+# 都说Composition API与React Hook很像，说说区别
+  1. 从React Hook的实现角度看，React Hook是根据useState调用的顺序来确定下一次重渲染时的state是来源于哪个useState，所以出现了以下限制
+    * 不能在循环、条件、嵌套函数中调用Hook
+    * 必须确保总是在你的React函数的顶层调用Hook
+    * useEffect、useMemo等函数必须手动确定依赖关系
+  
+  2. 而Composition API是基于Vue的响应式系统实现的，与React Hook的相比
+    * 声明在setup函数内，一次组件实例化只调用一次setup，而React Hook每次重渲染都需要调用Hook，使得React的GC比Vue更有压力，性能也相对于Vue来说也较慢
+    * Compositon API的调用不需要顾虑调用顺序，也可以在循环、条件、嵌套函数中使用
+    * 响应式系统自动实现了依赖收集，进而组件的部分的性能优化由Vue内部自己完成，而React Hook需要手动传入依赖，而且必须必须保证依赖的顺序，让useEffect、useMemo等函数正确的捕获依赖变量，否则会由于依赖不正确使得组件性能下降。
+
+  3. 原理
+    * React hook 底层是基于链表实现，调用的条件是每次组件被render的时候都会顺序执行所有的hooks。
+    * vue hook 只会被注册调用一次，vue 能避开这些麻烦的问题，原因在于它对数据的响应是基于proxy的，对数据直接代理观察。（这种场景下，只要任何一个更改data的地方，相关的function或者template都会被重新计算，因此避开了react可能遇到的性能上的问题）。
+    * react 中，数据更改的时候，会导致重新render，重新render又会重新把hooks重新注册一次，所以react复杂程度会高一些。
+---
+
+# Vue 3.0 性能提升主要是通过哪几方面体现的？(vue2.0与vue3.0的区别)
+  1. 重构响应式系统，使用Proxy替换Object.defineProperty，使用Proxy优势：
+    * 可直接监听数组类型的数据变化
+    * 监听的目标为对象本身，不需要像Object.defineProperty一样遍历每个属性，有一定的性能提升
+    * 可拦截apply、ownKeys、has等13种方法，而Object.defineProperty不行
+    * 直接实现对象属性的新增/删除
+  2. 新增Composition API，更好的逻辑复用和代码组织
+  3. 重构 Virtual DOM
+    * 模板编译时的优化，将一些静态节点编译成常量
+    * slot优化，将slot编译为lazy函数，将slot的渲染的决定权交给子组件
+    * 模板中内联事件的提取并重用（原本每次渲染都重新生成内联函数）
+  4. 代码结构调整，更便于Tree shaking，使得体积更小
+  5. 使用Typescript替换Flow
+---
+
+# Vue 3为什么要用 Proxy API 替代 DefineProperty API？
+  1. defineProperty API 的局限性最大原因是它只能针对单例属性做监听。
+    - Vue2.x中的响应式实现正是基于defineProperty中的descriptor，对 data 中的属性做了遍历 + 递归，为每个属性设置了 getter、setter。       
+    - 这也就是为什么 Vue 只能对 data 中预定义过的属性做出响应的原因，在Vue中使用下标的方式直接修改属性的值或者添加一个预先不存在的对象属性是无法做到setter监听的，这是defineProperty的局限性。
+
+  2. Proxy API的监听是针对一个对象的，那么对这个对象的所有操作会进入监听操作， 这就完全可以代理所有属性，将会带来很大的性能提升和更优的代码。
+    - Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。
+
+  3. 响应式是惰性的
+    - 在 Vue.js 2.x 中，对于一个深层属性嵌套的对象，要劫持它内部深层次的变化，就需要递归遍历这个对象，执行 Object.defineProperty 把每一层对象数据都变成响应式的，这无疑会有很大的性能消耗。
+    - 在 Vue.js 3.0 中，使用 Proxy API 并不能监听到对象内部深层次的属性变化，因此它的处理方式是在 getter 中去递归响应式，这样的好处是真正访问到的内部属性才会变成响应式，简单的可以说是按需实现响应式，减少性能消耗。
+---
+
+# Composition Api 与 Vue 2.x使用的Options Api 有什么区别？
+  * Options Api
+    - 包含一个描述组件选项（data、methods、props等）的对象 options；
+    - API开发复杂组件，同一个功能逻辑的代码被拆分到不同选项 ；
+    - 使用mixin重用公用代码，也有问题：命名冲突，数据来源不清晰；
+
+  * composition Api
+    - vue3 新增的一组 api，它是基于函数的 api，可以更灵活的组织组件的逻辑。
+    - 解决options api在大型项目中，options api不好拆分和重用的问题。
+---
+
+# Proxy只会代理对象的第一层，Vue3是怎样处理这个问题的呢？
+  判断当前Reflect.get的返回值是否为Object，如果是则再通过reactive方法做代理， 这样就实现了深度观测。
+监测数组的时候可能触发多次get/set，那么如何防止触发多次呢？我们可以判断key是否为当前被代理对象target自身属性，也可以判断旧值与新值是否相等，只有满足以上两个条件之一时，才有可能执行trigger。
 ---
