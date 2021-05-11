@@ -523,6 +523,14 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # vue3 的 类似 hooks 的原理是怎么样的
+  * 数据绑定建立响应式大致分为三个阶段: 
+    1. 初始化阶段： 初始化阶段通过组件初始化方法形成对应的proxy对象，然后形成一个负责渲染的effect。
+
+    2. get依赖收集阶段：通过解析template，替换真实data属性，来触发get,然后通过stack方法，通过proxy对象和key形成对应的deps，将负责渲染的effect存入deps。（这个过程还有其他的effect，比如watchEffect存入deps中 ）。
+
+    3. set派发更新阶段：当我们 this[key] = value 改变属性的时候，首先通过trigger方法，通过proxy对象和key找到对应的deps，然后给deps分类分成computedRunners和effect,然后依次执行，如果需要调度的，直接放入调度。
+
+  * 一句话描述：其实就是在 Proxy 第二个参数 handler 也就是陷阱操作符[3]中，拦截各种取值、赋值操作，依托 track 和 trigger 两个函数进行依赖收集和派发更新。
 
   * 优点：
     1. 可以监测到代理对象属性的动态添加和删除
