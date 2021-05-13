@@ -169,6 +169,15 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 原因：有时候一个action改变数据后，我们希望拿到改变后的数据做另外一个action，比如初始化action读取硬盘中的数据到内存，然后用该参数进行请求网络数据action。此时我们可以在componentWillReceiveProps方法中拿到参数，若此时发出再发出action，则数据返回后改变reducer会再次进入componentWillReceiveProps方法，又继续发出action，陷入死循环。
 ---
 
+# redux中间件原理
+  * 中间件提供第三方插件的模式，自定义拦截 action -> reducer 的过程。变为 action -> middlewares -> reducer 。这种机制可以让我们改变数据流，实现如异步 action ，action 过滤，日志输出，异常报告等功能。
+
+  * 常见的中间件：
+    - redux-logger：提供日志输出
+    - redux-thunk：处理异步操作
+    - redux-promise：处理异步操作，actionCreator的返回值是promise
+---
+
 # class 组件与函数式组件的区别
   * 函数或无状态组件是一个纯函数，它可接受接受参数，并返回react元素。这些都是没有任何副作用的纯函数。这些组件没有状态或生命周期方法
   * 类或有状态组件具有状态和生命周期方可能通过setState()方法更改组件的状态。类组件是通过扩展React创建的。它在构造函数中初始化，也可能有子组件
@@ -244,6 +253,10 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 ---
 
 # hooks和class Component的区别
+---
+
+# 什么是 React Hooks？
+Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况下使用state和其他 React 特性。使用 Hooks，可以从组件中提取有状态逻辑，这样就可以独立地测试和重用它。Hooks 允许咱们在不改变组件层次结构的情况下重用有状态逻辑，这样在许多组件之间或与社区共享 Hooks 变得很容易。
 ---
 
 # 为什么使用hooks
@@ -397,7 +410,9 @@ setState 是修改其中的部分状态，相当于 Object.assign，只是覆盖
 ---
 
 # setState是同步还是异步
-  * 结论：原生事件、setTimeout中是同步，合成事件、生命周期中是异步
+  * 结论：
+    - 由React控制的事件处理程序，以及生命周期函数调用setState不会同步更新state
+    - React控制之外的事件中调用setState是同步更新的。比如原生js绑定的事件、setTimeout、setInterval等。
   * 原因：React批量更新
     - 源码中根据isBatchingUpdates(默认false，同步更新)判断立即更新，还是放到队列中延迟更新
     - batchedUpdates方法会修改isBatchingUpdates为true，引起setState的异步更新
@@ -718,4 +733,10 @@ Fiber节点拥有return, child, sibling三个属性，分别对应父节点， �
     * props发送改变
   3. 强制更新
     * this.forceUpdate
+---
+
+# React 事件和 DOM 事件的区别
+  1. 所有事件挂载到 document上
+  2. event 不是原生的，是 SyntheticEvent合成事件对象
+  3. dispatchEvent
 ---
