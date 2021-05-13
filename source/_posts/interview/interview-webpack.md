@@ -36,7 +36,9 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
     - Gulp: gulp与grunt都是按任务执行，gulp有一个文件流的概念。每一步构建的结果并不会存在本地磁盘，而是保存在内存中，下一个步骤是可以使用上一个步骤的内存，大大增加了打包的速度。
 
 # webpack 如何实现动态加载
-  使用import
+  1. 使用import()
+  2. require.ensure
+  3. 使用bundle-loader
 ---
 
 # React.lazy 的原理是什么？
@@ -62,9 +64,16 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
 ---
 
 # require 引入的模块 webpack 能做 Tree Shaking 吗？
+不支持
 ---
 
 # webpack的plugins和loaders的实现原理。
+  * loaders原理： 
+    - webpack 只能直接处理 javascript 格式的代码。任何非 js 文件都必须被预先处理转换为 js 代码，才可以参与打包。loader（加载器）就是这样一个代码转换器。它由 webpack 的 `loader runner` 执行调用，接收原始资源数据作为参数（当多个加载器联合使用时，上一个loader的结果会传入下一个loader），最终输出 javascript 代码（和可选的 source map）给 webpack 做进一步编译。
+  * plugins原理：
+    - 读取配置的过程中会先执行 new HelloPlugin(options) 初始化一个 HelloPlugin 获得其实例。
+    - 初始化 compiler 对象后调用 HelloPlugin.apply(compiler) 给插件实例传入 compiler 对象。
+    - 插件实例在获取到 compiler 对象后，就可以通过compiler.plugin(事件名称, 回调函数) 监听到 Webpack 广播出来的事件。 并且可以通过 compiler 对象去操作 Webpack。
 ---
 
 # webpack如何优化编译速度?
@@ -157,8 +166,8 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
   4. 最终形成打包后的代码
 ---
 
-# babel原理
-  * babel的转译过程分为三个阶段：解析(parsing)、转换(transforming)、生成(generating)，以ES6代码转译为ES5代码为例，babel转译的具体过程如下：
+# babel原理(聊聊babel的抽象语法树)
+  * babel的转译过程分为三个阶段：解析(parsing)、转换(transforming)、生成(generating)，以ES6代码转译为ES5代码为例，babel的转换过程就是构建和修改抽象语法树的过程。babel转译的具体过程如下：
     1. 解析：将代码转换成 AST
       - 词法分析：将代码(字符串)分割为token流，即语法单元成的数组
       - 语法分析：分析token流(上面生成的数组)并生成 AST
@@ -464,10 +473,12 @@ Webpack 实际上为每个模块创造了一个可以导出和导入的环境，
   6. 异步的事件需要在插件处理完任务时调用回调函数通知 Webpack 进入下一个流程，不然会卡住
 ---
 
-# 聊聊babel的抽象语法树
----
-
 # dev-server的原理是什么？描述一下他的具体流程
+  * webpack-dev-server 可以作为命令行工具使用，核心模块依赖是 webpack 和 webpack-dev-middleware。webapck-dev-server 负责启动一个 express 服务器监听客户端请求；实例化 webpack compiler；启动负责推送 webpack 编译信息的 webscoket 服务器；负责向 bundle.js 注入和服务端通信用的 webscoket 客户端代码和处理逻辑。webapck-dev-middleware 把 webpack compiler 的 outputFileSystem 改为 in-memory fileSystem；启动 webpack watch 编译；处理浏览器发出的静态资源的请求，把 webpack 输出到内存的文件响应给浏览器。
+
+  * 每次 webpack 编译完成后向客户端广播 ok 消息，客户端收到信息后根据是否开启 hot 模式使用 liveReload 页面级刷新模式或者 hotReload 模块热替换。hotReload 存在失败的情况，失败的情况下会降级使用页面级刷新。
+
+  * 开启 hot 模式，即启用 HMR 插件。hot 模式会向服务器请求更新过后的模块，然后对模块的父模块进行回溯，对依赖路径进行判断，如果每条依赖路径都配置了模块更新后所需的业务处理回调函数则是 accepted 状态，否则就降级刷新页面。判断 accepted 状态后对旧的缓存模块和父子依赖模块进行替换和删除，然后执行 accept 方法的回调函数，执行新模块代码，引入新模块，执行业务处理代码。
 ---
 
 # 请说一下DllPlugin和DllReferencePlugin的工作原理

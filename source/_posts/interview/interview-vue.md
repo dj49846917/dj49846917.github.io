@@ -189,6 +189,11 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 提到DOM的更新是异步执行的，只要数据发生变化，将会开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。简单来说，就是当数据发生变化时，视图不会立即更新，而是等到同一事件循环中所有数据变化完成之后，再统一更新视图。
 ---
 
+# 在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick() 回调函数中。原因是什么呢
+  * 在 created() 钩子函数执行的时候DOM其实并未进行任何渲染，而此时进行 DOM 操作无异于徒劳，
+  * 所以在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的DOM结构的时候，这个操作都应该放进Vue.nextTick() 的回调函数中
+---
+
 # 怎么缓存当前的组件？缓存后怎么更新？
 ---
 
@@ -210,6 +215,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * **beforeDestroy**： 发生在实例销毁之前，在当前阶段实例完全可以被使用，我们可以在这时进行善后收尾工作，比如清除计时器。
 
   * **destroyed**： 发生在实例销毁之后，这个时候只剩下了dom空壳。组件已被拆解，数据绑定被卸除，监听被移出，子实例也统统被销毁。
+---
+
+# 第一次页面加载会触发哪几个钩子
+---
+
+# vue获取数据在哪个周期函数
 ---
 
 # 如何中断axios的请求？
@@ -257,6 +268,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * Virtual DOM本质就是用一个原生的JS对象去描述一个DOM节点。是对真实DOM的一层抽象。(也就是源码中的VNode类，它定义在src/core/vdom/vnode.js中。)
 
   * VirtualDOM映射到真实DOM要经历VNode的create、diff、patch等阶段。
+---
+
+# 为什么使用虚拟DOM
+  1. 手动操作 DOM 比较麻烦，还需要考虑浏览器兼容性问题，虽然有 jQuery等简化 DOM 操作，但是随着项目的复杂 DOM操作复杂提升
+  2. 为了简化 DOM 的复杂操作于是出现来各种 MVVM框架，MVVM框架解决来视图和状态的同步问题
+  3. 为了简化视图的操作我们可以使用模版引擎，但是模版引擎没有解决跟踪状态变化的问题，于是 Virtual DOM 出现了；Virtual DOM的好处是当状态改变时不需要立即更新DOM，只需要创建一个虚拟树来描述 DOM，Virtual DOM 内部将弄清楚如果有效(diff) 的更新DOM
+  4. 虚拟DOM可以维护程序的状态，跟踪上一次的状态,通过比较前后两次状态的差异更新真实DOM
 ---
 
 # vue和react有什么不同？使用场景是什么？ 
@@ -369,6 +387,11 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     - mutations里面的每个函数都会有一个state参数，这样就可以在mutations里面进行state的数据修改，当数据修改完毕后，会传导给页面。页面的数据也会发生改变。
 ---
 
+# 说一下vuex的思想
+  * Vuex 的思想是 当我们在页面上点击一个按钮，它会触发(dispatch)一个action, action 随后会执行(commit)一个mutation, mutation 立即会改变state,
+  * state 改变以后,我们的页面会state 获取数据，页面发生了变化。 Store 对象，包含了我们谈到的所有内容，action, state, mutation
+---
+
 # 路由守卫哪些参数，怎么实现？
   有to（去的那个路由）、from（离开的路由）、next（一定要用这个函数才能去到下一个路由，如果不用就拦截）
 ---
@@ -383,7 +406,8 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   4. 同时listener会在当前图片加载的过程的loading，loaded，error三种状态触发当前dom渲染的函数，分别渲染三种状态下dom的内容；
 ---
 
-# vue-router 的原理
+# vue-router 的原理（核心：更新视图而不重新请求页面）
+  ![原理](/images/vue/vue面试题3.jpg)
 ---
 
 # vue是怎么监听数组改变更新视图的
@@ -599,4 +623,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # Proxy只会代理对象的第一层，Vue3是怎样处理这个问题的呢？
   判断当前Reflect.get的返回值是否为Object，如果是则再通过reactive方法做代理， 这样就实现了深度观测。
 监测数组的时候可能触发多次get/set，那么如何防止触发多次呢？我们可以判断key是否为当前被代理对象target自身属性，也可以判断旧值与新值是否相等，只有满足以上两个条件之一时，才有可能执行trigger。
+---
+
+# vue首次渲染的过程
+  ![vue面试](/images/vue/vue面试题4.jpg)
+  ![vue面试](/images/vue/vue面试5.png)
 ---
