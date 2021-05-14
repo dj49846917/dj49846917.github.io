@@ -234,7 +234,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   4. 安全性更高，客户端支持防御 XSRF
 ---
 
-# axios原理
+# axios原理(axios和express的http是如何实现请求拦截器的，说下原理)
   1. axios 原理还是属于 XMLHttpRequest， 因此需要实现一个ajax。 
   2. 还需要但会一个promise对象来对结果进行处理。
 ---
@@ -628,4 +628,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # vue首次渲染的过程
   ![vue面试](/images/vue/vue面试题4.jpg)
   ![vue面试](/images/vue/vue面试5.png)
+---
+
+# 为什么vue2里不能监听数组
+---
+
+# 直接操作dom和虚拟dom的场景
+---
+
+# computed实现原理
 ---

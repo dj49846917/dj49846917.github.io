@@ -245,3 +245,8 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 
 # 伪类和伪元素的区别，讲讲伪类有哪些
 ---
+
+# 说一下flex怎么做出0.5px的线
+---
+
+# 实现三角形

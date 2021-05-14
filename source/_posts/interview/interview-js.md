@@ -418,9 +418,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 详细代码请看:  https://segmentfault.com/a/1190000011145364
 ---
 
-# ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
----
-
 # CORS 是如何做的？
     服务端设置 Access-Control-Allow-Origin 就可以开启 CORS。
 ---
@@ -443,7 +440,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     3. 详细代码请看: https://www.cnblogs.com/liugang-vip/p/5616484.html
 ---
 
-# 请说明.forEach循环和.map()循环的主要区别，它们分别在什么情况下使用？
+# 请说明.forEach循环和.map()循环的主要区别，它们分别在什么情况下使用？(map和foreach对数组元素进行操作是否会影响原数组的元素)
   * 都是数组循环，.forEach和.map()的主要区别在于.map()返回一个新的数组。
 ---
 
@@ -459,8 +456,17 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # apply、call、bind的区别？
 ---
 
+# ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
+---
+
 # 请说明 JSONP 的工作原理
   * JSONP（带填充的 JSON）是一种通常用于绕过 Web 浏览器中的跨域限制的方法，因为 Ajax 不允许跨域请求。
+---
+
+# jsonp的原理，怎么把js文件返回调用？
+---
+
+# jsonp的缺点
 ---
 
 # 请解释变量提升
