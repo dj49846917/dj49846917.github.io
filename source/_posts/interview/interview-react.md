@@ -75,6 +75,11 @@ Redux 使用 “Store” 将程序的整个状态存储在同一个地方。因�
 Reducers 是纯函数，它规定应用程序的状态怎样因响应 ACTION 而改变。Reducers 通过接受先前的状态和 action 来工作，然后它返回一个新的状态。它根据操作的类型确定需要执行哪种更新，然后返回新的值。如果不需要完成任务，它会返回原来的状态。
 ---
 
+# 请说下redux中你对reducers的理解,以及如何合并多个reducers
+  * 在redux中reducer是一个纯函数，其中这个纯函数会接收2个参数 一个是state 一个是action。state用来保存公共的状态，state有一个特点就是只允许读不允许进行修改 。
+  * 在实际开发中因为会涉及到多人协作开发所以每个模块都会有一个reducer。我们可以通过combineReducers来合并多个reducers
+---
+
 # Redux中同步 action 与异步 action 最大的区别是什么
 同步只返回一个普通 action 对象。而异步操作中途会返回一个 promise 函数。当然在 promise 函数处理完毕后也会返回一个普通 action 对象。thunk 中间件就是判断如果返回的是函数，则不传导给 reducer，直到检测到是普通 action 对象，才交由 reducer 处理。
 ---
@@ -129,10 +134,55 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 ---
 
 # Redux与mobx的区别
+  * 相同点：
+    - 为了解决状态管理混乱，无法有效同步的问题统一维护管理应用状态;
+    - 某一状态只有一个可信数据来源（通常命名为store，指状态容器）;
+    - 操作更新状态方式统一，并且可控（通常以action方式提供更新状态的途径）;
+    - 支持将store与React组件连接，如react-redux，mobx- react;
+  
+  * 不同点：
+    - redux将数据保存在单一的store中，mobx将数据保存在分散的多个store中
+    - redux使用plain object保存数据，需要手动处理变化后的操作;mobx适用observable保存数据，数据变化后自动处理响应的操作
+    - redux使用不可变状态，这意味着状态是只读的，不能直接去修改它，而是应该返回一个新的状态，同时使用纯函数;mobx中的状态是可变的，可以直接对其进行修改
+    - mobx相对来说比较简单，在其中有很多的抽象，mobx更多的使用面向对象的编程思维;redux会比较复杂，因为其中的函数式编程思想掌握起来不是那么容易，同时需要借助一系列的中间件来处理异步和副作用
+    - mobx中有更多的抽象和封装，调试会比较困难，同时结果也难以预测;而redux提供能够进行时间回溯的开发工具，同时其纯函数以及更少的抽象，让调试变得更加的容易
 ---
 
 # vuex, mobx, redux 各自的特点和区别。
+  * vuex:
+    1. 单向数据流。View 通过 store.dispatch() 调用 Action ，在 Action 执行完异步操作之后通过 store.commit() 调用 Mutation 更新 State ，通过 vue 的响应式机制进行视图更新。
+    2. 单一数据源，和 Redux 一样全局只有一个 Store 实例。
+    3. 可直接对 State 进行修改。
+
+  * mobx: 
+    1. 数据流流动不自然，只有用到的数据才会引发绑定，局部精确更新（细粒度控制）。
+    2. 没有时间回溯能力，因为数据只有一份引用。
+    3. 基于面向对象。
+    4. 往往是多个 Store。
+    5. 代码侵入性小。
+    6. 简单可扩展。
+    7. 大型项目使用 MobX 会使得代码难以维护。
+
+  * redux:
+    1. 单向数据流。View 发出 Action (store.dispatch(action))，Store 调用 Reducer 计算出新的 state
+    2. 若 state 产生变化，则调用监听函数重新渲染 View （store.subscribe(render)）。
+    3. 单一数据源，只有一个 Store。
+    4. state 是只读的，每次状态更新之后只能返回一个新的 state。
+    5. 没有 Dispatcher ，而是在 Store 中集成了 dispatch 方法，store.dispatch() 是 View 发出 Action 的唯一途径。
+
+  * 区别：
+    1. Redux 、Vuex 均为单向数据流。
+    2. Redux 和 Vuex 是基于 Flux 的，Redux 较为泛用，Vuex 只能用于 vue。
+    3. MobX 可以有多个 Store ，Redux 、Vuex 全局仅有一个 Store
+    4. Redux 、Vuex 适用于大型项目的状态管理，MobX 在大型项目中应用会使代码可维护性变差。
+    5. Redux 中引入了中间件，主要解决异步带来的副作用，可通过约定完成许多复杂工作。
+    6. MobX 是状态管理库中代码侵入性最小的之一，具有细粒度控制、简单可扩展等优势，但是没有时间回溯能力，一般适合应用于中小型项目中。
 ---
+
+# 说说你对 mobx 的理解
+  * 概念：也是一个全局状态管理工具
+  * 作用：可以让全局组件之间实现数据共享
+  * 理解: 虽然框架一般都有组件通信的功能, 但是全局状态管理工具, 可以更人性的操作数据
 
 # 说说对Vuex，Flux和Redux的理解
   * Vuex是一个专为Vue.js应用程序开发的状态管理模式，它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化
@@ -165,6 +215,16 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 # redux为什么每次reducer要返回一个新对象，面对大量节点如何优化
 ---
 
+# 说说redux存储数据和本地存储数据有什么区别？
+1. redux中的数据，在刷新（手动或者js触发）页面时，就会消失（或者说被初始化），无法持久化。
+2. sessionStorage中的数据，关闭页面消失（会话结束）。
+3. localStorage中的数据，永不消失（持久化在硬盘）。
+4. redux中的数据发生变化，相关页面（connect），会自动变化，其他两者无此功能，这是主要区别。
+5. 最重要的区别：redux存储在内存，localstorage则以文件的方式存储在本地
+6. 应用场景：redux用于组件之间的传值，localstorage则主要用于不同页面之间的传值。
+7. 永久性：当刷新页面时redux存储的值会丢失，localstorage不会。
+---
+
 # 使用redux时，不能在componentWillReceiveProps方法中使用action
 原因：有时候一个action改变数据后，我们希望拿到改变后的数据做另外一个action，比如初始化action读取硬盘中的数据到内存，然后用该参数进行请求网络数据action。此时我们可以在componentWillReceiveProps方法中拿到参数，若此时发出再发出action，则数据返回后改变reducer会再次进入componentWillReceiveProps方法，又继续发出action，陷入死循环。
 ---
@@ -176,6 +236,20 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
     - redux-logger：提供日志输出
     - redux-thunk：处理异步操作
     - redux-promise：处理异步操作，actionCreator的返回值是promise
+---
+
+# Redux 中间件是怎么拿到store 和 action? 然后怎么处理?
+redux中间件本质就是一个函数柯里化。redux applyMiddleware Api 源码中每个middleware 接受2个参数， Store 的getState 函数和dispatch 函数，分别获得store和action，最终返回一个函数。该函数会被传入 next 的下一个 middleware 的 dispatch 方法，并返回一个接收 action 的新函数，这个函数可以直接调用 next（action），或者在其他需要的时刻调用，甚至根本不去调用它。调用链中最后一个 middleware 会接受真实的 store的 dispatch 方法作为 next 参数，并借此结束调用链。所以，middleware 的函数签名是（{ getState，dispatch })=> next => action。
+---
+
+# Redux中的connect有什么作用
+connect负责连接React和Redux
+  1. 获取state
+    - connect 通过 context获取 Provider 中的 store，通过store.getState() 获取整个store tree 上所有state
+  2. 包装原组件
+    - 将state和action通过props的方式传入到原组件内部 wrapWithConnect 返回—个 ReactComponent 对 象 Connect，Connect 重 新 render 外部传入的原组件 WrappedComponent ，并把 connect 中传入的 mapStateToProps，mapDispatchToProps与组件上原有的 props合并后，通过属性的方式传给WrappedComponent
+  3. 监听store tree变化
+    - connect缓存了store tree中state的状态，通过当前state状态 和变更前 state 状态进行比较，从而确定是否调用 this.setState()方法触发Connect及其子组件的重新渲染
 ---
 
 # class 组件与函数式组件的区别
@@ -208,8 +282,23 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
   * 代码分离是将代码插入到单独的文件中，只加载模块或部分所需的文件的技术。
 ---
 
+# 在react中如何解决单页面开发首次加载白屏现象
+1. 通过路由懒加载的方式 reactloadable
+2. 首屏服务端渲染
+---
+
 # 什么是 Pure Components?
-  * React.PureComponent 与 React.Component 完全相同，只是它为你处理了 shouldComponentUpdate() 方法。当属性或状态发生变化时，PureComponent 将对属性和状态进行浅比较。另一方面，一般的组件不会将当前的属性和状态与新的属性和状态进行比较。因此，在默认情况下，每当调用 shouldComponentUpdate 时，默认返回 true，所以组件都将重新渲染。
+  * pureComponent表示一个纯组件，可以用来优化react程序。减少render函数渲染的次数。提高性能
+  * pureComponent进行的是浅比较，也就是说如果是引用数据类型的数据，只会比较不是同一个地址，而不会比较这个地址里面的数据是否一致
+  * 好处:当组件更新时，如果组件的props或者state都没有改变，render函数就不 会触发。省去虚拟DOM的生成和对比过程，达到提升性能的目的。具体原因 是因为react自动帮我们做了一层浅比较
+---
+
+# pureComponent执行的是浅比较还是深比较？
+浅比较
+---
+
+# redux执行的是浅比较还是深比较？
+浅比较
 ---
 
 # 什么是纯组件？
@@ -219,15 +308,6 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 # 什么是受控组件?什么是非受控组件?
   * 受控: 在随后的用户输入中，能够控制表单中输入元素的组件被称为受控组件
   * 非受控: 非受控组件是在内部存储其自身状态的组件，当需要时，可以使用 ref 查询 DOM 并查找其当前值。
----
-
-# 什么是高阶组件（HOC）? 作用是什么?
-  * 概念: 高阶组件(HOC) 就是一个函数，且该函数接受一个组件作为参数，并返回一个新的组件，我们将它们称为纯组件，因为它们可以接受任何动态提供的子组件，但它们不会修改或复制其输入组件中的任何行为。
-  * 作用:
-    1. 代码复用，逻辑抽象化
-    2. 渲染劫持
-    3. 抽象化和操作状态（state）
-    4. 操作属性（props）
 ---
 
 # 构造函数使用带 props 参数的目的是什么?
@@ -252,11 +332,72 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
   3. useState和useReducer中通过dispatchAction调度更新任务
 ---
 
-# hooks和class Component的区别
+# React Hooks 如何更新状态(useState原理)
+当我们在每次调用 dispatcher 时，并不会立刻对状态值进行修改，而是创建一条修改操作——在对应 Hook 对象的queue属性挂载的链表上加一个新节点，在下次执行函数组件，再次调用 useState 时， React 才会根据每个 Hook 上挂载的更新操作链表来计算最新的状态值。
 ---
 
-# 什么是 React Hooks？
-Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况下使用state和其他 React 特性。使用 Hooks，可以从组件中提取有状态逻辑，这样就可以独立地测试和重用它。Hooks 允许咱们在不改变组件层次结构的情况下重用有状态逻辑，这样在许多组件之间或与社区共享 Hooks 变得很容易。
+# useEffect原理
+  * useEffect 的保存方式与 useState / useReducer 类似，也是以链表的形式挂载在FiberNode.updateQueue中。
+  * 在挂载阶段：
+    1. 根据函数组件函数体中依次调用的 useEffect 语句，构建成一个链表并挂载在FiberNode.updateQueue中
+    2. 组件完成渲染后，遍历链表执行。
+  * 更新阶段：
+    1. 同样在依次调用 useEffect 语句时，判断此时传入的依赖列表，与链表节点Effect.deps中保存的是否一致。如果一致，则在Effect.tag标记上NoHookEffect。
+  * 在每次组件渲染完成后，就会进入 useEffect 的执行阶段：
+    1. 遍历链表
+    2. 如果遇到Effect.tag被标记上NoHookEffect的节点则跳过。
+    3. 如果Effect.destroy为函数类型，则需要执行该清除副作用的函数（至于这Effect.destroy是从哪里来的，下面马上说到）
+    4. 执行Effect.create，并将执行结果保存到Effect.destroy（如果开发者没有配置return，那得到的自然是undefined了，也就是说，开发者认为对于当前 useEffect 代码段，不存在需要清除的副作用）；注意由于闭包的缘故，Effect.destroy实际上可以访问到本次Effect.create函数作用域内的变量。
+---
+
+# 如何用 useEffect 模拟生命周期?
+  ```
+    useEffect(()=>{},[]) // 模拟 componentDidMount
+    useEffect(()=>{},[xxx]) // 模拟 componentDidUpdate
+  ```
+---
+
+# 函数可不可以当 useEffect 的依赖?
+可以当, 但是得在函数外包一层 useCallback, 这样函数就被缓存, 只有内部依赖改变时才会变化函数
+---
+
+# 为什么使用 useEffect 的时候会出现死循环？
+如果是无限循环请求, 则代表你依赖的数据一直在变化, 比如说请求数据时一直设置引用类变量或者利用函数作为依赖
+---
+
+# useReducer与redux的区别
+  1. useContext + useReducer可以一定程度上替代Redux
+  2. useReducer的store是独立分开的，并非一个独立的大状态，Redux是一个统一的状态。
+  3. useReducer的dispatch每个都是独立的，Redux是统一的对象。
+  4. useContext使得数据流不只是至上而下，也能往上传递。
+---
+
+# useCallback与useMemo的区别
+  * 相同点：useCallback 和 useMemo基本是一样的，都是对组件进行性能优化的，应用场景：父组件向子组件传值时，父组件render会导致子组件也会跟着render，不管传的值是否发生改变，子组件都会render，造成资源的浪费。用useCallback 和 useMemo可以监控传值情况，对其进行缓存，传值没有改变时，会阻止子组件render。
+  
+  * 不同点：useCallback直接缓存函数，useMemo缓存函数的返回值
+---
+
+# react hooks性能优化
+  1. useMemo缓存数据
+  2. useCallBack缓存函数
+---
+
+# 简单介绍下什么是hooks，hooks产生的背景？hooks的优点？
+  * 概念：
+    - Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况下使用state和其他 React 特性。使用 Hooks，可以从组件中提取有状态逻辑，这样就可以独立地测试和重用它。Hooks 允许咱们在不改变组件层次结构的情况下重用有状态逻辑，这样在许多组件之间或与社区共享 Hooks 变得很容易。
+  * 背景：
+    -  组件之间复用状态逻辑很难，在hooks之前，实现组件复用，一般采用高阶组件和 Render Props，它们本质是将复用逻辑提升到父组件中，很容易产生很多包装组件，带来嵌套地域。
+    - 组件逻辑变得越来越复杂，尤其是生命周期函数中常常包含一些不相关的逻辑，完全不相关的代码却在同一个方法中组合在一起。如此很容易产生 bug，并且导致逻辑不一致。
+    - 复杂的class组件，使用class组件，需要理解 JavaScript 中 this 的工作方式，不能忘记绑定事件处理器等操作，代码复杂且冗余。除此之外，class组件也会让一些react优化措施失效。
+  * 作用：
+    - 用于在函数组件中引入状态管理和生命周期方法
+    - 取代高阶组件和render props来实现抽象和可重用性
+  * 优点也很明显：
+    - 使用直观
+    - 解决hoc的prop 重名问题
+    - 解决render props 因共享数据 而出现嵌套地狱的问题
+    - 能在return之外使用数据的问题
 ---
 
 # 为什么使用hooks
@@ -283,6 +424,119 @@ Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况
     3. Hooks 在使用层面有着严格的规则约束（比如不要在循环、条件或嵌套函数中调用 Hook。）
 ---
 
+# 介绍下常用的hooks？
+  * useState()，状态钩子。为函数组建提供内部状态
+  * useContext()，共享钩子。该钩子的作用是，在组件之间共享状态。 可以解决react逐层通过Porps传递数据，它接受React.createContext()的返回结果作为参数，使用useContext将不再需要Provider 和 Consumer。
+  * useReducer()，Action 钩子。useReducer() 提供了状态管理，其基本原理是通过用户在页面中发起action, 从而通过reducer方法来改变state, 从而实现页面和状态的通信。使用很像redux
+  * useEffect()，副作用钩子。它接收两个参数， 第一个是进行的异步操作， 第二个是数组，用来给出Effect的依赖项
+  * useRef()，获取组件的实例；渲染周期之间共享数据的存储(state不能存储跨渲染周期的数据，因为state的保存会触发组件重渲染）useRef传入一个参数initValue，并创建一个对象{ current: initValue }给函数组件使用，在整个生命周期中该对象保持不变。
+  * useMemo和useCallback：可缓存函数的引用或值，useMemo用在计算值的缓存，注意不用滥用。经常用在下面两种场景（要保持引用相等；对于组件内部用到的 object、array、函数等，如果用在了其他 Hook 的依赖数组中，或者作为 props 传递给了下游组件，应该使用 useMemo/useCallback）
+  * useLayoutEffect：会在所有的 DOM 变更之后同步调用 effect，可以使用它来读取 DOM 布局并同步触发重渲染
+---
+
+# 描述下hooks下怎么模拟生命周期函数，模拟的生命周期和class中的生命周期有什么区别吗？
+  ```
+    // componentDidMount，必须加[],不然会默认每次渲染都执行
+    useEffect(()=>{
+    }, [])
+
+    // componentDidUpdate
+    useEffect(()=>{
+    document.title = `You clicked ${count} times`;
+    return()=>{
+    // 以及 componentWillUnmount 执行的内容       
+    }
+    }, [count])
+
+    //  shouldComponentUpdate, 只有 Parent 组件中的 count state 更新了，Child 才会重新渲染，否则不会。
+    function Parent() {
+        const [count,setCount] = useState(0);
+        const child = useMemo(()=> <Child count={count} />, [count]);
+        return <>{count}</>
+    }
+
+    function Child(props) {
+        return <div>Count:{props.count}</div>
+    }
+  ```
+  * 这里有一个点需要注意，就是默认的useEffect（不带[]）中return的清理函数，它和componentWillUnmount有本质区别的，默认情况下return，在每次useEffect执行前都会执行，并不是只有组件卸载的时候执行。
+  * useEffect在副作用结束之后，会延迟一段时间执行，并非同步执行，和compontDidMount有本质区别。遇到dom操作，最好使用useLayoutEffect。
+---
+
+# useState中的第二个参数更新状态和class中的this.setState区别？
+---
+
+# 类组件和hook组件的区别
+  * 类组件需要继承 class，函数组件不需要；
+  * 类组件可以访问生命周期方法，函数组件不能；
+  * 类组件中可以获取到实例化后的 this，并基于这个 this 做各种各样的事情，而函数组件不可以；
+  * 类组件中可以定义并维护 state（状态），而函数组件不可以；
+---
+
+# 为什么 useState 要使用数组而不是对象
+  * 如果 useState 返回的是数组，那么使用者可以对数组中的元素命名，代码看起来也比较干净
+  * 如果 useState 返回的是对象，在解构对象的时候必须要和 useState 内部实现返回的对象同名，想要使用多次的话，必须得设置别名才能使用返回值
+  * useState 返回的是 array 而不是 object 的原因就是为了降低使用的复杂度，返回数组的话可以直接根据顺序解构，而返回对象的话要想使用多次就需要定义别名了。
+---
+
+# useEffect和useLayoutEffect区别？
+  * useEffect是render结束后，callback函数执行，但是不会阻断浏览器的渲染，算是某种异步的方式吧。但是class的componentDidMount 和componentDidUpdate是同步的,在render结束后就运行,useEffect在大部分场景下都比class的方式性能更好.
+  * useLayoutEffect里面的callback函数会在DOM更新完成后立即执行,但是会在浏览器进行任何绘制之前运行完成,阻塞了浏览器的绘制.
+---
+
+# React Hook 的使用限制有哪些？
+  1. 不要在循环、条件或嵌套函数中调用 Hook；必须始终在 React函数的顶层使用Hook
+    * 这是因为React需要利用调用顺序来正确更新相应的状态，以及调用相应的钩子函数。一旦在循环或条件分支语句中调用Hook，就容易导致调用顺序的不一致性，从而产生难以预料到的后果。
+  2. 使用useState时候，使用push，pop，splice等直接更改数组对象,无法获取到新值,应该采用...方式
+  3. useState设置状态的时候，只有第一次生效，后期需要更新状态，必须通过useEffect
+  4. 善用useCallback，父组件传递给子组件事件句柄时，如果我们没有任何参数变动可能会选用useMemo。但是每一次父组件渲染子组件即使没变化也会跟着渲染一次。
+
+# React Hooks 和生命周期的关系？
+  * Hooks 组件有生命周期，而函数组件是没有生命周期的。
+  * 具体关系：
+    1. constructor：函数组件不需要构造函数，可以通过调用 useState 来初始化 state。如果计算的代价比较昂贵，也可以传一个函数给 useState。
+    2. getDerivedStateFromProps：一般情况下，我们不需要使用它，可以在渲染过程中更新 state，以达到实现 getDerivedStateFromProps 的目的。
+    3. shouldComponentUpdate：可以用 React.memo 包裹一个组件来对它的 props 进行浅比较
+    4. 注意：React.memo 等效于 PureComponent，它只浅比较 props。这里也可以使用 useMemo 优化每一个节点。
+    5. render：这是函数组件体本身。
+    6. componentDidMount, componentDidUpdate： useLayoutEffect 与它们两的调用阶段是一样的。但是，我们推荐你一开始先用 useEffect，只有当它出问题的时候再尝试使用 useLayoutEffect。useEffect 可以表达所有这些的组合。
+    7. componentWillUnmount：相当于 useEffect里面返回的 cleanup 函数
+    8. componentDidCatch and getDerivedStateFromError：目前还没有这些方法的 Hook 等价写法，但很快会加上。
+---
+
+# 什么是高阶组件（HOC）? 作用是什么?
+  * 概念: hoc是 React 中用于重用组件逻辑的高级技术，它是一个函数，能够接受一个组件并返回一个新的组件。
+  * 作用:
+    1. 代码复用，逻辑抽象化
+    2. 渲染劫持
+    3. 抽象化和操作状态（state）
+    4. 操作属性（props）
+  * 实现高阶组件的两种方式：
+    - 属性代理。高阶组件通过包裹的React组件来操作props
+    - 反向继承。高阶组件继承于被包裹的React组件
+---
+
+# 什么是属性代理?
+  * 属性代理组件继承自React.Component，通过传递给被包装的组件props得名
+  * 属性代理的用途:
+    - 更改 props，可以对传递的包裹组件的WrappedComponent的props进行控制
+    - 通过 refs 获取组件实例
+    - 把 WrappedComponent 与其它 elements 包装在一起
+---
+
+# 什么是反向继承？
+反向继承是继承自传递过来的组件，反向继承允许高阶组件通过 this 关键词获取 WrappedComponent，意味着它可以获取到 state，props，组件生命周期（component lifecycle）钩子，以及渲染方法（render），所以我们主要用它来做渲染劫持，比如在渲染方法中读取或更改 React Elements tree，或者有条件的渲染等。
+---
+
+# 你的项目中怎么使用的高阶组件
+  1. 项目中经常存在在配置系统中配置开关/全局常量，然后在页面需要请求配置来做控制，如果在每个需要调用全局设置的地方都去请求一下接口，就会有一种不优雅的感觉，这个时候我就想到利用高阶组件抽象一下。
+  2. 项目开发过程中，经常也会遇到需要对当前页面的一些事件的默认执行做阻止，我们也可以写一个高阶组件等。
+---
+
+# hooks和hoc和render props有什么不同？
+它们之间最大的不同在于，后两者仅仅是一种开发模式，而自定义的hooks是react提供的API模式，它既能更加自然的融入到react的渲染过程也更加符合react的函数编程理念。
+---
+
 # 了解过 react-router 内部实现机制吗？(实现原理)
   * 当用户点击页面跳转时，react-router阻止了浏览器的默认跳转行为，而改用history模块的pushState方法去触发url更新，当执行history.push时，执行了注册的listener函数，listener中的setState函数也被执行，将当前url地址栏对应的url传递下去，当Route组件匹配到该地址栏的时候，就会渲染该组件，如果匹配不到，Route组件就返回null
   * react-router依赖基础是history库：
@@ -301,12 +555,40 @@ Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况
     * Redirect 重定向
 ---
 
+# react中常用的路由配置项？
+  1. BrowserRouter 路由根组件，路径不带#号history路由
+  2. HashRouter    路由根组件，路径带#号hash路由
+  3. withRouter 对非路由渲染的组件组件进行包裹，让其具备三个属性
+  4. Route 定义路由
+  5. Link 路由跳转，没有动态属性，使用场景，非tabBar
+  6. NavLink 路由跳转，有动态属性，使用场景，tabBar
+  7. Switch 路由渲染，被其包裹的组件只会被渲染一个，包裹时最好将子组件 放在这个标签之外，父组件放在内部
+  8. Redirect 路由重定向
+---
+
+# 谈谈你对react中withRouter的理解
+默认情况下必须是经过路由匹配渲染的组件在this.props上拥有路由参数，才能使用编程式导航的写法，withRouter是把不是通过路由切换过来的组件，将reactrouter 的 history、location、match 三个对象传入props对象上
+---
+
+# 如何控制路由的路径完全匹配？
+  在NavLink或者Route标签中添加exact属性，是路径完全匹配
+---
+
 # react-router怎么实现路由切换
   1. Router组件使用Provider向下提供history对象，以及location的变更监听
   2. Route接收loaction(props || context)，Router尝试其属性path与location进行匹配，匹配检测(children > component > render)，内容渲染
   3. Link 跳转链接，生成一个a标签，禁用默认事件，js处理点击事件跳转(history.push) -> Link与直接使用a标签的区别是a页面会重新加载一下，Link只重新渲染Route组件部分
   4. Redirect to
   5. 从上下文中获取history this.context.router.history.push…
+---
+
+# react router和常规路由有何不同？
+  * 参与的页面：
+   ​ reactRouter：只涉及单个HTML页面；常规路由：每个视图对应一个新文件。
+  * URL更改：
+    ​reactRouter：仅更改历史记录属性。常规路由：http请求被发送到服务器并且接收相应的html页面
+  * 体验：
+    ​reactRouter：用户认为自己正在不同的页面间切换。常规路由：用户实际在每个视图的不同页面切换
 ---
 
 # 路由的动态加载模块
@@ -319,6 +601,13 @@ Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况
 
 # 什么是 JSX?
   * JSX是javascript的语法扩展。它就像一个拥有javascript全部功能的模板语言。它生成React元素，这些元素将在DOM中呈现。
+---
+
+# react中的JSX原理
+React.js 就把 JavaScript 的语法扩展了一下，让 JavaScript 语言能够支持这种直接在 JavaScript 代码里面编写类似 HTML 标签结构的语法，这样写起来就方便很多了。编译的过程会把类似 HTML 的 JSX 结构转换成 JavaScript 的对象结构。
+React.createElement 会构建一个 JavaScript 对象来描述你 HTML 结构的信息，包括标签名、属性、还有子元素等。
+jsx实际上就是一种javascript对象，他经过react语法的构造，还有编译转化，最后得到dom元素，可以插到页面中：所谓的 JSX 其实就是 JavaScript 对象，所以使用 React 和 JSX 的时候一定要经过编译的过程:
+JSX —使用react构造组件，bable进行编译—> JavaScript对象 — ReactDOM.render()—>DOM元素 —>插入页面
 ---
 
 # 为什么浏览器无法读取JSX？
@@ -359,6 +648,10 @@ Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况
   * Props 是 React 中属性的简写。它们是只读组件，必须保持纯，即不可变。它们总是在整个应用中从父组件传递到子组件。子组件永远不能将 prop 送回父组件。这有助于维护单向数据流，通常用于呈现动态生成的数据。
 ---
 
+# React中的props为什么是只读的？
+  因为react的特点是单向数据流，只能从父组件流向子组件
+--- 
+
 # React中的状态是什么？它是如何使用的？
   * 状态是 React 组件的核心，是数据的来源，必须尽可能简单。基本上状态是确定组件呈现和行为的对象。与props 不同，它们是可变的，并创建动态和交互式组件。可以通过 this.state() 访问它们。
 ---
@@ -383,6 +676,14 @@ Hooks是 React 16.8 中的新添加内容。它们允许在不编写类的情况
 
 # 执行setState发生了什么？(react的setstate过程)
 将传递给 setState 的对象合并到组件的当前状态，这将启动一个和解的过程，构建一个新的 react 元素树，与上一个元素树进行对比（diff），从而进行最小化的重渲染。
+---
+
+# React中setState的第二个参数作用是什么？
+setState 的第二个参数是一个可选的回调函数。这个回调函数将在组件重新渲染后执行。等价于在 componentDidUpdate 生命周期内执行。通常建议使用 componentDidUpdate 来代替此方式。在这个回调函数中你可以拿到更新后 state 的值：
+---
+
+# 在React中组件的this.state和setState有什么区别？
+this.state通常是用来初始化state的，this.setState是用来修改state值的。如果初始化了state之后再使用this.state，之前的state会被覆盖掉，如果使用this.setState，只会替换掉相应的state值。所以，如果想要修改state的值，就需要使用setState，而不能直接修改state，直接修改state之后页面是不会更新的。
 ---
 
 # react进行setState后触发了哪些钩子
@@ -457,11 +758,7 @@ setState 是修改其中的部分状态，相当于 Object.assign，只是覆盖
 ---
 
 # 聊聊 React 的 diff(原理)
-  1. 把树形结构按照层级分解，只比较同级元素。
-  2. 给列表结构的每个单元添加唯一的 key 属性，方便比较。
-  3. React 只会匹配相同 class 的 component（这里面的 class 指的是组件的名字）。
-  4. 合并操作，调用 component 的 setState 方法的时候, React 将其标记为 dirty.到每一个事件循环结束, React 检查所有标记 dirty 的 component 重新绘制.
-  5. 选择性子树渲染。开发人员可以重写 shouldComponentUpdate 提高 diff 的性能。
+当你使用react的时候，在某个时间点render函数创建了一颗react元素树，在下一个state或者props更新的时候,react函数将创建一颗新的react树,react将对比两棵树的不同之处，计算出如何高效的更新UI
 ---
 
 # 组件生命周期的不同阶段是什么?（分为三个阶段，初始，运行中，销毁）
@@ -499,7 +796,11 @@ setState 是修改其中的部分状态，相当于 Object.assign，只是覆盖
 ---
 
 # 重新渲染界面这个过程在生命周期中哪几步？
-componentwillReceiveProps > shouldComponentUpdate > componentWillUpdate > render > componentDidUpdate
+static getDerivedStateFromProps() > shouldComponentUpdate > getSnapshotBeforeUpdate > render > componentDidUpdate
+---
+
+# 错误处理期间调用哪些方法?
+static getDerivedStateFromError() > componentDidCatch()
 ---
 
 # static getDerivedStateFromProps什么时候用
@@ -533,6 +834,10 @@ componentwillReceiveProps > shouldComponentUpdate > componentWillUpdate > render
   * constructor() => static getDerivedStateFromProps() => render() =>componentDidMount()
 ---
 
+# 哪些生命周期会执行多次
+render、componentWillReceiveProps、shouldComponentUpdate、componentWillUpdate、componentDidUpdate
+---
+
 # 生命周期方法 getDerivedStateFromProps() 的目的是什么?
   * 新的静态 getDerivedStateFromProps() 生命周期方法在实例化组件之后以及重新渲染组件之前调用。它可以返回一个对象用于更新状态，或者返回 null 指示新的属性不需要任何状态更新。此生命周期方法与 componentDidUpdate() 一起涵盖了 componentWillReceiveProps() 的所有用例。
 ---
@@ -542,12 +847,26 @@ componentwillReceiveProps > shouldComponentUpdate > componentWillUpdate > render
 ---
 
 # forceUpdate经历了哪些生命周期，子组件呢?
-  * 都有render
+  shouldComponentUpdate、componentWillUpdate、render、componentDidUpdate
+---
+
+# this.setState执行后会执行哪些生命周期函数？
+  shouldComponentUpdate、componentWillUpdate、render、componentDidUpdate
 ---
 
 # fiber带来的新的生命周期是什么
   ![react面试题](/images/vue/vue面试5.png)
 ---
+
+# 渲染一个react组件的过程
+   1. 在组件渲染过程中，会先走constructor处理里面的逻辑，如：设置初始的state
+   2. 再执行getDeriveStateFromProps钩子，return prevProps的操作就是将props的内容映射到state中，使用getDeriveStateFromProps钩子，需要先使用this.state
+   3. 组件渲染的过程中都会走一遍componentDidMount钩子
+   4. 如果有触发state更新，钩子会从getDeriveStateFromProps开始处理
+   5. 再执行shouldComponentUpdate钩子，满足条件后返回true触发更新走render函数
+   6. render之后还要看是否有进一步的更新操作
+   7. 看是否有getSnapshotBeforeUpdate钩子拦截 它的返回值是componentDidupdate钩子的第三个参数snapshot
+   8. 不管有咩有getSnapshotBeforeUpdate，都会走到componentDidUpdate钩子，如果再这个过程中还有操作引起state的内容变化，会再次从getDerivedStateFromProps --- shouldComponentUpdate --- render ---getSnapshotBeforeUpdate --- componentDidUpdate
 
 # 是否可以在不调用 setState 方法的情况下，强制组件重新渲染?
   component.forceUpdate(callback)
@@ -625,8 +944,16 @@ JSX 元素将被转换为 React.createElement() 函数来创建 React 元素，�
 Context 通过组件树提供了一个传递数据的方法，从而避免了在每一个层级手动的传递props。比如，需要在应用中许多组件需要访问登录用户信息、地区偏好、UI主题等。
 ---
 
+# 谈谈你对context的理解
+当你不想在组件树中通过逐层传递props或者state的方式来传递数据时，可以使用Context来实现跨层级的组件数据传递,使用context可以实现跨组件传递
+---
+
 # children 属性是什么?
 Children 是一个属性（this.props.chldren），它允许你将组件作为数据传递给其他组件，就像你使用的任何其他组件一样。在组件的开始和结束标记之间放置的组件树将作为children属性传递给该组件。
+---
+
+# React.Children.map和js的map有什么区别？
+JavaScript中的map不会对为null或者undefined的数据进行处理，而React.Children.map中的map可以处理React.Children为null或者undefined的情况。
 ---
 
 # react-dom 中 render 方法的目的是什么?
@@ -707,14 +1034,20 @@ Fiber节点拥有return, child, sibling三个属性，分别对应父节点， �
     6. 单项数据，实现单项数流，从而减少代码复用
 ---
 
+# React 事件绑定原理
+  * React并不是将click事件绑定到了div的真实DOM上，而是在document处监听了所有的事件，当事件发生并且冒泡到document处的时候，React将事件内容封装并交由真正的处理函数运行。这样的方式不仅仅减少了内存的消耗，还能在组件挂在销毁时统一订阅和移除事件。
+
+  * 除此之外，冒泡到document上的事件也不是原生的浏览器事件，而是由react自己实现的合成事件（SyntheticEvent）。因此如果不想要是事件冒泡的话应该调用event.preventDefault()方法，而不是调用event.stopProppagation()方法。
+---
+
 # React组件中怎么做事件代理
+React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），定义的事件处理器会接收到一个合成事件对象的实例，它符合W3C标准，且与原生的浏览器事件拥有同样的接口，支持冒泡机制，所有的事件都自动绑定在最外层上。
 ---
 
 # React组件事件代理的原理
-  * 事件委托：事件注册到document上
-    - 统一管理卸载
-  * e.stopPropagation阻止冒泡不可达到document层，解决：e.nativeEvent.stopImmediatePropagation()
-  * react源码通过一个合成事件映射表判断是否是合成事件
+  * 在React底层，主要对合成事件做了：事件委派和自动绑定。
+    - 事件委派： React会把所有的事件绑定到结构的最外层，使用统一的事件监听器，这个事件监听器上维持了一个映射来保存所有组件内部事件监听和处理函数。
+    - 自动绑定： React组件中，每个方法的上下文都会指向该组件的实例，即自动绑定this为当前组件。
 ---
 
 # 在 React 中使用构造函数和 getInitialState 有什么区别？
@@ -739,4 +1072,31 @@ Fiber节点拥有return, child, sibling三个属性，分别对应父节点， �
   1. 所有事件挂载到 document上
   2. event 不是原生的，是 SyntheticEvent合成事件对象
   3. dispatchEvent
+---
+
+# React如何判断什么时候重新渲染组件？
+  * 组件状态的改变可以因为props的改变，或者直接通过setState方法改变。组件获得新的状态然后React决定是否应该重新渲染组件。只要组件的state发生变化，React就会对组件进行重新渲染。这是因为React中的shouldComponentUpdate方法默认返回true，这就是导致每次更新都重新渲染的原因。
+
+  * 当React将要渲染组件时会执行shouldComponentUpdate方法来看它是否返回true（组件应该更新，也就是重新渲染）。所以需要重写shouldComponentUpdate方法让它根据情况返回true或者false来告诉React什么时候重新渲染什么时候跳过重新渲染。
+---
+
+# 对React SSR的理解
+  * 服务端渲染是数据与模版组成的html，即 html= 数据 ＋ 模版。将组件或页面通过服务器生成html字符串，再发送到浏览器，最后将静态标记"混合"为客户端上完全交互的应用程序。页面没使用服务渲染，当请求页面时，返回的body里为空，之后执行js将html结构注入到body里，结合css显示出来;
+  * 优势：
+    - 对SEO友好
+    - 所有的模版、图片等资源都存在服务器端
+    - 一个html返回所有数据
+    - 减少HTTP请求
+    - 响应快、用户体验好、首屏渲染快
+  * 劣势:
+    - 服务端压力较大
+      - 本来是通过客户端完成渲染，现在统一到服务端node服务去做。尤其是高并发访问的情况，会大量占用服务端CPU资源;
+    - 开发条件受限
+      - 在服务端渲染中，只会执行到componentDidMount之前的生命周期钩子，因此项目引用的第三方的库也不可用其它生命周期钩子，这对引用库的选择产生了很大的限制;
+    - 学习成本相对较高
+      - 除了对webpack、MVVM框架要熟悉，还需要掌握node、 Koa2等相关技术。相对于客户端渲染，项目构建、部署过程更加复杂。
+---
+
+# 什么是纯函数？
+纯函数是不依赖并且不会在其作用域之外修改变量状态的函数。本质上，纯函数始终在给定相同参数的情况下返回相同结果。
 ---
