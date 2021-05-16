@@ -23,7 +23,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 手写深浅拷贝
 ---
 
-# 数组去重；
+# 数组去重；(所有方法)
 ---
 
 # 如何手写实现一个 Promise？
@@ -51,6 +51,28 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 写一个方法找出字符串中出现次数最多的字母
+  ```
+    function fn(str) {
+      var arr = str.split("");
+      var result = {};
+      var char = "";
+      var max = 0;
+      for (var i = 0; i < arr.length; i++) {
+        if (!result[arr[i]]) {
+          result[arr[i]] = 1;
+        } else {
+          result[arr[i]]++;
+        }
+      }
+      for (let item in result) {
+        if (result[item] > max) {
+          char = item;
+          max = result[item];
+        }
+      }
+      return char;
+    }
+  ```
 ---
 
 # 写一个方法获取URL中的查询字符串的参数

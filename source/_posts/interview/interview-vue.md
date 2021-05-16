@@ -71,6 +71,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 在computed里面定义了的属性，在data里面不能再重复定义，computed依赖于data中的属性，而watch依赖于data中属性的改变，watch中可以进行异步操作。
 ---
 
+# computed的原理
+---
+
+# 如果要你实现computed的特性（缓存、响应），你会怎么做
+---
+
 # Vue.observable你有了解过吗？说说看
   * vue2.6发布一个新的API，可以处理一些简单的跨组件共享数据状态的问题。
 ---
@@ -109,6 +115,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 
 # 说说你对vue的表单修饰符.lazy的理解
   * input标签v-model用lazy修饰之后，vue并不会立即监听input Value的改变，会在input失去焦点之后，才会触发input Value的改变
+---
+
+# vue里面的修饰符
 ---
 
 # vue为什么要求组件模板只能有一个根元素？
@@ -181,7 +190,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 该算法中还运用了动态规划的思想求解最长递归子序列。
 ---
 
-# vue能监听到数组变化的方法有哪些？为什么？
+# vue能监听到数组变化的方法有哪些？为什么？(Vue里面数组为什么直接修改不能触发数据更新，vue重写了哪些数组方法)
     push(), pop(), shift(), unshift(), splice(), sort(), reverse()
 ---
 
@@ -390,6 +399,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # 说一下vuex的思想
   * Vuex 的思想是 当我们在页面上点击一个按钮，它会触发(dispatch)一个action, action 随后会执行(commit)一个mutation, mutation 立即会改变state,
   * state 改变以后,我们的页面会state 获取数据，页面发生了变化。 Store 对象，包含了我们谈到的所有内容，action, state, mutation
+---
+
+# vuex是怎么实现的
+---
+
+# vue内部是怎么实现数组的响应式的
 ---
 
 # 路由守卫哪些参数，怎么实现？
@@ -625,7 +640,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 监测数组的时候可能触发多次get/set，那么如何防止触发多次呢？我们可以判断key是否为当前被代理对象target自身属性，也可以判断旧值与新值是否相等，只有满足以上两个条件之一时，才有可能执行trigger。
 ---
 
+# vue3的toRefs作用
+---
+
 # vue首次渲染的过程
   ![vue面试](/images/vue/vue面试题4.jpg)
   ![vue面试](/images/vue/vue面试5.png)
+---
+
+# vue懒加载原理
 ---

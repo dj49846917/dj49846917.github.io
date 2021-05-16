@@ -52,3 +52,12 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
   2. 文件模块
 ---
     
+# generator的原理
+---
+
+# Nodejs如何实现高并发的
+---
+
+# node 如何捕捉错误，内存泄漏怎么排查；
+---
+
