@@ -456,6 +456,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 详细说说common.js?
 ---
 
+# commonJS的底层原理是什么？
+---
+
 # commonJS 与 ES6 模块化区别；
 ---
 

@@ -397,6 +397,21 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
   3. contenthash：根据文件的内容生成hash值。不同文件hash值一定不一样
 ---
 
+# webpack 打包文件的 hash 值怎么设置？hash 值长度如何设置，用什么分割？
+---
+
+# hash 除了用文件内容外还可以用哪些来计算？
+---
+
+# webpack 注入变量给 js 调用如何做？
+---
+
+# mode 注入的环境值是 webpack 读取还是 node 读取？
+---
+
+# 在哪里配置 webpack 启动的命令？
+---
+
 # webpack-dev-server 和 http服务器的区别
 webpack-dev-server使用内存来存储webpack开发环境下的打包文件，并且可以使用模块热更新，比传统的http服务对开发更加有效。
 ---

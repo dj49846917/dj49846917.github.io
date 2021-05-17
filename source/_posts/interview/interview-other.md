@@ -154,6 +154,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     <7>.针对服务器的优化、拥抱最新前端技术。
 ---
 
+# 有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？
+---
+
 # 权限系统是怎么设计的
 ---
 
@@ -258,6 +261,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # If-Modified-Since、If-Match是根据什么进行判断
 ---
 
+# SSL证书浏览器是怎么验证的？
+---
+
 # 怎么生成ETAG
 ---
 
@@ -298,6 +304,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # websocket，用法，如何保证仍然连接，如何确保消息发送到了，从计网的角度来讲一讲如何保证websocket传输可靠(websocket怎么传送数据的)
+---
+
+# websocket是什么，原理，怎么实现
+---
+
+# websocket 为什么要加心跳? websocket 不是长连接吗，为什么还要加心跳去维持连接
 ---
 
 # 说说http 与 tcp 的关系
@@ -471,6 +483,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   3. 加一个首屏 loading 图，提升用户体验；
 ---
 
+# SPA理解和原理
+---
+
 # 对于首屏就必须要加载的包，有什么优化手段
 使用http缓存必须使用的包，下次请求时从缓存读取
 ---
@@ -495,9 +510,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   5. 辅助代码分离；
   6. 及时模块化；
   7. 集中/统一的状态管理；
----
-
-# websocket是什么，原理，怎么实现
 ---
 
 # 介绍下web worker，有什么用，什么样的场景比较适合？
@@ -530,9 +542,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 网页上实现VR效果的原理
----
-
-# wepy把vue语法转换成原生小程序的原理
 ---
 
 # 网页上实现VR效果的原理
@@ -609,13 +618,16 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # JPG和PNG图片的应用场景，哪一个质量低，两者区别。
 ---
 
-# Token的机制是怎样的
----
-
 # 登录功能怎么实现
 ---
 
+# Token的机制是怎样的
+---
+
 # token存在哪里
+---
+
+# token的产生方法与使用的原因
 ---
 
 # 每次发起请求都会携带token吗
@@ -651,6 +663,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 如何看待小程序，它的技术原理是；
 ---
 
+# wepy把vue语法转换成原生小程序的原理
+---
+
 # 正向代理和反向代理的区别
 ---
 
@@ -678,3 +693,11 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 怎么捕获资源异常、同步异步的错误
 ---
 
+# 如何理解前后端分离架构？
+---
+
+# fetch原理 options
+---
+
+# uni-app 的 h5 和 小程序打包出的文件有什么区别
+---

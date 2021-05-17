@@ -71,7 +71,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 在computed里面定义了的属性，在data里面不能再重复定义，computed依赖于data中的属性，而watch依赖于data中属性的改变，watch中可以进行异步操作。
 ---
 
-# computed的原理
+# computed的原理, computed中的get作用是什么
 ---
 
 # 如果要你实现computed的特性（缓存、响应），你会怎么做
@@ -372,12 +372,21 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 4.接收参数不同，mutation第一个参数是state，而action第一个参数是context.
 ---
 
+# 为什么 vue 不建议在 action 中修改 state 而是在 mutation 中修改？有什么好处？
+---
+
 # vuex的store有几个属性值？分别讲讲它们的作用是什么？
   * state, 状态初始化, 并实施观察
   * getter, 获取数据用于view或data中使用
   * mutation: 内部处理state变化
   * action: 处理外部交互
   * module: 模块化以上四个
+---
+
+# vuex 的状态规则 modules 作用
+---
+
+# vuex 和 eventbus 优缺点有什么不一样
 ---
 
 # 对 vuex 的理解，单向数据流
@@ -658,4 +667,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # vue懒加载原理
+---
+
+# vue可以拿index当key吗，为什么
 ---
