@@ -71,7 +71,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 在computed里面定义了的属性，在data里面不能再重复定义，computed依赖于data中的属性，而watch依赖于data中属性的改变，watch中可以进行异步操作。
 ---
 
-# computed的原理
+# computed的原理, computed中的get作用是什么
 ---
 
 # 如果要你实现computed的特性（缓存、响应），你会怎么做
@@ -243,7 +243,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   4. 安全性更高，客户端支持防御 XSRF
 ---
 
-# axios原理
+# axios原理(axios和express的http是如何实现请求拦截器的，说下原理)
   1. axios 原理还是属于 XMLHttpRequest， 因此需要实现一个ajax。 
   2. 还需要但会一个promise对象来对结果进行处理。
 ---
@@ -378,12 +378,21 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # 给 Vue 全局绑定一个变量有什么方式? 为什么 $store 不直接绑定到原型
 ---
 
+# 为什么 vue 不建议在 action 中修改 state 而是在 mutation 中修改？有什么好处？
+---
+
 # vuex的store有几个属性值？分别讲讲它们的作用是什么？
   * state, 状态初始化, 并实施观察
   * getter, 获取数据用于view或data中使用
   * mutation: 内部处理state变化
   * action: 处理外部交互
   * module: 模块化以上四个
+---
+
+# vuex 的状态规则 modules 作用
+---
+
+# vuex 和 eventbus 优缺点有什么不一样
 ---
 
 # 对 vuex 的理解，单向数据流
@@ -649,11 +658,25 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # vue3的toRefs作用
 ---
 
+# vue3中的teleport
+---
+
 # vue首次渲染的过程
   ![vue面试](/images/vue/vue面试题4.jpg)
   ![vue面试](/images/vue/vue面试5.png)
 ---
 
+# 为什么vue2里不能监听数组
+---
+
+# 直接操作dom和虚拟dom的场景
+---
+
+# computed实现原理
+---
+
 # vue懒加载原理
 ---
 
+# vue可以拿index当key吗，为什么
+---

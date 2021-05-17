@@ -26,7 +26,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
 ---
 
-# JavaScript有几种类型的值？有什么区别？
+# JavaScript有几种类型的值？有什么区别？(堆和栈的概念)
   * 类型
     1. 栈：原始数据类型（Undefined，Null，Boolean，Number、String）
     2. 堆：引用数据类型（对象、数组和函数）
@@ -54,6 +54,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。
   * 关系：instance.constructor.prototype = instance.__proto__
   * 特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。
+---
+
+# 隐式原型，显式原型有什么用
+---
+
+# 介绍一下JavaScript的执行上下文
 ---
 
 # prototype和__proto__属性？原型对象如何指向自己的实例化对象？
@@ -458,6 +464,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 详细说说common.js?
 ---
 
+# commonJS的底层原理是什么？
+---
+
 # commonJS 与 ES6 模块化区别；
 ---
 
@@ -475,8 +484,11 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     3. 详细代码请看: https://www.cnblogs.com/liugang-vip/p/5616484.html
 ---
 
-# 请说明.forEach循环和.map()循环的主要区别，它们分别在什么情况下使用？
+# 请说明.forEach循环和.map()循环的主要区别，它们分别在什么情况下使用？(map和foreach对数组元素进行操作是否会影响原数组的元素)
   * 都是数组循环，.forEach和.map()的主要区别在于.map()返回一个新的数组。
+---
+
+# reduce和map的区别
 ---
 
 # 宿主对象（host objects）和原生对象（native objects）的区别是什么？
@@ -491,6 +503,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # apply、call、bind的区别？
 ---
 
+# ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
+---
+
 # 箭头函数可以new吗 为什么？
 ---
 
@@ -499,6 +514,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # 请说明 JSONP 的工作原理
   * JSONP（带填充的 JSON）是一种通常用于绕过 Web 浏览器中的跨域限制的方法，因为 Ajax 不允许跨域请求。
+---
+
+# jsonp的原理，怎么把js文件返回调用？
+---
+
+# jsonp的缺点
 ---
 
 # 请解释变量提升
@@ -688,6 +709,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 原理是在 目标元素 上绑定touchstart ,touchend事件，然后在touchend结束的时候立马执行click事件，这样就解决了“点透”的问题（实质是事件冒泡导致）以及300ms延迟问题，300ms延迟是因为浏览器为了实现用户双击屏幕放大页面的效果。
 ---
 
+# fastclick什么作用
+---
+
 # typeof 和 instanceof 的区别
   1. 在 JavaScript 中，判断一个变量的类型尝尝会用 typeof 运算符，在使用 typeof 运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回 “object”。
 
@@ -793,4 +817,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 我们使用函数传参的时候传递的是值还是引用？
+---
+
+# better-scroll作用？都用了什么，怎么用的？
 ---

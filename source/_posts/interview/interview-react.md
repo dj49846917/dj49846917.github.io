@@ -89,7 +89,10 @@ Store 是一个 JavaScript 对象，它可以保存程序的状态，并提供�
 ---
 
 # redux 做状态管理和发布订阅模式有什么区别？
-    redux 其实也是一个发布订阅，但是 redux 可以做到数据的可预测和可回溯。
+redux 其实也是一个发布订阅，但是 redux 可以做到数据的可预测和可回溯。
+---
+
+# Redux中异步的请求怎么处理
 ---
 
 # react-redux 的原理，它是怎么跟 react 关联起来的？(实现原理、Redux如何实现多个组件之间的通信，多个组件使⽤相同状态如何进⾏管理)
@@ -531,6 +534,9 @@ connect负责连接React和Redux
     - 反向继承。高阶组件继承于被包裹的React组件
 ---
 
+# React高阶组件，和普通组件有什么区别
+---
+
 # 什么是属性代理?
   * 属性代理组件继承自React.Component，通过传递给被包装的组件props得名
   * 属性代理的用途:
@@ -595,6 +601,9 @@ connect负责连接React和Redux
   3. Link 跳转链接，生成一个a标签，禁用默认事件，js处理点击事件跳转(history.push) -> Link与直接使用a标签的区别是a页面会重新加载一下，Link只重新渲染Route组件部分
   4. Redirect to
   5. 从上下文中获取history this.context.router.history.push…
+---
+
+# react-router里的<Link>标签和<a>标签有什么区别
 ---
 
 # react router和常规路由有何不同？
@@ -1122,6 +1131,9 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 纯函数是不依赖并且不会在其作用域之外修改变量状态的函数。本质上，纯函数始终在给定相同参数的情况下返回相同结果。
 ---
 
+# React/Redux中哪些功能用到了哪些设计模式
+---
+
 # Class中static的属性和普通属性的区别，从继承的角度来说呢？
 ---
 
@@ -1130,3 +1142,9 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 
 # react父组件更新会导致子组件更新吗？为什么？如何优化？
 ---
+# React Native是如何渲染的
+---
+
+# React Native长列表优化
+---
+

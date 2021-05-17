@@ -27,6 +27,15 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 所以个人建议：将登陆信息等重要信息存放为SESSION,其他信息如果需要保留，可以放在COOKIE中
 ---
 
+# cookie 和 token 的区别？
+---
+
+# token 如何传递？token 的安全性？token 的签名怎么实现？token 的缺点？
+---
+
+# a.com 可以读取 b.com 的cookie吗？如何读取子域名的 cookie? 配置哪个参数？
+---
+
 # 请描述cookie、sessionStorage和localStorage的区别。
   1. cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。
   2. cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。
@@ -91,6 +100,9 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
        当然也可以直接使用成熟的框架、比如html5shim;
 ---
 
+# 介绍webworker
+---
+
 # 简述一下你对HTML语义化的理解？
   1. 用正确的标签做正确的事情。
   2. html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
@@ -116,6 +128,12 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   2. 设置同域下共享的localStorage与监听window.onstorage
   3. 设置共享cookie与不断轮询脏检查(setInterval)
 	4. 借助服务端或者中间层实现
+---
+
+# 浏览器渲染的整个过程(浏览器工作机制)
+---
+
+# css js渲染树如何一起工作
 ---
 
 # 网页验证码是干嘛的，是为了解决什么安全问题。
