@@ -61,3 +61,9 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
 # node 如何捕捉错误，内存泄漏怎么排查；
 ---
 
+# node线程模型
+---
+
+# node怎么启动
+---
+

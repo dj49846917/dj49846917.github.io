@@ -392,6 +392,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # sql注入原理
 ---
 
+# 运营商劫持怎么处理
+---
+
 # 请解释一下csrf 和 xss；
   * xss：XSS全称cross-site scripting（跨站点脚本），是一种代码注入攻击，是当前 web 应用中最危险和最普遍的漏洞之一。攻击者向网页中注入恶意脚本，当用户浏览网页时，脚本就会执行，进而影响用户**，比如关不完的网站、盗取用户的 cookie 信息从而伪装成用户去操作，危害数据安全。
 

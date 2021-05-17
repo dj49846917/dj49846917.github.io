@@ -776,6 +776,9 @@ setState 是修改其中的部分状态，相当于 Object.assign，只是覆盖
 当你使用react的时候，在某个时间点render函数创建了一颗react元素树，在下一个state或者props更新的时候,react函数将创建一颗新的react树,react将对比两棵树的不同之处，计算出如何高效的更新UI
 ---
 
+# react diff和vue diff的差别
+---
+
 # 组件生命周期的不同阶段是什么?（分为三个阶段，初始，运行中，销毁）
   * **初始化**：在组件初始化阶段会执行
     1. 执行getDefaultProps钩子函数，执行一次，挂载属性props（无Dom元素，有组件相关的this但是无法获取数据，组件想要拥有默认属性可以通过这个钩子函数设置）
@@ -1123,4 +1126,7 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 ---
 
 # dva的数据流是怎么样的？同步情况和异步情况？
+---
+
+# react父组件更新会导致子组件更新吗？为什么？如何优化？
 ---

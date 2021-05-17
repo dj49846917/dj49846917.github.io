@@ -20,6 +20,8 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 本质上，require是赋值过程，其实require的结果就是对象、数字、字符串、函数等，再把require的结果赋值给某个变量；而import是解构过程，但是目前所有的引擎都还没有实现import，我们在node中使用babel支持ES6，也仅仅是将ES6转码为ES5再执行，import语***被转码为require；
 ---
 
+# 
+
 # 介绍js的基本数据类型。
   * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
 ---
@@ -457,6 +459,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # commonJS 与 ES6 模块化区别；
+---
+
+# 当我们用 CommonJS 规范去 require 加载一个包，require 的加载机制大概是怎么样的
 ---
 
 # 说下AMD，CMD的区别

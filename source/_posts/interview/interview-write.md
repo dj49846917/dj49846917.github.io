@@ -80,3 +80,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # vue原理, 手写实现数据劫持
 ---
+
+# 实现洋葱模型
+---
+
+# 实现一个中间件
+---
+
+# Nodejs实现一个从大JSON文件取到对应值的方法
+---

@@ -372,6 +372,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 4.接收参数不同，mutation第一个参数是state，而action第一个参数是context.
 ---
 
+# Vue 的 $store 是怎么绑定到 Vue 实例上的?
+---
+
+# 给 Vue 全局绑定一个变量有什么方式? 为什么 $store 不直接绑定到原型
+---
+
 # vuex的store有几个属性值？分别讲讲它们的作用是什么？
   * state, 状态初始化, 并实施观察
   * getter, 获取数据用于view或data中使用
@@ -404,7 +410,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # vuex是怎么实现的
 ---
 
-# vue内部是怎么实现数组的响应式的
+# vue内部是怎么实现数组的响应式的。为什么不直接去更改数组原型上的方法？改了会有什么问题
 ---
 
 # 路由守卫哪些参数，怎么实现？
@@ -650,3 +656,4 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 
 # vue懒加载原理
 ---
+
