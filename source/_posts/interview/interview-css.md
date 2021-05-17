@@ -249,10 +249,13 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 # 使用过 flex 布局吗？flex-grow 和 flex-shrink 属性有什么用？
 ---
 
-# 伪类和伪元素的区别，讲讲伪类有哪些
+# flex: 1 的原理? flex 还有哪些值? 有什么作用
 ---
 
 # 说一下flex怎么做出0.5px的线
+---
+
+# 伪类和伪元素的区别，讲讲伪类有哪些
 ---
 
 # 实现三角形

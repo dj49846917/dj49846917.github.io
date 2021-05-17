@@ -100,4 +100,11 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ![算法](/images/math/算法.jpg)
 ---
 
-# 
+# 手写 new
+---
+
+# 手写 apply
+---
+
+# 手写代码，两个有序数组的合并
+---

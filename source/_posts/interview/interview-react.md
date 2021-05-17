@@ -1136,3 +1136,11 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 
 # dva的数据流是怎么样的？同步情况和异步情况？
 ---
+
+# React Native是如何渲染的
+---
+
+# React Native长列表优化
+---
+
+# 
