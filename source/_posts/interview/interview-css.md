@@ -86,6 +86,9 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   例如:transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
 ```
 
+# css3的animation属性有哪些
+---
+
 # 经常遇到的浏览器的兼容性有哪些？
 ---
 
@@ -180,6 +183,9 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 多数显示器默认频率是60Hz，即1秒刷新60次，所以理论上最小间隔为1/60＊1000ms ＝ 16.7ms
 ---
 
+# css 动画与 js 动画，两者优缺点与性能
+---
+
 # 怎么让Chrome支持小于12px 的文字？
   1. 用图片：如果是内容固定不变情况下，使用将小于12px文字内容切出做图片，这样不影响兼容也不影响美观。
 
@@ -250,3 +256,7 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 ---
 
 # 实现三角形
+---
+
+# 有兼容 retina 屏幕的经历吗？如何在移动端实现 1 px 的线;
+---

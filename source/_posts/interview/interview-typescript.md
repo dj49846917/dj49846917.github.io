@@ -217,3 +217,5 @@ extends
   * 內部模組 - namespace 模組之间是相近的功能，使用namespace集中功能。 外部模組 - module 模組之间是不同功能，两个模块之间的关系是通过在文件级别上使用imports和exports建立的。 区别：namespace是跨文件的，JS里的module是以文件为单位一个文件一个module
 ---
 
+# 静态方法和静态属性有什么区别
+---

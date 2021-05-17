@@ -35,6 +35,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     3. 引用数据类型存储在堆(heap)中的对象,占据空间大、大小不固定。如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体
 ---
 
+# js栈怎么实现的
+---
+
+# js队列怎么实现的
+---
+
 # 介绍js有哪些内置对象？
   * Object 是 JavaScript 中所有对象的父对象
   * 数据封装类对象：Object、Array、Boolean、Number 和 String
@@ -46,6 +52,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。
   * 关系：instance.constructor.prototype = instance.__proto__
   * 特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。
+---
+
+# prototype和__proto__属性？原型对象如何指向自己的实例化对象？
 ---
 
 # 说说你对原型，构造函数，实例的理解, 他们之间的关系是什么？
@@ -296,6 +305,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   4.  事件流:  三个阶段：事件捕捉，目标阶段，事件冒泡
 ---
 
+# 浏览器事件机制
+---
+
 # 什么是闭包（closure）, 特点是什么? 有什么优缺点? 有什么作用?
   * 概念：闭包是指有权访问另一个函数作用域中变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量,利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。
   
@@ -392,6 +404,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # Ajax的工作原理
   * Ajax的工作原理相当于在用户和服务器之间加了—个中间层(AJAX引擎)，使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器。像—些数据验证和数据处理等都交给Ajax引擎自己来做,，只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。
 ---
+
+# ajax请求和浏览器常规请求的区别
+---
    
 # Ajax 解决浏览器缓存问题？
   * 在ajax发送请求前加上 anyAjaxObj.setRequestHeader("If-Modified-Since","0")。
@@ -418,6 +433,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 详细代码请看:  https://segmentfault.com/a/1190000011145364
 ---
 
+# 使用Access-Control-Allow-Origin为什么可以解决跨域问题(流程)
+---
+
+# ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
+---
+
 # CORS 是如何做的？
     服务端设置 Access-Control-Allow-Origin 就可以开启 CORS。
 ---
@@ -430,6 +451,15 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     	2. CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。
     	3. AMD 是提前执行，CMD 是延迟执行。
     	4. AMD推荐的风格通过返回一个对象做为模块对象，CommonJS的风格通过对module.exports或exports的属性赋值来达到暴露模块对象的目的。
+---
+
+# 详细说说common.js?
+---
+
+# commonJS 与 ES6 模块化区别；
+---
+
+# 说下AMD，CMD的区别
 ---
 
 # 请解释事件委托
@@ -457,6 +487,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
+---
+
+# 箭头函数可以new吗 为什么？
+---
+
+# bind函数绑定和执行过程，如何实现bind函数？
 ---
 
 # 请说明 JSONP 的工作原理
@@ -517,6 +553,24 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # Promise内部实现原理
+---
+
+# Promise的执行过程；以及resolve和reject分别调用了哪个钩子？
+---
+
+# promise的几种状态？
+---
+
+# 我在promise里面用到了resolve和rejected都会发生回调吗？
+---
+
+# 说一下Promise和Async的区别。
+---
+
+# Promise和AJAX的区别？
+---
+
+# promise的理解，有哪些方法，all的用法及原理
 ---
 
 # 什么是事件循环？调用堆栈和任务队列之间有什么区别？
@@ -607,6 +661,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ```
 ---
 
+# Js执行会阻塞dom渲染吗，如何避免呢
+---
+
 # Javascript垃圾回收方法
   * 标记清除
     - 当变量进入执行环境的时候，比如函数中声明一个变量，垃圾回收器将其标记为“进入环境”，当变量离开环境的
@@ -681,9 +738,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # JS中的async/await的用法和理解
 ---
 
-# 说一下Promise和Async的区别。
----
-
 # jquery选择器实现原理
   * jquery原型里面有一个init初始化的方法，将传入的值进行解析，比如传入的id还是class还是标签名。然后通过相应的方法返回数组型对象。既可以通过对象直接调用方法，也可以使用数组的length。
 ---
@@ -697,3 +751,50 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # splice和slice的区别
 ---
 
+# es6 map和普通对象自变量有什么区别
+---
+
+# 了解过函数式编程嘛
+---
+
+# hash路由和history路由
+---
+
+# es6的迭代器了解吗
+---
+
+# object.create和new的区别
+---
+
+# JS设计模式
+---
+
+# 了解设计模式么，说说单例模式的优缺点;
+---
+
+# 订阅者模式大致介绍一下
+---
+
+# addeventlistener是什么设计模式
+---
+
+# 防抖节流，原理是什么，区别是什么
+---
+
+# click和onmousedown和onmouseup的执行顺序
+---
+
+# 说一下你知道的鼠标键盘响应事件方法
+---
+
+# 浏览器是多线程的吗？为什么？那js是多线程还是单线程？为什么？
+---
+
+# let var和const的区别是什么？什么是暂时性死区？
+---
+
+# mockjs和echarts原理了解吗
+---
+
+# 我们使用函数传参的时候传递的是值还是引用？
+---

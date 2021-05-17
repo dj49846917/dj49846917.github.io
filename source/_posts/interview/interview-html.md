@@ -41,6 +41,15 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
      * cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
 ---
 
+# 如何设置cookie的过期时间
+---
+
+# 部署在多台服务器上，cookie会有问题，知道吗？cookie的安全问题了解吗？
+---
+
+# 浏览器可以访问所有cookie吗，js可以访问所有cookie吗，如何不让js访问cookie
+---
+
 # 什么是渐进式渲染？
   * 渐进式渲染是用于提高网页性能（尤其是提高用户感知的加载速度），以尽快呈现页面的技术。
 	
@@ -146,6 +155,12 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 防止不必要的安全问题
 ---
 
+# cdn知道吗？
+---
+
+# cdn用的是哪一种缓存？
+---
+
 # 简述一下src与href的区别。
   1. src用于替换当前元素，href用于在当前文档和引用资源之间确立联系。
 
@@ -156,21 +171,6 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 
 # 在css/js代码上线之后开发人员经常会优化性能，从用户刷新网页开始，一次js请求一般情况下有哪些地方会有缓存处理？
   * dns缓存，cdn缓存，浏览器缓存，服务器缓存。
----
-
-# 说一下浏览器缓存；
-  1. 浏览器缓存分为强缓存和协商缓存，强缓存会直接从浏览器里面拿数据，协商缓存会先访问服务器看缓存是否过期，再决定是否从浏览器里面拿数据。
-  2. 控制强缓存的字段有：Expires和Cache-Control，Expires 和 Cache-Control。
-  3. 控制协商缓存的字段是：Last-Modified / If-Modified-Since 和 Etag / If-None-Match，其中 Etag / If-None-Match的优先级比Last-Modified / If-Modified-Since高。
----
-
-# 强缓存和协商缓存
----
-
-# 浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？
----
-
-# http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？
 ---
 
 # HTML与XHTML的区别？
@@ -213,11 +213,10 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 回流必定触发重绘，重绘不一定触发回流。重绘的开销较小，回流的代价较高。
 ---
 
-# 骨架屏是什么
+# 骨架屏是什么，怎么实现的
 ---
 
-# 问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？
----
+
 
 
 
