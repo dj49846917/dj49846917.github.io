@@ -263,3 +263,9 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 
 # 有兼容 retina 屏幕的经历吗？如何在移动端实现 1 px 的线;
 ---
+
+# css 中的颜色单位
+---
+
+# 16进制颜色对应多少字节，如果 32 位 的呢
+---

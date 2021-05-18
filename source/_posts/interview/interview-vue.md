@@ -419,6 +419,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # vuex是怎么实现的
 ---
 
+# vuex的原理
+---
+
 # vue内部是怎么实现数组的响应式的。为什么不直接去更改数组原型上的方法？改了会有什么问题
 ---
 
@@ -639,6 +642,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     - 在 Vue.js 3.0 中，使用 Proxy API 并不能监听到对象内部深层次的属性变化，因此它的处理方式是在 getter 中去递归响应式，这样的好处是真正访问到的内部属性才会变成响应式，简单的可以说是按需实现响应式，减少性能消耗。
 ---
 
+# vue的v-model的原理
+---
+
 # Composition Api 与 Vue 2.x使用的Options Api 有什么区别？
   * Options Api
     - 包含一个描述组件选项（data、methods、props等）的对象 options；
@@ -679,4 +685,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # vue可以拿index当key吗，为什么
+---
+
+# .vue文件怎么在浏览器上显示的，这个过程和原理
 ---

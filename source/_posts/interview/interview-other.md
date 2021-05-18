@@ -221,6 +221,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   7. 生成DOM树，解析css和js，渲染页面，直至显示完成；
 ---
 
+# DOM树和渲染树的区别
+---
+
 # 从接口请求到后端响应经过了什么
 ---
 
@@ -388,7 +391,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # Udp如何实现可靠传输
 ---
 
+# quic 协议原理
+---
+
 # HTTP2.0的多路复用和HTTP1.1的长连接有什么区别
+---
+
+# http2和http3的区别
 ---
 
 # 对 http 几个版本有什么区别？keep-alive 和 多路复用在性能上有什么区别？为什么 keep-alive 可以达到多路复用的效果？
@@ -429,6 +438,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 进程调度
 ---
 
+# 进程之间和线程之间如何通信
+---
+
 # 前端安全问题？
   XSS，sql注入，CSRF
 ---
@@ -466,6 +478,15 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # XSS攻击的场景能描述一个么？
 ---
 
+# 服务端劫持了 token 怎么做防御
+---
+
+# 服务端反爬虫
+---
+
+# 服务端跨域应该如何设置
+---
+
 # GET和POST的区别，何时使用POST？
   * 区别:
     1. GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在2000个字符
@@ -478,6 +499,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 描述以下POST和PUT的区别
+---
+
+# 简单请求和复杂请求的区别
 ---
 
 # x-www-urlecoded-form和application/json在post中的区别
@@ -744,6 +768,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # serverless云开发适用于什么场景？有什么缺点？
 ---
 
+# serverless和传统后台的区别，好处是什么
+---
+
 # webassembly是做什么的，适用于什么场景
 ---
 
@@ -754,4 +781,25 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 如果catch中又有报错，onerror能不能捕获
+---
+
+# 怎么自己实现一个vue-cli
+---
+
+# 讲一讲threejs，它的兼容性怎么样
+---
+
+# 验证码怎么设置，生成验证码是在前端还是后端，在后端怎么做，在前端怎么做，怎么加密
+---
+
+# 手机扫码登录是怎么实现的，原理
+---
+
+# 数据库范式
+---
+
+# 数据库分表原则
+---
+
+# 详细说一下ARP协议，ARP病毒
 ---

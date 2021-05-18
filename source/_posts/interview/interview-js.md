@@ -20,10 +20,11 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 本质上，require是赋值过程，其实require的结果就是对象、数字、字符串、函数等，再把require的结果赋值给某个变量；而import是解构过程，但是目前所有的引擎都还没有实现import，我们在node中使用babel支持ES6，也仅仅是将ES6转码为ES5再执行，import语***被转码为require；
 ---
 
-# 
-
 # 介绍js的基本数据类型。
   * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
+---
+
+# symbol作用
 ---
 
 # JavaScript有几种类型的值？有什么区别？(堆和栈的概念)
@@ -526,6 +527,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 变量提升（hoisting）是用于解释代码中变量声明行为的术语。使用var关键字声明或初始化的变量，会将声明语句“提升”到当前作用域的顶部。 但是，只有声明才会触发提升，赋值语句（如果有的话）将保持原样。
 ---
 
+# 变量提升和暂时性死区的关系
+---
+
 # 请描述事件冒泡,如何阻止事件冒泡？
   * 当一个事件在 DOM 元素上触发时，如果有事件监听器，它将尝试处理该事件，然后事件冒泡到其父级元素，并发生同样的事情。最后直到事件到达祖先元素。
 
@@ -541,7 +545,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     ```
 ---
 
+# 事件的默认行为怎么阻止？
+---
+
 # 什么是事件冒泡和事件捕获，区别是什么？
+---
+
+# 事件捕获是怎么样的，怎么设置事件捕获
 ---
 
 # 请解释关于 JavaScript 的同源策略。
@@ -579,6 +589,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 我在promise里面用到了resolve和rejected都会发生回调吗？
+---
+
+# promise.all遇到reject，后面的reject还会执行嘛
 ---
 
 # 说一下Promise和Async的区别。
@@ -739,6 +752,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     5. 当线程空闲（即执行栈清空）时继续拉取消息队列下一轮消息（next tick ，事件循环流转一次称为一次 tick ）。
 ---
 
+# 既然 JS 是单线程，那么面对网络请求的时候为什么能异步处理
+---
+
 # 什么是回调函数？
   * 回调函数就是一个通过函数指针调用的函数。如果你把函数的指针(地址)作为参数传递给另一个函数，当这个指针被用为调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。
 ---
@@ -763,6 +779,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # setTimeout和setInterval区别，如何互相实现？
+---
+
+# setTimeout能准时执行吗，为什么，怎么能让它准时执行
 ---
 
 # 问jquery的链式调用原理。
@@ -820,4 +839,19 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # better-scroll作用？都用了什么，怎么用的？
+---
+
+# window.onload和DOMContentLoaded的区别
+---
+
+# 当有很多个a标签时，怎么监听它们的点击事件（事件委托），除了事件冒泡还有吗
+---
+
+# 使用装饰器的好处
+---
+
+# Mixins 和 装饰器的不同，Mixins 的缺点
+---
+
+# 拿到对象的 key 有哪些方法，使用 for...in 和 Object.keys 有什么不同
 ---
