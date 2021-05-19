@@ -20,6 +20,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 写一个 es6 的继承过程
 ---
 
+# 手写继承
+---
+
 # 手写深浅拷贝
 ---
 
@@ -116,4 +119,32 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 手写代码，两个有序数组的合并
+---
+
+# 如果让你去实现一个 symbol 你会怎么实现
+---
+
+# 计算两个数组的交集和并集。
+---
+
+# 手写bind
+---
+
+# 数组反转
+---
+
+# Array的map、filter、reduce挑一个手写实现
+---
+
+# 手写ajax
+  * 要求：
+    1. 封装promise形式
+    2. 根据封装后的promise形式写出扩展函数
+      - 请求成功则返回值
+      - 不成功到达3次则取消请求
+
+# 手写axios（用promise封装ajax）,只考虑get,post请求
+---
+
+# 手写JSON.stringify(),传参类型为数组或对象，返回一个JSON字符串
 ---

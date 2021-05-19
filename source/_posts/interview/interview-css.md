@@ -89,6 +89,10 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 # css3的animation属性有哪些
 ---
 
+# animation和transition有什么区别
+animation更强调于帧动画，transition更针对于过渡的效果
+---
+
 # 经常遇到的浏览器的兼容性有哪些？
 ---
 
@@ -255,6 +259,9 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 # 说一下flex怎么做出0.5px的线
 ---
 
+# flex-grow,flex-shrink是什么意思
+---
+
 # 伪类和伪元素的区别，讲讲伪类有哪些
 ---
 
@@ -268,4 +275,7 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 ---
 
 # 16进制颜色对应多少字节，如果 32 位 的呢
+---
+
+# css3里面有些些属性会影响z-index
 ---

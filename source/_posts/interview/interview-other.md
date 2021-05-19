@@ -180,8 +180,17 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   6. `<script>`标签的长时间连接(可跨域)
 ---
 
+# 描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的
+---
+
 # 移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？
   300ms
+---
+
+# cdn知道吗？
+---
+
+# cdn用的是哪一种缓存？
 ---
 
 # 使用CDN有什么好处
@@ -189,6 +198,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # cdn原理
+---
+
+# 应当什么场景下实用CDN服务器？
 ---
 
 # JWT的优缺点, 使用场景?
@@ -258,7 +270,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 500-599 用于支持服务器错误。 503 – 服务不可用
 ---
 
+# 一个http的报文的头和body之间有什么分隔
+---
+
 # http协议中301和302的区别
+---
+
+# 介绍HTTP2.0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？
 ---
 
 # 介绍下304过程。
@@ -279,7 +297,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 怎么生成ETAG
 ---
 
+# 协商缓存中etag lastmodify区别
+---
+
 # 生成ETAG的算法了解过吗(原理)
+---
+
+# 缓存原理，ETAG给服务器的压力太大怎么办
 ---
 
 # expires的单位是
@@ -324,10 +348,20 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # websocket 为什么要加心跳? websocket 不是长连接吗，为什么还要加心跳去维持连接
 ---
 
+# websocket 连接成功的状态码是多少
+---
+
+# WebSocket了解吗？用的什么协议
+TCP
+---
+
 # 说说http 与 tcp 的关系
 ---
 
 # tcp 可以建立多个连接吗？
+---
+
+# 介绍TCP队头阻塞的问题以及如何解决的？
 ---
 
 # tcp 握手 回收过程，了解泛洪攻击么；
@@ -373,6 +407,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   ![面试题](/images/vue/面试题.jpg)
 ---
 
+# SSL协议是使用对称加密还是非对称加密
+对称加密和非对称加密相结合
+---
+
 # HTTPS原理及过程
 ---
 
@@ -389,6 +427,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # Udp如何实现可靠传输
+---
+
+# 域名解析属于udp还是tcp？
+udp
 ---
 
 # quic 协议原理
@@ -415,10 +457,16 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 强缓存和协商缓存
 ---
 
-# 协商缓存中etag lastmodify区别
+# cache-control中的no-cache和no-store的差异
 ---
 
 # 浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？
+---
+
+# 有了 Last-Modified 为什么还要有 Etag
+---
+
+# 为什么有了 Expires 还要有 Cache-Control？Expires  会造成什么问题
 ---
 
 # http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？
@@ -501,6 +549,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 描述以下POST和PUT的区别
 ---
 
+# 介绍下options请求
+---
+
+# contentType 有哪些，有什么作用
+---
+
 # 简单请求和复杂请求的区别
 ---
 
@@ -533,6 +587,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 项目里面的鉴权和图片懒加载怎么实现的
+---
+
+# 路由鉴权如何实现，如果是不同身份怎么重定向到未认证页面，死扣细节，代码实现
 ---
 
 # 如何更好的处理线上的日志？
@@ -620,6 +677,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 允许在https页面插http资源吗
+---
+
+# 有了解 http 轮询吗
+---
+
+# 传统轮询有没有可能发两次请求后发的请求先返回数据？怎么解决（如何保证响应顺序）
 ---
 
 # 你们的代码存在哪里啊，通过什么管理的
@@ -711,6 +774,30 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 小程序的底层架构是怎么样的？
 ---
 
+# 小程序生命周期
+---
+
+# 小程序的像素rpx计算方式
+---
+
+# 小程序双线程模型
+---
+
+# 小程序为什么是双线程
+---
+
+# 小程序项目的登录如何实现的
+---
+
+# 小程序遇到调试问题
+---
+
+# 小程序的原生组件实现原理
+---
+
+# 小程序有什么css不能用？
+---
+
 # wepy把vue语法转换成原生小程序的原理
 ---
 
@@ -741,7 +828,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 怎么实现前端异常监控
 ---
 
+# 前端性能监控的工具有哪些，是怎么监控的？说一下见解
+---
+
 # 怎么捕获资源异常、同步异步的错误
+---
+
+# 前端错误收集（怎么记录，怎么区分是不是第三方插件的问题，怎么上报，怎么分析）
 ---
 
 # 如何理解前后端分离架构？
@@ -757,6 +850,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # uniapp多端框架的多端编译原理讲一下
+---
+
+# uni-app和 vue 小程序有什么不一样
 ---
 
 # 0.1+0.2为什么不等于0.3
@@ -802,4 +898,16 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 详细说一下ARP协议，ARP病毒
+---
+
+# mogoodb v.s. mySql
+---
+
+# mySql事务
+---
+
+# 为什么用requestAnimationFrame来代替setTimeout
+---
+
+# svg和canvas得区别，以及各自的优缺点
 ---

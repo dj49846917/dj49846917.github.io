@@ -173,12 +173,6 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 防止不必要的安全问题
 ---
 
-# cdn知道吗？
----
-
-# cdn用的是哪一种缓存？
----
-
 # 简述一下src与href的区别。
   1. src用于替换当前元素，href用于在当前文档和引用资源之间确立联系。
 
@@ -234,6 +228,12 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 # 回流和重绘的区别，怎么避免回流
 ---
 
+# translate()是否会触发重绘
+---
+
+# 怎么避免触发重绘
+---
+
 # 骨架屏是什么，怎么实现的
 ---
 
@@ -243,6 +243,17 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 # 如果有很多if else，怎么优化
 ---
 
+# 移动端meta标签（就是设定视口宽度、初始缩放比和是否允许用户缩放）
+---
+
+# encodeURL原理
+---
+
+# 矢量图比起其他图片到底好在哪
+---
+
+# 雪碧图怎么获取需要图片的位置
+---
 
 
 

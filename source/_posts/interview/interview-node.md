@@ -35,6 +35,9 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
   3. 可以通过向模板传递参数来动态渲染 HTML页面
 ---
 
+# express框架和Koa的区别
+---
+
 # 介绍一下你对中间件的理解
 ---
 
@@ -87,4 +90,12 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
 
 # 什么是 IOC 机制，如何在 Node 里面使用
 ---
+
+# npm的简单指令
+---
+
+# export和module.exports有什么区别？哪些代码会放在module.exports里？export有哪几种导出方式？加载时间不一样
+---
+
+
 

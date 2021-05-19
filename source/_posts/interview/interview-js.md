@@ -24,7 +24,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
 ---
 
-# symbol作用
+# 介绍下 symbol, symbol作用
+---
+
+# Symbol主要用于什么场景下
 ---
 
 # JavaScript有几种类型的值？有什么区别？(堆和栈的概念)
@@ -50,6 +53,15 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 其他对象：Function、Arguments、Math、Date、RegExp、Error
 ---
 
+# 如何判断Array类型
+---
+
+# 何如判断对象类型
+---
+
+# Array都有什么方法
+---
+
 # JavaScript原型，原型链 ? 有什么特点？
   * 原型: 每个对象都会在其内部初始化一个属性，就是prototype(原型)
   * 当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。
@@ -57,7 +69,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。
 ---
 
+# 原型链顶端是什么
+---
+
 # 隐式原型，显式原型有什么用
+---
+
+# 隐式类型转换有哪几种
 ---
 
 # 介绍一下JavaScript的执行上下文
@@ -342,6 +360,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * setTimeout 的第一个参数使用字符串而非函数的话，会引发内存泄漏。闭包、控制台日志、循环（在两个对象彼此引用且彼此保留时，就会产生一个循环）
 ---
 
+# 如何避免
+---
+
 # javascript 代码中的"use strict";是什么意思 ? 使用它有什么优缺点？
   * 概念: use strict是一种ECMAscript 5 添加的（严格）运行模式,这种模式使得 Javascript 在更严格的条件下运行
 
@@ -378,6 +399,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     4. 创建并插入iframe，让它异步执行js
 
   * 延迟加载：有些 js 代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。
+---
+
+# js里实现异步有哪几种方式
 ---
 
 # js延迟加载的方式有哪些？
@@ -448,8 +472,14 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
 ---
 
+# 对 CORS 有了解吗?具体是怎么实现跨域的? 需要后端去设置哪些值了解吗
+---
+
 # CORS 是如何做的？
     服务端设置 Access-Control-Allow-Origin 就可以开启 CORS。
+---
+
+# cors原理
 ---
 
 # 什么是模块化？怎么实现? 对前端模块化的认识
@@ -771,6 +801,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # weakSet和weakMap的区别
 ---
 
+# object和map有什么区别
+---
+
 # JS中的async/await的用法和理解
 ---
 
@@ -817,6 +850,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # addeventlistener是什么设计模式
 ---
 
+# onclick和addEventListener('click',handler)有什么区别
+---
+
 # 防抖节流，原理是什么，区别是什么
 ---
 
@@ -830,6 +866,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # let var和const的区别是什么？什么是暂时性死区？
+---
+
+# 块级作用域和函数作用域的区别
 ---
 
 # mockjs和echarts原理了解吗
@@ -854,4 +893,16 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 拿到对象的 key 有哪些方法，使用 for...in 和 Object.keys 有什么不同
+---
+
+# ==与===的区别，==比较的规则，隐式转换的规则
+---
+
+# 说一下深拷贝的实现原理。
+---
+
+# 如何实现深拷贝
+---
+
+# 用sort好吗，为什么不好？   那你有什么更好的方案？ （提了快排和归并，然后口述快排原理）
 ---

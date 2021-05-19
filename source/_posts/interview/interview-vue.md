@@ -190,6 +190,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 该算法中还运用了动态规划的思想求解最长递归子序列。
 ---
 
+# diff一定可以节约性能吗？
+由于Vue的diff算法是同层级比较的，所以如果是不同层级出现可复用的组件就不能被复用，所以此时性能会低
+---
+
 # vue能监听到数组变化的方法有哪些？为什么？(Vue里面数组为什么直接修改不能触发数据更新，vue重写了哪些数组方法)
     push(), pop(), shift(), unshift(), splice(), sort(), reverse()
 ---
@@ -393,6 +397,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # vuex 和 eventbus 优缺点有什么不一样
+---
+
+# eventbus的emit，on和子到父传值的emit，on有啥区别？
 ---
 
 # 对 vuex 的理解，单向数据流
@@ -688,4 +695,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # .vue文件怎么在浏览器上显示的，这个过程和原理
+---
+
+# vue模板解析是用正则匹配的吗？还是别的？
+---
+
+# vue在render的时候内部做什么处理
 ---

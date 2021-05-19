@@ -75,6 +75,9 @@ Redux 使用 “Store” 将程序的整个状态存储在同一个地方。因�
 Reducers 是纯函数，它规定应用程序的状态怎样因响应 ACTION 而改变。Reducers 通过接受先前的状态和 action 来工作，然后它返回一个新的状态。它根据操作的类型确定需要执行哪种更新，然后返回新的值。如果不需要完成任务，它会返回原来的状态。
 ---
 
+# redux为什么是纯函数，不纯也不会报错，为什么开发要求要纯
+---
+
 # 请说下redux中你对reducers的理解,以及如何合并多个reducers
   * 在redux中reducer是一个纯函数，其中这个纯函数会接收2个参数 一个是state 一个是action。state用来保存公共的状态，state有一个特点就是只允许读不允许进行修改 。
   * 在实际开发中因为会涉及到多人协作开发所以每个模块都会有一个reducer。我们可以通过combineReducers来合并多个reducers
@@ -616,6 +619,9 @@ connect负责连接React和Redux
     ​reactRouter：仅更改历史记录属性。常规路由：http请求被发送到服务器并且接收相应的html页面
   * 体验：
     ​reactRouter：用户认为自己正在不同的页面间切换。常规路由：用户实际在每个视图的不同页面切换
+---
+
+# router和router和route的区别
 ---
 
 # 路由的动态加载模块

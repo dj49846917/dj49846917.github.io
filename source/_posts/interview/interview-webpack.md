@@ -176,6 +176,9 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
     3. 生成：以新的 AST 为基础生成代码
 ---
 
+# 写过babel插件吗？是用来干什么？怎么写的？
+---
+
 # webpack怎么配置多入口
   1. 在webpack.config.js的entry定义入口文件，这些写多个
     ```
@@ -571,4 +574,10 @@ browserslist就是帮助我们来设置目标浏览器的工具。它实际上�
 ---
 
 # 打包时是怎么把不同router路径的js分别打包到多个trunk里的
+---
+
+# webpack中怎么设置压缩代码
+---
+
+# 我看到你的webpack配置用到webpack.optimize.UglifyJsPlugin这个插件，有没有觉得压缩速度很慢，有什么办法提升速度。
 ---
