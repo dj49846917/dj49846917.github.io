@@ -446,6 +446,9 @@ connect负责连接React和Redux
 # React Hooks最佳实践
 ---
 
+# hook中useReducer,useRef的介绍
+---
+
 # useEffect不加数组和加数组的区别
 ---
 
@@ -570,6 +573,18 @@ connect负责连接React和Redux
     - 老浏览器的history: 主要通过hash来实现，对应createHashHistory
     - 高版本浏览器: 通过html5里面的history，对应createBrowserHistory
     - node环境下: 主要存储在memeory里面，对应createMemoryHistory
+---
+
+# react-router的原理
+  * hashHistory：使用hash的方式，由于hash值改变时浏览器不会发送请求，实现了单页应用的功能。
+     - 一开始将所有页面对应的hash值储存到一个数组中，并存入对应的回调函数。
+     - 监听hashChange事件，当hash值改变时执行对应的回调函数，实现组件的切换。
+     - 通过location.hash获取当前页面的hash值，执行对应回调
+
+  * BroswerHistory(不能刷新,浏览器会自动发送请求，导致错误。可以通过在服务器配置，当收到不符合要求的url就返回index.html页面) 利用H5的history新特性实现，当使用history.pushState()/history.replaceState()改变url时，页面不会发送请求，只会改变url的值。但由于不能监听history的改变，所以不能监听到对应的url而执行对应回调，所以需要手动监听。
+     - 一开始注册所有对应url的回调函数，存入数组。
+     - 监听popState事件，当点击前进后退按钮时，会触发，然后执行对应的回调。
+     - 当发生点击跳转时，取消点击事件的默认请求操作，调用pushState()改变url，执行对应的回调函数。
 ---
 
 # 如何配置React-Router

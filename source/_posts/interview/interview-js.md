@@ -482,6 +482,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # cors原理
 ---
 
+# CORS通常完成一个请求需要请求多少次服务器？
+---
+
 # 什么是模块化？怎么实现? 对前端模块化的认识
   * 概念: 模块化就是讲js文件按照功能分离，根据需求引入不同的文件中。
   * 实现: 就是将一段js、html、css组合在一起，形成有一定功能的代码片段
@@ -817,7 +820,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # setTimeout能准时执行吗，为什么，怎么能让它准时执行
 ---
 
+# 解释一下settimeout的原理
+---
+
 # 问jquery的链式调用原理。
+---
+
+# JQuery和Vue有什么区别
 ---
 
 # splice和slice的区别
@@ -874,6 +883,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # mockjs和echarts原理了解吗
 ---
 
+# Echarts与d3的区别
+---
+
 # 我们使用函数传参的时候传递的是值还是引用？
 ---
 
@@ -905,4 +917,16 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 用sort好吗，为什么不好？   那你有什么更好的方案？ （提了快排和归并，然后口述快排原理）
+---
+
+# JSbridge原理, js和native是如何通信的?
+---
+
+# 介绍下argument
+---
+
+# map数据类型和set数据类型
+---
+
+# map和set的区别
 ---

@@ -148,3 +148,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # 手写JSON.stringify(),传参类型为数组或对象，返回一个JSON字符串
 ---
+
+# 手写一个函数实现const的功能
+---
