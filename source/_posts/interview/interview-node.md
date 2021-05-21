@@ -20,6 +20,9 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
 # Node 如何多进程？
 ---
 
+# node.js中进程通信
+---
+
 # express实现原理
   * express的所有服务端逻辑处理都是通过中间件来实现的，中间件是一个函数，而app.use（）方法就是去装载这些函数,并放入一个数组中。
 
@@ -95,6 +98,9 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
 ---
 
 # export和module.exports有什么区别？哪些代码会放在module.exports里？export有哪几种导出方式？加载时间不一样
+---
+
+# node的 nextTick 和 vue的 nextTick 区别
 ---
 
 

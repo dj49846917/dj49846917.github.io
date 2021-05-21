@@ -130,6 +130,9 @@ animation更强调于帧动画，transition更针对于过渡的效果
   * 详细请看: https://segmentfault.com/a/1190000013647777
 ---
 
+# 说说 bfc，bfc的margin塌陷是有意为之吗？为什么？
+---
+
 # 浏览器是怎样解析CSS选择器的？
   * 按照从上到下,从右到左的顺序解析。
 ---
@@ -278,4 +281,7 @@ animation更强调于帧动画，transition更针对于过渡的效果
 ---
 
 # css3里面有些些属性会影响z-index
+---
+
+# z-index 属性原理
 ---

@@ -200,6 +200,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # cdn原理
 ---
 
+# CDN什么资源都能存吗？
+---
+
 # 应当什么场景下实用CDN服务器？
 ---
 
@@ -286,6 +289,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 介绍下304过程。
+---
+
+# 301 302 304各自代表了什么，304的协商缓存怎么定义，说一下强缓存
 ---
 
 # 问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？

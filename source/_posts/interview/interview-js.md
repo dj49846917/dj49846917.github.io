@@ -24,6 +24,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
 ---
 
+# JS传值、传引用的区别？
+---
+
 # 介绍下 symbol, symbol作用
 ---
 
@@ -540,9 +543,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
 ---
 
-# 箭头函数可以new吗 为什么？
----
-
 # bind函数绑定和执行过程，如何实现bind函数？
 ---
 
@@ -751,6 +751,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 简单说明一下你对ES6中箭头函数的理解
 ---
 
+# 箭头函数可以new吗 为什么？
+---
+
 # fastclick 解决点击穿透的原理；
   * 原理是在 目标元素 上绑定touchstart ,touchend事件，然后在touchend结束的时候立马执行click事件，这样就解决了“点透”的问题（实质是事件冒泡导致）以及300ms延迟问题，300ms延迟是因为浏览器为了实现用户双击屏幕放大页面的效果。
 ---
@@ -799,12 +802,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # DOM事件的绑定的几种方式
----
-
-# weakSet和weakMap的区别
----
-
-# object和map有什么区别
 ---
 
 # JS中的async/await的用法和理解
@@ -919,14 +916,29 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 用sort好吗，为什么不好？   那你有什么更好的方案？ （提了快排和归并，然后口述快排原理）
 ---
 
+# 数组sort（）方法底层原理？用了什么算法？
+---
+
 # JSbridge原理, js和native是如何通信的?
 ---
 
 # 介绍下argument
 ---
 
+# weakSet和weakMap的区别
+---
+
+# object和map有什么区别
+---
+
 # map数据类型和set数据类型
 ---
 
 # map和set的区别
+---
+
+# 介绍Object.assign的使用
+---
+
+# es6新增哪些对象？多了哪些类型？
 ---

@@ -207,6 +207,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 所以在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的DOM结构的时候，这个操作都应该放进Vue.nextTick() 的回调函数中
 ---
 
+# vue页面跳转的时候会触发哪些生命周期，destroy一定会被触发吗？为什么？
+---
+
 # 怎么缓存当前的组件？缓存后怎么更新？
 ---
 
@@ -400,6 +403,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # eventbus的emit，on和子到父传值的emit，on有啥区别？
+---
+
+# this.$emit原理
+---
+
+# $on怎么监听 
 ---
 
 # 对 vuex 的理解，单向数据流
@@ -704,4 +713,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # 用了mixins,这是什么，优缺点？
+---
+
+# this.$ref原理
+---
+
+# mounted和watch里面监听props 哪个先执行
 ---

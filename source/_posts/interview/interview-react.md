@@ -1167,6 +1167,11 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 # dva的数据流是怎么样的？同步情况和异步情况？
 ---
 
+# 讲一下 DVA 的思想和数据流向 effects
+  1. 一个基于 redux 和 redux-saga 的数据流方案，然后为了简化开发体验，dva 还额外内置了 react-router 和 fetch，所以也可以理解为一个轻量级的应用框架。
+  2. （举个例子）输入url渲染对应的组件，该组件通过dispatch去出发action里面的函数，如果是同步的就去进入model的ruducer去修改state，如果是异步比如fetch获取数据就会被effect拦截通过server交互获取数据进而修改state，同样state通过connect将model、状态数据与组件相连
+---
+
 # react父组件更新会导致子组件更新吗？为什么？如何优化？
 ---
 # React Native是如何渲染的
