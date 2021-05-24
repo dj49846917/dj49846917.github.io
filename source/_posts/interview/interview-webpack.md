@@ -136,6 +136,7 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
   * IgnorePlugin
   * 使用production
   * Scope Hosting
+---
 
 # webpack 热更新原理
   * 大概是我们用 webpack-dev-server启动一个服务之后，浏览器和服务端是通过 websocket进行长连接， webpack内部实现的 watch就会监听文件修改，只要有修改就 webpack会重新打包编译到内存中，然后 webpack-dev-server依赖中间件 webpack-dev-middleware和 webpack之间进行交互，每次热更新都会请求一个携带 hash值的 json文件和一个 js， websocker传递的也是 hash值，内部机制通过 hash值检查进行热更新

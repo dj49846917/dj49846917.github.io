@@ -1174,9 +1174,16 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 
 # react父组件更新会导致子组件更新吗？为什么？如何优化？
 ---
+
 # React Native是如何渲染的
 ---
 
 # React Native长列表优化
 ---
 
+# 知道 React Native 加载 bundle 的机制吗？
+要实现 RN 的脚本热更新，我们要搞明白 RN 是如何去加载脚本的。 在编写业务逻辑的时候，我们会有许多个 js 文件，打包的时候 RN 会将这些个 js 文件打包成一个叫 index.android.bundle(ios 的是 index.ios.bundle)的文件，所有的 js 代码(包括 rn 源代码、第三方库、业务逻辑的代码)都在这一个文件里，启动 App 时会第一时间加载 bundle 文件，所以脚本热更新要做的事情就是替换掉这个 bundle 文件。
+---
+
+# React Native和Flutter 的区别？谁的操作效率更高？更快？
+---

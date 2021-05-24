@@ -160,6 +160,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 权限系统是怎么设计的
 ---
 
+# 假如进入一个页面没有权限进入，如何判断
+大意在前端处理分为路由和接口两个方面，路由在vue-route中的钩子函数beforeEach，接口是通过axios响应拦截器处理
+---
+
 # 谈谈以前端角度出发做好SEO需要考虑什么？
   1. 了解搜索引擎如何抓取网页和如何索引网页:  你需要知道一些搜索引擎的基本工作原理，各个搜索引擎之间的区别，搜索机器人（SE robot 或叫 web crawler）如何进行工作，搜索引擎如何对搜索结果进行排序等等。
   2. Meta标签优化: 主要包括主题（Title)，网站描述(Description)，和关键词（Keywords）。还有一些其它的隐藏文字比如Author（作者），Category（目录），Language（编码语种）等。
@@ -234,9 +238,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   5. web服务器响应请求，并返回指定url的数据（或错误信息，或重定向的新的url地址）；
   6. 浏览器下载web服务器返回的数据及解析html源文件；
   7. 生成DOM树，解析css和js，渲染页面，直至显示完成；
----
-
-# DOM树和渲染树的区别
 ---
 
 # 从接口请求到后端响应经过了什么
@@ -554,6 +555,9 @@ udp
     3. Referer check；请求来源限制，此种方法成本最低，但是并不能保证 100% 有效，因为服务器并不是什么时候都能取到 Referer，而且低版本的浏览器存在伪造 Referer 的风险
 ---
 
+# 怎么解决refer伪造？
+---
+
 # XSS是什么，攻击原理，怎么预防。
 ---
 
@@ -751,6 +755,9 @@ udp
 # git rebase和git merge的区别
 ---
 
+# get rebase的作用
+---
+
 # 讲讲二叉树
 ---
 
@@ -764,6 +771,13 @@ udp
 ---
 
 # 登录功能怎么实现
+---
+
+# 前后端交互怎么确定用户身份？
+---
+
+# 跨域部署怎么传cookie？
+https://blog.csdn.net/weixin_44862325/article/details/105605091
 ---
 
 # Token的机制是怎样的
@@ -953,4 +967,7 @@ udp
 ---
 
 # Bigint详解
+---
+
+# Vue项目是如何做部署的（你是用什么工具做支撑吗？还是直接传上去）
 ---

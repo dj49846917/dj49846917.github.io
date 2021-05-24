@@ -20,6 +20,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 本质上，require是赋值过程，其实require的结果就是对象、数字、字符串、函数等，再把require的结果赋值给某个变量；而import是解构过程，但是目前所有的引擎都还没有实现import，我们在node中使用babel支持ES6，也仅仅是将ES6转码为ES5再执行，import语***被转码为require；
 ---
 
+# ES6 module与require的区别
+---
+
 # 介绍js的基本数据类型。
   * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
 ---
@@ -469,6 +472,15 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 详细代码请看:  https://segmentfault.com/a/1190000011145364
 ---
 
+# nginx跨域原理
+---
+
+# proxy解决跨域的原理？
+---
+
+# 跨域时用cors 有的时候会多发一个option请求是为什么？
+---
+
 # 使用Access-Control-Allow-Origin为什么可以解决跨域问题(流程)
 ---
 
@@ -526,6 +538,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # reduce和map的区别
+---
+
+# reduce()讲讲 reduce怎么统计数据出现次数
 ---
 
 # 宿主对象（host objects）和原生对象（native objects）的区别是什么？
@@ -613,6 +628,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # Promise内部实现原理
+---
+
+# 如何中断Promise的链式调用
 ---
 
 # Promise的执行过程；以及resolve和reject分别调用了哪个钩子？
@@ -838,6 +856,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # hash路由和history路由
 ---
 
+# hash了解吗，用什么来监听hash的变化，原生api有用过吗
+---
+
 # es6的迭代器了解吗
 ---
 
@@ -928,6 +949,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # weakSet和weakMap的区别
 ---
 
+# 为什么Set能去重
+---
+
 # object和map有什么区别
 ---
 
@@ -941,4 +965,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # es6新增哪些对象？多了哪些类型？
+---
+
+# new String('a')和'a'是一样的么?
 ---

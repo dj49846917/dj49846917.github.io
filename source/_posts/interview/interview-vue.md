@@ -74,7 +74,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # computed的原理, computed中的get作用是什么
 ---
 
+# computed实现原理
+---
+
 # 如果要你实现computed的特性（缓存、响应），你会怎么做
+---
+
+# 初次加载页面computed会不会立即执行，watch会不会立即执行（watch的immediate设置为true就会立即执行）
 ---
 
 # Vue.observable你有了解过吗？说说看
@@ -278,6 +284,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * keep-alive可以实现组件缓存，当组件切换时不会对当前组件进行卸载。
   * 常用的两个属性include/exclude，允许组件有条件的进行缓存。
   * 两个生命周期activated/deactivated，用来得知当前组件是否处于活跃状态。
+---
+
+# 如果两个组件被keep-alive 缓存，切换时候还会执行 create 吗
+---
+
+# 怎么监听组件是否处于激活或失活
 ---
 
 # 什么是虚拟dom?
@@ -692,9 +704,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # 直接操作dom和虚拟dom的场景
----
-
-# computed实现原理
 ---
 
 # vue懒加载原理

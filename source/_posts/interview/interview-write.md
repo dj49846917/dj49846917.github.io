@@ -32,10 +32,16 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # 如何手写实现一个 Promise？
 ---
 
+# 编程题：实现promiseAll
+---
+
 # 手写实现 jsonp
 ---
 
 # 手写快排，时间复杂度，优化
+---
+
+# 快排的原理
 ---
 
 # 手写冒泡排序。快速排序
@@ -150,4 +156,47 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 手写一个函数实现const的功能
+---
+
+# 获取一个字母数组混合的字符串中最大的数字
+```
+    function solution(arr){
+      let max=-1;
+      let tmp=0;
+      for(let i = 0;i<arr.length;i++){
+          if(arr[i]>='0'&&arr[i]<='9'){
+            let cur = parseInt(arr[i]);
+            tmp*=10;
+            tmp+=cur;
+            if(max<tmp){
+              max=tmp;
+            }                  
+          }else{
+            tmp=0;
+          }
+      }
+      return max;
+  }
+  console.log(solution("055e" ))
+```
+---
+
+# 手写实现instance
+```
+  function myInstanceOf(left, right) {
+    let prototype = right.prototype;
+    left = left.proto;
+    while(true) {
+      if(!left) {
+        return false;
+      }
+      if(left === prototype) {
+        return true;
+      }
+      left = left.proto;
+    }
+  }
+```
+
+# 编程题：实现trim
 ---

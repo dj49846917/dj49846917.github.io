@@ -131,9 +131,16 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 ---
 
 # 浏览器渲染的整个过程(浏览器工作机制)
+  1. 解析DOM树 - 渲染引起首先解析HTML树生成DOM树
+  2. 构建render树 - DOM树和CSS树一起生成DOM树
+  3. 布局render树 - 对render树的每个节点进行布局处理，确定在屏幕的位置
+  4. 绘制render树 - 最后遍历render树并用UI后端将每一个节点绘制出来
 ---
 
 # css js渲染树如何一起工作
+---
+
+# DOM树和渲染树的区别
 ---
 
 # 网页验证码是干嘛的，是为了解决什么安全问题。

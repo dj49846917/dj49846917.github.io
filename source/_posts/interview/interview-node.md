@@ -103,5 +103,11 @@ cover: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024
 # node的 nextTick 和 vue的 nextTick 区别
 ---
 
+# node开启多线程怎么做，PM2了解吗
+---
+
+# V8垃圾回收机制
+---
+
 
 
