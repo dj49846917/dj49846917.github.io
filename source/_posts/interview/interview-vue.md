@@ -289,6 +289,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # 如果两个组件被keep-alive 缓存，切换时候还会执行 create 吗
 ---
 
+# keep-alive缓存的是什么？
+---
+
+# keep-alive的原理是什么？
+---
+
 # 怎么监听组件是否处于激活或失活
 ---
 
