@@ -155,6 +155,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？
+  * WebGL: WebGL (Web图形库) 是一种JavaScript API，用于在任何兼容的Web浏览器中呈现交互式3D和2D图形，而无需使用插件。WebGL通过引入一个与OpenGL ES 2.0紧密相符合的API，可以在HTML5 元素中使用。
 ---
 
 # 权限系统是怎么设计的
@@ -438,6 +439,14 @@ TCP
 ---
 
 # 非对称加密耗时久，怎么优化?
+---
+
+# http工作原理
+  1. 客户端连接到Web服务器 
+  2. 发送HTTP请求
+  3. 服务器接受请求并返回HTTP响应
+  4. 释放连接TCP连接
+  5. 客户端浏览器解析HTML内容
 ---
 
 # HTTPS原理及过程

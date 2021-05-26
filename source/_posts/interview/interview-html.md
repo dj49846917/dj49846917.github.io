@@ -14,7 +14,7 @@ categories:
 cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956932538&fm=26&gp=0.jpg                 # 文章的缩略图（用在首页）
 ---
 
-# DOCTYPEDOCTYPE有什么用? 标准模式与兼容模式各有什么区别?
+# DOCTYPE有什么用? 标准模式与兼容模式各有什么区别?
   1. DOCTYPE是“document type”的缩写。它是 HTML 中用来区分标准模式和怪异模式的声明，用来告知浏览器使用标准模式渲染页面
   2. 标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
 ---
@@ -101,6 +101,7 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 ---
 
 # 介绍webworker
+web worker 是运行在后台的 JavaScript，不会影响页面的性能。提供协程能力，如果有一个比较密集的计算任务，可以放到另一个进程中处理，等处理好了再把结果传回主程，这样主要进程就不会阻塞，页面可以正常渲染和响应,可充分利用多核的CPU
 ---
 
 # 简述一下你对HTML语义化的理解？
@@ -124,10 +125,11 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 ---
 
 # 如何实现浏览器内多个标签页之间的通信?
-  1. 通过父页面window.open()和子页面postMessage, 异步下，通过 window.open('about: blank') 和 tab.location.href = '*'	
-  2. 设置同域下共享的localStorage与监听window.onstorage
-  3. 设置共享cookie与不断轮询脏检查(setInterval)
-	4. 借助服务端或者中间层实现
+  1. WebSocket （可跨域）
+  2. postMessage（可跨域）
+  3. SharedWorker
+  4. localStorage: localstorge在一个标签页里被添加、修改或删除时，都会触发一个storage事件，通过在另一个标签页里监听storage事件，即可得到localstorge存储的值，实现不同标签页之间的通信。
+  5. Cookies: 使用cookie+setInterval，将要传递的信息存储在cookie中，每隔一定时间读取cookie信息，即可随时获取要传递的信息。
 ---
 
 # 浏览器渲染的整个过程(浏览器工作机制)
@@ -209,6 +211,14 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   4. 传输速度方面: JSON的速度要远远快于XML。
 ---
 
+# HTML与XML二者有不同
+  * XHTML 的规范更加严格。
+  * XHTML 元素必须被正确地嵌套。
+  * XHTML 元素必须被关闭。
+  * 标签名必须用小写字母。
+  * XHTML 文档必须拥有根元素。
+---
+
 # 请谈谈你对重绘与回流的理解
   * 重绘(repaint): 当元素样式的改变不影响布局时，浏览器将使用重绘对元素进行更新，此时由于只需要UI层面的重新像素绘制，因此 损耗较少
 
@@ -262,6 +272,44 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 # 雪碧图怎么获取需要图片的位置
 ---
 
+# label都有哪些作用？并举相应的例子说明
+lable可以关联控件，可以和表单元素结合。有两个属性，for和accesskey。
+---
 
+# 元素的alt和title有什么区别？
+  1. alt属性定义了图像的备用文本描述，只能用在<img>、<area>和<input>元素中，用于网页中图片无法正常显示时给用户提供文字说明使其了解图像信息。alt是替代图像作用而不是提供额外说明文字的。使用alt属性还具有搜索引擎优化效果，因为搜素引擎是无法直接读取图像的信息的，alt可以为其提供文字信息所以对搜索引擎比较友好。
+  2. title是全局属性，可以用在所有HTML元素上，包含了表示咨询信息文本，和它属于的元素相关。把鼠标移动到元素上面，就会显示title的内容，以达到补充说明或者提示的效果。
+---
 
+# 谈谈你对input元素中readonly和disabled属性的理解
+  * 相同点：都会使文本框变成只读，不可编辑。
+  * 不同点：
+    1. disabled属性在将input文本框变成只读不可编辑的同时，还会使文本框变灰，但是readonly不会。
+    2. disabled属性修饰后的文本框内容，在不可编辑的同时，通过js也是获取不到的。但是用readonly修饰后的文本框内容，是可以通过js获取到的，也就只是简单的不可编辑而已！
+    3. disabled属性对input文本框，单选radio,多选checkbox都适用，但是readonly就不适用，用它修饰后的单选以及多选按钮仍然是可以编辑状态的。
+---
 
+# 说说你对属性data-的理解
+data- 属性是H5新增的自定义属性，也可以用来存储值。
+---
+
+# 标准模式和怪异模式有什么区别？
+standards盒模型：width = content
+quirks盒模型：width = content + border + padding
+---
+
+# Form表单是怎么上传文件的？你了解它的原理吗？
+  * 简单来说就是把文件转化成字节流，然后使用http进行传输，后端接受后在把二进制转化成原先的文件格式。
+  * WEB服务器端程序接收到“multipart/form-data”类型的HTTP请求消息后，其核心和基本的编程工作就是读取请求消息中的实体内容，然后解析出每个分区的数据，接着再从每个分区中解析出描述头和主体内容部分。
+---
+
+# a标签的href和onclick属性同时存在时哪个先触发？
+onclick事件先触发， 如果函数执行返回false(全等), 则href不会被触发。
+---
+
+# 说说你对accesskey的理解，举例说明它有什么运用场景？
+accessKey 可以注入到任意的元素中，通过快捷键触发对应元素的绑定事件。
+```
+  <a href="http://www.baidu.com" accesskey="1">快捷键1直接跳转百度</a>
+``` 
+---
