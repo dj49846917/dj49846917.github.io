@@ -59,6 +59,18 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 # 浏览器可以访问所有cookie吗，js可以访问所有cookie吗，如何不让js访问cookie
 ---
 
+# 如何防止cookie被盗用？
+  1. 禁止第三方网站带cookie(same-site属性)
+  2. 每次请求需要输入图形验证码
+  3. 使用Token验证
+  4. 为cookie设置HttpOnly
+  5. 设置CSP
+  6. 使用Referer验证
+  7. 禁止网页内嵌
+  8. 使用https
+  9. cookie带上用户ip加密
+---
+
 # 什么是渐进式渲染？
   * 渐进式渲染是用于提高网页性能（尤其是提高用户感知的加载速度），以尽快呈现页面的技术。
 	
@@ -102,6 +114,19 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 
 # 介绍webworker
 web worker 是运行在后台的 JavaScript，不会影响页面的性能。提供协程能力，如果有一个比较密集的计算任务，可以放到另一个进程中处理，等处理好了再把结果传回主程，这样主要进程就不会阻塞，页面可以正常渲染和响应,可充分利用多核的CPU
+---
+
+# Web Worker线程的限制是什么？
+  1. 同源限制
+    * 分配给 Worker 线程运行的脚本文件，必须与主线程的脚本文件同源。
+  2. DOM 限制
+    * Worker 线程所在的全局对象，与主线程不一样，无法读取主线程所在网页的 DOM 对象，也无法使用document、window、parent这些对象。但是，Worker 线程可以navigator对象和location对象。
+  3. 通信联系
+    * Worker 线程和主线程不在同一个上下文环境，它们不能直接通信，必须通过消息完成。
+  4. 脚本限制
+    * Worker 线程不能执行alert()方法和confirm()方法，但可以使用 XMLHttpRequest 对象发出 AJAX 请求。
+  5. 文件限制
+    * Worker 线程无法读取本地文件，即不能打开本机的文件系统（file://），它所加载的脚本，必须来自网络。
 ---
 
 # 简述一下你对HTML语义化的理解？
@@ -312,4 +337,15 @@ accessKey 可以注入到任意的元素中，通过快捷键触发对应元素�
 ```
   <a href="http://www.baidu.com" accesskey="1">快捷键1直接跳转百度</a>
 ``` 
+---
+
+# 说说form-data、x-www-form-urlencoded、raw、binary的区别是什么？
+  1. multipart/form-data 其请求内容格式为Content-Type: multipart/form-data,用来指定请求内容的数据编码格式，一般用来文件上传。
+  2. application/x-www-form-urlencoded 是post的默认格式，使用js中URLencode转码方法。
+  3. raw 可上传任意格式的文本，可以上传text、json、xml、html等各种文本类型。
+  4. binary 等同于Content-Type:application/octet-stream，只可上传二进制数据。
+---
+
+# 请解释下href="javascript:void(0)"和href="#"的区别是什么？
+"#" 包含了一个位置信息，默认的锚是#top 也就是网页的上端。而javascript:void(0), 仅仅表示一个死链接。在页面很长的时候会使用 # 来定位页面的具体位置，格式为：# + id。如果你要定义一个死链接请使用 javascript:void(0) 。
 ---
