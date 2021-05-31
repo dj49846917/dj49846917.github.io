@@ -484,9 +484,6 @@ connect负责连接React和Redux
   * useEffect在副作用结束之后，会延迟一段时间执行，并非同步执行，和compontDidMount有本质区别。遇到dom操作，最好使用useLayoutEffect。
 ---
 
-# useState中的第二个参数更新状态和class中的this.setState区别？
----
-
 # hooks的出现给状态管理器带来的变化
 ---
 
@@ -723,7 +720,19 @@ JSX —使用react构造组件，bable进行编译—> JavaScript对象 — Reac
 ---
 
 # 执行setState发生了什么？(react的setstate过程)
-将传递给 setState 的对象合并到组件的当前状态，这将启动一个和解的过程，构建一个新的 react 元素树，与上一个元素树进行对比（diff），从而进行最小化的重渲染。
+  * 简单说：将传递给 setState 的对象合并到组件的当前状态，这将启动一个和解的过程，构建一个新的 react 元素树，与上一个元素树进行对比（diff），从而进行最小化的重渲染。
+
+  * 详细步骤：
+    1. 将setState传入的partialState参数存储在当前组件实例的state暂存队列中。
+    2. 判断当前React是否处于批量更新状态，如果是，将当前组件加入待更新的组件队列中。
+    3. 如果未处于批量更新状态，将批量更新状态标识设置为true，用事务再次调用前一步方法，保证当前组件加入到了待更新组件队列中。
+    4. 调用事务的waper方法，遍历待更新组件队列依次执行更新。
+    5. 执行生命周期getDerivedStateFromProps。
+    6. 将组件的state暂存队列中的state进行合并，获得最终要更新的state对象，并将队列置为空。
+    7. 执行生命周期componentShouldUpdate，根据返回值判断是否要继续更新。
+    8. 执行生命周期getSnapshotBeforeUpdate。
+    9. 执行真正的更新，render。
+    10. 执行生命周期componentDidUpdate。
 ---
 
 # React中setState的第二个参数作用是什么？
@@ -736,8 +745,8 @@ this.state通常是用来初始化state的，this.setState是用来修改state�
 
 # react进行setState后触发了哪些钩子
   * setState的改变会触发4个生命周期钩子
-    - shouldComponentUpdate
-    - componentWillUpdate
+    - shouldComponentUpdate(getDerivedStateFromProps)
+    - componentWillUpdate(getSnapshotBeforeUpdate)
     - render
     - componentDidUpdate
 
@@ -979,8 +988,11 @@ ref 用于返回对元素的引用。但在大多数情况下，应该避免使�
   4. 使用 “render callback” 模式（比如： ），它无法像大多数人预期的那样工作。
 ---
 
-# 请说一说Forwarding Refs有什么用
-是父组件用来获取子组件的dom元素的
+# 什么是React.forwardRef？它有什么作用？
+  * React.forwardRef 会创建一个React组件，这个组件能够将其接受的 ref 属性转发到其组件树下的另一个组件中。
+  * 作用：
+    - 转发 refs 到 DOM 组件
+    - 在高阶组件中转发 refs
 ---
 
 # React 中 key 的重要性是什么？
@@ -1187,3 +1199,5 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 
 # React Native和Flutter 的区别？谁的操作效率更高？更快？
 ---
+
+

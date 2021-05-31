@@ -31,6 +31,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 介绍下 symbol, symbol作用
+
 ---
 
 # Symbol主要用于什么场景下
@@ -394,7 +395,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 使用instanceof 
 ---
 
-# new操作符具体干了什么呢?(new 和 instanceof 的内部机制)
+# new操作符具体干了什么呢?(new 和 instanceof 的内部机制、原理)
   * 创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
   * 属性和方法被加入到 this 引用的对象中。
   * 新创建的对象由 this 所引用，并且最后隐式的返回 this。
@@ -447,7 +448,8 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * Ajax的工作原理相当于在用户和服务器之间加了—个中间层(AJAX引擎)，使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器。像—些数据验证和数据处理等都交给Ajax引擎自己来做,，只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。
 ---
 
-# ajax请求和浏览器常规请求的区别
+# 使用 jQuery 中止 Ajax 请求
+abort（）
 ---
    
 # Ajax 解决浏览器缓存问题？
@@ -456,6 +458,14 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 在URL后面加上一个随机数： "fresh=" + Math.random();。
   * 在URL后面加上时间戳："nowtime=" + new Date().getTime();。
   * 如果是使用jQuery，直接这样就可以了 $.ajaxSetup({cache:false})。这样页面的所有ajax都会执行这条语句就是不需要保存缓存记录。
+---
+
+# ajax返回的状态有哪些？
+  * 0 － （未初始化）还没有调用send()方法
+  * 1 － （载入）已调用send()方法，正在发送请求
+  * 2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+  * 3 － （交互）正在解析响应内容
+  * 4 － （完成）响应内容解析完成，可以在客户端调用了
 ---
 
 # 同步和异步的区别?
@@ -473,9 +483,6 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * nodejs中间件代理跨域
   * WebSocket协议跨域
   * 详细代码请看:  https://segmentfault.com/a/1190000011145364
----
-
-# nginx跨域原理
 ---
 
 # proxy解决跨域的原理？
@@ -560,9 +567,7 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # apply、call、bind的区别？
----
-
-# ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
+通过apply和call改变函数的this指向，他们两个函数的第一个参数都是一样的表示要改变指向的那个对象，第二个参数，apply是数组，而call则是arg1,arg2...这种形式。通过bind改变this作用域会返回一个新的函数，这个函数不会马上执行。
 ---
 
 # bind函数绑定和执行过程，如何实现bind函数？
@@ -783,6 +788,7 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # 箭头函数和普通函数的区别
+箭头函数根本就没有绑定自己的this，在箭头函数中调用 this 时，仅仅是简单的沿着作用域链向上寻找，找到最近的一个 this 拿来使用
 ---
 
 # 简单说明一下你对ES6中箭头函数的理解
@@ -902,6 +908,8 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # let var和const的区别是什么？什么是暂时性死区？
+  * var声明的变量是全局或者整个函数块的，而let,const声明的变量是块级的变量，var声明的变量存在变量提升，let,const不存在，let声明的变量允许重新赋值，const不允许。
+  * 暂时性死区：在代码块内，使用let、const命令声明变量之前，该变量都是不可用的。
 ---
 
 # 块级作用域和函数作用域的区别
@@ -980,4 +988,12 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # new String('a')和'a'是一样的么?
+---
+
+# js的各种位置，比如clientHeight,scrollHeight,offsetHeight ,以及scrollTop, offsetTop,clientTop的区别？
+  * clientHeight：表示的是可视区域的高度，不包含border和滚动条
+  * offsetHeight：表示可视区域的高度，包含了border和滚动条
+  * scrollHeight：表示了所有区域的高度，包含了因为滚动被隐藏的部分。
+  * clientTop：表示边框border的厚度，在未指定的情况下一般为0
+  * scrollTop：滚动后被隐藏的高度，获取对象相对于由offsetParent属性指定的父坐标(css定位的元素或body元素)距离顶端的高度。
 ---

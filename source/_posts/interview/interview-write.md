@@ -200,3 +200,18 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # 编程题：实现trim
 ---
+
+# 实现一个once函数，传入函数参数只执行一次
+```
+  function ones(func){
+      var tag=true;
+      return function(){
+          if(tag==true){
+              func.apply(null,arguments);
+              tag=false;
+          }
+          return undefined
+      }
+  }
+```
+---
