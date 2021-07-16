@@ -111,3 +111,44 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632
         host: localhost
     ```
   5. 启动，并输入：localhost:8080/put?key=name&value=zhangsan，localhost:8080/get能看到结果
+
+# springboot集成lombok
+## 安装lombok
+  1. 引入jar包
+    ```
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+      </dependency>
+    ```
+  2. 启用lombok
+    ```
+      File => Settings => Build, Execution, Deployment => Compiler => Annotation Processors
+
+      勾选 Enable annotation processing
+    ```
+  3. 安装lombok插件
+    ```
+      File => Settings => Plugins, 搜索lombok下载
+    ```
+## 代码编写
+  ```
+    # 新建UserInfo2.class类
+
+      @Setter @Getter // 自动生成成员变量的get和set方法
+      public class UserInfo2 {
+          private Long id;
+          private String name;
+          private String phone;
+          private String address;
+      }
+
+    # 新建使用方法App.class
+      public class App {
+        public static void main(String[] args) {
+          UserInfo2 userInfo2 = new UserInfo2();
+        }
+      }
+  ```
+## 详细教程点击这里：[lombok教程](/source/_posts/lombok/lombok.md)
