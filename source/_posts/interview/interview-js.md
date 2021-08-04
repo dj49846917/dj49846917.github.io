@@ -61,12 +61,36 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 如何判断Array类型
+1. 使用instanceof方法。
+   var arr=[];
+   console.log(arr instanceof Array) //true
+2. 使用constructor方法。
+   console.log([].constructor == Array);  //true
+3. 使用Object.prototype.toString.call(arr) === '[object Array]'方法。
+   function isArray(o) {
+　　return Object.prototype.toString.call(o);
+   }
+   var arr=[2,5,6,8];
+   console.log(isArray(arr)); //[object Array]
+4. ES5定义了Array.isArray
+    Array.isArray([]) //true
 ---
 
 # 何如判断对象类型
+ * 同上
 ---
 
 # Array都有什么方法
+1. 给数组末尾添加新内容的push方法；
+2. 删除数组最后一项的pop方法；
+3. 删除数组第一项的shift方法；
+4. 向数组首位添加新内容unshift方法；
+5. concat();合并两个或更多的数组，并返回新数组。
+6. join();就是将数组的每个元素以指定的字符连接，形成新字符串返回。
+7. splice() 插入，删除，替换元素。
+8. some();对数组的每个元素判断是否满足条件，如果都不满足就返回false，如果有一个满足的就返回true，并且不再判断后面的内容。
+9. every();对数组的每个元素判断是否满足条件，如果有一个不满足条件就返回为false，全部满足时返回true。
+10. filter();方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。
 ---
 
 # JavaScript原型，原型链 ? 有什么特点？
@@ -77,9 +101,17 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 原型链顶端是什么
+* 函数的prototype是一个在函数声明阶段就会产生的对象(prototype只有函数才会有)，这个对象只有两个属性constructor和__proto__，其中__proto__指向了我们原型链的顶点Object.prototype。constructor指向函数本身，里面包括了函数一些基本描述信息比如函数名称，参数个数等。
+
 ---
 
 # 怎么判断某个属性是自身的还是原型链上的
+1. hasOwnProperty
+  var obj = {name: 'h5course-com'};
+  obj.hasOwnProperty('name'); // true
+  obj.hasOwnProperty('toString'); // false
+  原型链上继承过来的属性无法通过hasOwnProperty检测到，返回false。
+2. in 操作符
 ---
 
 # 隐式原型，显式原型有什么用
@@ -412,6 +444,11 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # js里实现异步有哪几种方式
+1. JS执行环境：单线程.
+2. Promises
+3. 发布、订阅模式
+4. 回调函数（callback）可能会造成回调地狱
+5. async及await   
 ---
 
 # js延迟加载的方式有哪些？
@@ -486,6 +523,8 @@ abort（）
 ---
 
 # proxy解决跨域的原理？
+* 客户端发送请求时不直接到服务器而是先到代理的中间层在这里将localhost：8088的这个域名装换为192.168.0.67:8061，再将请求发送到服务器这样在服务器端收到的请求就是使用的192.168.0.67:8061域名
+  同理，当服务器返回数据的时候，也是先到代理的中间层将192.168.0.67:8061转换成localhos：8088；这样在客户端也是在相同域名下访问的了。
 ---
 
 # 跨域时用cors 有的时候会多发一个option请求是为什么？
@@ -533,6 +572,8 @@ abort（）
 ---
 
 # 说下AMD，CMD的区别
+* . AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块,CMD推崇就近依赖，只有在用到某个模块的时候再去require。AMD推崇依赖前置，因此，JS可以及其轻巧地知道某个模块依赖的模块是哪一个，因此可以立即加载那个模块；而CMD是就近依赖，它要等到所有的模块变为字符串，解析一遍之后才知道他们之间的依赖关系。
+
 ---
 
 # 说说你对AMD和Commonjs的理解
@@ -552,6 +593,7 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # reduce和map的区别
+* map()是把array中的所有元素，都依次作为increase函数的参数传进去，即依次执行,最后返回的是一个新数组。而reduce()是先把数组的前两个数作为参数传进multiply函数，然后把返回值加上数组的第三个数，再次作为参数传进multiply函数，如此类推，最终得到的就不是数组了，而是一个数。
 ---
 
 # reduce()讲讲 reduce怎么统计数据出现次数
@@ -811,6 +853,9 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # for...in 和 for...of 有什么区别？
+ 1. for … of遍历获取的是对象的键值,for … in 获取的是对象的键名
+ 2. for … in会遍历对象的整个原型链,性能非常差不推荐使用,而for … of只遍历当前对象不会遍历原型链
+ 3. 对于数组的遍历,for … in会返回数组中所有可枚举的属性(包括原型链上可枚举的属性),for … of只返回数组的下标对应的属性值
 ---
 
 # 说一下你对 generator 的了解？
@@ -940,6 +985,7 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # 拿到对象的 key 有哪些方法，使用 for...in 和 Object.keys 有什么不同
+* 使用 for...in 和 Object.keys, 两者之间最主要的区别就是Object.keys( )不会走原型链，而for in 会走原型链；
 ---
 
 # ==与===的区别，==比较的规则，隐式转换的规则
@@ -952,6 +998,10 @@ CommonJS是服务器端模块的规范，Node.js采用了这个规范。CommonJS
 ---
 
 # 实现深拷贝的方式有哪些
+1. slice 方法实现数组的深拷贝，该方法可以将原数组中抽离部分出来形成一个新数组，只要设置为抽离全部，即可完成数组的深拷贝。
+2. concat 方法实现数组的深拷贝，该方法用于连接多个数组组成一个新的数组的方法。那么只要连接它自己，即可完成数组的深拷贝。
+3. Object.assign() 拷贝，当对象中只有一级属性，没有二级属性的时候，此方法为深拷贝，但是对象中有对象的时候（有二级属性），此方法就是浅拷贝。
+4. JSON.stringify 和 JSON.parse
 ---
 
 # 用sort好吗，为什么不好？   那你有什么更好的方案？ （提了快排和归并，然后口述快排原理）

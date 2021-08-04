@@ -86,9 +86,11 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
       
 # vite的使用
 ## 安装插件
-  * npm init @vitejs/app
+  * npm init vite@latest
     - ![vite安装](/images/vue/vite安装.jpg)
     - npm install
+
+  * 详细配置文档请看：https://cn.vitejs.dev/
 
 ## 在vite中使用vue-router
   1. 安装：

@@ -290,9 +290,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # keep-alive缓存的是什么？
+* 缓存的是被包含在 keep-alive 中创建的组件的状态避免组件重新渲染，
 ---
 
 # keep-alive的原理是什么？
+* 它是一个动态组件，同时也是vue的内置组件，当组件在切换的过程中，keep-alive可以将状态保存在内存中，防止重复渲染dom。会增加两个生命周期：组件激活时：actived() 该钩子在服务器渲染期间不能被调用
+  组件停用时：deactivated() 该钩子在服务器渲染期间不能被调用。
+
 ---
 
 # 怎么监听组件是否处于激活或失活
@@ -716,6 +720,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # vue可以拿index当key吗，为什么
+* 不建议，
 ---
 
 # .vue文件怎么在浏览器上显示的，这个过程和原理
@@ -728,10 +733,42 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # 用了mixins,这是什么，优缺点？
+* 混合 (mixins) 是一种分发 Vue 组件中可复用功能的非常灵活的方式。混合对象可以包含任意组件选项。当组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。
+* 优缺点：Mixin的优点是不需要传递状态，但缺点也显而易见可能会被滥用。
 ---
 
 # this.$ref原理
+* 是一个对象，持有已注册过的所有子组件。ref为子组件指定一个名称，通过this.$refs.ref指定的子组件名称 即可获得对该子组件的操作（包括data中定义的数据和methods中定义的方法）
 ---
 
 # mounted和watch里面监听props 哪个先执行
+* watch先于mounted，props传过去的值，第一时间在mounted是获取不到的。因为是异步传值的。解决方法：结合watch和mounted同时渲染
+   export default {
+		name: 'zblist',
+		props: {
+			lists:Array
+		},
+		data() {
+			return {
+				show: true,
+				Tlist: this.lists,
+				list_today:[]
+			}
+		},
+		watch:{
+			lists:function(newVal,oldVal){
+				this.Tlist = newVal
+				this.getData()
+			}
+		},
+		mounted() {
+			this.getData()
+		},
+		methods: {
+			getData() {
+				console.log(this.Tlist)
+				this.list_today = this.Tlist[0].today
+			}
+		},
+	}
 ---
