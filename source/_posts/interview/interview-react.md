@@ -33,6 +33,20 @@ cover: https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510
   * 新增 state,对状态的管理更加明确，通过 redux，流程更加规范了，减少手动编码量，提高了编码效率，同时缺点时当数据更新时有时候组件不需要，但是也要重新绘制，有些影响效率。一般情况下，我们在构建多交互，多数据流的复杂项目应用时才会使用它们
 ---
 
+# redux的设计思想
+  * 单向数据流
+  * Store是唯一的数据源
+  * Redux的三大原则
+    1. 单一数据源
+    2. State只读
+    3. 使用纯函数来修改
+---
+
+# 单向数据流的好处
+  * 数据流动方向可以追踪，流动单一，追查问题的时候可以更快捷
+  * view发出action后不修改原有state，耳屎返回一个新的，可以保存state的历史记录，可以复现场景，易测试
+---
+
 # 有用过状态管理吗？说说redux 的理念；
 ```
   概念: Redux 是 React的一个状态管理库
@@ -96,14 +110,38 @@ redux 其实也是一个发布订阅，但是 redux 可以做到数据的可预�
 ---
 
 # Redux中异步的请求怎么处理
+  * 利用中间件：redux-thunk、saga、
 ---
 
 # react-redux 的原理，它是怎么跟 react 关联起来的？(实现原理、Redux如何实现多个组件之间的通信，多个组件使⽤相同状态如何进⾏管理)
   * react-redux 的核心组件只有两个，Provider 和 connect，Provider 存放 Redux 里 store 的数据到 context 里，通过 connect 从 context 拿数据，通过 props 传递给 connect 所包裹的组件。
 ---
 
+# 接入Redux的过程？
+  1. 安装redux
+  2. 创建Store统一管理state
+  3. 通过store，订阅state和分发更新state
+---
+
+# 绑定connect的过程？
+  * connect的作用是连接Redux store和React组件: connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
+  * mapStateToProps: 将Redux store中的数据作为props绑定到组件上
+  * mapDispatchToProps: 将action作为props绑定到组件上
+  * mergeProps: mapStateToProps和mapDisPatchToProps得到的props和ownerProps合并
+  * options: 定制connect的一些特殊行为
+---
+
+# connect原理
+  1. Provider向子组件提供store的Context
+  2. 接收Redux的store作为props，通过context对象传递给子组件上的connect
+  3. connect连接Redux和React，通过高阶组件HOC包在我们的容器组件的外一层，它接收上面Provider提供的store，根据对应转换函数得到state和dispatch，并组成一个对象，以属性的形式传给我们的容器组件，并在内部订阅store的变化，根据变化更新state的值
+---
+
 # 多个组件之间如何拆分各⾃的state，每块⼩的组件有⾃⼰的状态，它们之间还有⼀些公共的状态需要维护，如何思考这块
-每块小组件自己的状态放到私有state中，公共的才用Redux管理
+  * 如果状态具有复杂的更新逻辑，则将该逻辑从组件中提取到自定义钩子中。
+  * 保证唯一数据源和单向数据
+  * 将复杂的状态逻辑提取到自定义钩子中(自定义useReducer)。
+  * 对于组件的拆分要做到高内聚低耦合
 ---
 
 # React-Redux中展示组件和容器组件之间的区别是什么?
@@ -191,6 +229,18 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
   * 理解: 虽然框架一般都有组件通信的功能, 但是全局状态管理工具, 可以更人性的操作数据
 
 # mobx实现原理
+  1. 三个基本概念：
+    * Observable  //被观察者
+    * Observer    //观察者
+    * Reaction    //响应
+  2. 在被观察者和观察者之间建立依赖关系
+    * 通过一个Reaction来track一个函数，该函数中访问了Observable变量，Observable变量的get方法会被执行，此时可以进行依赖收集，将此函数加入到该Observable变量的依赖中。
+  3. 触发依赖函数
+    * 上一步中Observable中，已经收集到了该函数。一旦Observable被修改，会调用set方法，就是依次执行该Observable之前收集的依赖函数，当前函数就会自动执行。
+    * mobx底层对数据的观察，是使用Object.defineProperty(Mobx4)或Proxy(Mobx5)，Mobx4中Array是用类数组对象来模拟的，原始值是装箱为一个对象。
+  4. mobx-react更新react状态
+    * observer这个装饰器，对React组件的render方法进行track。将render方法，加入到各个observable的依赖中。当observable发生变化，track方法就会执行。
+    * track中，还是先进行依赖收集，调用forceUpdate去更新组件，一个mobx添加的周期componentWillReact，也会在此时执行。然后结束依赖收集。
 ---
 
 # 说说对Vuex，Flux和Redux的理解
@@ -222,6 +272,7 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 ---
 
 # redux为什么每次reducer要返回一个新对象，面对大量节点如何优化
+  * 
 ---
 
 # 说说redux存储数据和本地存储数据有什么区别？
@@ -234,8 +285,24 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 7. 永久性：当刷新页面时redux存储的值会丢失，localstorage不会。
 ---
 
+# React数据持久化有什么实践吗？
+  1. 数据持久化本质是利用localstorage，同一个域名共享同一个，且存储量不能超过5M，存储量太大会影响性能，建议不超过2.5M
+  2. 如果要控制过期时间，可以在set数据时加个时间戳
+  3. 注意JSON.stringify,有一些对象无法存储，例如：function、正则等
+  4. 若业务线众多，建议划分域名使用localstorage
+  5. 跨页面传输数据，优先建议url传输数据
+---
+
 # 使用redux时，不能在componentWillReceiveProps方法中使用action
 原因：有时候一个action改变数据后，我们希望拿到改变后的数据做另外一个action，比如初始化action读取硬盘中的数据到内存，然后用该参数进行请求网络数据action。此时我们可以在componentWillReceiveProps方法中拿到参数，若此时发出再发出action，则数据返回后改变reducer会再次进入componentWillReceiveProps方法，又继续发出action，陷入死循环。
+---
+
+# Redux中间件是什么？接收几个参数？柯里化函数两端的参数具体是什么？
+  * Redux中间件：提供的是位于action被发起之后，到达reducer之前的扩展点，也就是说，原本 view => action => reducer => store的数据流加上中间件后变成了 view => action => 中间件 => reducer => store，在这一环节我们可以做一些"副作用"的操作，比如异步请求，打印日志等
+
+  * 接收一个对象做参数，对象的参数上有两个字段dispatch和getState, 分别代表着Redux Store上的两个同名函数
+
+  * 柯里化函数两端一个是中间件，一个是store.dispatch
 ---
 
 # redux中间件原理
@@ -248,7 +315,7 @@ Redux是基于Flux实现的，Vuex是Redux的基础上进行改变，在Redux中
 ---
 
 # Redux 中间件是怎么拿到store 和 action? 然后怎么处理?
-redux中间件本质就是一个函数柯里化。redux applyMiddleware Api 源码中每个middleware 接受2个参数， Store 的getState 函数和dispatch 函数，分别获得store和action，最终返回一个函数。该函数会被传入 next 的下一个 middleware 的 dispatch 方法，并返回一个接收 action 的新函数，这个函数可以直接调用 next（action），或者在其他需要的时刻调用，甚至根本不去调用它。调用链中最后一个 middleware 会接受真实的 store的 dispatch 方法作为 next 参数，并借此结束调用链。所以，middleware 的函数签名是（{ getState，dispatch })=> next => action。
+  > redux中间件本质就是一个函数柯里化。redux applyMiddleware Api 源码中每个middleware 接受2个参数， Store 的getState 函数和dispatch 函数，分别获得store和action，最终返回一个函数。该函数会被传入 next 的下一个 middleware 的 dispatch 方法，并返回一个接收 action 的新函数，这个函数可以直接调用 next（action），或者在其他需要的时刻调用，甚至根本不去调用它。调用链中最后一个 middleware 会接受真实的 store的 dispatch 方法作为 next 参数，并借此结束调用链。所以，middleware 的函数签名是（{ getState，dispatch })=> next => action。
 ---
 
 # Redux中的connect有什么作用
@@ -285,10 +352,17 @@ connect负责连接React和Redux
 ---
 
 # React 优化
-  * 适当地使用shouldComponentUpdate生命周期方法。 它避免了子组件的不必要的渲染。 如果树中有100个组件，则不重新渲染整个组件树来提高应用程序性能。
-  * 不可变性是提高性能的关键。不要对数据进行修改，而是始终在现有集合的基础上创建新的集合，以保持尽可能少的复制，从而提高性能。
-  * 在显示列表或表格时始终使用 Keys，这会让 React 的更新速度更快
-  * 代码分离是将代码插入到单独的文件中，只加载模块或部分所需的文件的技术。
+  * 在constructor改变this指向代替箭头函数和render内绑定this，避免函数作为props带来不必要的rerender
+  * shouldComponentUpdate和PureComponent，减少不不必要的render
+  * 使用唯一key优化list diff
+  * 合并setState操作，减少虚拟dom对比频率
+  * React路由动态加载react-loadable
+  * 合理使用useMemo和useCallBack
+  * 合理拆分组件
+---
+
+# shouldComponentUpdate是为了解决什么问题？
+  > 组件重复渲染
 ---
 
 # 在react中如何解决单页面开发首次加载白屏现象
@@ -300,6 +374,11 @@ connect负责连接React和Redux
   * pureComponent表示一个纯组件，可以用来优化react程序。减少render函数渲染的次数。提高性能
   * pureComponent进行的是浅比较，也就是说如果是引用数据类型的数据，只会比较不是同一个地址，而不会比较这个地址里面的数据是否一致
   * 好处:当组件更新时，如果组件的props或者state都没有改变，render函数就不 会触发。省去虚拟DOM的生成和对比过程，达到提升性能的目的。具体原因 是因为react自动帮我们做了一层浅比较
+---
+
+# pureComponent和FunctionComponent区别？
+  > Component需要自己实现shouldComponentUpdate
+  > 但是在shouldComponentUpdate实现中PureComponent使用了props和state的浅比较。
 ---
 
 # pureComponent执行的是浅比较还是深比较？
@@ -327,6 +406,13 @@ connect负责连接React和Redux
   * class 是 JavaScript 中的关键字，而 JSX 是 JavaScript 的扩展。
 ---
 
+# React如何进行组件/逻辑复用?
+  * 属性代理
+  * 反向继承
+  * 渲染属性
+  * react-hooks
+---
+
 # 什么是 Fragments ?为什么使用 Fragments 比使用容器 div 更好?
   * 概念:  它是 React 中的常见模式，用于组件返回多个元素。Fragments 可以让你聚合一个子元素列表，而无需向 DOM 添加额外节点。
   * 好处:
@@ -339,6 +425,8 @@ connect负责连接React和Redux
   1. 单向链表通过next把hooks串联起来
   2. memoizedState存在fiber node上，组件之间不会相互影响
   3. useState和useReducer中通过dispatchAction调度更新任务
+
+  4. 具体原理：React会维护两个链表，一个是CurrentHook,一个是WorkInProgressHook,每一个节点类型都是hook，每当调用useXXX的时候，React都会创建一个hook对象，并挂载到链表的尾部，函数式组件之所以可以做一些class才能做得事情，就是因为Hook对象，函数式组件的状态、计算值、缓存的函数都是交由hook进行管理的，需要和当前调用他的组件通过fiber.memoizedState关联起来，组件对应的fiber会维护一个memoizedState属性，它永远指向hook链表的头部
 ---
 
 # React Hooks 如何更新状态(useState原理)
@@ -399,6 +487,7 @@ connect负责连接React和Redux
     -  组件之间复用状态逻辑很难，在hooks之前，实现组件复用，一般采用高阶组件和 Render Props，它们本质是将复用逻辑提升到父组件中，很容易产生很多包装组件，带来嵌套地域。
     - 组件逻辑变得越来越复杂，尤其是生命周期函数中常常包含一些不相关的逻辑，完全不相关的代码却在同一个方法中组合在一起。如此很容易产生 bug，并且导致逻辑不一致。
     - 复杂的class组件，使用class组件，需要理解 JavaScript 中 this 的工作方式，不能忘记绑定事件处理器等操作，代码复杂且冗余。除此之外，class组件也会让一些react优化措施失效。
+    - 难以记忆的生命周期
   * 作用：
     - 用于在函数组件中引入状态管理和生命周期方法
     - 取代高阶组件和render props来实现抽象和可重用性
@@ -504,6 +593,7 @@ connect负责连接React和Redux
 ---
 
 # useEffect和useLayoutEffect区别？
+  * useEffect是异步，useLayoutEffect是同步的
   * useEffect是render结束后，callback函数执行，但是不会阻断浏览器的渲染，算是某种异步的方式吧。但是class的componentDidMount 和componentDidUpdate是同步的,在render结束后就运行,useEffect在大部分场景下都比class的方式性能更好.
   * useLayoutEffect里面的callback函数会在DOM更新完成后立即执行,但是会在浏览器进行任何绘制之前运行完成,阻塞了浏览器的绘制.
 ---
@@ -622,6 +712,9 @@ connect负责连接React和Redux
 ---
 
 # react-router里的<Link>标签和<a>标签有什么区别
+  1. 有onclick那就执行onclick
+  2. click的时候阻止a标签默认事件
+  3. 根据跳转href,用history跳转，此时只是连接变了，并没有刷新页面
 ---
 
 # react router和常规路由有何不同？
@@ -666,6 +759,11 @@ JSX —使用react构造组件，bable进行编译—> JavaScript对象 — Reac
 
 # 为什么虚拟 dom 会提高性能?
 虚拟 dom 相当于在 js 和真实 dom 中间加了一个缓存，利用 dom diff 算法避免了没有必要的 dom 操作，从而提高性能。用 JavaScript 对象结构表示 DOM 树的结构；然后用这个树构建一个真正的 DOM 树，插到文档当中当状态变更的时候，重新构造一棵新的对象树。然后用新的树和旧的树进行比较，记录两棵树差异把 2 所记录的差异应用到步骤 1 所构建的真正的 DOM 树上，视图就更新了。
+---
+
+# 虚拟dom真的比真实dom性能好吗？
+  1. 首次渲染大量dom时，由于多了一层虚拟dom的计算，会比innerHTML插入强
+  2. 正如它能保证性能下限，在真实dom操作的时候进行针对性的优化时，还是更快的
 ---
 
 # 虚拟Dom中的$$typeof属性的作用是什么？
@@ -735,6 +833,17 @@ JSX —使用react构造组件，bable进行编译—> JavaScript对象 — Reac
     10. 执行生命周期componentDidUpdate。
 ---
 
+# setState原理（同上）
+  1. react的类组件通过state管理内部状态，而唯一改变状态更新的视图只能通过setState和forceUpdate。setState最终也会走forceUpdate。每个类组件都有一个updater对象用于管理state的变化。
+  2. 当我们调用setState传入partialState时，会将partialState存入updater中的pendingState中
+  3. 此时updater又会调用emitUpdate来决定当前是否立即更新，判断条件简单来说是否有nextProps,或者updateQueue的isPending是否开启。（这个updateQueue用于批量管理updater。）如果updateQueue的isPending为true，那么就将当前update直接加入到updateQueue的队列中。（开启isPending的方式可以是自定义方法和生命周期等。）
+  4. 当这些方法执行完毕更新update,调用update的componentUpdate, 安段组件的shouldComponentUpdate决定是否调用forceUpdate进行更新
+---
+
+# state是怎么注入到组件的，从reducer到组件经历了什么样的过程
+  * 通过connect和mapStateToProps将state注入到组件中
+---
+
 # React中setState的第二个参数作用是什么？
 setState 的第二个参数是一个可选的回调函数。这个回调函数将在组件重新渲染后执行。等价于在 componentDidUpdate 生命周期内执行。通常建议使用 componentDidUpdate 来代替此方式。在这个回调函数中你可以拿到更新后 state 的值：
 ---
@@ -743,7 +852,7 @@ setState 的第二个参数是一个可选的回调函数。这个回调函数�
 this.state通常是用来初始化state的，this.setState是用来修改state值的。如果初始化了state之后再使用this.state，之前的state会被覆盖掉，如果使用this.setState，只会替换掉相应的state值。所以，如果想要修改state的值，就需要使用setState，而不能直接修改state，直接修改state之后页面是不会更新的。
 ---
 
-# react进行setState后触发了哪些钩子
+# react进行setState后触发了哪些钩子（state和props触发更新的生命周期分别有什么区别）
   * setState的改变会触发4个生命周期钩子
     - shouldComponentUpdate(getDerivedStateFromProps)
     - componentWillUpdate(getSnapshotBeforeUpdate)
@@ -756,6 +865,9 @@ this.state通常是用来初始化state的，this.setState是用来修改state�
     - componentWillUpdate
     - render
     - componentDidUpdate
+  
+  * 区别：
+    - 在getDerivedStateFromProps、shouldComponentUpdate、getSnapshotBeforeUpdate这几个生命周期中，如果是更新state,参数prevState会有值，nextProps是一个空对象；如果是更新props，参数nextProps会有值，prevState是一个空对象
 ---
 
 # 当调用`setState`时，React `render` 是如何工作的？
@@ -771,14 +883,14 @@ setState 是修改其中的部分状态，相当于 Object.assign，只是覆盖
   * 结论：
     - 由React控制的事件处理程序，以及生命周期函数调用setState不会同步更新state
     - React控制之外的事件中调用setState是同步更新的。比如原生js绑定的事件、setTimeout、setInterval等。
-  * 原因：React批量更新
-    - 源码中根据isBatchingUpdates(默认false，同步更新)判断立即更新，还是放到队列中延迟更新
-    - batchedUpdates方法会修改isBatchingUpdates为true，引起setState的异步更新
-    - React调用事件处理函数前会先调用batchedUpdates方法，所以由React处理的事件setState为异步。
 ---
 
-# 在 componentWillMount() 方法中使用 setState() 好吗?
-建议避免在 componentWillMount() 生命周期方法中执行异步初始化。在 mounting 发生之前会立即调用 componentWillMount()，且它在 render() 之前被调用，因此在此方法中更新状态将不会触发重新渲染。应避免在此方法中引入任何副作用或订阅操作。我们需要确保对组件初始化的异步调用发生在 componentDidMount() 中，而不是在 componentWillMount() 中。
+# setState为什么默认是异步
+  > 假如所有的setState是同步的，意味着每执行一次setState时都重新vnode diff + dom修改，这对性能来说是极为不好的，如果是异步，则可以把一个同步代码的多个setState合并成一次组件更新
+---
+
+# 回调函数作为 setState() 参数的目的是什么?
+  * 当 setState 完成和组件渲染后，回调函数将会被调用。由于 setState() 是异步的，回调函数用于任何后续的操作。
 ---
 
 # 为什么我们需要将函数传递给 setState() 方法?(为什么函数比对象更适合于 setState()?)
@@ -802,16 +914,16 @@ setState 是修改其中的部分状态，相当于 Object.assign，只是覆盖
     ```
 ---
 
+# 在 componentWillMount() 方法中使用 setState() 好吗?
+建议避免在 componentWillMount() 生命周期方法中执行异步初始化。在 mounting 发生之前会立即调用 componentWillMount()，且它在 render() 之前被调用，因此在此方法中更新状态将不会触发重新渲染。应避免在此方法中引入任何副作用或订阅操作。我们需要确保对组件初始化的异步调用发生在 componentDidMount() 中，而不是在 componentWillMount() 中。
+---
+
 # 什么是调解?
 当组件的props或state发生更改时，React 通过将新返回的元素与先前呈现的元素进行比较来确定是否需要实际的 DOM 更新。当它们不相等时，React 将更新 DOM 。此过程称为reconciliation。
 ---
 
 # 我们为什么不能直接更新状态?
   * 如果你尝试直接改变状态，那么组件将不会重新渲染。正确方法应该是使用 setState() 方法。它调度组件状态对象的更新。当状态更改时，组件通将会重新渲染。
----
-
-# 回调函数作为 setState() 参数的目的是什么?
-  * 当 setState 完成和组件渲染后，回调函数将会被调用。由于 setState() 是异步的，回调函数用于任何后续的操作。
 ---
 
 # 聊聊 React 的 diff(原理)
@@ -855,8 +967,26 @@ setState 是修改其中的部分状态，相当于 Object.assign，只是覆盖
     - 这三个生命周期被移除
 ---
 
+# 为什么要改变生命周期
+  * Fiber 架构下，reconciler 会进行多次，reconciler 过程又会调用多次之前的 willxxx ，造成了语意不明确，因此干掉
+  * 多次调用 willxxx 会导致一些性能安全/数据错乱等问题，因此 Unsafe
+  * 静态函数 getDerivedStateFromProps ，直接将其函数内的用户逻辑降低几个数量级，减少用户出错，提高性能，符合语意
+  * getSnapshotBeforeUpdate 替换之前 willxxxx，给想读取 dom 的用户一些空间，强逼用户到 mount 阶段才能操作 dom
+  * 提高性能，减少 try catch 的使用
+---
+
 # 重新渲染界面这个过程在生命周期中哪几步？
 static getDerivedStateFromProps() > shouldComponentUpdate > getSnapshotBeforeUpdate > render > componentDidUpdate
+---
+
+# 哪些方法会触发react重新渲染？重新渲染render会做些什么？
+  * 方法：
+    1. setState调用
+    2. 父组件重新渲染
+  * 做些什么：
+    1. 会对新旧vNode进行对比
+    2. 对新旧两棵树进行一个深度优先遍历，这样每一个节点都会游一个标记，在到深度遍历的时候，每遍历一个节点，就把该节点和新的节点树进行对比，如果有差异就放到一个对象里面
+    3. 遍历差异对象，根据差异的类型，根据对应规则进行更新vNode
 ---
 
 # 错误处理期间调用哪些方法?
@@ -892,6 +1022,12 @@ static getDerivedStateFromError() > componentDidCatch()
 
 # 在 mounting 阶段生命周期方法的执行顺序是什么?
   * constructor() => static getDerivedStateFromProps() => render() =>componentDidMount()
+---
+
+# 在⽣命周期中的哪⼀步你应该发起 AJAX 请求
+  * componentDidMount
+  * React 下⼀代调和算法 Fiber 会通过开始或停⽌渲染的⽅式优化应⽤性能，其会影响 到 componentWillMount 的触发次数。对于 componentWillMount 这个⽣命周期函数 的调⽤次数会变得不确定， React 可能会多次频繁调⽤ componentWillMount 。
+  * 如果我 们将 AJAX 请求放到 componentWillMount 函数中，那么显⽽易⻅其会被触发多次，⾃ 然也就不是好的选择。 如果我们将 AJAX 请求放置在⽣命周期的其他函数中，我们并不能保证请求仅在组件挂载 完毕后才会要求响应。如果我们的数据请求在组件挂载之前就完成，并且调⽤了setState 函数将数据添加到组件状态中，对于未挂载的组件则会报错。⽽在componentDidMount 函数中进⾏ AJAX 请求则能有效避免这个问题
 ---
 
 # 哪些生命周期会执行多次
@@ -995,7 +1131,7 @@ ref 用于返回对元素的引用。但在大多数情况下，应该避免使�
     - 在高阶组件中转发 refs
 ---
 
-# React 中 key 的重要性是什么？
+# react key是干嘛用的，为什么要加？key主要是解决哪一类问题
 key 用于识别唯一的 Virtual DOM 元素及其驱动 UI 的相应数据。它们通过回收 DOM 中当前所有的元素来帮助 React 优化渲染。这些 key 必须是唯一的数字或字符串，React 只是重新排序元素而不是重新渲染它们。这可以提高应用程序的性能。
 ---
 
@@ -1008,7 +1144,7 @@ Context 通过组件树提供了一个传递数据的方法，从而避免了在
 ---
 
 # 谈谈你对context的理解
-当你不想在组件树中通过逐层传递props或者state的方式来传递数据时，可以使用Context来实现跨层级的组件数据传递,使用context可以实现跨组件传递
+  > 当你不想在组件树中通过逐层传递props或者state的方式来传递数据时，可以使用Context来实现跨层级的组件数据传递。Context对象就好比一个直通给子组件访问的作用域，而Context对象的属性可以看成作用域上的活动对象。由于组件的Context由其父节点链上所有组件通过getChildContext()返回的Context对象组合而成，所以，组件通过Context是可以访问到其父组件链上所有节点组件提供的Context的属性
 ---
 
 # children 属性是什么?
@@ -1060,6 +1196,21 @@ React 会创建一个虚拟 DOM(virtual DOM)。当一个组件中的状态改变
   * React Fiber 的目标是增强其在动画、布局和手势等领域的适用性。它的主要特性是增量渲染:能够将渲染工作分割成块，并将其分散到多个帧中。
 ---
 
+# Fiber算法原理
+  0. 总结：更新任务分成俩个阶段，Reconcilition Phase(调和阶段)和Commit Phase(交付阶段)。Reconciliation Phase的任务干的事情是，找出要做的更新工作(Diff Fiber Tree),就是一个计算阶段，计算结果可以被缓存，也就可以被打断；Commit Phase需要提交所有更新并渲染，为了防止页面抖动，被设置为不能打断。
+  1. 用户操作引起setState被调用以后，先调用enqueueSetState方法，该方法可以划分成俩个阶段（个人理解），第一阶段Data Preparation，是初始化一些数据结构，比如fiber，updateQueue，update。
+  2. 新的update会通过insertUpdateIntoQueue方法，根据优先级插入到队列的对应位置，ensureUpdateQueues方法初始化俩个更新队列，queue1和current.updateQueue对应，queue2和current.alternate.updateQueue对应。
+  3. 第二阶段，Fiber Reconciler，就开始进行任务分片调度，scheduleWork首先更新每个fiber的优先级，这里并没有updatePriority这个方法，但是干了这件事。当fiber.return === null，找到父节点，把所有diff出的变化(side effect)归结到root上。
+  4. requestWork，首先把当前的更新添加到schedule list中(addRootToSchedule),然后根据当前是否为异步渲染(isAsync参数)，异步渲染调用。scheduleCallbackWithExpriation方法，下一步高能！！
+  5. scheduleCallbackWithExpriation这个方法在不同环境，实现不一样，chrome等浏览器中使用requestIdleCallback API，没有这个API的浏览器中，通过requestAnimationFrame模拟一个requestIdCallback，来在浏览器空闲时，完成下一个分片的工作，注意，这个函数会传入一个expirationTime，超过这个时间活没干完，就放弃了。
+  6. 执行到performWorkOnRoot，就是fiber文档中提到的Commit Phase和Reconciliation Phase俩阶段。
+  7. 第一阶段Reconciliation Phase,在workLoop中，通过一个while循环，完成每个分片任务。
+  8. performUnitOfWork也可以分成俩阶段，蓝色框表示。beginWork是一个入口函数，根据workInProgress的类型去实例化不同的react element class。workInProgress是通过alternate挂载一些新属性获得的。
+  9. 实例化不同的react element class时候会调用和will有关的生命周期方法。
+  10. completeUnitOfWork是进行一些收尾工作，diff完一个节点以后，更新props和调用生命周期方法等。
+  11. 然后进入Commit Phase阶段，这个阶段不能被打断。
+---
+
 # 为什么 Fiber 双向链表的结构可以解决递归慢的问题
 ---
 
@@ -1107,7 +1258,7 @@ Fiber节点拥有return, child, sibling三个属性，分别对应父节点， �
 ---
 
 # React组件中怎么做事件代理
-React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），定义的事件处理器会接收到一个合成事件对象的实例，它符合W3C标准，且与原生的浏览器事件拥有同样的接口，支持冒泡机制，所有的事件都自动绑定在最外层上。
+  > React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），定义的事件处理器会接收到一个合成事件对象的实例，它符合W3C标准，且与原生的浏览器事件拥有同样的接口，支持冒泡机制，所有的事件都自动绑定在最外层上。
 ---
 
 # React组件事件代理的原理
@@ -1200,4 +1351,45 @@ React基于Virtual DOM实现了一个SyntheticEvent层（合成事件层），�
 # React Native和Flutter 的区别？谁的操作效率更高？更快？
 ---
 
+# RN混原生和原生混RN有什么不同？
+  1. RN混原生
+    * RN混原生，工程中大部分是RN，调用部分原生模块。可以实现调用设备API，实现原生功能
+  2. 原生混RN
+    * 原生混RN，RN的js代码最后都是打包为jsbundle文件，所以其实就是如何使用这个文件来渲染一个原生组件和处理逻辑。
+    * 原生混用RN可以实现多业务拆分，rn实现的不同业务代码打包多个jsbundle文件，再由原生调用，可以业务间的独立性
+---
+
+# react-native的原理
+  > React Native 渲染 在 React 框架中，JSX 源码通过 React 框架最终渲染到了浏览器的真实 DOM 中，而在 React Native 框架中，JSX 源码通过 React Native 框架编译后，通过对应平台的 Bridge 实现了与原生框架的通信。如果我们在程序中调用了 React Native 提供的 API，那么 React Native 框架就通过 Bridge 调用原生框架中的方法。 因为 React Native 的底层为 React 框架，所以如果是 UI 层的变更，那么就映射为虚拟 DOM 后进行 diff 算法，diff 算法计算出变动后的 JSON 映射文件，最终由 Native 层将此 JSON 文件映射渲染到原生 App 的页面元素上，最终实现了在项目中只需要控制 state 以及 props 的变更来引起 iOS 与 Android 平台的 UI 变更。 编写的 React Native代码最终会打包生成一个 main.bundle.js 文件供 App 加载，此文件可以在 App 设备本地，也可以存放于服务器上供 App 下载更新
+---
+
+# RN如何调用原生的一些功能？
+  > 使用原生暴露的模块来使用原生的方法或者view，js层通过NativeModules.模块名.方法名来调用
+---
+
+# RN如何和原生进行通信？
+  * 通过原生Module进行交互
+  * 通过原生 View 进行交互
+  * 通过发送事件 Event 进行交互
+---
+
+# 如何做RN在安卓和IOS端的适配
+  1. 布局：由于RN组件的尺寸是不用传单位的，而设计稿一般标记的是px，所以要进行转换，规则是：`px * 设备分辨率 / 设计稿的基准宽度`
+  2. 图片：需要准备1倍，2倍，3倍3种尺寸，rn会根据不同的分辨率选择不同的倍图
+  3. 组件：在RN自带组件有些带有平台标记的组件，比如说ImagePickerIOS,表明该组件是用于IOS平台。所以如果安卓和ios效果不一样的时候，使用Platform.OS来区分平台，进行不同的布局
+---
+
+# RN为什么能在原生中绘制成原生组件
+  > RN写的代码最终会打包成jsbundle并被原生加载解析，在打包之前会经过babel把jsx解析为js纯函数，RN上的组件现在都是ReactElement对象。在原生创建好了js线程和加载完jsbundle之后开始执行js代码，而原生到rn的入口是appResgistry.registerComponent,在这个方法里一路走可以看到几个主要函数调用是renderApplication => React.createElement，RN上的ReactElement调用React.createElement渲染，最终调用的是原生模块RCTUIManager的createView方法来创建原生组件，通过yoga引擎解析计算组件的布局，最终渲染出对应的原生组件。
+---
+
+# Native提供了什么能力给RN？
+  1. 扩展原生功能给到RN使用，比如获取设备信息，使用设备硬件。
+  2. 创建原生view给的RN使用，如果官方demo中的原生封装地图组件给到rn使用，使其保持原生良好的性能。
+---
+
+# 如何解决props层级过深的问题
+  1. ContextAPI: 提供一种组件间的共享状态，而不必通过显示组件树逐层传递props
+  2. Redux等应用状态管理库
+---
 

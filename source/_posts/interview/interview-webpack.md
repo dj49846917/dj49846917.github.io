@@ -59,6 +59,15 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
     * React.lazy使用import来懒加载组件，import在webpack中最终会调用requireEnsure方法，动态插入script来请求js文件，类似jsonp的形式。
 ---
 
+# webpack如何做异步加载？
+  1. import函数
+  2. require.ensure
+---
+
+# webpack怎么处理内联css的？
+  * 将页面打包过程产生的所有css提取层一个独立的文件，然后将这个css文件内联进html header里。
+---
+
 # webpack 能动态加载 require 引入的模块吗？
 不能
 ---
@@ -77,13 +86,6 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
 ---
 
 # webpack如何优化编译速度?
-  <!-- 1. 多入口情况下，使用CommonsChunkPlugin来提取公共代码
-  2. 通过externals配置来提取常用库
-  3. 利用DllPlugin和DllReferencePlugin预编译资源模块 通过DllPlugin来对那些我们引用但是绝对不会修改的npm包来进行预编译，再通过DllReferencePlugin将预编译的模块加载进来。
-  4. 使用Happypack 实现多线程加速编译
-  5. 使用webpack-uglify-parallel来提升uglifyPlugin的压缩速度。 原理上webpack-uglify-parallel采用了多核并行压缩来提升压缩速度
-  6. 使用Tree-shaking和Scope Hoisting来剔除多余代码 -->
-
 1. 使用高版本的 Webpack 和 Node.js
 2. 多进程/多实例构建：HappyPack(不维护了)、thread-loader
 3. 压缩代码
@@ -149,7 +151,7 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
   4. 把AST抽象语法树变成浏览器可以识别的代码， 然后输出
 ---
 
-# webpack的构建流程
+# webpack的构建流程(生命周期)
   1. 初始化参数：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数；
   2. 开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行对象的 run 方法开始执行编译；
   3. 确定入口：根据配置中的 entry 找出所有的入口文件；
@@ -363,6 +365,18 @@ cover: https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665
   * babel-runtime 不会污染全局，产出第三方lib时要用babel-runtime
 ---
 
+# babel的缓存是怎么实现的
+---
+
+# webpack怎么配置mock转发代理，mock的服务，怎么拦截转换的
+---
+
+# 自己有没有写过ast, webpack通过什么把公共的部分抽出来的，属性配置是什么
+---
+
+# webpack如何做到页面不刷新也就就自动更新的
+---
+
 # Webpack 五个核心概念分别是什么？
 1. Entry
   * 入口（Entry）指示 Webpack 以哪个文件为入口起点开始打包，分析内部构件依赖图
@@ -503,7 +517,13 @@ Webpack 实际上为每个模块创造了一个可以导出和导入的环境，
   * 开启 hot 模式，即启用 HMR 插件。hot 模式会向服务器请求更新过后的模块，然后对模块的父模块进行回溯，对依赖路径进行判断，如果每条依赖路径都配置了模块更新后所需的业务处理回调函数则是 accepted 状态，否则就降级刷新页面。判断 accepted 状态后对旧的缓存模块和父子依赖模块进行替换和删除，然后执行 accept 方法的回调函数，执行新模块代码，引入新模块，执行业务处理代码。
 ---
 
-# 请说一下DllPlugin和DllReferencePlugin的工作原理
+# dev-server是怎么跑起来的？
+  1. 启动http服务
+  2. webpack构建输出bundle到内存，http服务从内存中读取bundle文件
+  3. 监听文件变化，重新执行第二步操作
+---
+
+# 请说一下DllPlugin和DllReferencePlugin的工作原理，为什么不直接使用压缩版本的js
 ---
 
 # Webpack 怎么提取公共模块
@@ -584,4 +604,11 @@ browserslist就是帮助我们来设置目标浏览器的工具。它实际上�
 ---
 
 # 我看到你的webpack配置用到webpack.optimize.UglifyJsPlugin这个插件，有没有觉得压缩速度很慢，有什么办法提升速度。
+---
+
+# webpack是怎么处理模块循环引用的情况的？
+---
+
+# 介绍下webpack的整个生命周期
+
 ---

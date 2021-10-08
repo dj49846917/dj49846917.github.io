@@ -15,6 +15,53 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 手写函数防抖和节流
+  * 防抖：
+    ```
+      //防抖debounce代码：
+      function debounce(fn,delay) {
+          var timeout = null; // 创建一个标记用来存放定时器的返回值
+          return function (e) {
+              // 每当用户输入的时候把前一个 setTimeout clear 掉
+              clearTimeout(timeout); 
+              // 然后又创建一个新的 setTimeout, 这样就能保证interval 间隔内如果时间持续触发，就不会执行 fn 函数
+              timeout = setTimeout(() => {
+                  fn.apply(this, arguments);
+              }, delay);
+          };
+      }
+      // 处理函数
+      function handle() {
+          console.log('防抖：', Math.random());
+      }
+              
+      //滚动事件
+      window.addEventListener('scroll', debounce(handle,500));
+    ```
+  * 节流：
+    ```
+      //节流throttle代码：
+      function throttle(fn,delay) {
+          let canRun = true; // 通过闭包保存一个标记
+          return function () {
+              // 在函数开头判断标记是否为true，不为true则return
+              if (!canRun) return;
+              // 立即设置为false
+              canRun = false;
+              // 将外部传入的函数的执行放在setTimeout中
+              setTimeout(() => { 
+              // 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。
+              // 当定时器没有执行的时候标记永远是false，在开头被return掉
+                  fn.apply(this, arguments);
+                  canRun = true;
+              }, delay);
+          };
+      }
+      
+      function sayHi(e) {
+          console.log('节流：', e.target.innerWidth, e.target.innerHeight);
+      }
+      window.addEventListener('resize', throttle(sayHi,500));
+    ```
 ---
 
 # 写一个 es6 的继承过程
@@ -45,6 +92,60 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 手写冒泡排序。快速排序
+  * 冒泡：
+    ```
+      var arr = [12,3,44,343,55,1,23];
+      for(var i=0;i<arr.length-1;i++){
+          for(var j=0;j<arr.length-i-1;j++){
+              if(arr[j]>arr[j+1]){
+                  var current = arr[j];
+                  arr[j] = arr[j+1];
+                  arr[j+1] = current;
+              }
+          }
+      }
+      console.log(arr);
+    ```
+  * 快排：
+    ```
+      /*
+      * 利用递归函数实现排序
+      * 每次获取数组中间元素cItem
+      * 把大于和小于cItem的元素分别放置在arrGt和arrLt两个数组中,
+      * 利用concat组合递归调用函数返回的值
+      * 直到数组的长度等于1时，直接返回元素调出递归
+      */
+      var arr = [10, 8, 20, 5, 6, 30, 11, 9]；
+      function fastSort(arr){
+          //6. 递归退出条件
+          if(arr.length<=1){
+            return arr;
+          }
+          //1. 找出数组中间位置元素
+          var cIdx = parseInt(arr.length/2);
+
+          //2.删除中间元素，避免与自己本身进行对比而造成死循环
+          var cItem = arr.splice(cIdx,1);//[6],arr=[10, 8, 20, 5, 30, 11, 9]
+
+          //3. 创建两个空数组用于保存大于或小于cItem的数字
+          var arrLt = [];//[5]
+          var arrGt = [];//[10,8,20,30,11,9]
+
+          // 4.遍历数组，分别与cItem进行对比
+          // 把小于cItem的数写入arrLt
+          // 把大于cItem的数写入arrGt
+          for(var i=0;i<arr.length;i++){
+              if(arr[i]<cItem[0]){
+                arrLt.push(arr[i])
+              }else{
+                arrGt.push(arr[i]);
+              }
+          }
+          // 5.组合排序后的数组
+          return fastSort([5]).concat(cItem,fastSort(arrGt));
+      }
+      console.log(fastSort(arr));
+    ```
 ---
 
 # 实现一个事件发布订阅类，其实就是 eventEmitter

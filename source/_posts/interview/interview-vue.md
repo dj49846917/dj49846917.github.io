@@ -14,13 +14,18 @@ categories:
 cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页）
 ---
 
-# 谈谈你对MVVM开发模式的理解
+# 谈谈你对MVVM、MVC开发模式的理解
   1. MVVM分为Model、View、ViewModel三者。
     * Model 代表数据模型，数据和业务逻辑都在Model层中定义；
     * View 代表UI视图，负责数据的展示；
     * ViewModel 负责监听 Model 中数据的改变并且控制视图的更新，处理用户交互操作；
 
   2. Model 和 View 并无直接关联，而是通过 ViewModel 来进行联系的，Model 和 ViewModel 之间有着双向数据绑定的联系。因此当 Model 中的数据改变时会触发 View 层的刷新，View 中由于用户交互操作而改变的数据也会在 Model 中同步。这种模式实现了 Model 和 View 的数据自动同步，因此开发者只需要专注对数据的维护操作即可，而不需要自己操作 dom。
+
+  3. 什么是MVC：
+    * M（modal）：是应用程序中处理数据逻辑的部分。
+    * V （view） ：是应用程序中数据显示的部分。
+    * C（controller）：是应用程序中处理用户交互的地方
 ---
 
 # 简述Vue的响应式原理
@@ -67,14 +72,18 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   2. history模式：history采用HTML5的新特性；且提供了两个新方法：pushState（），replaceState（）可以对浏览器历史记录栈进行修改，以及popState事件的监听到状态变更。
 ---
 
-# vue中的computed和watch有什么区别？
-  * 在computed里面定义了的属性，在data里面不能再重复定义，computed依赖于data中的属性，而watch依赖于data中属性的改变，watch中可以进行异步操作。
+# 谈谈Computed和Watch！vue中的computed和watch有什么区别？
+  * Computed本质是一个具备缓存的watcher，依赖的属性发生变化就会更新视图。适用于计算比较消耗性能的计算场景。当表达式过于复杂时，在模板中放入过多逻辑会让模板难以维护，可以将复杂的逻辑放入计算属性中处理。
+  * Watch没有缓存性，更多的是观察的作用，可以监听某些数据执行回调。当我们需要深度监听对象中的属性时，可以打开deep：true选项，这样便会对对象中的每一项进行监听。这样会带来性能问题，优化的话可以使用字符串形式监听，如果没有写到组件中，不要忘记使用unWatch手动注销哦。
+
+  * 区别：在computed里面定义了的属性，在data里面不能再重复定义，computed依赖于data中的属性，而watch依赖于data中属性的改变，watch中可以进行异步操作。
 ---
 
 # computed的原理, computed中的get作用是什么
 ---
 
 # computed实现原理
+  > 在对computed的属性进行 watcher 的时候，传入一个 lazy 为 true 的参数，在 watcher 内部将 lazy 值赋值给 dirty 属性，在获取 computed 属性的时候，如果 dirty 为 true，则重新执行被 defineComputed 改写过的 get 方法，获取最新值，如果 dirty 为 false，则获取上一次 watcher 实例的 value 值，这里就实现了缓存。对于 dirty 值更改为 true 的时机，则是在 props 和 data 等被 defineProperty 劫持改写的 set 方法内，每当数据发生变化，则通过 defineReactive$$1 方法最后执行 update 方法更新 dirty 值。
 ---
 
 # 如果要你实现computed的特性（缓存、响应），你会怎么做
@@ -123,9 +132,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * input标签v-model用lazy修饰之后，vue并不会立即监听input Value的改变，会在input失去焦点之后，才会触发input Value的改变
 ---
 
-# vue里面的修饰符
----
-
 # vue为什么要求组件模板只能有一个根元素？
   ```
     <1>.当我们实例化Vue的时候，填写一个el选项，来指定我们的SPA入口：
@@ -147,6 +153,34 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # 使用vue渲染大量数据时应该怎么优化？说下你的思路！
   1. 异步渲染组件：因为组件渲染太多，影响页面的渲染时间，所有可以延迟组件渲染，可以考虑v-if处理
   2. 可以使用虚拟滚动的组件：参考使用这个插件
+---
+
+# Vue性能优化方法
+  1. 编码阶段
+    * 尽量减少data中的数据，data中的数据都会增加getter和setter，会收集对应的watcher；
+    * 如果需要使用v-for给每项元素绑定事件时使用事件代理；
+    * SPA 页面采用keep-alive缓存组件；
+    * 在更多的情况下，使用v-if替代v-show；
+    * key保证唯一；
+    * 使用路由懒加载、异步组件；
+    * 防抖、节流；
+    * 第三方模块按需导入；
+    * 长列表滚动到可视区域动态加载；
+    * 图片懒加载；
+  2. 用户体验：
+    * 骨架屏；
+    * PWA；
+    * 还可以使用缓存(客户端缓存、服务端缓存)优化、服务端开启gzip压缩等。
+  3. SEO优化
+    * 预渲染；
+    * 服务端渲染SSR；
+  4. 打包优化
+    * 压缩代码；
+    * Tree Shaking/Scope Hoisting；
+    * 使用cdn加载第三方模块；
+    * 多线程打包happypack；
+    * splitChunks抽离公共文件；
+    * sourceMap优化；
 ---
 
 # 在vue中使用this应该注意哪些问题？
@@ -200,12 +234,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 由于Vue的diff算法是同层级比较的，所以如果是不同层级出现可复用的组件就不能被复用，所以此时性能会低
 ---
 
-# vue能监听到数组变化的方法有哪些？为什么？(Vue里面数组为什么直接修改不能触发数据更新，vue重写了哪些数组方法)
-    push(), pop(), shift(), unshift(), splice(), sort(), reverse()
----
-
-# 你知道nextTick的原理吗？
+# 你知道nextTick的原理吗？如何知道DOM渲染结束？
   * 提到DOM的更新是异步执行的，只要数据发生变化，将会开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。简单来说，就是当数据发生变化时，视图不会立即更新，而是等到同一事件循环中所有数据变化完成之后，再统一更新视图。
+
+  * 如何知道：通过异步队列的方式来控制dom更新和nextTick的回调先后执行，保证了dom更新后再执行回调
 ---
 
 # 在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick() 回调函数中。原因是什么呢
@@ -245,6 +277,20 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # vue获取数据在哪个周期函数
 ---
 
+# Vue中组件生命周期调用顺序说一下
+  * 组件的调用顺序都是先父后子,渲染完成的顺序是先子后父。
+  * 组件的销毁操作是先父后子，销毁完成的顺序是先子后父。
+
+  * 加载渲染过程
+    - 父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount- >子mounted->父mounted
+  * 子组件更新过程
+    - 父beforeUpdate->子beforeUpdate->子updated->父updated
+---
+
+# 生命周期钩子是如何实现的?
+  * 简单说就是vue的生命周期钩子就是回调函数而已，当创建组件实例的过程中会调用对应的钩子方法。内部主要是使用callHook方法来调用对应的方法。核心是一个发布订阅模式，将钩子订阅好(内部采用数组的方式存储)，在对应的阶段进行发布。
+---
+
 # 如何中断axios的请求？
     使用cancelToken
 ---
@@ -278,6 +324,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     性能优化，让vue在更新数据的时候可以更有针对性
 ---
 
+# v-if 与 v-for的优先级?
+  1. v-for优先于v-if被解析 
+  2. 如果同时出现，每次渲染都会先执行循环再判断条件，无论如何循环都不可避免，浪费了性能 
+  3. 要避免出现这种情况，则在外层嵌套template，在这一层进行v-if判断，然后在内部进行v-for循环 
+  4. 如果条件出现在循环内部，可通过计算属性提前过滤掉那些不需要显示的项
+---
+
 # 说说你对keep-alive的理解是什么？
   * 简单说：保留组件状态 避免重新渲染
 
@@ -296,7 +349,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 # keep-alive的原理是什么？
 * 它是一个动态组件，同时也是vue的内置组件，当组件在切换的过程中，keep-alive可以将状态保存在内存中，防止重复渲染dom。会增加两个生命周期：组件激活时：actived() 该钩子在服务器渲染期间不能被调用
   组件停用时：deactivated() 该钩子在服务器渲染期间不能被调用。
-
 ---
 
 # 怎么监听组件是否处于激活或失活
@@ -418,6 +470,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * module: 模块化以上四个
 ---
 
+# 如何在vuex中使用异步修改?
+  > 在调用vuex中的方法action的时候，用promise实现异步修改
+---
+
 # vuex 的状态规则 modules 作用
 ---
 
@@ -449,18 +505,48 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     - mutations里面的每个函数都会有一个state参数，这样就可以在mutations里面进行state的数据修改，当数据修改完毕后，会传导给页面。页面的数据也会发生改变。
 ---
 
+# actions与mutations的区别?
+  > commit是提交执行mutations中的方法，Mutations 是修改数据的，必须同步。
+  > dispatch是提交执行actions中的方法，action 提交的是Mutations,可以是异步操作。action不可以修改store中的数据，需要commit mutation中的方法进行数据修改
+---
+
+# 在Vuex中使用mutation要注意什么?
+  > mutation 必须是同步函数
+---
+
 # 说一下vuex的思想
   * Vuex 的思想是 当我们在页面上点击一个按钮，它会触发(dispatch)一个action, action 随后会执行(commit)一个mutation, mutation 立即会改变state,
   * state 改变以后,我们的页面会state 获取数据，页面发生了变化。 Store 对象，包含了我们谈到的所有内容，action, state, mutation
 ---
 
-# vuex是怎么实现的
+# vuex是怎么实现的（vuex的原理）
+  * vuex是利用vue的mixin混入机制，在beforeCreate钩子前混入vuexInit方法，vuexInit方法实现了store注入vue组件实例，并注册了vuex store的引用属性$store。
+  * Vuex的state状态是响应式，是借助vue的data是响应式，将state存入vue实例组件的data中；Vuex的getters则是借助vue的计算属性computed实现数据实时监听。
 ---
 
-# vuex的原理
+# 页面刷新后vuex的state数据丢失怎么解决
+  1. 使用Localstorage、sessionStorage
+  2. 使用一些插件：vuex-persistedstate
+---
+
+# vue能监听到数组变化的方法有哪些？为什么？(Vue里面数组为什么直接修改不能触发数据更新，vue重写了哪些数组方法)
+    push(), pop(), shift(), unshift(), splice(), sort(), reverse()
 ---
 
 # vue内部是怎么实现数组的响应式的。为什么不直接去更改数组原型上的方法？改了会有什么问题
+  * 数组则通过重写数组方法来实现的。扩展它的 7 个变更⽅法，通过监听这些方法可以做到依赖收集和派发更新；
+---
+
+# 请说一下响应式数据的理解？
+  1. 对象内部通过defineReactive方法，使用 Object.defineProperty() 监听数据属性的 get 来进行数据依赖收集，再通过 set 来完成数据更新的派发；
+  2. 数组则通过重写数组方法来实现的。扩展它的 7 个变更⽅法，通过监听这些方法可以做到依赖收集和派发更新；
+---
+
+# Vue.set 方法是如何实现的？（$set的原理）
+  * 为什么$set可以触发更新，我们给对象和数组本身都增加了dep属性，当给对象新增不存在的属性则触发对象依赖的watcher去更新，当修改数组索引时我们调用数组本身的splice方法去更新数组。
+  * 如果是数组，调用重写的splice方法。
+  * 如果不是响应式的也不需要将其定义成响应式属性。
+  * 如果是对象，将属性定义成响应式的
 ---
 
 # 路由守卫哪些参数，怎么实现？
@@ -500,11 +586,15 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * v-model本质就是一个语法糖，可以看成是value + input方法的语法糖。 可以通过model属性的prop和event属性来进行自定义。原生的v-model，会根据标签的不同生成不同的事件和属性。
 ---
 
+# 在v-model上怎么用Vuex中state的值？
+  > 需要通过computed计算属性来转换。
+---
+
 # Vue事件绑定原理说一下
     原生事件绑定是通过addEventListener绑定给真实元素的，组件事件绑定是通过Vue自定义的$on实现的。
 ---
 
-# Vue模版编译原理知道吗，能简单说一下吗？
+# Vue模版编译原理知道吗，能简单说一下吗？(介绍vue template到render的过程)
   * 简单说，Vue的编译过程就是将template转化为render函数的过程。模板编译又分三个阶段，解析parse，优化optimize，生成generate，最终生成可执行函数render。
     1. parse阶段：使用大量的正则表达式对template字符串进行解析，将标签、指令、属性等转化为抽象语法树AST。
     2. optimize阶段：遍历AST，找到其中的一些静态节点并进行标记，方便在页面重渲染的时候进行diff比较时，直接跳过这一些静态节点，优化runtime的性能。
@@ -517,14 +607,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 编译的最后一步是将优化后的AST树转换为可执行的代码。 
 ---
 
-# Vue中组件生命周期调用顺序说一下
-  * 组件的调用顺序都是先父后子,渲染完成的顺序是先子后父。
-  * 组件的销毁操作是先父后子，销毁完成的顺序是先子后父。
-
-  * 加载渲染过程
-    - 父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount- >子mounted->父mounted
-  * 子组件更新过程
-    - 父beforeUpdate->子beforeUpdate->子updated->父updated
+# vue3.0在编译方面有哪些优化？
+  * vue.js 3.x中标记和提升所有的静态节点，diff的时候只需要对比动态节点内容；
+  * Fragments（升级vetur插件): template中不需要唯一根节点，可以直接放文本或者同级标签
+  * 静态提升(hoistStatic),当使用 hoistStatic 时,所有静态的节点都被提升到 render 方法之外.只会在应用启动的时候被创建一次,之后使用只需要应用提取的静态节点，随着每次的渲染被不停的复用。
+  * patch flag, 在动态标签末尾加上相应的标记,只能带 patchFlag 的节点才被认为是动态的元素,会被追踪属性的修改,能快速的找到动态节点,而不用逐个逐层遍历，提高了虚拟dom diff的性能。
+  * 缓存事件处理函数cacheHandler,避免每次触发都要重新生成全新的function去更新之前的函数 tree shaking 通过摇树优化核心库体积,减少不必要的代码量
 ---
 
 # assets和static的区别
@@ -625,7 +713,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 
     3. set派发更新阶段：当我们 this[key] = value 改变属性的时候，首先通过trigger方法，通过proxy对象和key找到对应的deps，然后给deps分类分成computedRunners和effect,然后依次执行，如果需要调度的，直接放入调度。
 
-  * 一句话描述：其实就是在 Proxy 第二个参数 handler 也就是陷阱操作符[3]中，拦截各种取值、赋值操作，依托 track 和 trigger 两个函数进行依赖收集和派发更新。
+  * 一句话描述：其实就是在 Proxy 第二个参数 handler，拦截各种取值、赋值操作，依托 track 和 trigger 两个函数进行依赖收集和派发更新。
 
   * 优点：
     1. 可以监测到代理对象属性的动态添加和删除
@@ -633,6 +721,13 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 缺点：
     1. ES6的proxy语法对于低版本浏览器不支持，ie11
     2. vue3针对ie11出了一个特殊的版本做兼容
+---
+
+# Vue3.x响应式数据原理?
+  > Vue3.x改用Proxy替代Object.defineProperty。
+  > 因为Proxy可以直接监听对象和数组的变化，并且有多达13种拦截方法。并且作为新标准将受到浏览器厂商重点持续的性能优化。
+  > Proxy只会代理对象的第一层，那么Vue3又是怎样处理这个问题的呢？ 判断当前Reflect.get的返回值是否为Object，如果是则再通过reactive方法做代理， 这样就实现了深度观测。
+  > 监测数组的时候可能触发多次get/set，那么如何防止触发多次呢？ 我们可以判断key是否为当前被代理对象target自身属性，也可以判断旧值与新值是否相等，只有满足以上两个条件之一时，才有可能执行trigger。
 ---
 
 # 都说Composition API与React Hook很像，说说区别
@@ -678,9 +773,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   3. 响应式是惰性的
     - 在 Vue.js 2.x 中，对于一个深层属性嵌套的对象，要劫持它内部深层次的变化，就需要递归遍历这个对象，执行 Object.defineProperty 把每一层对象数据都变成响应式的，这无疑会有很大的性能消耗。
     - 在 Vue.js 3.0 中，使用 Proxy API 并不能监听到对象内部深层次的属性变化，因此它的处理方式是在 getter 中去递归响应式，这样的好处是真正访问到的内部属性才会变成响应式，简单的可以说是按需实现响应式，减少性能消耗。
----
-
-# vue的v-model的原理
 ---
 
 # Composition Api 与 Vue 2.x使用的Options Api 有什么区别？
@@ -734,7 +826,23 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 
 # 用了mixins,这是什么，优缺点？
 * 混合 (mixins) 是一种分发 Vue 组件中可复用功能的非常灵活的方式。混合对象可以包含任意组件选项。当组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。
-* 优缺点：Mixin的优点是不需要传递状态，但缺点也显而易见可能会被滥用。
+* 优缺点：Mixin的优点是不需要传递状态，组件复用。但缺点不可知，不易维护。因为你可以在mixins里几乎可以加任何代码，props、data、methods、各种东西，就导致如果不了解mixins封装的代码的话，是很难维护的
+---
+
+# mixins和vuex的区别?
+  * vuex公共状态管理，在一个组件被引入后，如果该组件改变了vuex里面的数据状态，其他引入vuex数据的组件也会对应修改，所有的vue组件应用的都是同一份vuex数据。（在js中，有点类似于浅拷贝）
+  * vue引入mixins数据，mixins数据或方法，在每一个组件中都是独立的，互不干扰的，都属于vue组件自身。（在js中，有点类似于深度拷贝）
+---
+
+# 简述mixin、extends的覆盖逻辑
+  * mixin和extends均是用于合并、拓展组件的，两者均通过mergeOptions方法进行合并
+  * mixins接收一个混入对象的数组，其中混入对象可以像正常的实例对象一样包含实例选项，这些选项会被合并到最终的选项中，Mixin钩子按照传入顺序依次调用，并在调用组件自身的钩子之前被调用
+  * extends主要是便于拓展单文件组件，接收一个对象或者构造函数
+  * mergeOptions的执行过程
+    1. 规范化选项
+    2. 对未合并的选项，进行判断
+    3. 合并处理。根据一个通用vue实例所包含的选项进行分类逐一判断合并，如：props、data、methods、watch、computed、生命周期等，将合并结果储存在新定义的options对象里。
+    4. 返回合并结果options
 ---
 
 # this.$ref原理
@@ -771,4 +879,76 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 			}
 		},
 	}
+---
+
+# vue中怎么重置data
+  > 使用object.assign()，vm.$ data可以获取当前状态下的data，vm.$option.data(this)，可以获取到组件初始化状态下data
+object.assgin(this. $data,this. $option.data(this))
+---
+
+# Vue SSR渲染原理？
+  * 优点：
+    - 更利于SEO
+      - 不同爬虫工作原理类似，只会爬取源码，不会执行网站的任何脚本（Google除外，据说Googlebot可以运行javaScript）。使用了Vue或者其它MVVM框架之后，页面大多数DOM元素都是在客户端根据js动态生成，可供爬虫抓取分析的内容大大减少。另外，浏览器爬虫不会等待我们的数据完成之后再去抓取我们的页面数据。服务端渲染返回给客户端的是已经获取了异步数据并执行JavaScript脚本的最终HTML，网络爬中就可以抓取到完整页面的信息。
+    - 更利于首屏渲染
+      - 首屏的渲染是node发送过来的html字符串，并不依赖于js文件了，这就会使用户更快的看到页面的内容。尤其是针对大型单页应用，打包后文件体积比较大，普通客户端渲染加载所有所需文件时间较长，首页就会有一个很长的白屏等待时间。
+  * 场景：交互少，数据多，例如新闻，博客，论坛类等
+  * 原理：
+    - 相当于服务端前面加了一层url分配，可以假想为服务端的中间层，
+    - 当地址栏url改变或者直接刷新，其实直接从服务器返回内容，是一个包含内容部分的html模板，是服务端渲染
+    - 而在交互过程中则是ajax处理操作，局部刷新，首先是在history模式下，通过history. pushState方式进而url改变，然后请求后台数据服务，拿到真正的数据，做到局部刷新，这时候接收的是数据而不是模板
+  * 缺点：
+    - 服务端压力较大
+      - 本来是通过客户端完成渲染，现在统一到服务端node服务去做。尤其是高并发访问的情况，会大量占用服务端CPU资源；
+    - 开发条件受限
+      - 在服务端渲染中，created和beforeCreate之外的生命周期钩子不可用，因此项目引用的第三方的库也不可用其它生命周期钩子，这对引用库的选择产生了很大的限制；
+    - 安全问题
+      - 因为做了node服务，因此安全方面也需要考虑DDOS攻击和sql注入
+    - 学习成本相对较高
+      - 除了对webpack、Vue要熟悉，还需要掌握node、Express相关技术。相对于客户端渲染，项目构建、部署过程更加复杂。
+---
+
+# new Vue() 发生了什么？
+  1. new Vue()是创建Vue实例，它内部执行了根实例的初始化过程。
+  2. 具体包括以下操作：
+    * 选项合并
+    * $children，$refs，$slots，$createElement等实例属性的方法初始化
+    * 自定义事件处理
+    * 数据响应式处理
+    * 生命周期钩子调用 （beforecreate created）
+    * 可能的挂载
+  3. 总结：new Vue()创建了根实例并准备好数据和方法，未来执行挂载时，此过程还会递归的应用于它的子组件上，最终形成一个有紧密关系的组件实例树。
+---
+
+# Vue.use是干什么的？原理是什么？
+  * vue.use 是用来使用插件的，我们可以在插件中扩展全局组件、指令、原型方法等。
+
+  * 原理：
+    1. 检查插件是否注册，若已注册，则直接跳出；
+    2. 处理入参，将第一个参数之后的参数归集，并在首部塞入 this 上下文；
+    3. 执行注册方法，调用定义好的 install 方法，传入处理的参数，若没有 install 方法并且插件本身为 function 则直接进行注册；
+---
+
+# 如何理解自定义指令？
+  1. 在生成 ast 语法树时，遇到指令会给当前元素添加directives属性
+  2. 通过 genDirectives 生成指令代码
+  3. 在patch前将指令的钩子提取到 cbs中，在patch过程中调用对应的钩子。
+  4. 当执行指令对应钩子函数时，调用对应指令定义的方法
+---
+
+# 怎么给vue定义全局方法
+  1. 将方法挂载到vue.prototype上。缺点：调用这个方法的时候没有提示
+  2. 你用全局混入mixin。优点：因为mixin里面的methods会和创建的每个单个文件组件合并。这样调用的时候就有提示
+  3. 使用plugin方式：vue.use的实现没有挂载的功能，只是触发插件的install方法，本事还是用的vue.prototype
+  4. 任意vue文件中写全局函数
+---
+
+# vue中父组件可以监听到子组件的生命周期吗？
+  * 可以。使用以下几种方式
+    1. 使用on和emit
+    2. 使用hook钩子函数
+---
+
+# vue-cli默认是单页面的，如果要开发多页面怎么办
+  * 可以在vue-cli中配置vue.config.js的pages选项，它是一个对象，对象的key是入口的名字，value是具体的路径
 ---
