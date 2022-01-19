@@ -71,7 +71,40 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 手写深浅拷贝
+  * 深拷贝 ![深拷贝](/images/math/深拷贝.png)
 ---
+
+# js里浅拷贝常见的实现方式
+  * Object.assign
+    ```
+      let obj1 = {person: {name: "刘德华", age: 50 }, hobby: "唱歌"}
+      let obj2 = Object.assion({}, obj1)
+      obj2.person.name="杜兰特"
+      obj2.hobby="打篮球"
+      console.log(obj1) // {person: {name: "杜兰特", age: 50 }, hobby: "打篮球"}
+    ```
+  * 展开运算符
+    ```
+      let obj1 = {person: {name: "刘德华", age: 50 }, hobby: "唱歌"}
+      let obj2 = {...obj1}
+      obj2.person.name="杜兰特"
+      obj2.hobby="打篮球"
+      console.log(obj1) // {person: {name: "杜兰特", age: 50 }, hobby: "打篮球"}
+    ```
+  * Array.protptype.concat()
+    ```
+      let arr = [1, 3, {person: "刘德华"}]
+      let arr2 = arr.concat()
+      arr[2].person = "周杰伦"
+      console.log(arr) // [1, 3, {person: "周杰伦"}]
+    ```
+  * Array.prototype.slice()
+    ```
+      let arr = [1, 3, {person: "刘德华"}]
+      let arr2 = arr.concat()
+      arr[2].person = "周杰伦"
+      console.log(arr) // [1, 3, {person: "周杰伦"}]
+    ```
 
 # 数组去重；(所有方法)
 ---
@@ -81,6 +114,8 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # 编程题：实现promiseAll
 ---
+
+# 手写Promise.any
 
 # 手写实现 jsonp
 ---
@@ -315,4 +350,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
       }
   }
 ```
+---
+
+# 后台返回一个扁平的数据结构，请把其转换为树结构？
+  * ![扁平化](/images/math/扁平化.png)
+  * ![扁平化](/images/math/扁平化2.png)
+  * ![扁平化](/images/math/扁平化3.png)
 ---
