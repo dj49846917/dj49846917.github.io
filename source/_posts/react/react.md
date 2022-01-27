@@ -493,4 +493,165 @@ cover: /images/react/logo.jpg                 # 文章的缩略图（用在首�
           }
           export default Cat;
         ```
-  
+
+# react-hooks api学习
+## useState
+  ```
+    import { useState } from "react";
+    function Test() {
+      let [count, setCount] = useState<number>(0)
+      return (
+        <div>
+          <div>数量：{count}</div>
+          <button onClick={() => setCount(count += 1)}>点击</button>
+        </div>
+      )
+    }
+    export default Test;
+  ```
+
+## useEffect
+  ```
+    import { useEffect, useState } from "react";
+    type listItemState = {
+      name: string,
+      age: string
+    }
+    type Istate = {
+      list: listItemState[]
+    }
+    function UseEffect() {
+      let [info, setInfo] = useState<Istate>({
+        list: []
+      })
+
+      useEffect(() => {
+        const data: listItemState[] = [{ name: '张三', age: '18' }]
+        setInfo({
+          list: data
+        })
+      }, [])
+      return (
+        <div>
+          数据：{JSON.stringify(info.list)}
+        </div>
+      )
+    }
+
+    export default UseEffect;
+  ```
+
+## useLayoutEffect
+> 与useEffect的区别在于，useEffect会阻塞渲染，是同步的，相当于componentDidMount
+
+  ```
+    import { useLayoutEffect, useState } from "react";
+    type IState = {
+      user: string,
+      age: string
+    }
+    type listState = {
+      list: IState[]
+    }
+    function UseLayoutEffect() {
+      let [info, setInfo] = useState<listState>({
+        list: []
+      })
+      let data: IState[] = [{ user: 'lisi', age: '18' }]
+      useLayoutEffect(() => {
+        setInfo({
+          list: data
+        })
+      }, [])
+      return <div>{JSON.stringify(info)}</div>;
+    }
+    export default UseLayoutEffect;
+  ```
+
+## useCallback+useMemo
+  * 父组件
+    ```
+      import { Input } from "antd";
+      import { ChangeEvent, useCallback, useState, useMemo } from "react";
+      import Child from "./Child/Child";
+      import Child2 from "./Child/Child2";
+
+      function UseCallback() {
+        let [username, setUsername] = useState<string>('')
+        let [password, setPassword] = useState<string>('')
+        let [age, setAge] = useState<string>('')
+        let newUser = useMemo(() => ({ username }), [username]);
+        let newPassword = useMemo(() => ({ password }), [password]);
+        const getUser = useCallback((v: ChangeEvent<HTMLInputElement>) => {
+          setUsername((username) => username = v.target.value)
+        }, []);
+
+        const getPassword = useCallback((v: ChangeEvent<HTMLInputElement>) => {
+          setPassword((password) => password = v.target.value)
+        }, []);
+
+        return (
+          <div>
+            测试useCallBack
+            <Input 
+              placeholder="输入框" 
+              defaultValue={age} 
+              onChange={(v)=>{
+                setAge((age)=>age = v.target.value)
+              }} 
+            />
+            <br />
+            <Child
+              username={newUser.username}
+              changeValue={getUser}
+            />
+            <hr />
+            <Child2 password={newPassword.password} changeValue={getPassword} />
+          </div>
+        )
+      }
+
+      export default UseCallback;
+    ```
+  * 子组件child1
+    ```
+      import { Input } from "antd";
+      import { memo } from "react";
+
+      type Iprops = {
+        username: string,
+        changeValue: Function
+      }
+
+      function Child(props: Iprops) {
+        console.log("child")
+        return (
+          <div>
+            用户名：<Input placeholder="请输入用户名" defaultValue={props.username} onChange={(v)=>props.changeValue(v)} />
+          </div>
+        )
+      }
+
+      export default memo(Child);
+    ```
+  * 子组件2
+    ```
+      import { Input } from "antd";
+      import { memo } from "react";
+
+      type Iprops = {
+        password: string,
+        changeValue: Function
+      }
+
+      function Child2(props: Iprops) {
+        console.log("child2")
+        return (
+          <div>
+            密码：<Input placeholder="请输入密码" defaultValue={props.password}  onChange={(v)=>props.changeValue(v)} />
+          </div>
+        )
+      }
+
+      export default memo(Child2);
+    ```
