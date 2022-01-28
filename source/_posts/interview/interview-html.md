@@ -131,6 +131,12 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 通过设置HttpOnly属性
 ---
 
+# cookie的secure这个属性是干啥的
+---
+
+# cookie的httpOnly是干啥的
+---
+
 # 如何防止cookie被盗用？
   1. 禁止第三方网站带cookie(same-site属性)
   2. 每次请求需要输入图形验证码

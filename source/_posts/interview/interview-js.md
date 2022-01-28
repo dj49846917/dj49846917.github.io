@@ -56,6 +56,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     4. symbol作为键名时，不被常规方法遍历出来，因此可以给对象定义非私有，但只用于内部使用的方法和属性
 ---
 
+# Symbol 和 Bigint 简单介绍
+---
+
 # Symbol主要用于什么场景下
   1. 利用这一特点来更好的设计我们的数据对象，让“对内操作”和“对外选择性输出”变得更加优雅。
   2. 使用Symbol来替代常量
@@ -100,7 +103,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 其他对象：Function、Arguments、Math、Date、RegExp、Error
 ---
 
-# 如何判断Array类型
+# 如何判断Array类型（怎么区别array和object）
 1. 使用instanceof方法。
    var arr=[];
    console.log(arr instanceof Array) //true
@@ -412,6 +415,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * 作用域同上
 ---
 
+# 怎么理解JS 静态作用域
+---
+
 # 谈谈This对象的理解。
   * this总是指向函数的直接调用者（而非间接调用者）；
   * 如果有new关键字，this指向new出来的那个对象；
@@ -452,6 +458,13 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
             null == undefined // true
             null === undefined // false
   ```
+---
+
+# typeof(null) 为什么返回的是 'object'
+---
+
+# typeof(NaN) 返回什么
+  number
 ---
 
 # 事件是？IE与火狐的事件机制有什么区别？ 如何阻止冒泡？Javascript的事件流（浏览器事件机制）
@@ -1143,6 +1156,15 @@ abort（）
   > 箭头函数根本就没有绑定自己的this，在箭头函数中调用 this 时，仅仅是简单的沿着作用域链向上寻找，找到最近的一个 this 拿来使用
 ---
 
+# 什么是类数组？
+---
+
+# arguments 类数组，如何遍历类数组
+---
+
+# 箭头函数有super吗？
+---
+
 # 简单说明一下你对ES6中箭头函数的理解
   * 概念：是普通函数的简化版
   * 特点：
@@ -1652,4 +1674,10 @@ abort（）
 ---
 
 # 讲讲 window.history 的原理, 为什么 popState 能够实现前端路由
+---
+
+# 数组中的方法如何实现 break
+---
+
+# 比较常用的数组方法 map() reduce() find() findIndex() push() .... 哪些可以改变原数组，那些不可以改变
 ---
