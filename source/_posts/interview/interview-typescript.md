@@ -21,6 +21,18 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3746182100,8984
   * interface能够声明合并，type不能
 ---
 
+# typescript中对抽象类和interface的理解
+---
+
+# ts如何对早期库比如jquery如何补充类型
+---
+
+# ts中的可选和必选
+---
+
+# 动态runtime注入的类型怎样做才能静态不报错
+---
+
 # 说说Typescript的优缺点？
   * 优点. 
     1. 快速简单，易于学习。
@@ -224,4 +236,10 @@ extends
 ---
 
 # 静态方法能不能使用 this ？为什么
+---
+
+# any 和 unknown的区别
+---
+
+# ts的类和js的类的区别
 ---

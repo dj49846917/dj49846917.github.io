@@ -354,6 +354,9 @@ transition需要触发一个事件才能改变属性，而animation不需要触�
   * flex-basis：指定了flex元素在主轴方向上的初始大小。如果不使用 box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。
 ---
 
+# 为什么flex: 1就可以实现自适应，1是哪个属性的值
+---
+
 # 说一下flex怎么做出0.5px的线
   * css使用transform的scale(0.5)
   * flex使用flex-shrink(0.5)
@@ -532,5 +535,4 @@ transition需要触发一个事件才能改变属性，而animation不需要触�
 ---
 
 # 脱离文档流指的是什么？
-
 ---

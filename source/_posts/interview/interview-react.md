@@ -29,8 +29,6 @@ cover: https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510
   * redux 是一个应用数据流框架，主要是解决了组件间状态共享的问题，原理是集中式管理，
   * 主要有三个核心方法，action，store，reducer。
   * 工作流程是 view 调用 store 的 dispatch 接收 action 传入 store，reducer 进行 state 操作，view 通过 store 提供的 getState 获取最新的数据，flux 也是用来进行数据操作的，有四个组成部分 action，dispatch，view，store，工作流程是 view 发出一个 action，派发器接收 action，让 store 进行数据更新，更新完成以后 store 发出 change，view 接受 change 更新视图。
-  * Redux 和 Flux 很像。主要区别在于 Flux 有多个可以改变应用状态的 store，在 Flux 中 dispatcher 被用来传递数据到注册的回调事件，但是在 redux 中只能定义一个可更新状态的 store，redux 把 store 和 Dispatcher 合并,结构更加简单清晰
-  * 新增 state,对状态的管理更加明确，通过 redux，流程更加规范了，减少手动编码量，提高了编码效率，同时缺点时当数据更新时有时候组件不需要，但是也要重新绘制，有些影响效率。一般情况下，我们在构建多交互，多数据流的复杂项目应用时才会使用它们
 ---
 
 # redux的设计思想
@@ -80,6 +78,10 @@ cover: https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510
     5. actions将action通过调用store.dispatch方法发送到了reducer中
     6. reducer接收到action并根据标识信息判断之后返回了新的state
     7. store的state被reducer更改为新state的时候，store.subscribe方法里的回调函数会执行，此时就可以通知view去重新获取state
+---
+
+# React是如何将redux包装到组件上的？
+> React的react-redux库，通过给根组件包装一层<Provider>，并将store绑定上去，需要进行状态管理的组件通过connect包装生成容器组件，并将状态和事件映射到props上。
 ---
 
 # Redux遵循的三个原则是什么？
@@ -470,6 +472,18 @@ connect负责连接React和Redux
 # 浅比较是怎么个比较法？
 ---
 
+# useEffect不加数组和加数组的区别
+---
+
+# useEffect里面如何进行依赖项比较
+---
+
+# useEffect和useLayoutEffect区别？
+  * useEffect是异步，useLayoutEffect是同步的
+  * useEffect是render结束后，callback函数执行，但是不会阻断浏览器的渲染，算是某种异步的方式吧。但是class的componentDidMount 和componentDidUpdate是同步的,在render结束后就运行,useEffect在大部分场景下都比class的方式性能更好.
+  * useLayoutEffect里面的callback函数会在DOM更新完成后立即执行,但是会在浏览器进行任何绘制之前运行完成,阻塞了浏览器的绘制.
+---
+
 # useEffect怎么知道关联的变量变化了
 ---
 
@@ -482,6 +496,18 @@ connect负责连接React和Redux
 ---
 
 # 如果在 useEffect 的依赖项加入引用类型，会导致 useEffect 执行死循环，如何解决呢？
+---
+
+# useeffect第二个参数不加会怎样
+---
+
+# useEffect和闭包有什么关系，会产生什么问题
+---
+
+# useEffect的触发时机（无参数、`[]`,`[a,b]`），在render前还是render后
+---
+
+# 为什么函数组件要用hook
 ---
 
 # useReducer与redux的区别
@@ -560,12 +586,6 @@ connect负责连接React和Redux
 # hook中useReducer,useRef的介绍
 ---
 
-# useEffect不加数组和加数组的区别
----
-
-# useEffect里面如何进行依赖项比较
----
-
 # 描述下hooks下怎么模拟生命周期函数，模拟的生命周期和class中的生命周期有什么区别吗？
   ```
     // componentDidMount，必须加[],不然会默认每次渲染都执行
@@ -612,12 +632,6 @@ connect负责连接React和Redux
   * 如果 useState 返回的是数组，那么使用者可以对数组中的元素命名，代码看起来也比较干净
   * 如果 useState 返回的是对象，在解构对象的时候必须要和 useState 内部实现返回的对象同名，想要使用多次的话，必须得设置别名才能使用返回值
   * useState 返回的是 array 而不是 object 的原因就是为了降低使用的复杂度，返回数组的话可以直接根据顺序解构，而返回对象的话要想使用多次就需要定义别名了。
----
-
-# useEffect和useLayoutEffect区别？
-  * useEffect是异步，useLayoutEffect是同步的
-  * useEffect是render结束后，callback函数执行，但是不会阻断浏览器的渲染，算是某种异步的方式吧。但是class的componentDidMount 和componentDidUpdate是同步的,在render结束后就运行,useEffect在大部分场景下都比class的方式性能更好.
-  * useLayoutEffect里面的callback函数会在DOM更新完成后立即执行,但是会在浏览器进行任何绘制之前运行完成,阻塞了浏览器的绘制.
 ---
 
 # React Hook 的使用限制有哪些？
@@ -715,6 +729,9 @@ connect负责连接React和Redux
   6. NavLink 路由跳转，有动态属性，使用场景，tabBar
   7. Switch 路由渲染，被其包裹的组件只会被渲染一个，包裹时最好将子组件 放在这个标签之外，父组件放在内部
   8. Redirect 路由重定向
+---
+
+# hashrouter通过什么来感知hash的变化
 ---
 
 # 谈谈你对react中withRouter的理解
@@ -1431,3 +1448,8 @@ Fiber节点拥有return, child, sibling三个属性，分别对应父节点， �
 # 用过哪些自定义 hooks，第三方 hooks ？
 ---
 
+# 写react hooks时需要注意的问题，为什么不能在条件判断循环里写，array是全局的吗，useEffect有什么问题
+---
+
+# React Context 和 redux mobx的区别
+---
