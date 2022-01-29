@@ -105,6 +105,27 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 通过设置expires属性。如果Cookie没有设置expires属性，那么 cookie 的生命周期只是在当前的会话中，关闭浏览器意味着这次会话的结束，此时 cookie 随之失效。
 ---
 
+# JS如何设置cookie？
+---
+
+# cookie的作用域
+---
+
+# 如何跨域访问cookie
+---
+
+# 说一下session
+---
+
+# 为什么要有session id
+---
+
+# session id解决什么问题？
+---
+
+# 没有cookie会出现什么问题？
+---
+
 # 部署在多台服务器上，cookie会有问题，知道吗？cookie的安全问题了解吗？
   * 安全问题：
     1. cookie欺骗

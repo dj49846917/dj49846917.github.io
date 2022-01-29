@@ -464,7 +464,14 @@ connect负责连接React和Redux
   ```
 ---
 
-# 
+# useEffect中的依赖是浅比较还是深比较
+---
+
+# 浅比较是怎么个比较法？
+---
+
+# useEffect怎么知道关联的变量变化了
+---
 
 # 函数可不可以当 useEffect 的依赖?
 可以当, 但是得在函数外包一层 useCallback, 这样函数就被缓存, 只有内部依赖改变时才会变化函数
@@ -472,6 +479,9 @@ connect负责连接React和Redux
 
 # 为什么使用 useEffect 的时候会出现死循环？
 如果是无限循环请求, 则代表你依赖的数据一直在变化, 比如说请求数据时一直设置引用类变量或者利用函数作为依赖
+---
+
+# 如果在 useEffect 的依赖项加入引用类型，会导致 useEffect 执行死循环，如何解决呢？
 ---
 
 # useReducer与redux的区别
@@ -1157,6 +1167,9 @@ Context 通过组件树提供了一个传递数据的方法，从而避免了在
 
 # 谈谈你对context的理解
   > 当你不想在组件树中通过逐层传递props或者state的方式来传递数据时，可以使用Context来实现跨层级的组件数据传递。Context对象就好比一个直通给子组件访问的作用域，而Context对象的属性可以看成作用域上的活动对象。由于组件的Context由其父节点链上所有组件通过getChildContext()返回的Context对象组合而成，所以，组件通过Context是可以访问到其父组件链上所有节点组件提供的Context的属性
+---
+
+# react中context作用和使用场景，在之前版本的react中类组件怎么获得context呢
 ---
 
 # children 属性是什么?

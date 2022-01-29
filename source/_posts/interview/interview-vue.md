@@ -241,6 +241,18 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 如何知道：通过异步队列的方式来控制dom更新和nextTick的回调先后执行，保证了dom更新后再执行回调
 ---
 
+# nextTick里面调用updated会是什么情况？
+---
+
+# nextTick可以做什么不可以做什么？
+---
+
+# 如果我循环更新dom节点并且执行它，会有什么结果？
+---
+
+# 循环调用的话nextTick里面有容错机制吗？
+---
+
 # 在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick() 回调函数中。原因是什么呢
   * 在 created() 钩子函数执行的时候DOM其实并未进行任何渲染，而此时进行 DOM 操作无异于徒劳，
   * 所以在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的DOM结构的时候，这个操作都应该放进Vue.nextTick() 的回调函数中
@@ -342,6 +354,12 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 
 # 如果两个组件被keep-alive 缓存，切换时候还会执行 create 吗
   > 不会
+---
+
+# keep-alive适合使用场景
+---
+
+# keep-alive缓存在哪
 ---
 
 # keep-alive缓存的是什么？
@@ -804,6 +822,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     2. vue3针对ie11出了一个特殊的版本做兼容
 ---
 
+# Vue2,3双向绑定的区别
+---
+
 # Vue3.x响应式数据原理?
   > Vue3.x改用Proxy替代Object.defineProperty。
   > 因为Proxy可以直接监听对象和数组的变化，并且有多达13种拦截方法。并且作为新标准将受到浏览器厂商重点持续的性能优化。
@@ -1138,14 +1159,22 @@ object.assgin(this. $data,this. $option.data(this))
 # Vue响应式原理Observer、Dep、Watcher理解
 ---
 
+# watcher 种类，各个种类的收集时期是在哪里？
+---
+
 # $mount 和 el的区别
   > 两者在使用效果上没有任何区别，都是为了将实例化后的vue挂载到指定的dom元素中。如果在实例化vue的时候指定el，则该vue将会渲染在此el对应的dom中，反之，若没有指定el，则vue实例会处于一种“未挂载”的状态，此时可以通过$mount来手动执行挂载。
 ---
 
 # setup()是如何生效的？如何和之前的版本兼容？
+---
 
+# setup里面this是谁，为啥这样呢？
 ---
 
 # vue3初始化过程有哪些变化？
   > 首先执行createApp函数，这个方法会返回一个app实例，会执行mount函数，mount函数内部会执行render函数，render函数内部又执行patch,执行完patch之后，会处理根组件processComponent函数，它的内部会执行mountComponent
+---
+
+# Vue是基于哪种设计模式？
 ---
