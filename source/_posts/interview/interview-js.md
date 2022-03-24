@@ -33,29 +33,17 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
   * commentJs具有缓存。在第一次被加载时，会完整运行整个文件并输出一个对象，拷贝（浅拷贝）在内存中。下次加载文件时，直接从内存中取值
 ---
 
-# 介绍js的基本数据类型。
-  * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
----
-
 # JS传值、传引用的区别？
   * 值传递，内存中的地址复制了一份，修改数据指的是修改复制出来的内存地址，对原先的值不会有影响。引用传递，将其指向同一个内存地址，修改数据会对原先的值有影响。
 ---
 
 # 介绍下 symbol, symbol作用
   * 介绍
-    1. Symbol是ES6 的新增属性，保证每一个属性名都是独一无二的，从根本上防止属性名的冲突。
-    2. Symbol值通过Symbol函数，对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的 Symbol 类型。而Symbol类型的属性名都是独一无二的，保证不会与其他属性名发生冲突。
-    3. Symbol函数前不能用new命令，这是因为生成的 Symbol 是一个原始类型的值，不是对象。
-    4. Symbol函数接受参数：注意：
-      - Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
-      - Symbol值不能与其他类型的值进行运算
-      - Symbol值可以显式转为字符串
-      - Symbol值可以转为布尔型，但不能转为数值。
-    5. 作为属性名的Symbol值
-      - Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。注意：
-      - Symbol作为对象属性名时，不能用点运算符。(点运算符后面总是字符串)
-      - 在对象的内部，使用 Symbol 值定义属性时，Symbol 值必须放在方括号之中。方括号中的属性名代表了Symbol值。
-      - Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。
+    1. Symbol 是一种基本数据类型，通过Symbol函数生成，唯一。
+    2. 对象的属性名有两种类型，一种是字符串，另一种就是Symbol。
+    3. Symbol函数不能用new，因为生成的 Symbol 是一个原始类型的值，不是对象。
+    4. Symbol值不能与其他类型的值进行运算，会报错，但是可以显示的转换为字符串以及转换为布尔值
+    5. Symbol 作为属性名，该属性不会出现在for…in、for…of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol属性名。
   
   * 作用：
     1. 防止变量名起冲突
@@ -65,7 +53,20 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
     4. symbol作为键名时，不被常规方法遍历出来，因此可以给对象定义非私有，但只用于内部使用的方法和属性
 ---
 
-# Symbol 和 Bigint 简单介绍
+# Bigint简单介绍（理解）
+  1. 是一种基本数据类型，用于当整数值大于Number数据类型支持的范围时。
+  2. 使用场景包括时间戳、大整数id等
+  3. 通过在数字末尾追加n或者使用BigInt函数生成
+  4. 注意点：
+    - 不能和number类型做运算，因为 JavaScript 在处理不同类型的运算时，会把他们先转换为同一类型，而 BigInt 类型变量在被隐式转换为 Number 类型时，可能会丢失精度，或者直接报错。
+    - 不能使用Math对象的api，比如说Math.floor等
+    - 相同的2n、2、"2"，两个等号是true，三个等是false
+  5. 使用JSON.stringify会报错，因为默认情况下 BigInt 值不会在 JSON 中序列化。但是可以通过实现toString方法来满足
+    ```
+      BigInt.prototype.toJSON = function() { return this.toString(); }
+      JSON.stringify(BigInt(1));
+    ```
+  6. 使用 BigInt 运算时，带小数的结果会被取整。如 5n / 2n = 2 ，而不是 2.5
 ---
 
 # Symbol主要用于什么场景下
@@ -75,6 +76,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 用过Symbol吗？ Symbol () == Symbol () 的结果是啥，你觉得Symbol可以用在哪些场景
+---
+
+# 介绍js的基本数据类型。
+  * 答: Undefined、Null、Boolean、Number、String、Symbol(创建后独一无二且不可变的数据类型 )
 ---
 
 # JavaScript有几种类型的值？有什么区别？(堆和栈的概念)
