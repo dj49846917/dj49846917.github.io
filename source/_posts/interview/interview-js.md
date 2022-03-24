@@ -43,10 +43,19 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 
 # 介绍下 symbol, symbol作用
   * 介绍
-    1. Symbol是ES6 的新增属性，代表用给定名称作为唯一标识，这种类型的值可以这样创建
-    2. Symbl确保唯一，即使采用相同的名称，也会产生不同的值，我们创建一个字段，仅为知道对应symbol的人能访问，使用symbol很有用，symbol并不是100%隐藏，有内置方法Object.getOwnPropertySymbols(obj)可以获得所有的symbol。
-    3. 也有一个方法Reflect.ownKeys(obj)返回对象所有的键，包括symbol。
-    4. 所以并不是真正隐藏。但大多数库内置方法和语法结构遵循通用约定他们是隐藏的
+    1. Symbol是ES6 的新增属性，保证每一个属性名都是独一无二的，从根本上防止属性名的冲突。
+    2. Symbol值通过Symbol函数，对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的 Symbol 类型。而Symbol类型的属性名都是独一无二的，保证不会与其他属性名发生冲突。
+    3. Symbol函数前不能用new命令，这是因为生成的 Symbol 是一个原始类型的值，不是对象。
+    4. Symbol函数接受参数：注意：
+      - Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
+      - Symbol值不能与其他类型的值进行运算
+      - Symbol值可以显式转为字符串
+      - Symbol值可以转为布尔型，但不能转为数值。
+    5. 作为属性名的Symbol值
+      - Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。注意：
+      - Symbol作为对象属性名时，不能用点运算符。(点运算符后面总是字符串)
+      - 在对象的内部，使用 Symbol 值定义属性时，Symbol 值必须放在方括号之中。方括号中的属性名代表了Symbol值。
+      - Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。
   
   * 作用：
     1. 防止变量名起冲突
@@ -60,11 +69,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # Symbol主要用于什么场景下
-  1. 利用这一特点来更好的设计我们的数据对象，让“对内操作”和“对外选择性输出”变得更加优雅。
+  1. 使用Symbol来作为对象属性名
   2. 使用Symbol来替代常量
-  3. 设置私有属性
-  4. 注册和获取全局Symbol
-  5. iterator迭代器
+  3. 使用Symbol定义类的私有属性/方法 
+---
+
+# 用过Symbol吗？ Symbol () == Symbol () 的结果是啥，你觉得Symbol可以用在哪些场景
 ---
 
 # JavaScript有几种类型的值？有什么区别？(堆和栈的概念)
@@ -930,7 +940,16 @@ abort（）
 ---
 
 # 说说你对promise的理解，promise代替回调函数有什么优缺点?
-  * 概念: Promise是一个可能在未来某个时间产生结果的对象：操作成功的结果或失败的原因,用户可以对Promise添加回调函数来处理操作成功的结果或失败的原因。
+  * Promise是异步编程的一种解决方案，它是一个对象，可以获取异步操作的消息，他的出现大大改善了异步编程的困境，避免了地狱回调，它比传统的解决方案回调函数和事件更合理和更强大。
+  * 所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
+  * Promise的实例有三个状态:
+    - Pending（进行中）
+    - Resolved（已完成）
+    - Rejected（已拒绝）
+  * 当把一件事情交给promise时，它的状态就是Pending，任务完成了状态就变成了Resolved、没有完成失败了就变成了Rejected。
+  * Promise的特点：
+    - 对象的状态不受外界影响。promise对象代表一个异步操作，有三种状态，pending（进行中）、fulfilled（已成功）、rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态，这也是promise这个名字的由来——“承诺”；
+    - 一旦状态改变就不会再变，任何时候都可以得到这个结果。promise对象的状态改变，只有两种可能：从pending变为fulfilled，从pending变为rejected。这时就称为resolved（已定型）。如果改变已经发生了，你再对promise对象添加回调函数，也会立即得到这个结果。这与事件（event）完全不同，事件的特点是：如果你错过了它，再去监听是得不到结果的。
 
   * 优点:
 	  1. 避免可读性极差的回调地狱。
@@ -1065,7 +1084,13 @@ abort（）
 ---
 
 # ES6 的类和 ES5 的构造函数有什么区别？
-  * 详细请看:  https://www.jdon.com/51322
+  * 类的内部所有定义的方法，都是不可枚举的
+  * 类和模块的内部，默认就是严格模式（this 实际指向的是undefined），非严格模式指向window，所以不需要使用use strict指定运行模式
+  * 类不存在变量提升（hoist）
+  * 类的方法内部如果含有this，它默认指向类的实例
+  * 类的静态方法不会被实例继承，静态方法里的this指的是类，而不是他的实例
+  * 类的继承extends，在constructor中使用super，让this指向当前类，等同于Parent.prototype.constructor.call(this)
+  * 类的数据类型就是函数，类本身就指向构造函数；使用的时候，也是直接对类使用new命令，跟构造函数的用法完全一致；Object.assign方法可以很方便地一次向类添加多个方法；prototype对象的constructor属性，直接指向“类”的本身，这与 ES5 的行为是一致的；
 
 # 什么是Ajax和JSON，它们的优缺点
   * Ajax是异步JavaScript和XML，用于在Web页面中实现异步数据交互。
@@ -1107,6 +1132,12 @@ abort（）
   * 概念: 无法直接调用数组方法或期望length属性有什么特殊的行为，但仍可以对真正数组遍历方法来遍历它们。典型的是函数的argument参数，还有像调用getElementsByTagName,document.childNodes之类的,它们都返回NodeList对象都属于伪数组。
 
   * 可以使用Array.prototype.slice.call(fakeArray)将数组转化为真正的Array对象。
+---
+
+# 数组和伪数组的区别？为什么要设置成伪数组？
+---
+
+# 伪数组怎么调用数组的方法
 ---
 
 # 原生JS的window.onload与Jquery的$(document).ready(function(){})有什么不同？
@@ -1507,6 +1538,9 @@ abort（）
 4. JSON.stringify 和 JSON.parse
 ---
 
+# json解析的底层原理
+---
+
 # 请说说js的浅拷贝和深拷贝?
   * 浅拷贝是创建一个新的对象，如果对象的属性是基本属性，拷贝的就是基本类型的值，如果是引用类型，拷贝的是内存地址，如果对象改变了地址，就会影响另一个对象
   * 深拷贝是将一个对象从内存中完整的拷贝一份出来，从堆内存中开辟一个新的区域来存放新对象，所以，修改新对象不会影响旧对象
@@ -1701,4 +1735,9 @@ abort（）
 ---
 
 # 如果在Object.keys()中传入一个字符串输出什么？为什么？
+---
+
+# isNaN 和 Number.isNaN 函数的区别？
+  * 函数 isNaN 接收参数后，会尝试将这个参数转换为数值，任何不能被转换为数值的的值都会返回 true，因此非数字值传入也会返回 true ，会影响 NaN 的判断。
+  * 函数 Number.isNaN 会首先判断传入参数是否为数字，如果是数字再继续判断是否为 NaN ，不会进行数据类型的转换，这种方法对于 NaN 的判断更为准确。
 ---
