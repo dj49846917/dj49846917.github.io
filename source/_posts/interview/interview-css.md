@@ -347,14 +347,11 @@ transition需要触发一个事件才能改变属性，而animation不需要触�
     * flex-shrink: 定义了项目的缩小比例。flex-shrink的默认值为1，flex-shrink的值为0时，不缩放。
 ---
 
-# flex: 1 的原理
+# flex: 1 的原理（为什么flex: 1就可以实现自适应，1是哪个属性的值）
   * flex 是 flex-grow、flex-shrink、flex-basis的缩写。默认值是 0 1 auto。
   * flex-grow：定义弹性盒子项（flex item）的拉伸因子
   * flex-shrink：指定了 flex 元素的收缩规则。flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值。
   * flex-basis：指定了flex元素在主轴方向上的初始大小。如果不使用 box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。
----
-
-# 为什么flex: 1就可以实现自适应，1是哪个属性的值
 ---
 
 # 说一下flex怎么做出0.5px的线
@@ -535,4 +532,5 @@ transition需要触发一个事件才能改变属性，而animation不需要触�
 ---
 
 # 脱离文档流指的是什么？
+  * 当为某个元素设置浮动，或者绝对定位时，后面的兄弟元素占据了它以前的位置，这样后面的兄弟元素的位置就变了。这个现象就是元素脱离文档流。
 ---

@@ -105,25 +105,27 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 通过设置expires属性。如果Cookie没有设置expires属性，那么 cookie 的生命周期只是在当前的会话中，关闭浏览器意味着这次会话的结束，此时 cookie 随之失效。
 ---
 
-# JS如何设置cookie？
+# cookie的作用域
+  * domain属性设置。domain本身以及domain的子域名可以访问到相关cookie。不设置指当前域名
 ---
 
-# cookie的作用域
+# cookie有哪些属性
+  * name: 字段为一个cookie的名称。
+  * value: 字段为一个cookie的值。
+  * domain: 字段为可以访问此cookie的域名。
+  * path: 字段为可以访问此cookie的页面路径。
+  * expires/Max-Age: Expires和Max-age均为Cookie的有效期。
+    - Expires是该Cookie被删除时的时间戳，格式为GMT,若设置为以前的时间，则该Cookie立刻被删除，并且该时间戳是服务器时间，不是本地时间！若不设置则默认页面关闭时删除该Cookie。
+    - Max-age也是Cookie的有效期，但它的单位为秒，即多少秒之后失效，若Max-age设置为0，则立刻失效，设置为负数，则在页面关闭时失效。Max-age默认为 -1。
+  * Size：cookie大小。
+  * HttpOnly：HttpOnly值为 true 或 false,若设置为true，则不允许通过脚本document.cookie去更改这个值
+  * secure：设置是否只能通过https来传递此条cookie
 ---
 
 # 如何跨域访问cookie
----
-
-# 说一下session
----
-
-# 为什么要有session id
----
-
-# session id解决什么问题？
----
-
-# 没有cookie会出现什么问题？
+  * 在前端请求的时候设置request对象的属性withCredentials为true
+  * 在服务端设置Access-Control-Allow-Origin
+  * 在服务端设置Access-Control-Allow-Credentials
 ---
 
 # 部署在多台服务器上，cookie会有问题，知道吗？cookie的安全问题了解吗？
@@ -150,12 +152,6 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 可以
   * 可以
   * 通过设置HttpOnly属性
----
-
-# cookie的secure这个属性是干啥的
----
-
-# cookie的httpOnly是干啥的
 ---
 
 # 如何防止cookie被盗用？
