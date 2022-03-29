@@ -369,6 +369,7 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # 怎么监听组件是否处于激活或失活
+  * 设置生命周期activated与deactivated
 ---
 
 # 什么是虚拟dom?
@@ -561,9 +562,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   > vuex 和传统的 event-bus 的不同点除了 vuex 实现了更加友好的响应式状态之外，还禁止了 vuex 里面数据的直接修改，大大增强了信任度（有点像promise的status），通过增加 mutations 和 actions 这种“中间层”，它能更好的控制中间的变化，比如实现时间旅行、状态回退和状态保存的功能。
 ---
 
-# eventbus的emit，on和子到父传值的emit，on有啥区别？
----
-
 # this.$emit原理
   > 采用发布订阅模式，根据传入的事件名从当前实例的_events属性（即事件中心）中获取到该事件名所对应的回调函数cbs，然后再获取传入的附加参数args，由于cbs是一个数组，所以遍历该数组，拿到每一个回调函数，执行回调函数并将附加参数args传给该回调。
 ---
@@ -665,9 +663,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 
 # vue是怎么监听数组改变更新视图的
   * 使用了函数劫持的方式，重写了数组的方法，Vue将data中的数组进行了原型链重写，指向了自己定义的数组原型方法。这样当调用数组api时，可以通知依赖更新。如果数组中包含着引用类型，会对数组中的引用类型再次递归遍历进行监控。这样就实现了监测数组变化。
----
-
-# 问了数据劫持，收集依赖的过程 ，实现的方式
 ---
 
 # vue从data改变到页面渲染的过程。
@@ -819,9 +814,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
     2. vue3针对ie11出了一个特殊的版本做兼容
 ---
 
-# Vue2,3双向绑定的区别
----
-
 # Vue3.x响应式数据原理?
   > Vue3.x改用Proxy替代Object.defineProperty。
   > 因为Proxy可以直接监听对象和数组的变化，并且有多达13种拦截方法。并且作为新标准将受到浏览器厂商重点持续的性能优化。
@@ -890,9 +882,6 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 监测数组的时候可能触发多次get/set，那么如何防止触发多次呢？我们可以判断key是否为当前被代理对象target自身属性，也可以判断旧值与新值是否相等，只有满足以上两个条件之一时，才有可能执行trigger。
 ---
 
-# 如何使用 Reflect，它提供了什么？
----
-
 # vue3的toRefs作用
   > toRefs() 函数可以将 reactive() 创建出来的响应式对象, 转换为普通对象, 只不过这个普通对象上的而每一个属性都是响应式的,这样可以在不丢失响应式的情况下对返回的对象解构使用
 ---
@@ -914,25 +903,14 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
 ---
 
 # 为什么vue2里不能监听数组
----
-
-# 直接操作dom和虚拟dom的场景
+  * 性能问题
 ---
 
 # vue懒加载原理
 ---
 
 # vue可以拿index当key吗，为什么
-* 不建议，
----
-
-# .vue文件怎么在浏览器上显示的，这个过程和原理
----
-
-# vue模板解析是用正则匹配的吗？还是别的？
----
-
-# vue在render的时候内部做什么处理
+* 不建议，因为会影响性能。比如说循环一个数组，有4个对象。你用的index做key，如果删除的是第二个，第三、四个的绑定关系会发生变化，3、4会被重新渲染。如果是下拉框，本来第三个是选中状态，你删除了第二个之后就变成了第四个是选中状态，就会出现bug。
 ---
 
 # 用了mixins,这是什么，优缺点？
@@ -1154,24 +1132,27 @@ object.assgin(this. $data,this. $option.data(this))
 ---
 
 # Vue响应式原理Observer、Dep、Watcher理解
+> Observer中进行响应式的绑定，在数据被读的时候，触发get方法，执行Dep来收集依赖，也就是收集Watcher。在数据被改的时候，触发set方法，通过对应的所有依赖(Watcher)，去执行更新。比如watch和computed就执行开发者自定义的回调方法。
 ---
 
 # watcher 种类，各个种类的收集时期是在哪里？
+  * computed-watcher
+    - vue组件上的每一条数据绑定指令(例如{{myData}})和computed属性，通过compile最后都会生成一个对应的 watcher 对象。
+  * user-watcher
+    - 在watch属性中，由用户自己定义的，都属于这种类型，即只要监听的属性改变了，都会触发定义好的回调函数
+  * render-watcher
+    - 每一个组件都会有一个 render-watcher,当 data / computed中的属性改变的时候，会调用该 render-watcher 来更新组件的视图
+  * 执行顺序：computed-watcher-> user-watcher -> render-watcher
 ---
 
 # $mount 和 el的区别
   > 两者在使用效果上没有任何区别，都是为了将实例化后的vue挂载到指定的dom元素中。如果在实例化vue的时候指定el，则该vue将会渲染在此el对应的dom中，反之，若没有指定el，则vue实例会处于一种“未挂载”的状态，此时可以通过$mount来手动执行挂载。
 ---
 
-# setup()是如何生效的？如何和之前的版本兼容？
----
-
 # setup里面this是谁，为啥这样呢？
+> undefined, 因为setup方法的调用时机是在boforeCreated方法之前，也就是说在组件还没有创建之前就调用了setup方法，所以在setup中肯定不存在一个指向当前组件的this。
 ---
 
 # vue3初始化过程有哪些变化？
   > 首先执行createApp函数，这个方法会返回一个app实例，会执行mount函数，mount函数内部会执行render函数，render函数内部又执行patch,执行完patch之后，会处理根组件processComponent函数，它的内部会执行mountComponent
----
-
-# Vue是基于哪种设计模式？
 ---
