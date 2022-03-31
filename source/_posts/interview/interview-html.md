@@ -88,17 +88,9 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 ---
 
 # 请描述cookie、sessionStorage和localStorage的区别。
-  1. cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。
-  2. cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。
-  3. sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
-  4. 存储大小：
-     * cookie数据大小不能超过4k。
-     * sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
-
-  5. 有期时间：
-     * localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
-     * sessionStorage  数据在当前浏览器窗口关闭后自动删除。
-     * cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
+  * cookie数据大小不能超过4k；sessionStorage和localStorage的存储比cookie大得多，可以达到5M+
+  * cookie设置的过期时间之前一直有效；localStorage永久存储，浏览器关闭后数据不丢失除非主动删除数据；sessionStorage数据在当前浏览器窗口关闭后自动删除
+  * cookie的数据会自动的传递到服务器；sessionStorage和localStorage数据保存在本地
 ---
 
 # 如何设置cookie的过期时间
@@ -219,14 +211,14 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
 ---
 
 # 介绍webworker
-web worker 是运行在后台的 JavaScript，不会影响页面的性能。提供协程能力，如果有一个比较密集的计算任务，可以放到另一个进程中处理，等处理好了再把结果传回主程，这样主要进程就不会阻塞，页面可以正常渲染和响应,可充分利用多核的CPU
+> 在Javascript单线程执行的基础上，开启一个子线程，进行程序处理，当子线程执行完毕之后再回到主线程上，在这个过程中并不影响主线程的执行过程。使用场景包括：使用专用线程进行数学运算；图像处理；大量数据的检索
 ---
 
 # Web Worker线程的限制是什么？
   1. 同源限制
     * 分配给 Worker 线程运行的脚本文件，必须与主线程的脚本文件同源。
   2. DOM 限制
-    * Worker 线程所在的全局对象，与主线程不一样，无法读取主线程所在网页的 DOM 对象，也无法使用document、window、parent这些对象。但是，Worker 线程可以navigator对象和location对象。
+    * Worker 线程所在的全局对象，与主线程不一样，无法读取主线程所在网页的 DOM 对象，也无法使用document、window、parent这些对象。但是，Worker 线程可以使用navigator对象和location对象。
   3. 通信联系
     * Worker 线程和主线程不在同一个上下文环境，它们不能直接通信，必须通过消息完成。
   4. 脚本限制
@@ -265,7 +257,7 @@ web worker 是运行在后台的 JavaScript，不会影响页面的性能。提�
 
 # 浏览器渲染的整个过程(浏览器工作机制)
   1. 解析DOM树 - 渲染引起首先解析HTML树生成DOM树
-  2. 构建render树 - DOM树和CSS树一起生成DOM树
+  2. 构建render树 - DOM树和CSS树一起生成render树
   3. 布局render树 - 对render树的每个节点进行布局处理，确定在屏幕的位置
   4. 绘制render树 - 最后遍历render树并用UI后端将每一个节点绘制出来
 ---
@@ -353,14 +345,6 @@ web worker 是运行在后台的 JavaScript，不会影响页面的性能。提�
   4. 传输速度方面: JSON的速度要远远快于XML。
 ---
 
-# HTML与XML二者有不同
-  * XHTML 的规范更加严格。
-  * XHTML 元素必须被正确地嵌套。
-  * XHTML 元素必须被关闭。
-  * 标签名必须用小写字母。
-  * XHTML 文档必须拥有根元素。
----
-
 # 请谈谈你对重绘与回流的理解
   * 重绘(repaint): 当元素样式的改变不影响布局时，浏览器将使用重绘对元素进行更新，此时由于只需要UI层面的重新像素绘制，因此 损耗较少
 
@@ -391,14 +375,12 @@ web worker 是运行在后台的 JavaScript，不会影响页面的性能。提�
     - 注意：JS 获取 Layout 属性值（如：offsetLeft、scrollTop、getComputedStyle 等）也会引起回流。因为浏览器需要通过回流计算最新值
     - 回流必将引起重绘，而重绘不一定会引起回流
   * 如何避免：
-    - css:
-      - 避免设置多层内联样式。
-      - 如果需要设置动画效果，最好将元素脱离正常的文档流。
-      - 避免使用CSS表达式（例如：calc()）。
-    - js:
-      - 避免频繁操作样式，最好将样式列表定义为class并一次性更改class属性。
-      - 避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。
-      - 可以先为元素设置为不可见：display: none，操作结束后再把它显示出来。
+    - 集中改变样式，不要一条一条地修改 DOM 的样式。
+    - 不要把 DOM 结点的属性值放在循环里当成循环里的变量。
+    - 为动画的 HTML 元件使用 fixed 或 absoult 的 position，那么修改他们的 CSS 是不会 reflow 的。
+    - 不使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局。
+    - 尽量只修改position：absolute或fixed元素，对其他元素影响不大
+    - 动画开始GPU加速，translate使用3D变化
 ---
 
 # translate()是否会触发重绘
@@ -484,7 +466,7 @@ lable可以关联控件，可以和表单元素结合。有两个属性，for和
 ---
 
 # 说说你对属性data-的理解
-data- 属性是H5新增的自定义属性，也可以用来存储值。
+> data- 属性是H5新增的自定义属性，也可以用来存储值。
 ---
 
 # 标准模式和怪异模式有什么区别？
@@ -498,7 +480,7 @@ quirks盒模型：width = content + border + padding
 ---
 
 # a标签的href和onclick属性同时存在时哪个先触发？
-onclick事件先触发， 如果函数执行返回false(全等), 则href不会被触发。
+> onclick事件先触发， 如果函数执行返回false(全等), 则href不会被触发。
 ---
 
 # 说说你对accesskey的理解，举例说明它有什么运用场景？
