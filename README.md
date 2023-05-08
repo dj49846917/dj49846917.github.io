@@ -30,7 +30,7 @@
 
 4. 安装hexo
   ```
-    cnpm install -g hexo-cli -g
+    cnpm install -g hexo-cli -g  
   ```
 
 5. 将hexo发布到github
