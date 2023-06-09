@@ -45,6 +45,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
       * 给数组适用下标方式新增一项（arr[3] = ‘哈哈’），页面无变化，需要使用 vm.$set(数组，3，‘哈哈’)或者使用push方法
 ---
 
+# 如果data中没有数据可以触发响应式吗
+  * 可以
+---
+
 # v-if 和 v-show 有什么区别？
   * v-show 仅仅控制元素的显示方式，将 display 属性在 block 和 none 来回切换；而v-if会控制这个 DOM 节点的存在与否
 ---
@@ -749,6 +753,10 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 所以，template和jsx的都是render的一种表现形式，不同的是：JSX相对于template而言，具有更高的灵活性，在复杂的组件中，更具有优势，而 template 虽然显得有些呆滞。但是 template 在代码结构上更符合视图与逻辑分离的习惯，更简单、更直观、更好维护。
 ---
 
+# vue是怎么解析template的? template会变成什么?
+  
+---
+
 # Proxy 相对于 Object.defineProperty有哪些优点？
   * proxy的性能本来比defineproperty好，proxy可以拦截属性的访问、赋值、删除等操作，不需要初始化的时候遍历所有属性，另外有多层属性嵌套的话，只有访问某个属性的时候，才会递归处理下一级的属性。
 
@@ -756,6 +764,9 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 可以劫持整个对象
   * 操作时不是对原对象操作,是 new Proxy 返回的一个新对象
   * 可以劫持的操作有 13 种
+
+# object.defineProproty中除了set get还有哪些可配置的属性
+---
   
 # vue3.0 有哪些改动和新特性？
 ## 改动

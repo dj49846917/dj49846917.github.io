@@ -247,6 +247,16 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
     4. 即使内容为空，加载也需要时间
 ---
 
+# 前端需要注意哪些SEO
+  * 合理的title 、description 、keywords ：搜索对着三项的权重逐个减小， title值强调重点即可， 重要关键词出现不要超过2次， 而且要靠前，不同⻚⾯title 要有所不同； description 把⻚⾯内容高度概括， ⻓度合适，不可过分堆砌关键词，不同⻚⾯description 有所不同； keywords 列举出重要关键词即可
+  * 语义化的HTML 代码，符合W3C规范：语义化代码让搜索引擎容易理解网⻚
+  * 重要内容HTML 代码放在最前：搜索引擎抓取HTML 顺序是从上到下， 有的搜索引擎对抓取⻓度有限制，保证重要内容⼀定会被抓取
+  * 重要内容不要用js 输出：爬虫不会执⾏js获取内容
+  * 少用iframe ：搜索引擎不会抓取iframe 中的内容
+  * ⾮装饰性图片必须加alt
+  * 提高网站速度： 网站速度是搜索引擎排序的⼀个重要指标
+---
+
 # 如何实现浏览器内多个标签页之间的通信?
   1. WebSocket （可跨域）
   2. postMessage（可跨域）
