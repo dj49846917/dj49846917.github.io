@@ -63,8 +63,26 @@ cover: https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956
   * 通配符选择器（ * ）
   * 属性选择器（a[rel = "external"]）
   * 伪类选择器（a:hover, li:nth-child）
-  * **继承的样式： font-size font-family color, UL LI DL DD DT;**
-  * **不可继承的样式：border padding margin width height ;**
+---
+
+# CSS的哪些属性哪些可以继承？哪些不可以继承？
+  1. 可以继承属性：
+     - 字体的一些属性：font, font-family、 font-weight, font-size、font-style;
+     - 文本的一些属性：
+       * 内联元素: color, line-height, word -spacing、letter-spacing、text-transform;
+       * 块级元素: text indent, text align;
+     - 元素的可见性：visibility:hidden
+     - 表格布局的属性： caption-side、border-collapse、 border-spacing、empty-cells、table-layout,
+     - 列表的属性：list-style
+     - 页面样式属性：page
+     - 声音的样式属性
+
+  2. 不可继承属性：
+     - display：规定元素应该生成的框的类型;
+     - 文本属性：vertical-align、 text decoration;
+     - 盒子模型的属性：width、height, margin 、border、 padding;
+     - 背景属性：background. background color background-image;
+     - 定位属性：float, clear、 position. top、right、bottom, left min width、min-height. max width. max-height, overflow、 clip;
 ---
 
 # display有哪些值？说明他们的作用

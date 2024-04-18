@@ -197,6 +197,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的
+同上
 ---
 
 # 移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？
@@ -221,6 +222,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # CDN什么资源都能存吗？
+  * 不是。
+  * CDN 可以存储网站的静态资源，如图片、视频、音频、CSS、JS 等文件。这些文件的特点是文件体积大，访问频率高，但更新不频繁。将这些静态资源缓存到 CDN 上可以降低网站的负载，提高网站的访问速度和用户体验。
+  * CDN 不能存储动态数据，如网站的数据库内容、网站程序源代码、用户上传的文件等。这些数据的特点是更新频繁，无法通过 CDN 缓存实现加速。另外，由于 CDN 缓存是公开的，存储敏感数据存在安全隐患。
 ---
 
 # Cdn有哪些优化静态资源加载速度的方法？
@@ -230,6 +234,7 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 应当什么场景下实用CDN服务器？
+> 我们应该在网站流量大、需要提供多媒体内容服务、需要防止网络安全问题以及电商平台需要进行大促活动等场景下考虑使用CDN。通过CDN的加速和优化，可以提高网站的性能和用户体验，提升网站的竞争力。
 ---
 
 # JWT的优缺点, 使用场景?
@@ -295,9 +300,31 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # http报文头部有哪些字段?有什么意义?
+> 请求头
+  1. Accept: 客户端希望获得资源的类型。类似 text/html 则是 MIME 类型，接在后面的 q 代表的是优先级，q 的范围通常在 0 到 1，越大优先级越高。
+  2. Accept-Encoding: 客户端支持的压缩算法。服务端可以根据它来使用压缩算法来压缩资源，降低带宽，让用户能更快加载资源。
+  3. Accept-Language: 客户端支持的语言。服务端可以通过这个字段来做 国际化，根据用户设置的语言来返回不同国家文案内容。
+  4. Host: 当前请求的域名。服务端可以根据这个字段来做 反向代理。
+  5. Connection: 客户端是否希望使用 TCP 长连接。
+  6. User-Agent: 用户代理。该字段标注了发送方的一些信息，你可以通过它来知道请求方是浏览器、爬虫、postman 还是 cURL。
+> 响应头：
+  1. Content-Type：服务端返回的资源类型，可以带上使用的编码格式。
+  2. Content-Encoding：返回资源使用的压缩格式。
+  3. Content-Length： HTTP 消息体的长度。
+  4. Date：HTTP 响应报文生成的时间，使用了 GMT 格式。
+  5. Connection：服务端决定使用长连接还是短连接。
+  6. Server：使用了哪种服务器。
 ---
 
 # 和浏览器缓存相关的HTTP头有哪些
+> 请求头：
+  1. Cache-Control
+  2. Pragma
+  3. If-Modified-Since
+  4. If-None-Match
+> 响应头：
+  1. Last-Modified
+  2. ETag
 ---
 
 # http状态码有那些？分别代表是什么意思？
@@ -309,9 +336,12 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 一个http的报文的头和body之间有什么分隔
+> HTTP协议规定,HTTP首部(headers)和HTTP主体之间是以一个空行分割的
 ---
 
 # http协议中301和302的区别
+  * 302重定向是暂时的重定向，搜索引擎会抓取新的内容而保存旧的网址。由于效劳器前往302代码，搜索引擎以为新的网址只是暂时的。
+  * 301重定向是永久的重定向，搜索引擎在抓取新内容的同时也将旧的网址交换为重定向之后的网址。
 ---
 
 # 介绍HTTP2.0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？
@@ -324,6 +354,11 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 说一下和304相关的几个header属性，Etag和last modified有什么区别
+  * ETag/If-None-Match
+  * Last-Modified/If-Modified-Since
+  * 区别：
+    1. last-modified 的精确度是秒，相比来说，etag 更加精确。
+    2. last-modified 是每次文件修改都会对应修改，即使文件内容并没有改变，相比来说，etag 可以避免部分文件内容未修改的缓存更新。
 ---
 
 # 什么时候用304？
@@ -337,15 +372,17 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 ---
 
 # 问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？
----
-
-# 如果我有一个资源一个月内能满足我的需求，我想一直用，怎么设置http缓存
+  * name=value: 表示要设置的Cookie的名称和值。
+  * expires=date: 指定Cookie的过期时间，如果不设置，Cookie默认在浏览器关闭时过期。
+  * domain=domain: 指定Cookie的有效域，控制哪些域可以访问该Cookie。
+  * path=path: 指定Cookie的有效路径，控制哪些路径下的页面可以访问该Cookie。
+  * secure: 如果设置了该选项，Cookie只能通过HTTPS协议传输。
+  * httponly: 如果设置了该选项，Cookie将无法通过JavaScript脚本访问，有助于防止跨站脚本攻击（XSS）。
+  * samesite=strict/lax/none: 该选项用于控制跨站请求伪造（CSRF）攻击。strict表示仅在同站点请求时发送Cookie，lax表示在导航到其他站点时不发送Cookie，仅在顶级导航时发送；none表示总是发送Cookie。
 ---
 
 # If-Modified-Since、If-Match是根据什么进行判断
----
-
-# SSL证书浏览器是怎么验证的？
+etag
 ---
 
 # 什么是Etag？
@@ -377,7 +414,10 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # https怎么加密的？(加密流程)，如何通过公钥和私钥加密？
 ---
 
-# HTTPS认证是怎么认证的？
+# https加密解密过程涉及的算法，这些算法的区别
+---
+
+# HTTPS认证是怎么认证的？(SSL证书浏览器是怎么验证的？)
   * 客户端和服务端进行数据传输之前，先通过证书对双方进行身份验证：
     1. 客户端在发送SSL握手信息给服务端要求连接
     2. 服务端会将证书发送给客户端
@@ -436,6 +476,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
 # websocket 为什么要加心跳? websocket 不是长连接吗，为什么还要加心跳去维持连接
 ---
 
+# 心跳监听机制
+---
+
 # websocket 连接成功的状态码是多少
 ---
 
@@ -492,7 +535,7 @@ TCP
 ---
 
 # 为什么是三次握手而不是两次握手
-  > 这是因为服务端的LISTEN状态下的SOCKET当收到SYN报文的连接请求后，它可以把ACK和SYN（ACK起应答作用，SYN起同步作用）房子啊一个报文里来发送，但关闭连接时，当收到对方的FIN报文通知时，它仅仅表示对方没有数据发送给你了，但未必你所有的数据都发送给对方了，所以你可能未必会马上关闭SOCKET，即你可能还需要发送一个数据给对方之后，再发送DIN报文给对方来表示你同意现在可以关闭连接了，所以他这里的ACK报文和FIN报文多数情况下都是分开发送的
+  > 防止已失效的连接请求又传送到服务器端，因而产生错误。这是因为服务端的LISTEN状态下的SOCKET当收到SYN报文的连接请求后，它可以把ACK和SYN（ACK起应答作用，SYN起同步作用）房子啊一个报文里来发送，但关闭连接时，当收到对方的FIN报文通知时，它仅仅表示对方没有数据发送给你了，但未必你所有的数据都发送给对方了，所以你可能未必会马上关闭SOCKET，即你可能还需要发送一个数据给对方之后，再发送DIN报文给对方来表示你同意现在可以关闭连接了，所以他这里的ACK报文和FIN报文多数情况下都是分开发送的
 ---
 
 # HTTP和HTTPS的区别。https怎么实现它的安全性的？

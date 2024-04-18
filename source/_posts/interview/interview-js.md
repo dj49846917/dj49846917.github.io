@@ -494,6 +494,9 @@ cover: https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,34581
             在验证null时，一定要使用　=== ，因为 == 无法分别 null 和　undefined
             null == undefined // true
             null === undefined // false
+        <6>. Number() 转数字也不同
+            Number(null)是0
+            Number(undefined)是undefined
   ```
 ---
 
@@ -1098,11 +1101,21 @@ abort（）
 ---
 
 # 什么是事件循环？调用堆栈和任务队列之间有什么区别？
-  1. 事件循环: 执行一个宏任务，然后执行清空微任务列表，循环再执行宏任务，再清微任务列表
-    * 微任务: promise / ajax 
-    * 宏任务: setTimout / script / IO
+> 事件循环最主要是分三部分：主线程、宏队列（macrotask）、微队列（microtask）
+> 执行顺序
+  1、先执行主线程
+  2、遇到宏队列（macrotask）放到宏队列（macrotask）
+  3、遇到微队列（microtask）放到微队列（microtask）
+  4、主线程执行完毕
+  5、执行微队列（microtask），微队列（microtask）执行完毕
+  6、执行一次宏队列（macrotask）中的一个任务，执行完毕
+  7、执行微队列（microtask），执行完毕
+  8、依次循环。。。
 
-  2. 堆栈: 先进后出，任务队列: 先进先出
+  * 微任务: promise / ajax 
+  * 宏任务: setTimeout、setInterval、setImmediate、I/O、UI rendering
+
+  1. 堆栈: 先进后出，任务队列: 先进先出
 ---
 
 # 描述一下EventLoop的执行过程
@@ -1266,6 +1279,16 @@ abort（）
 ---
 
 # 箭头函数有super吗？
+  * 没有，原因同上面
+---
+
+# 普通函数和构造函数的区别：
+   * 构造函数也是一个普通函数，创建方式和普通函数一样，但是构造函数习惯上首字母大写
+   * 调用方式不一样，普通函数直接调用，构造函数要用关键字new来调用
+   * 调用时，构造函数内部会创建一个新对象，就是实例，普通函数不会创建新对象
+   * 构造函数内部的this指向实例，普通函数内部的this指向调用函数的对象（如果没有对象调用，默认为window）
+   * 构造函数默认的返回值是创建的对象（也就是实例），普通函数的返回值由return语句决定
+   * 构造函数的函数名与类名相同
 ---
 
 # 简单说明一下你对ES6中箭头函数的理解
@@ -1347,6 +1370,10 @@ abort（）
 ---
 
 # JS中的async/await的用法和理解
+   1. async/await 本质上是一个语法糖，它是基于 Promise 的简化和封装
+   2. await 可以理解成是 Promise 的 then 方法，只有执行 resolve 才会执行 then 方法
+   3. 捕获 reject 建议使用 try/catch 来捕获 reject
+   4. async 函数默认返回 Promsie 对象(被 Promise.resolve() 包装成期约对象)，如果没有 return，则返回 undefined 的 Promise 对象
 ---
 
 # jquery选择器实现原理

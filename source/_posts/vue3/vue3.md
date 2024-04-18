@@ -83,7 +83,174 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
   * 注意：在安装了vant后会报以下错误：
     - ![安装时的报错](/images/vue/installError.jpg)
     - 解决办法：
-      
+
+# 最新vue3项目vite使用
+  1. 安装命令：
+    ```
+      npm create vue@3  可选择vur-router、pinia、eslint
+    ```
+  2. 运行时代码强校验
+    * 安装命令：
+      ```
+        npm install --save-dev vite-plugin-eslint
+      ```
+    * 在.eslintrc.cjs中添加如下代码：(vite-plugin-eslint有报错，但是不影响运行，所以直接注释掉)
+      ```
+        // @ts-ignore
+        import eslintPlugin from 'vite-plugin-eslint'
+
+        export default defineConfig({
+        plugins: [
+          ...
+          eslintPlugin()
+        ],
+        ...
+      })
+      ```
+
+## pinia的使用
+  1. 在src下，新建store/index.ts,并写入
+    ```
+      import userStore from "./modules/user";
+
+      export default function useStore() {
+          return {
+              user: userStore()
+          }
+      }
+    ```
+  2. 在src/store下新建modules/user.ts，并写入
+    ```
+      import { defineStore } from 'pinia'
+
+      const userStore = defineStore('user', {
+        state() {
+          return {
+            count: 0
+          }
+        },
+        actions: {
+          increment() {
+            this.count ++;
+          },
+          decrement() {
+            this.count --;
+          }
+        }
+      })
+
+      export default userStore
+    ```
+  3. 检查在main.ts中引入pinia
+    ```
+      import { createApp } from 'vue'
+      import { createPinia } from 'pinia'
+
+      import App from './App.vue'
+      const app = createApp(App)
+      app.use(createPinia())
+      app.mount('#app')
+    ```
+  4. 使用pinia中的count
+    ```
+      <script setup lang="ts">
+        import useStore from './stores';
+
+        const store = useStore();
+
+        const add = () => {
+          store.user.increment()
+        }
+        const deleteAction = () => {
+          store.user.decrement();
+        }
+      </script>
+
+      <template>
+        <div>
+          {{ store.user.count }}
+          <button @click="add">加</button>
+          <button @click="deleteAction">减</button>
+        </div>
+      </template>
+    ```
+  5. 使用pinia中的storeToRefs进行解构（不能用toRefs,因为会把store里面的所有属性方法都转换成ref）
+    ```
+      <script setup lang="ts">
+      import useStore from './stores';
+      import { storeToRefs } from 'pinia';
+
+      const store = useStore();
+      const { count } = storeToRefs(store.user);
+
+      const add = () => {
+        store.user.increment()
+      }
+
+      const deleteAction = () => {
+        store.user.decrement
+      }
+      </script>
+
+      <template>
+        {{ count }}
+        <button @click="add">加</button>
+        <button @click="deleteAction">减</button>
+      </template>
+    ```
+
+  6. `$subscribe`相当于watch,当值发生变化时触发
+    ```
+      <script setup lang="ts">
+        import useStore from './stores';
+        import { storeToRefs } from 'pinia';
+
+        const store = useStore();
+        const { count } = storeToRefs(store.user);
+
+        store.user.$subscribe((mutate, state)=>{
+          console.log("mutate", mutate, state);
+        })
+
+        const add = () => {
+          store.user.increment()
+        }
+
+        const deleteAction = () => {
+          store.user.decrement
+        }
+      </script>
+
+      <template>
+        {{ count }}
+        <button @click="add">加</button>
+        <button @click="deleteAction">减</button>
+      </template>
+    ```
+
+  7. 组合式API写法
+    * 修改src/store/modules/user.ts
+      ```
+        import { ref } from 'vue'
+        import { defineStore } from 'pinia'
+
+        const userStore = defineStore('counter', () => {
+          const count = ref(0)
+          function increment() {
+            count.value++
+          }
+
+          function decrement() {
+            count.value--
+          }
+
+          return { count, increment, decrement }
+        })
+
+        export default userStore
+      ```
+
+
 # vite的使用
 ## 安装插件
   * npm init vite@latest
@@ -255,6 +422,32 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
       const app = createApp(App)
       app.use(router).use(store).use(ElementPlus).mount('#app')
     ```
+
+  3. 按需导入
+    * 首先你需要安装unplugin-vue-components 和 unplugin-auto-import这两款插件
+      ```
+        npm install -D unplugin-vue-components unplugin-auto-import
+      ```
+    * 在vite.config.ts中配置
+      ```
+        import { defineConfig } from 'vite'
+        import AutoImport from 'unplugin-auto-import/vite'
+        import Components from 'unplugin-vue-components/vite'
+        import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+        export default defineConfig({
+          // ...
+          plugins: [
+            // ...
+            AutoImport({
+              resolvers: [ElementPlusResolver()],
+            }),
+            Components({
+              resolvers: [ElementPlusResolver()],
+            }),
+          ],
+        })
+      ```
 
 {% note danger %}
   注意: 
@@ -469,6 +662,20 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
         const app = createApp(App)
         app.use(router).use(store).use(Vant).mount('#app')
       ```
+
+{% note danger %}
+  注意: 
+    出现以下报错：![报错](/images/vue/报错.png)
+  解决办法：在文件根目录下面的，vite-env.d.ts文件中添加如下代码，即可成功解决该问题。
+    ```
+      declare module "*.vue" {
+        import type { DefineComponent } from "vue";
+        const vueComponent: DefineComponent<{}, {}, any>;
+        export default vueComponent;
+      }
+
+    ```
+{% endnote %}
   
 # vant ui的rem适配
   1. 安装
@@ -501,6 +708,44 @@ cover: /images/vue/vue.jpg                 # 文章的缩略图（用在首页�
         },
       };
     ```
+
+# rem适配pc端方案
+1. 安装 postcss-pxtorem
+  ```
+    npm install postcss-pxtorem amfe-flexible -D
+  ```
+2. 配置 vite.config.ts
+  ```
+    import { defineConfig } from 'vite'
+    import postcssPxtoRem from 'postcss-pxtorem'
+
+    export default defineConfig({
+      css: {
+        postcss: {
+          plugins: [
+            postcssPxtoRem({
+              rootValue: 144, // 按照自己的设计稿修改 1440/10
+              unitPrecision: 5, // 保留到5位小数
+              selectorBlackList: ['ignore', 'tab-bar', 'tab-bar-item'],  // 忽略转换正则匹配项
+              propList: ['*'],
+              replace: true,
+              mediaQuery: false,
+              minPixelValue: 0
+            })  
+          ]
+        }
+      }
+    })
+  ```
+3. 再main.ts文件中引入amfe-flexible
+  ```
+    import 'amfe-flexible'
+  ```
+4. 在样式中直接使用 px 作为单位即可
+5. 如果是行内样式或者js赋值的px这个插件不会转行rem，这个时候需要在赋值的时候/144
+  ```
+    <div :style="{width: 265 / 144 + 'rem', height: 180 / 144 + 'rem'}"></div>
+  ```
 
 # 使用vite构建vue项目打包发布gitee pages或者github pages
   1. 由于我使用了vite的多环境，在.env.development和.env.production中分别添加变量VITE_APP_BASE，设置项目基础路径，也就是你要部署github/gitee的仓库名称，我这里的仓库名称是vue3-shopping

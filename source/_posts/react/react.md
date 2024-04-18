@@ -70,47 +70,43 @@ cover: /images/react/logo.jpg                 # 文章的缩略图（用在首�
 > 重点：使用useRoutes管理路由
   1. 修改src/router/index.tsx
     ```
-      import { lazy, ReactNode, Suspense } from 'react';
-      import { RouteObject } from 'react-router-dom';
-      import Layout from '../layout';
-      const Category = lazy(() => import('../views/Category'));
-      const Home = lazy(() => import('../views/Home'));
-      const Login = lazy(() => import('../views/Login'));
-      const Cat = lazy(() => import('../views/Cat'));
-
-      const lazyload = (children: ReactNode): ReactNode => {
-        return (
-          <Suspense fallback={<>loading</>}>
-            {children}
-          </Suspense>
-        )
-      }
-      const RouterConfig: RouteObject[] = [
+      import { createBrowserRouter, Navigate } from "react-router-dom";
+      import Home from "../view/Home.tsx";
+      import Main from "../view/Main.tsx";
+      import Layout from "../layout/Layout.tsx";
+      import { lazy, Suspense } from "react";
+      const V1 = lazy(() => import("@/view/Dashboard")); // 懒加载
+      const router = [
         {
-          path: '/',
+          path: "/",
           element: <Layout />,
           children: [
             {
-              index: true,
-              element: lazyload(<Home />)
+              path: "/",
+              element: <Navigate to={"/dashboard"} />,
             },
             {
-              path: '/category',
-              element: lazyload(<Category />)
+              path: "/dashboard",
+              element: (
+                <Suspense>
+                  <V1 />
+                </Suspense>
+              ),
             },
-            {
-              path: '/cat',
-              element: lazyload(<Cat />)
-            }
           ],
         },
         {
-          path: '/login',
-          element: lazyload(<Login />)
+          path: "/home",
+          element: <Home />,
         },
-      ]
+        {
+          path: "/*",
+          element: <Main />,
+        },
+      ];
 
-      export default RouterConfig
+      export default createBrowserRouter(router);
+
     ```
   2. 修改app.tsx
     ```
@@ -655,3 +651,487 @@ cover: /images/react/logo.jpg                 # 文章的缩略图（用在首�
 
       export default memo(Child2);
     ```
+
+# 最新vite5搭建React18环境
+## 初始化项目
+  1. 安装命令：
+    ```
+      yarn create vite
+      pnpm create vite
+    ```
+  2. 安装依赖
+    ```
+      pnpm install
+    ```
+## 配置editorConfig(不同ide相同展示)
+> 在webstorm中会自动读取.editorcondig，vscode需要下载插件EditorConfig for VS Code
+  1. 在根路径下创建.editorconfig文件
+     ```
+      # https://editorconfig.org
+      root = true
+
+      # *表示所有的文件都生效
+      [*]
+      charset = utf-8
+      # 空格缩进、每次2格
+      indent_style = tab
+      indent_size = 2
+      # 换行
+      end_of_line = lf
+      insert_final_newline = true
+      trim_trailing_whitespace = true
+
+      [*.md]
+      insert_final_newline = false
+      trim_trailing_whitespace = false
+     ```
+
+## 配置npm/yarn/pnpm镜像
+  1. 必须要有稳定版的nodejs
+  2. 安装cnpm、yarn或者pnpm
+    ```
+      # 安装yarn
+      npm install -g yarn
+      # 安装pnpm
+      npm install -g pnpm
+    ```
+  3. 查看当前镜像源
+    ```
+      npm config get registry
+    ```
+  4. 修改npm配置
+    * 在项目根目录下(package.json同一目录)中新建.npmrc文件，编辑文件内容如下：
+      ```
+        registry=https://registry.npmmirror.com
+      ```
+  5. 修改yarn配置
+    * 在项目根目录下(package.json同一目录)中新建.yarnrc文件，编辑文件内容如下：
+      ```
+        registry "https://registry.npmmirror.com"
+      ```
+  6. 命令行修改配置
+    ```
+      npm config set registry https://registry.npmmirror.com
+      yarn config set registry https://registry.npmmirror.com
+    ```
+  7. pnpm使用命令：
+    ```
+      pnpm install 包名
+
+      pnpm i 包名
+
+      pnpm add 包名 -S   // 默认写入dependencies
+
+      pnpm add 包名 -D   // devDependencies
+
+      pnpm add 包名 -g   // 全局安装
+
+      pnpm remove 包名   // 移除
+      
+      pnpm up           // 更新所有依赖项
+
+      pnpm upgrade 包名  // 更新包
+
+      pnpm upgrade 包名 --global  // 全局更新包
+    ```
+
+## pretter集成(代码格式化)
+> 官网：https://www.prettier.cn/
+  1. 安装：
+    ```
+      pnpm add prettier -D 或
+      yarn add prettier -D
+    ```
+  2. 在项目根目录下(package.json同一目录)中新建prettierrc.cjs文件，编辑文件内容如下：
+    ```
+      module.exports = {
+        // 每行最大列，超过换行
+        printWidth: 120,
+        // 使用制表符而不是空格缩进
+        useTabs: false,
+        // 缩进
+        tabWidth: 2,
+        // 结尾不用分号
+        semi: false,
+        // 使用单引号
+        singleQuote: true,
+        // 在jsx中使用单引号而不是双引号
+        jsxSingleQuote: true,
+        // 箭头函数里面，如果是一个参数的时候，去掉括号
+        arrowParens: 'avoid',
+        // 对象、数组括号与文字间添加空格
+        bracketSpacing: true,
+        // 尾随逗号
+        trailingComma: 'none'
+      }
+    ```
+  3. 自动格式化
+    * 在vscode搜索安装prettier插件`Prettier - Code formatter`
+    * 在项目根目录下(package.json同一目录)中新建.vscode文件夹，再新建settings.json,编辑文件内容如下：(代码保存是会自动格式化代码)
+      ```
+        {
+          // 保存自动格式化代码
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          // 开启stylelint自动修复
+          "editor.codeActionsOnSave": {
+            "source.fixAll": true
+          }
+        }
+      ```
+
+## vite配置
+> 在vite.config.ts中配置如下：
+  ```
+    import { defineConfig } from "vite";
+    import react from "@vitejs/plugin-react";
+    import path from "path";
+
+    // https://vitejs.dev/config/
+    export default defineConfig({
+      plugins: [react()],
+      resolve: {
+        alias: {
+          "@": path.resolve(__dirname, "./src"),
+        },
+      },
+      server: {
+        host: "localhost",
+        port: 8000,
+        proxy: {
+          "/api": "http://api-driver.marsview.cc",
+        },
+      },
+    });
+  ```
+
+## 集成react-router6.x
+  1. 安装：
+    ```
+      yarn add react-router-dom 或
+      pnpm add react-router-dom
+    ```
+  2. 在src下心间router/router.tsx,并写入：
+    ```
+      import { createBrowserRouter, Navigate } from "react-router-dom";
+      import Home from "../view/Home.tsx";
+      import Main from "../view/Main.tsx";
+      import Layout from "../layout/Layout.tsx";
+      import Dashboard from "@/view/Dashboard";
+
+      const router = createBrowserRouter([
+        {
+          path: "/",
+          element: <Layout />,
+          children: [
+            {
+              path: "/",
+              element: <Navigate to={"/dashboard"} />,
+            },
+            {
+              path: "/dashboard",
+              element: <Dashboard />,
+            },
+          ],
+        },
+        {
+          path: "/home",
+          element: <Home />,
+        },
+        {
+          path: "/*",
+          element: <Main />,
+        },
+      ]);
+
+      export default router;
+    ```
+  3. 在main.tsx中引入router
+    ```
+      import React from "react";
+      import ReactDOM from "react-dom/client";
+      import "./index.css";
+      import { RouterProvider } from "react-router-dom";
+      import router from "./router";
+
+      ReactDOM.createRoot(document.getElementById("root")!).render(
+        <React.StrictMode>
+          <RouterProvider router={router} />
+        </React.StrictMode>,
+      );
+    ```
+
+# 封装loading组件(使用antd的spin)
+  1. 安装antd
+    ```
+      yarn add antd
+    ```
+  2. 在components/loading文件夹中新建如下文件
+    * index.css文件
+      ```
+        #i-loading {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+        }
+      ```
+    * index.tsx文件
+      ```
+        import { createRoot } from "react-dom/client";
+        import Loading from "./loading";
+
+        let count = 0;
+
+        export const showLoading = () => {
+          if (count === 0) {
+            const loading = document.createElement("div");
+            loading.setAttribute("id", "i-loading");
+            document.getElementById("root")?.appendChild(loading);
+            createRoot(loading).render(<Loading />);
+          }
+          count++;
+        };
+
+        export const hideLoading = () => {
+          if (count < 0) {
+            return;
+          }
+          count--;
+          if (count === 0) {
+            document
+              .getElementById("root")
+              ?.removeChild(document.getElementById("i-loading") as HTMLDivElement);
+          }
+        };
+      ```
+    * Loading.tsx文件
+      ```
+        import { Spin } from "antd";
+        import "./index.css";
+
+        export default function Loading({ tip = "loading" }: { tip?: string }) {
+          return <Spin tip={tip} size="large" className="i-loading" />;
+        }
+      ```
+  3. 在封装的axios中使用
+    ```
+      import { hideLoading, showLoading } from "@/components/loading";
+      import { message } from "antd";
+      import axios, { AxiosError } from "axios";
+
+      const instance = axios.create({
+        // baseURL: "/test",
+        timeout: 8000,
+        timeoutErrorMessage: "请求超时，请稍后再试",
+        withCredentials: true,
+      });
+
+      // 请求拦截器
+      instance.interceptors.request.use(
+        (config) => {
+          showLoading();
+          const token = localStorage.getItem("token");
+          if (token) {
+            config.headers.Authorization = "Token:" + token;
+          }
+          return {
+            ...config,
+          };
+        },
+        (error: AxiosError) => {
+          return Promise.reject(error);
+        },
+      );
+
+      // 响应拦截器
+      instance.interceptors.response.use(
+        (response) => {
+          const data = response.data;
+          hideLoading();
+          if (data.code === 500001) {
+            message.error(data.msg);
+          } else if (data.code != 0) {
+            return Promise.reject(data);
+          }
+          return data.data;
+        },
+        (error) => {
+          hideLoading();
+          message.error(error.message);
+          return Promise.reject(error.message);
+        },
+      );
+
+      export default {
+        get<T>(url: string, params?: object): Promise<T> {
+          return instance.get(url, { params });
+        },
+        post<T>(url: string, params?: object): Promise<T> {
+          return instance.post(url, params);
+        },
+      };
+    ```
+
+# 封装localStorage、sessionStorage、cookie
+> 封装cookie需要安装js-cookie和@types/js-cookie
+  1. 安装js-cookie和@types/js-cookie
+    ```
+      yarn add js-cookie
+      yarn add @types/js-cookie -D
+
+      pnpm add js-cookie
+      pnpm add @types/js-cookie -D
+    ```
+  2. 在utils/storage.ts中写入：
+    ```
+      import Cookies from "js-cookie";
+
+      // localstorage模块封装
+      const getValue = (type: "local" | "session" | "cookie", key: string) => {
+        let value;
+        if (type === "local") {
+          value = localStorage.getItem(key);
+        } else if (type === "session") {
+          value = sessionStorage.getItem(key);
+        }
+
+        if (!value) return "";
+        try {
+          return JSON.parse(value);
+        } catch (error) {
+          return value;
+        }
+      };
+
+      export default {
+        local: {
+          set: (key: string, value: any) => {
+            localStorage.setItem(key, JSON.stringify(value));
+          },
+          get: (key: string) => {
+            return getValue("local", key);
+          },
+          remove: (key: string) => {
+            localStorage.removeItem(key);
+          },
+          clear: () => {
+            localStorage.clear();
+          },
+        },
+        session: {
+          set: (key: string, value: any) => {
+            sessionStorage.setItem(key, JSON.stringify(value));
+          },
+          get: (key: string) => {
+            return getValue("session", key);
+          },
+          remove: (key: string) => {
+            sessionStorage.removeItem(key);
+          },
+          clear: () => {
+            sessionStorage.clear();
+          },
+        },
+        cookie: Cookies,
+      };
+    ```
+
+# vite的多环境配置(编译时环境配置)
+  1. 在根路径下创建对应的环境文件，例如：.env.local, .env.sit, .env.production
+    ```
+      # 环境设置
+      NODE_ENV=development
+
+      VITE_API_URL=https://www.fastmock.site/mock/development/f5d8d99de1a8ce59a932ad17a28ed974/temp
+
+    ```
+  2. 打印import.meta.env能够看到所有的值（注意，环境变量必须要是VITE_开头，不然不会生效）
+  3. 在package.json里，添加`--mode`关键词，启动对应的程序，并且要保证在跟路径下有对应的.env文件
+    ```
+      ...
+      "scripts": {
+        ...
+        "dev:development": "vite --mode development",
+        "dev:sit": "vite --mode sit",
+        ...
+      },
+    ```
+
+# vite多环境配置（运行时环境配置-更推荐）
+  1. 在根路径下新建config/index.ts,写入一下代码：
+    ```
+      type ENV = "development" | "sit" | "production";
+
+      const env = (document.documentElement.dataset.env as ENV) || "development";
+
+      const config = {
+        development: {
+          node_env: "development",
+          api_url:
+            "https://www.fastmock.site/mock/development/f5d8d99de1a8ce59a932ad17a28ed974/temp",
+        },
+        sit: {
+          node_env: "sit",
+          api_url:
+            "https://www.fastmock.site/mock/sit/f5d8d99de1a8ce59a932ad17a28ed974/temp",
+        },
+        production: {
+          node_env: "production",
+          api_url:
+            "https://www.fastmock.site/mock/production/f5d8d99de1a8ce59a932ad17a28ed974/temp",
+        },
+      };
+
+      export default {
+        env,
+        ...config[env],
+      };
+    ```
+
+  2. 在index.html的html标签添加`data-env="sit"`
+    ```
+        <!doctype html>
+        <html lang="en" data-env="sit">
+          ...
+        </html>
+    ```
+
+# 配置@
+  1. 在vite.config.ts中添加如下：
+    ```
+      import { defineConfig } from "vite";
+      import react from "@vitejs/plugin-react";
+      import path from "path";
+
+      export default defineConfig({
+        ...
+        resolve: {
+          alias: {
+            "@": path.resolve(__dirname, "./src"),
+          },
+        },
+        ...
+      });
+    ```
+  2. 在tsconfig.json中添加如下：
+    ```
+      {
+        "compilerOptions": {
+          ...
+            "paths": {
+              "@/*": ["./src/*"]
+            },
+        }
+      }
+    ```
+
+# 通过vscode提交git
+  1. 输入：git init
+  2. 点击vs code放大镜下面的按钮
+    * ![vscode添加git文件](/images/react/vscode的vite配置.png)
