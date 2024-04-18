@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>springboot | 杜江的博客</title><meta name="description" content="pring Boot 是 Spring 家族中的一个全新的框架，用来简化 Spring 应用程序的创建和开发过程"><meta name="keywords" content="springboot"><meta name="author" content="杜江"><meta name="copyright" content="杜江"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2021/05/06/springboot/springboot/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="springboot"><meta property="og:url" content="http://yoursite.com/2021/05/06/springboot/springboot/"><meta property="og:site_name" content="杜江的博客"><meta property="og:description" content="pring Boot 是 Spring 家族中的一个全新的框架，用来简化 Spring 应用程序的创建和开发过程"><meta property="og:image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632593097&amp;fm=26&amp;gp=0.jpg"><meta property="article:published_time" content="2021-05-06T01:07:44.000Z"><meta property="article:modified_time" content="2024-04-18T03:43:57.900Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="prev" title="springboot2" href="http://yoursite.com/2021/05/11/springboot/springboot2/"><link rel="next" title="vue3开发总结" href="http://yoursite.com/2021/01/04/vue3/vue3/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/images/hexo/avater.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">38</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">48</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#springboot学习所遇问题"><span class="toc-number">1.</span> <span class="toc-text">springboot学习所遇问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#springboot项目中，右侧没有mavenproject"><span class="toc-number">1.1.</span> <span class="toc-text">springboot项目中，右侧没有mavenproject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置maven镜像"><span class="toc-number">1.2.</span> <span class="toc-text">设置maven镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新jar包的最新版本"><span class="toc-number">1.3.</span> <span class="toc-text">更新jar包的最新版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第1章Spring-Boot-框架入门"><span class="toc-number">2.</span> <span class="toc-text">第1章Spring Boot 框架入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot-简介"><span class="toc-number">2.1.</span> <span class="toc-text">Spring Boot 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot-的特性"><span class="toc-number">2.2.</span> <span class="toc-text">Spring Boot 的特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot-四大核心"><span class="toc-number">2.3.</span> <span class="toc-text">Spring Boot 四大核心</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第2章Spring-Boot-入门案例"><span class="toc-number">3.</span> <span class="toc-text">第2章Spring Boot 入门案例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一个-SpringBoot-项目"><span class="toc-number">3.1.</span> <span class="toc-text">第一个 SpringBoot 项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发步骤"><span class="toc-number">3.1.1.</span> <span class="toc-text">开发步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门案例"><span class="toc-number">3.2.</span> <span class="toc-text">入门案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot-的核心配置文件"><span class="toc-number">3.3.</span> <span class="toc-text">Spring Boot 的核心配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#核心配置格式"><span class="toc-number">3.3.1.</span> <span class="toc-text">核心配置格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多环境配置"><span class="toc-number">3.3.2.</span> <span class="toc-text">多环境配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Boot-自定义配置"><span class="toc-number">3.3.3.</span> <span class="toc-text">Spring Boot 自定义配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第3章Spring-Boot集成jsp"><span class="toc-number">4.</span> <span class="toc-text">第3章Spring Boot集成jsp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第4章springboot集成mybaties"><span class="toc-number">5.</span> <span class="toc-text">第4章springboot集成mybaties</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库准备"><span class="toc-number">5.1.</span> <span class="toc-text">数据库准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置pom-xml中的相关jar依赖"><span class="toc-number">5.2.</span> <span class="toc-text">配置pom.xml中的相关jar依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在application-yml中配置数据源"><span class="toc-number">5.3.</span> <span class="toc-text">在application.yml中配置数据源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码开发"><span class="toc-number">5.4.</span> <span class="toc-text">代码开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-Mybatis-反向工程生成接口、映射文件以及实体-bean"><span class="toc-number">5.4.1.</span> <span class="toc-text">使用 Mybatis 反向工程生成接口、映射文件以及实体 bean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web包下创建-StudentController-并写入"><span class="toc-number">5.4.2.</span> <span class="toc-text">在web包下创建 StudentController,并写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-service-包下创建-service-接口并编写代码"><span class="toc-number">5.4.3.</span> <span class="toc-text">在 service 包下创建 service 接口并编写代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在service-impl包下创建service接口并编写代码"><span class="toc-number">5.4.4.</span> <span class="toc-text">在service.impl包下创建service接口并编写代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动-Application-应用，浏览器访问测试运行"><span class="toc-number">5.4.5.</span> <span class="toc-text">启动 Application 应用，浏览器访问测试运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAO-其它开发方式"><span class="toc-number">5.5.</span> <span class="toc-text">DAO 其它开发方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springboot使用事务"><span class="toc-number">6.</span> <span class="toc-text">springboot使用事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码开发-1"><span class="toc-number">6.1.</span> <span class="toc-text">代码开发:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springboot下面的springmvc"><span class="toc-number">7.</span> <span class="toc-text">springboot下面的springmvc</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller"><span class="toc-number">7.1.</span> <span class="toc-text">@Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RestController"><span class="toc-number">7.2.</span> <span class="toc-text">@RestController</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestMapping"><span class="toc-number">7.3.</span> <span class="toc-text">@RequestMapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetMapping"><span class="toc-number">7.4.</span> <span class="toc-text">@GetMapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PostMapping"><span class="toc-number">7.5.</span> <span class="toc-text">@PostMapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PutMapping"><span class="toc-number">7.6.</span> <span class="toc-text">@PutMapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DeleteMapping"><span class="toc-number">7.7.</span> <span class="toc-text">@DeleteMapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#综合练习"><span class="toc-number">7.8.</span> <span class="toc-text">综合练习</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springboot实现restfull"><span class="toc-number">8.</span> <span class="toc-text">springboot实现restfull</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">8.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot-开发-RESTFul"><span class="toc-number">8.2.</span> <span class="toc-text">Spring Boot 开发 RESTFul</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-number">8.3.</span> <span class="toc-text">案例</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><header class="post-bg" id="page-header" style="background-image: url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632593097&amp;fm=26&amp;gp=0.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">杜江的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">springboot</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-05-06 09:07:44"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2021-05-06</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history fa-fw"></i> 更新于 2024-04-18</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><i class="fas fa-angle-right post-meta__separator"></i><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/springboot/">springboot</a><i class="fas fa-angle-right post-meta__separator"></i><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/springboot/java/">java</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="springboot学习所遇问题"><a href="#springboot学习所遇问题" class="headerlink" title="springboot学习所遇问题"></a>springboot学习所遇问题</h1><h2 id="springboot项目中，右侧没有mavenproject"><a href="#springboot项目中，右侧没有mavenproject" class="headerlink" title="springboot项目中，右侧没有mavenproject"></a>springboot项目中，右侧没有mavenproject</h2><ul>
+<li>输入命令：shift + ctrl + A, 在输入Maven，选择ADD </li>
+</ul>
+<h2 id="设置maven镜像"><a href="#设置maven镜像" class="headerlink" title="设置maven镜像"></a>设置maven镜像</h2><ul>
+<li>在settings -&gt; Build,Execution,Deployment -&gt; Maven, 找到Maven home directory,打开该目录</li>
+<li>找到conf/settings.xml, 在mirrors下写入以下内容：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;mirrors&gt;</span><br><span class="line">  &lt;mirror&gt;</span><br><span class="line">    &lt;id&gt;nexus-aliyun&lt;&#x2F;id&gt;</span><br><span class="line">    &lt;mirrorOf&gt;*&lt;&#x2F;mirrorOf&gt;</span><br><span class="line">    &lt;name&gt;Nexus aliyun&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;url&gt;http:&#x2F;&#x2F;maven.aliyun.com&#x2F;nexus&#x2F;content&#x2F;groups&#x2F;public&lt;&#x2F;url&gt;</span><br><span class="line">  &lt;&#x2F;mirror&gt;</span><br><span class="line">&lt;&#x2F;mirrors&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="更新jar包的最新版本"><a href="#更新jar包的最新版本" class="headerlink" title="更新jar包的最新版本"></a>更新jar包的最新版本</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  &lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;javax.servlet.jsp&lt;&#x2F;groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;javax.servlet.jsp-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">	&lt;version&gt;[2.3.1,)&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>以上注意version里的[2.3.1,)表示取2.3.1以上最新版本。当我这样写version之后，我的selenium框架里的jar包就会自动升级了，现在他们自己变成2.3.1版本了。</li>
+</ul>
+<h1 id="第1章Spring-Boot-框架入门"><a href="#第1章Spring-Boot-框架入门" class="headerlink" title="第1章Spring Boot 框架入门"></a>第1章Spring Boot 框架入门</h1><h2 id="Spring-Boot-简介"><a href="#Spring-Boot-简介" class="headerlink" title="Spring Boot 简介"></a>Spring Boot 简介</h2><ul>
+<li>Spring Boot 是 Spring 家族中的一个全新的框架，它用来简化 Spring 应用程序的创建和开发过程，也可以说 Spring Boot 能简化我们之前采用 SpringMVC + Spring + MyBatis 框架进行开发的过程。</li>
+</ul>
+<h2 id="Spring-Boot-的特性"><a href="#Spring-Boot-的特性" class="headerlink" title="Spring Boot 的特性"></a>Spring Boot 的特性</h2><ul>
+<li>能够快速创建基于 Spring 的应用程序</li>
+<li>能够直接使用 java main 方法启动内嵌的 Tomcat 服务器运行 Spring Boot 程序，不需<br>要部署 war 包文件</li>
+<li>提供约定的 starter POM 来简化 Maven 配置，让 Maven 的配置变得简单</li>
+<li>自动化配置，根据项目的 Maven 依赖配置， Spring boot 自动配置 Spring、 Spring mvc<br>等</li>
+<li>提供了程序的健康检查等功能</li>
+<li>基本可以完全不使用 XML 配置文件，采用注解配置</li>
+</ul>
+<h2 id="Spring-Boot-四大核心"><a href="#Spring-Boot-四大核心" class="headerlink" title="Spring Boot 四大核心"></a>Spring Boot 四大核心</h2><ol>
+<li>自动配置</li>
+<li>起步依赖</li>
+<li>Actuator</li>
+<li>命令行界面</li>
+</ol>
+<h1 id="第2章Spring-Boot-入门案例"><a href="#第2章Spring-Boot-入门案例" class="headerlink" title="第2章Spring Boot 入门案例"></a>第2章Spring Boot 入门案例</h1><h2 id="第一个-SpringBoot-项目"><a href="#第一个-SpringBoot-项目" class="headerlink" title="第一个 SpringBoot 项目"></a>第一个 SpringBoot 项目</h2><h3 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h3><p>项目名称： 001-springboot-first</p>
+<ol>
+<li><p>创建一个 Module，选择类型为 Spring Initializr 快速构建</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%88%9B%E5%BB%BAmodule.jpg" alt="创建module"></li>
+</ul>
+</li>
+<li><p>设置 GAV 坐标及 pom 配置信息</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%88%9B%E5%BB%BAmodule2.jpg" alt="配置pom"></li>
+</ul>
+</li>
+<li><p>选择 Spring Boot 版本及依赖</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%88%9B%E5%BB%BAmodule3.jpg" alt="选择版本"></li>
+</ul>
+</li>
+<li><p>设置模块名称、 Content Root 路径及模块文件的目录</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%88%9B%E5%BB%BAmodule4.jpg" alt="文件目类"></li>
+</ul>
+</li>
+<li><p>项目创建完毕，如下</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%88%9B%E5%BB%BAmodule5.jpg" alt="项目展示"></li>
+</ul>
+</li>
+<li><p>项目结构</p>
+<ul>
+<li>static： 存放静态资源，如图片、 CSS、 JavaScript 等</li>
+<li>templates：存放 Web 页面的模板文件</li>
+<li>application.properties/application.yml 用于存放程序的各种依赖模块的配置信息，比如 服务端口，数据库连接配置等</li>
+</ul>
+</li>
+</ol>
+<h2 id="入门案例"><a href="#入门案例" class="headerlink" title="入门案例"></a>入门案例</h2><ol>
+<li><p>创建一个 Spring MVC 的 IndexController</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B.jpg" alt="入门案例"></li>
+</ul>
+</li>
+<li><p>在 IDEA 中右键，运行 Application 类中的 main 方法</p>
+<ul>
+<li><p>通过在控制台的输出，可以看到启动 SpringBoot 框架，会启动一个内嵌的 tomcat，端口号为 8080，上下文根为空</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B2.jpg" alt="入门案例"></li>
+</ul>
+</li>
+<li><p>在浏览器中输入 <a href="http://localhost:8080/hello/world" target="_blank" rel="noopener">http://localhost:8080/hello/world</a> 访问</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B3.jpg" alt="入门案例"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Spring-Boot-的核心配置文件"><a href="#Spring-Boot-的核心配置文件" class="headerlink" title="Spring Boot 的核心配置文件"></a>Spring Boot 的核心配置文件</h2><ul>
+<li>Spring Boot 的核心配置文件用于配置 Spring Boot 程序，名字必须以 application 开始<h3 id="核心配置格式"><a href="#核心配置格式" class="headerlink" title="核心配置格式"></a>核心配置格式</h3></li>
+</ul>
+<ol>
+<li><p>.properties 文件（默认采用该文件）</p>
+<ul>
+<li><p>通过修改 application.properties 配置文件，在修改默认 tomcat 端口号及项目上下文件根键值对的 properties 属性文件配置方式</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.jpg" alt="修改配置文件"></li>
+</ul>
+</li>
+<li><p>配置完毕之后，启动浏览器测试</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B62.jpg" alt="修改配置文件"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>.yml 文件</p>
+<ul>
+<li><p>yml 是一种 yaml 格式的配置文件，主要采用一定的空格、换行等格式排版进行配置。</p>
+</li>
+<li><p>yaml 是一种直观的能够被计算机识别的的数据序列化格式，容易被人类阅读， yaml 类似于 xml，但是语法比 xml 简洁很多，值与前面的冒号配置项必须要有一个空格， yml 后缀也可以使用 yaml 后缀</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B63.jpg" alt="修改配置文件"></li>
+</ul>
+</li>
+<li><p>注意：当两种格式配置文件同时存在，使用的是.properties 配置文件</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h3><ul>
+<li><p>为每个环境创建一个配置文件，命名必须以 application-环境标识.properties|yml, 启动即可</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E5%A4%9A%E7%8E%AF%E5%A2%83.jpg" alt="多环境"></li>
+</ul>
+</li>
+<li><p>在application.properties中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 激活对应的环境</span><br><span class="line">spring.profiles.active&#x3D;prod</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在application-dev.properties中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server.port&#x3D;8082</span><br><span class="line">server.servlet.context-path&#x3D;&#x2F;app</span><br><span class="line"></span><br><span class="line">school.name&#x3D;萱花中学</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在application-prod.properties中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server.port&#x3D;8083</span><br><span class="line">server.servlet.context-path&#x3D;&#x2F;app</span><br><span class="line"></span><br><span class="line">school.name&#x3D;永川中学</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Spring-Boot-自定义配置"><a href="#Spring-Boot-自定义配置" class="headerlink" title="Spring Boot 自定义配置"></a>Spring Boot 自定义配置</h3><ul>
+<li><p>@Value 注解</p>
+<ol>
+<li><p>在核心配置文件 applicatin.properties 中，添加两个自定义配置项 school.name。在 IDEA 中可以看到这个属性不能被 SpringBoot 识别，背景是桔色的</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE.jpg" alt="自定义配置"></li>
+</ul>
+</li>
+<li><p>在 IndexController 中定义属性，并使用@Value 注解或者自定义配置值，并对其方法进行测试</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class IndexController &#123;</span><br><span class="line">    @Value(&quot;$&#123;school.location&#125;&quot;)</span><br><span class="line">    public String location;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value &#x3D; &quot;&#x2F;say&quot;)</span><br><span class="line"></span><br><span class="line">    public @ResponseBody String say() &#123;</span><br><span class="line">        return &quot;hello,world:&quot; + school.getName() + &quot;and&quot; + location;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新运行 Application，在浏览器中进行测试</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE2.jpg" alt="自定义配置"></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>@ConfigurationProperties</p>
+<ul>
+<li>将整个文件映射成一个对象，用于自定义配置项比较多的情况<ol>
+<li>在 com.dj.app.web 包下创建 School 类，并为该类加上 Component 和 ConfigurationProperties 注解，并在 ConfigurationProperties 注解中添加属性 prefix，作用可以区分同名配置<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">@ConfigurationProperties(prefix &#x3D; &quot;school&quot;)</span><br><span class="line">public class School &#123;</span><br><span class="line">  private String name;</span><br><span class="line">  public String getName() &#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">  public void setName(String name) &#123;</span><br><span class="line">      this.name &#x3D; name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>application.properties 配置文件<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">school.name&#x3D;永川中学</span><br><span class="line">school.location&#x3D;456</span><br></pre></td></tr></table></figure></li>
+<li>在 IndexController 中注入 School 配置类<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private School school;</span><br></pre></td></tr></table></figure></li>
+<li>修改 IndexController 类中的测试方法<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public @ResponseBody String say() &#123;</span><br><span class="line">  return &quot;hello,world:&quot; + school.getName() + &quot;and&quot; + location;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行测试<br><img src= "/img/loading.gif" data-src="/images/springboot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE2.jpg" alt="自定义配置"></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>警告解决</p>
+<div class="note warning">
+            <p>在 School 类中使用了 ConfigurationProperties 注解后， IDEA 会出现一个警告，不影响程序的执行</p><ul><li><img src= "/img/loading.gif" data-src="/images/springboot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE3.jpg" alt="自定义配置"></li><li>点击 open documentnation 跳转到网页，在网页中提示需要加一个依赖，我们将这个依赖拷贝，粘贴到 pom.xml 文件中<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-configuration-processor&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;optional&gt;true&lt;&#x2F;optional&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></li></ul>
+          </div>
+</li>
+<li><p>中文乱码</p>
+<div class="note warning">
+            <p>如果在 SpringBoot 核心配置文件中有中文信息，会出现乱码：</p><ul><li>一般在配置文件中，不建议出现中文（注释除外）</li><li>如果有，可以先转化为 ASCII 码，在Settings -&gt; Editor -&gt; File Encodings<ul><li><img src= "/img/loading.gif" data-src="/images/springboot/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE4.jpg" alt="自定义配置"></li></ul></li></ul>
+          </div>
+</li>
+<li><p>友情提示</p>
+<div class="note warning">
+            <p>大家如果是从其它地方拷贝的配置文件，一定要将里面的空格删干净</p>
+          </div>
+
+</li>
+</ul>
+<h1 id="第3章Spring-Boot集成jsp"><a href="#第3章Spring-Boot集成jsp" class="headerlink" title="第3章Spring Boot集成jsp"></a>第3章Spring Boot集成jsp</h1><ol>
+<li><p>在 pom.xml 文件中配置以下依赖项</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--引入 Spring Boot 内嵌的 Tomcat 对 JSP 的解析包，不加解析不了 jsp 页面--&gt;</span><br><span class="line">&lt;!--如果只是使用 JSP 页面，可以只添加该依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.tomcat.embed&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tomcat-embed-jasper&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--如果要使用 servlet 必须添加该以下两个依赖--&gt;</span><br><span class="line">&lt;!-- servlet 依赖的 jar 包--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javax.servlet-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet.jsp&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javax.servlet.jsp-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.3.1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--如果使用 JSTL 必须添加该依赖--&gt;</span><br><span class="line">&lt;!--jstl 标签依赖的 jar 包 start--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 pom.xml 的 build 标签中要配置以下信息</p>
+<ul>
+<li>SpringBoot 要求 jsp 文件必须编译到指定的 META-INF/resources 目录下才能访问，否则访问不到。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--SpringBoot 要求 jsp 文件必须编译到指定的 META-INF&#x2F;resources 目录下才能访问，否则访问不到。其它官方已经建议使用模版技术（后面会课程会单独讲解模版技术）--&gt;</span><br><span class="line">  &lt;resources&gt;</span><br><span class="line">      &lt;resource&gt;</span><br><span class="line">          &lt;!--源文件位置--&gt;</span><br><span class="line">          &lt;directory&gt;src&#x2F;main&#x2F;webapp&lt;&#x2F;directory&gt;</span><br><span class="line"></span><br><span class="line">          &lt;!--指定编译到 META-INF&#x2F;resources，该目录不能随便写--&gt;</span><br><span class="line">          &lt;targetPath&gt;META-INF&#x2F;resources&lt;&#x2F;targetPath&gt;</span><br><span class="line"></span><br><span class="line">          &lt;!--指定要把哪些文件编译进去， **表示 webapp 目录及子目录， *.*表示所有文件--&gt;</span><br><span class="line">          &lt;includes&gt;</span><br><span class="line">              &lt;include&gt;**&#x2F;*.*&lt;&#x2F;include&gt;</span><br><span class="line">          &lt;&#x2F;includes&gt;</span><br><span class="line">      &lt;&#x2F;resource&gt;</span><br><span class="line">  &lt;&#x2F;resources&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>在application.properties文件配置 Spring MVC 的视图展示为jsp，这里相当于 Spring MVC 的配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#配置 SpringMVC 视图解析器</span><br><span class="line">#其中： &#x2F; 表示目录为 src&#x2F;main&#x2F;webapp</span><br><span class="line">spring.mvc.view.prefix&#x3D;&#x2F;</span><br><span class="line">spring.mvc.view.suffix&#x3D;.jsp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 com.dj.app.web 包下创建 IndexController 类，并编写代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RequestMapping(value&#x3D;&quot;&#x2F;abc&quot;)</span><br><span class="line">public String index(Model model) &#123;</span><br><span class="line">    model.addAttribute(&quot;age&quot;, &quot;18&quot;);</span><br><span class="line">    return &quot;index&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 src/main 下创建一个 webapp 目录，然后在该目录下新建index.jsp 页面</p>
+<ul>
+<li>如果在webapp目录下右键，没有创建jsp的选项，可以在Project Structure中指定webapp为 Web Resource Directory<ul>
+<li>快捷键Shift + Ctrl + A, 搜索Project Structure,点开</li>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90jsp.jpg" alt="集成jsp"></li>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90jsp2.jpg" alt="集成jsp"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>启动</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90jsp3.jpg" alt="展示"></li>
+</ul>
+</li>
+</ol>
+<h1 id="第4章springboot集成mybaties"><a href="#第4章springboot集成mybaties" class="headerlink" title="第4章springboot集成mybaties"></a>第4章springboot集成mybaties</h1><h2 id="数据库准备"><a href="#数据库准备" class="headerlink" title="数据库准备"></a>数据库准备</h2><ol>
+<li>下载mysql数据库，并安装</li>
+<li>下载Navcat，并安装</li>
+<li>使用navcat连接mysql<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/navcat%E8%BF%9E%E6%8E%A5mysql.jpg" alt="连接mysql"></li>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/navcat%E8%BF%9E%E6%8E%A5mysql2.jpg" alt="连接mysql"></li>
+</ul>
+</li>
+<li>右键点击新建数据库springboot<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/navcat%E8%BF%9E%E6%8E%A5mysql3.jpg" alt="连接mysql"></li>
+</ul>
+</li>
+<li>右键点击springboot表，选择运行SQL文件，将准备好的sql文件引入，文件放在images/springboot文件夹下<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/navcat%E8%BF%9E%E6%8E%A5mysql4.jpg" alt="连接mysql"></li>
+<li>文件内容为：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">drop table if exists t_student;</span><br><span class="line">create table t_student </span><br><span class="line">(</span><br><span class="line">  id                   int(10)                        not null auto_increment,</span><br><span class="line">  name                 varchar(20)                    null,</span><br><span class="line">  age                  int(10)                        null,</span><br><span class="line">  constraint PK_T_STUDENT primary key clustered (id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into t_student(name,age) values(&quot;zhangsan&quot;,25);</span><br><span class="line">insert into t_student(name,age) values(&quot;lisi&quot;,28);</span><br><span class="line">insert into t_student(name,age) values(&quot;wangwu&quot;,23);</span><br><span class="line">insert into t_student(name,age) values(&quot;Tom&quot;,21);</span><br><span class="line">insert into t_student(name,age) values(&quot;Jck&quot;,55);</span><br><span class="line">insert into t_student(name,age) values(&quot;Lucy&quot;,27);</span><br><span class="line">insert into t_student(name,age) values(&quot;zhaoliu&quot;,75);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="配置pom-xml中的相关jar依赖"><a href="#配置pom-xml中的相关jar依赖" class="headerlink" title="配置pom.xml中的相关jar依赖"></a>配置pom.xml中的相关jar依赖</h2><ul>
+<li>在pom.xml中，添加mysql<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--mybatis依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;!--mysql驱动--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="在application-yml中配置数据源"><a href="#在application-yml中配置数据源" class="headerlink" title="在application.yml中配置数据源"></a>在application.yml中配置数据源</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  # 配置内嵌 Tomcat 端口号</span><br><span class="line">  port: 8081</span><br><span class="line">  servlet:</span><br><span class="line">    # 配置项目上下文根</span><br><span class="line">    context-path: &#x2F;app</span><br><span class="line"># 配置数据库的连接信息</span><br><span class="line"># 注意这里的驱动类有变化</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;springboot?useUnicode&#x3D;t</span><br><span class="line">      rue&amp;characterEncoding&#x3D;UTF-8&amp;useJDBCCompliantTimezoneShift&#x3D;true&amp;useLegacyD</span><br><span class="line">      atetimeCode&#x3D;false&amp;serverTimezone&#x3D;GMT%2B8</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="代码开发"><a href="#代码开发" class="headerlink" title="代码开发"></a>代码开发</h2><h3 id="使用-Mybatis-反向工程生成接口、映射文件以及实体-bean"><a href="#使用-Mybatis-反向工程生成接口、映射文件以及实体-bean" class="headerlink" title="使用 Mybatis 反向工程生成接口、映射文件以及实体 bean"></a>使用 Mybatis 反向工程生成接口、映射文件以及实体 bean</h3><ol>
+<li><p>在根路径下新建GeneratorMapper.xml，并写入以下代码:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD MyBatis Generator Configuration 1.0&#x2F;&#x2F;EN&quot;</span><br><span class="line">        &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;!-- 指定连接数据库的 JDBC 驱动包所在位置，指定到你本机的完整路径 --&gt;</span><br><span class="line">    &lt;classPathEntry location&#x3D;&quot;C:\Users\lip\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar&quot;&#x2F;&gt;</span><br><span class="line">    &lt;!-- 配置 table 表信息内容体， targetRuntime 指定采用 MyBatis3 的版本 --&gt;</span><br><span class="line">    &lt;context id&#x3D;&quot;tables&quot; targetRuntime&#x3D;&quot;MyBatis3&quot;&gt;</span><br><span class="line">        &lt;!-- 抑制生成注释，由于生成的注释都是英文的，可以不让它生成 --&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name&#x3D;&quot;suppressAllComments&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;commentGenerator&gt;</span><br><span class="line">        &lt;!-- 配置数据库连接信息 --&gt;</span><br><span class="line">        &lt;jdbcConnection driverClass&#x3D;&quot;com.mysql.cj.jdbc.Driver&quot;</span><br><span class="line">                        connectionURL&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;springboot&quot;</span><br><span class="line">                        userId&#x3D;&quot;root&quot;</span><br><span class="line">                        password&#x3D;&quot;root&quot;&gt;</span><br><span class="line">        &lt;&#x2F;jdbcConnection&gt;</span><br><span class="line">        &lt;!-- 生成 model 类， targetPackage 指定 model 类的包名， targetProject 指定</span><br><span class="line">        生成的 model 放在 eclipse 的哪个工程下面--&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage&#x3D;&quot;com.dj.app.springboot.model&quot;</span><br><span class="line">                            targetProject&#x3D;&quot;src&#x2F;main&#x2F;java&quot;&gt;</span><br><span class="line">            &lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br><span class="line">            &lt;property name&#x3D;&quot;trimStrings&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;javaModelGenerator&gt;</span><br><span class="line">        &lt;!-- 生成 MyBatis 的 Mapper.xml 文件， targetPackage 指定 mapper.xml 文件的</span><br><span class="line">        包名， targetProject 指定生成的 mapper.xml 放在 eclipse 的哪个工程下面 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage&#x3D;&quot;com.dj.app.springboot.mapper&quot;</span><br><span class="line">                        targetProject&#x3D;&quot;src&#x2F;main&#x2F;java&quot;&gt;</span><br><span class="line">            &lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;sqlMapGenerator&gt;</span><br><span class="line">        &lt;!-- 生成 MyBatis 的 Mapper 接口类文件,targetPackage 指定 Mapper 接口类的包</span><br><span class="line">        名， targetProject 指定生成的 Mapper 接口放在 eclipse 的哪个工程下面 --&gt;</span><br><span class="line">        &lt;javaClientGenerator type&#x3D;&quot;XMLMAPPER&quot;</span><br><span class="line">                            targetPackage&#x3D;&quot;com.dj.app.springboot.mapper&quot; targetProject&#x3D;&quot;src&#x2F;main&#x2F;java&quot;&gt;</span><br><span class="line">            &lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;javaClientGenerator&gt;</span><br><span class="line">        &lt;!-- 数据库表名及对应的 Java 模型类名 --&gt;</span><br><span class="line">        &lt;table tableName&#x3D;&quot;t_student&quot; domainObjectName&#x3D;&quot;Student&quot;</span><br><span class="line">              enableCountByExample&#x3D;&quot;false&quot;</span><br><span class="line">              enableUpdateByExample&#x3D;&quot;false&quot;</span><br><span class="line">              enableDeleteByExample&#x3D;&quot;false&quot;</span><br><span class="line">        enableSelectByExample&#x3D;&quot;false&quot;</span><br><span class="line">        selectByExampleQueryId&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;context&gt;</span><br><span class="line">&lt;&#x2F;generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+<div class="note warning">
+            <p>注意:<br>  ➢ 如果使用高版本， 驱动类变为： com.mysql.cj.jdbc.Driver<br>  ➢ url 后面应该加属性 nullCatalogMeansCurrent=true，否则生成有问题<br>  当前版本 MySQL 数据库为 5.5.60</p>
+          </div>
+</li>
+<li><p>在pom.xml中，添加 mysql 反向工程依赖</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--mybatis 代码自动生成插件--&gt;</span><br><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.generator&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.6&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;configuration&gt;</span><br><span class="line">        &lt;!--配置文件的位置--&gt;</span><br><span class="line">        &lt;configurationFile&gt;GeneratorMapper.xml&lt;&#x2F;configurationFile&gt;</span><br><span class="line">        &lt;verbose&gt;true&lt;&#x2F;verbose&gt;</span><br><span class="line">        &lt;overwrite&gt;true&lt;&#x2F;overwrite&gt;</span><br><span class="line">    &lt;&#x2F;configuration&gt;</span><br><span class="line">&lt;&#x2F;plugin</span><br></pre></td></tr></table></figure></li>
+<li><p>在右侧Maven,找到项目中的Plugins/mybatis-generator/mybatis-generator:generate, 双击红色选中命令，生成相关文件</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90mybatis.jpg" alt="集成mybatis"></li>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90mybatis2.jpg" alt="集成mybatis"></li>
+</ul>
+</li>
+</ol>
+<h3 id="在web包下创建-StudentController-并写入"><a href="#在web包下创建-StudentController-并写入" class="headerlink" title="在web包下创建 StudentController,并写入"></a>在web包下创建 StudentController,并写入</h3>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.dj.app.springboot.web;</span><br><span class="line"></span><br><span class="line">import com.dj.app.springboot.model.Student;</span><br><span class="line">import com.dj.app.springboot.service.StudentService;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class StudentController &#123;</span><br><span class="line">    &#x2F;&#x2F; 注入业务层</span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentService studentService;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value&#x3D;&quot;&#x2F;student&quot;)</span><br><span class="line">    public @ResponseBody Object student(Integer id) &#123;</span><br><span class="line">        Student student &#x3D; studentService.queryStudentById(id);</span><br><span class="line">        return student;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在-service-包下创建-service-接口并编写代码"><a href="#在-service-包下创建-service-接口并编写代码" class="headerlink" title="在 service 包下创建 service 接口并编写代码"></a>在 service 包下创建 service 接口并编写代码</h3>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.dj.app.springboot.service;</span><br><span class="line">import com.dj.app.springboot.model.Student;</span><br><span class="line">public interface StudentService &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">    * 根据学生ID查询详情</span><br><span class="line">    * @param id</span><br><span class="line">    * @return</span><br><span class="line">    *&#x2F;</span><br><span class="line">    Student queryStudentById(Integer id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在service-impl包下创建service接口并编写代码"><a href="#在service-impl包下创建service接口并编写代码" class="headerlink" title="在service.impl包下创建service接口并编写代码"></a>在service.impl包下创建service接口并编写代码</h3>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.dj.app.springboot.service.impl;</span><br><span class="line"></span><br><span class="line">import com.dj.app.springboot.mapper.StudentMapper;</span><br><span class="line">import com.dj.app.springboot.model.Student;</span><br><span class="line">import com.dj.app.springboot.service.StudentService;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class StudentServiceImpl implements StudentService &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentMapper studentMapper;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Student queryStudentById(Integer id) &#123;</span><br><span class="line">        Student student &#x3D; studentMapper.selectByPrimaryKey(id);</span><br><span class="line">        return student;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning">
+            <p>注意：如果在 web 中导入 service 存在报错，可以尝试进行如下配置解决<br><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90mybatis3.jpg" alt="集成mybatis"></p><p>➢ 在 Mybatis 反向工程生成的 StudentMapper 接口上加一个 Mapper 注解<br>@Mapper 作用： mybatis 自动扫描数据持久层的映射文件及 DAO 接口的关系<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface StudentMapper &#123;</span><br></pre></td></tr></table></figure></p><p>➢ 默认情况下， Mybatis 的 xml 映射文件不会编译到 target 的 class 目录下，所以我们需要在 pom.xml 文件中配置 resource<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--手动指定文件夹为resources--&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">  &lt;resource&gt;</span><br><span class="line">    &lt;directory&gt;src&#x2F;main&#x2F;java&lt;&#x2F;directory&gt;</span><br><span class="line">    &lt;includes&gt;</span><br><span class="line">      &lt;include&gt;<em>*&#x2F;</em>.xml&lt;&#x2F;include&gt;</span><br><span class="line">    &lt;&#x2F;includes&gt;</span><br><span class="line">  &lt;&#x2F;resource&gt;</span><br><span class="line">&lt;&#x2F;resources&gt;</span><br></pre></td></tr></table></figure></p>
+          </div>
+
+<h3 id="启动-Application-应用，浏览器访问测试运行"><a href="#启动-Application-应用，浏览器访问测试运行" class="headerlink" title="启动 Application 应用，浏览器访问测试运行"></a>启动 Application 应用，浏览器访问测试运行</h3><ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90mybatis4.jpg" alt="集成mybatis"></li>
+</ul>
+<h2 id="DAO-其它开发方式"><a href="#DAO-其它开发方式" class="headerlink" title="DAO 其它开发方式"></a>DAO 其它开发方式</h2><ol>
+<li><p>在运行的主类上添加注解包扫描@MapperScan(“com.abc.springboot.mapper”)</p>
+<ul>
+<li><p>注释掉 StudentMapper 接口上的@Mapper 注解</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; @Mapper &#x2F;&#x2F; 扫描dao接口到spring容器</span><br><span class="line">public interface StudentMapper &#123;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在运行主类 Application 上加@MapperScan(“com.abc.springboot.mapper”)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@MapperScan(basePackages &#x3D; &quot;com.dj.app.springboot.mapper&quot;)</span><br><span class="line">public class Application &#123;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>将接口和映射文件分开</p>
+<ul>
+<li><p>在resources目录下新建目录mapper存放映射文件，将StudentMapper.xml文件移到resources/mapper目录下</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E9%9B%86%E6%88%90mybatis5.jpg" alt="集成mybatis"></li>
+</ul>
+</li>
+<li><p>在 application.yml 配置文件中指定映射文件的位置，这个配置只有接口和映射文件不在同一个包的情况下，才需要指定</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper&#x2F;*.xml</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样，pom.xml中手动指定文件夹为resources就可以删掉了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--手动指定文件夹为resources--&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">  &lt;resource&gt;</span><br><span class="line">    &lt;directory&gt;src&#x2F;main&#x2F;java&lt;&#x2F;directory&gt;</span><br><span class="line">    &lt;includes&gt;</span><br><span class="line">      &lt;include&gt;**&#x2F;*.xml&lt;&#x2F;include&gt;</span><br><span class="line">    &lt;&#x2F;includes&gt;</span><br><span class="line">  &lt;&#x2F;resource&gt;</span><br><span class="line">&lt;&#x2F;resources&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="springboot使用事务"><a href="#springboot使用事务" class="headerlink" title="springboot使用事务"></a>springboot使用事务</h1><ol>
+<li>在入口类中使用注解 @EnableTransactionManagement 开启事务支持</li>
+<li>在访问数据库的 Service 方法上添加注解 @Transactional 即可</li>
+</ol>
+<h2 id="代码开发-1"><a href="#代码开发-1" class="headerlink" title="代码开发:"></a>代码开发:</h2><ol>
+<li><p>在 StudentController 中添加更新学生的方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.dj.app.springboot.web;</span><br><span class="line"></span><br><span class="line">import com.dj.app.springboot.model.Student;</span><br><span class="line">import com.dj.app.springboot.service.StudentService;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class StudentController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentService studentService;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value &#x3D; &quot;&#x2F;springboot&#x2F;modify&quot;)</span><br><span class="line"></span><br><span class="line">    public @ResponseBody Object modifyStudent() &#123;</span><br><span class="line">        int count &#x3D; 0;</span><br><span class="line">        try &#123;</span><br><span class="line">            Student student &#x3D; new Student();</span><br><span class="line">            student.setId(1);</span><br><span class="line">            student.setName(&quot;Jack&quot;);</span><br><span class="line">            student.setAge(33);</span><br><span class="line">            count &#x3D; studentService.modifyStudentById(student);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return &quot;fail&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 StudentService 接口中添加更新学生方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.dj.app.springboot.service;</span><br><span class="line"></span><br><span class="line">import com.dj.app.springboot.model.Student;</span><br><span class="line"></span><br><span class="line">public interface StudentService &#123;</span><br><span class="line">    int modifyStudentById(Student student);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在 StudentServiceImpl 接口实现类中对更新学生方法进行实现，并构建一个异常，同时在该方法上加@Transactional 注解</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.dj.app.springboot.service.impl;</span><br><span class="line"></span><br><span class="line">import com.dj.app.springboot.mapper.StudentMapper;</span><br><span class="line">import com.dj.app.springboot.model.Student;</span><br><span class="line">import com.dj.app.springboot.service.StudentService;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class StudentServiceImpl implements StudentService &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentMapper studentMapper;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @Transactional</span><br><span class="line">    public int modifyStudentById(Student student) &#123;</span><br><span class="line">        int updateCount &#x3D; studentMapper.updateByPrimaryKeySelective(student);</span><br><span class="line">        System.out.println(&quot;更新结果： &quot; + updateCount);</span><br><span class="line">&#x2F;&#x2F;在此构造一个除数为 0 的异常，测试事务是否起作用</span><br><span class="line">        int a &#x3D; 10&#x2F;0;</span><br><span class="line">        return updateCount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 Application 类上加@EnableTransactionManagement开启事务支持(可选)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@EnableTransactionManagement</span><br><span class="line">public class Application &#123;</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+<ul>
+<li><img src= "/img/loading.gif" data-src="/images/springboot/%E4%BA%8B%E5%8A%A1.jpg" alt="事务"></li>
+</ul>
+</li>
+</ol>
+<h1 id="springboot下面的springmvc"><a href="#springboot下面的springmvc" class="headerlink" title="springboot下面的springmvc"></a>springboot下面的springmvc</h1><h2 id="Controller"><a href="#Controller" class="headerlink" title="@Controller"></a>@Controller</h2><p>  Spring MVC 的注解，处理 http 请求</p>
+<h2 id="RestController"><a href="#RestController" class="headerlink" title="@RestController"></a>@RestController</h2><p>  等于 @Controller + @ResponseBody</p>
+<h2 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h2><p>  支持 Get 请求，也支持 Post 请求</p>
+<h2 id="GetMapping"><a href="#GetMapping" class="headerlink" title="@GetMapping"></a>@GetMapping</h2><p>  RequestMapping 和 Get 请求方法的组合。只支持 Get 请求Get 请求。主要用于查询操作</p>
+<h2 id="PostMapping"><a href="#PostMapping" class="headerlink" title="@PostMapping"></a>@PostMapping</h2><p>  RequestMapping 和 Post 请求方法的组合。只支持 Post 请求。Post 请求主要用户新增数据</p>
+<h2 id="PutMapping"><a href="#PutMapping" class="headerlink" title="@PutMapping"></a>@PutMapping</h2><p>  RequestMapping 和 Put 请求方法的组合。只支持 Put 请求。Put 通常用于修改数据</p>
+<h2 id="DeleteMapping"><a href="#DeleteMapping" class="headerlink" title="@DeleteMapping"></a>@DeleteMapping</h2><p>  RequestMapping 和 Delete 请求方法的组合。只支持 Delete 请求。通常用于删除数据</p>
+<h2 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">* 该案例主要演示了使用 Spring 提供的不同注解接收不同类型的请求</span><br><span class="line">*&#x2F;</span><br><span class="line">&#x2F;&#x2F;RestController 注解相当于加了给方法加了@ResponseBody 注解，所以是不能跳转页面的，</span><br><span class="line">只能返回字符串或者 json 数据</span><br><span class="line">@RestController</span><br><span class="line">public class MVCController &#123;</span><br><span class="line">    @GetMapping(value &#x3D; &quot;&#x2F;query&quot;)</span><br><span class="line">        public String get() &#123;</span><br><span class="line">        return &quot;@GetMapping 注解,通常查询时使用&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    @PostMapping(value &#x3D; &quot;&#x2F;add&quot;)</span><br><span class="line">    public String add() &#123;</span><br><span class="line">        return &quot;@PostMapping 注解，通常新增时使用&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    @PutMapping(value &#x3D; &quot;&#x2F;modify&quot;)</span><br><span class="line">    public String modify() &#123;</span><br><span class="line">        return &quot;@PutMapping 注解，通常更新数据时使用&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    @DeleteMapping(value &#x3D; &quot;&#x2F;remove&quot;)</span><br><span class="line">    public String remove() &#123;</span><br><span class="line">        return &quot;@DeleteMapping 注解，通常删除数据时使用&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="springboot实现restfull"><a href="#springboot实现restfull" class="headerlink" title="springboot实现restfull"></a>springboot实现restfull</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>  一种互联网软件架构设计的风格，但它并不是标准，它只是提出了一组客户端和服务器交互时的架构理念和设计原则，基于这种理念和原则设计的接口可以更简洁，更有层次</p>
+<h2 id="Spring-Boot-开发-RESTFul"><a href="#Spring-Boot-开发-RESTFul" class="headerlink" title="Spring Boot 开发 RESTFul"></a>Spring Boot 开发 RESTFul</h2><ol>
+<li>@PathVariable<ul>
+<li>获取 url 中的数据。该注解是实现 RESTFul 最主要的一个注解</li>
+</ul>
+</li>
+<li>@PostMapping、@GetMapping</li>
+</ol>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ul>
+<li>创建RestfulController，并编写代码<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.dj.app.springboot.web;</span><br><span class="line"></span><br><span class="line">import org.springframework.web.bind.annotation.*;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">public class RestfullController &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">    * 添加学生</span><br><span class="line">    * 请求地址：</span><br><span class="line">    http:&#x2F;&#x2F;localhost:8081&#x2F;app&#x2F;student&#x2F;wangpeng&#x2F;23</span><br><span class="line">    * 请求方式： POST</span><br><span class="line">    * @param name</span><br><span class="line">    * @param age</span><br><span class="line">    * @return</span><br><span class="line">    *&#x2F;</span><br><span class="line">    @PostMapping(value &#x3D; &quot;&#x2F;student&#x2F;&#123;name&#125;&#x2F;&#123;age&#125;&quot;)</span><br><span class="line">    public Object addStudent(@PathVariable(&quot;name&quot;) String name, @PathVariable(&quot;age&quot;) Integer age) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; retMap &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">        retMap.put(&quot;name&quot;, name);</span><br><span class="line">        retMap.put(&quot;age&quot;, age);</span><br><span class="line"></span><br><span class="line">        return retMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">    * 删除学生</span><br><span class="line">    * 请求地址：</span><br><span class="line">    http:&#x2F;&#x2F;localhost:8081&#x2F;app&#x2F;springBoot&#x2F;student&#x2F;1</span><br><span class="line">    * 请求方式： Delete</span><br><span class="line">    * @param id</span><br><span class="line">    * @return</span><br><span class="line">    *&#x2F;</span><br><span class="line">    @DeleteMapping(value &#x3D; &quot;&#x2F;student&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Object removeStudent(@PathVariable(&quot;id&quot;) Integer id) &#123;</span><br><span class="line">        return &quot;删除的学生 id 为： &quot; + id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">    * 修改学生信息</span><br><span class="line">    * 请求地址：</span><br><span class="line">    http:&#x2F;&#x2F;localhost:8081&#x2F;app&#x2F;student&#x2F;2</span><br><span class="line">    * 请求方式： Put</span><br><span class="line">    * @param id</span><br><span class="line">    * @return</span><br><span class="line">    *&#x2F;</span><br><span class="line">    @PutMapping(value &#x3D; &quot;&#x2F;student&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Object modifyStudent(@PathVariable(&quot;id&quot;) Integer id) &#123;</span><br><span class="line">        return &quot;修改学生的 id 为&quot; + id;</span><br><span class="line">    &#125;</span><br><span class="line">    @GetMapping(value &#x3D; &quot;&#x2F;student&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Object queryStudent(@PathVariable(&quot;id&quot;) Integer id) &#123;</span><br><span class="line">        return &quot;查询学生的 id 为&quot; + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">杜江</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2021/05/06/springboot/springboot/">http://yoursite.com/2021/05/06/springboot/springboot/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">杜江的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/springboot/">springboot</a><a class="post-meta__tags" href="/tags/java/">java</a></div><div class="post_share"><div class="social-share" data-image="/images/hexo/hexo_logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/05/11/springboot/springboot2/"><img class="prev-cover" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632593097&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">springboot2</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/04/vue3/vue3/"><img class="next-cover" data-src="/images/vue/vue.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vue3开发总结</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2021/06/08/lombok/lombok/" title="lombok"><img class="relatedPosts_cover" data-src="/images/springboot/lombok.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-08</div><div class="relatedPosts_title">lombok</div></div></a></div><div class="relatedPosts_item"><a href="/2021/05/11/springboot/springboot2/" title="springboot2"><img class="relatedPosts_cover" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589588367,2632593097&fm=26&gp=0.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-11</div><div class="relatedPosts_title">springboot2</div></div></a></div><div class="relatedPosts_item"><a href="/2021/07/15/mybatis/mybatis/" title="mybatis"><img class="relatedPosts_cover" data-src="/images/mybatis/log.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-15</div><div class="relatedPosts_title">mybatis</div></div></a></div><div class="relatedPosts_item"><a href="/2021/07/26/mybatis/mybatisPlus2/" title="mybatisPlus2"><img class="relatedPosts_cover" data-src="/images/mybatis/plus.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-26</div><div class="relatedPosts_title">mybatisPlus2</div></div></a></div><div class="relatedPosts_item"><a href="/2021/07/16/mybatis/mybatis2/" title="mybatis2"><img class="relatedPosts_cover" data-src="/images/mybatis/log.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-16</div><div class="relatedPosts_title">mybatis2</div></div></a></div><div class="relatedPosts_item"><a href="/2021/06/18/spring/spring2-aop/" title="spring2-aop"><img class="relatedPosts_cover" data-src="/images/spring/logo.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-18</div><div class="relatedPosts_title">spring2-aop</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC81MDYyNy8yNzExMA=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 杜江</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://dj49846917.github.io/" target="_blank" rel="noopener">blog</a>!</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/click_heart.js"></script></body></html>

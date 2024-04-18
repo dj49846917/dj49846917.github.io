@@ -1,0 +1,1467 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>面试——其他篇 | 杜江的博客</title><meta name="description" content="JavaScript（简称“JS”） 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言。"><meta name="keywords" content="面试,js"><meta name="author" content="杜江"><meta name="copyright" content="杜江"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/12/29/interview/interview-other/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="面试——其他篇"><meta property="og:url" content="http://yoursite.com/2020/12/29/interview/interview-other/"><meta property="og:site_name" content="杜江的博客"><meta property="og:description" content="JavaScript（简称“JS”） 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言。"><meta property="og:image" content="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,3458128037&amp;fm=26&amp;gp=0.jpg"><meta property="article:published_time" content="2020-12-29T02:23:51.000Z"><meta property="article:modified_time" content="2024-04-18T03:43:57.889Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="prev" title="面试——typescript篇" href="http://yoursite.com/2020/12/29/interview/interview-typescript/"><link rel="next" title="面试——html篇" href="http://yoursite.com/2020/12/28/interview/interview-html/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/images/hexo/avater.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">38</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">48</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#询问工作经历，在项目中如何做性能优化的？"><span class="toc-number">1.</span> <span class="toc-text">询问工作经历，在项目中如何做性能优化的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器http请求过多怎么解决？"><span class="toc-number">2.</span> <span class="toc-text">浏览器http请求过多怎么解决？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组件库如何做按需加载"><span class="toc-number">3.</span> <span class="toc-text">组件库如何做按需加载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#聊项目：为什么做，功能是什么，你做了什么，难点是什么，怎么解决的，结果怎么样"><span class="toc-number">4.</span> <span class="toc-text">聊项目：为什么做，功能是什么，你做了什么，难点是什么，怎么解决的，结果怎么样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#跨平台的框架用过哪些，这些框架的好处是什么，问题是什么，各自的区别是什么"><span class="toc-number">5.</span> <span class="toc-text">跨平台的框架用过哪些，这些框架的好处是什么，问题是什么，各自的区别是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你觉得做前端工程师需要什么能力"><span class="toc-number">6.</span> <span class="toc-text">你觉得做前端工程师需要什么能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你对前端未来的发展趋势的看法"><span class="toc-number">7.</span> <span class="toc-text">你对前端未来的发展趋势的看法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你认为自己做的项目有什么值得的说道的地方吗？这里其实就是考察项目的亮点，可以说一些项目难点是如何解决的，或者介绍一些项目中用到的比较高级的技术。"><span class="toc-number">8.</span> <span class="toc-text">你认为自己做的项目有什么值得的说道的地方吗？这里其实就是考察项目的亮点，可以说一些项目难点是如何解决的，或者介绍一些项目中用到的比较高级的技术。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"><span class="toc-number">9.</span> <span class="toc-text">常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？"><span class="toc-number">10.</span> <span class="toc-text">除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何管理前端团队"><span class="toc-number">11.</span> <span class="toc-text">如何管理前端团队?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你在现在的团队处于什么样的角色，起到了什么明显的作用？"><span class="toc-number">12.</span> <span class="toc-text">你在现在的团队处于什么样的角色，起到了什么明显的作用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最近在学什么？能谈谈你未来3，5年给自己的规划吗？"><span class="toc-number">13.</span> <span class="toc-text">最近在学什么？能谈谈你未来3，5年给自己的规划吗？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简单描述一下你做过的移动APP项目研发流程？"><span class="toc-number">14.</span> <span class="toc-text">简单描述一下你做过的移动APP项目研发流程？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你对加班的看法？"><span class="toc-number">15.</span> <span class="toc-text">你对加班的看法？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你的优点是什么？缺点是什么？"><span class="toc-number">16.</span> <span class="toc-text">你的优点是什么？缺点是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在项目中所承担的角色，怎样看待自己的角色"><span class="toc-number">17.</span> <span class="toc-text">在项目中所承担的角色，怎样看待自己的角色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自己有什么技术上的优势"><span class="toc-number">18.</span> <span class="toc-text">自己有什么技术上的优势</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#职业规划"><span class="toc-number">19.</span> <span class="toc-text">职业规划</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工作之余，平时都做些什么"><span class="toc-number">20.</span> <span class="toc-text">工作之余，平时都做些什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#未来3年的打算？"><span class="toc-number">21.</span> <span class="toc-text">未来3年的打算？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你期望的团队和工作是什么样的？"><span class="toc-number">22.</span> <span class="toc-text">你期望的团队和工作是什么样的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#说说你对中台的理解，和后台有什么区别"><span class="toc-number">23.</span> <span class="toc-text">说说你对中台的理解，和后台有什么区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如果团队成员因某种原因没有完成相应的任务，该怎么办"><span class="toc-number">24.</span> <span class="toc-text">如果团队成员因某种原因没有完成相应的任务，该怎么办</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#平时如何管理你的项目？"><span class="toc-number">25.</span> <span class="toc-text">平时如何管理你的项目？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？"><span class="toc-number">26.</span> <span class="toc-text">对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？"><span class="toc-number">27.</span> <span class="toc-text">有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#权限系统是怎么设计的"><span class="toc-number">28.</span> <span class="toc-text">权限系统是怎么设计的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#假如进入一个页面没有权限进入，如何判断"><span class="toc-number">29.</span> <span class="toc-text">假如进入一个页面没有权限进入，如何判断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#大意在前端处理分为路由和接口两个方面，路由在vue-route中的钩子函数beforeEach，接口是通过axios响应拦截器处理"><span class="toc-number">29.1.</span> <span class="toc-text">大意在前端处理分为路由和接口两个方面，路由在vue-route中的钩子函数beforeEach，接口是通过axios响应拦截器处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#谈谈以前端角度出发做好SEO需要考虑什么？"><span class="toc-number">30.</span> <span class="toc-text">谈谈以前端角度出发做好SEO需要考虑什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB应用从服务器主动推送Data到客户端有那些方式？"><span class="toc-number">31.</span> <span class="toc-text">WEB应用从服务器主动推送Data到客户端有那些方式？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的"><span class="toc-number">32.</span> <span class="toc-text">描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#同上"><span class="toc-number">32.1.</span> <span class="toc-text">同上</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#移动端的点击事件的有延迟，时间是多久，为什么会有？-怎么解决这个延时？"><span class="toc-number">33.</span> <span class="toc-text">移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#300ms"><span class="toc-number">33.1.</span> <span class="toc-text">  300ms</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是CDN缓存"><span class="toc-number">34.</span> <span class="toc-text">什么是CDN缓存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cdn用的是哪一种缓存？"><span class="toc-number">35.</span> <span class="toc-text">cdn用的是哪一种缓存？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用CDN有什么好处"><span class="toc-number">36.</span> <span class="toc-text">使用CDN有什么好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cdn原理"><span class="toc-number">37.</span> <span class="toc-text">cdn原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CDN什么资源都能存吗？"><span class="toc-number">38.</span> <span class="toc-text">CDN什么资源都能存吗？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cdn有哪些优化静态资源加载速度的方法？"><span class="toc-number">39.</span> <span class="toc-text">Cdn有哪些优化静态资源加载速度的方法？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应当什么场景下实用CDN服务器？"><span class="toc-number">40.</span> <span class="toc-text">应当什么场景下实用CDN服务器？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JWT的优缺点-使用场景"><span class="toc-number">41.</span> <span class="toc-text">JWT的优缺点, 使用场景?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从浏览器地址栏输入url到显示页面的步骤-以HTTP为例"><span class="toc-number">42.</span> <span class="toc-text">从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从接口请求到后端响应经过了什么"><span class="toc-number">43.</span> <span class="toc-text">从接口请求到后端响应经过了什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dns查询过程，使用的协议"><span class="toc-number">44.</span> <span class="toc-text">dns查询过程，使用的协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DNS解析的内部原理"><span class="toc-number">45.</span> <span class="toc-text">DNS解析的内部原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dns劫持了解吗"><span class="toc-number">46.</span> <span class="toc-text">dns劫持了解吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-request报文结构是怎样的"><span class="toc-number">47.</span> <span class="toc-text">HTTP request报文结构是怎样的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-response报文结构是怎样的"><span class="toc-number">48.</span> <span class="toc-text">HTTP response报文结构是怎样的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http报文头部有哪些字段-有什么意义"><span class="toc-number">49.</span> <span class="toc-text">http报文头部有哪些字段?有什么意义?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#和浏览器缓存相关的HTTP头有哪些"><span class="toc-number">50.</span> <span class="toc-text">和浏览器缓存相关的HTTP头有哪些</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http状态码有那些？分别代表是什么意思？"><span class="toc-number">51.</span> <span class="toc-text">http状态码有那些？分别代表是什么意思？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一个http的报文的头和body之间有什么分隔"><span class="toc-number">52.</span> <span class="toc-text">一个http的报文的头和body之间有什么分隔</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http协议中301和302的区别"><span class="toc-number">53.</span> <span class="toc-text">http协议中301和302的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍HTTP2-0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？"><span class="toc-number">54.</span> <span class="toc-text">介绍HTTP2.0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍下304过程。-原理"><span class="toc-number">55.</span> <span class="toc-text">介绍下304过程。(原理)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#说一下和304相关的几个header属性，Etag和last-modified有什么区别"><span class="toc-number">56.</span> <span class="toc-text">说一下和304相关的几个header属性，Etag和last modified有什么区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么时候用304？"><span class="toc-number">57.</span> <span class="toc-text">什么时候用304？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#如果客户端发送了一个带条件的GET-请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。"><span class="toc-number">57.1.</span> <span class="toc-text">  如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#301-302-304各自代表了什么，304的协商缓存怎么定义，说一下强缓存"><span class="toc-number">58.</span> <span class="toc-text">301 302 304各自代表了什么，304的协商缓存怎么定义，说一下强缓存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？"><span class="toc-number">59.</span> <span class="toc-text">问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#If-Modified-Since、If-Match是根据什么进行判断"><span class="toc-number">60.</span> <span class="toc-text">If-Modified-Since、If-Match是根据什么进行判断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#etag"><span class="toc-number">60.1.</span> <span class="toc-text">etag</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是Etag？"><span class="toc-number">61.</span> <span class="toc-text">什么是Etag？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么生成ETAG"><span class="toc-number">62.</span> <span class="toc-text">怎么生成ETAG</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#协商缓存中etag-lastmodify区别"><span class="toc-number">63.</span> <span class="toc-text">协商缓存中etag lastmodify区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成ETAG的算法了解过吗-原理"><span class="toc-number">64.</span> <span class="toc-text">生成ETAG的算法了解过吗(原理)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#缓存原理，ETAG给服务器的压力太大怎么办"><span class="toc-number">65.</span> <span class="toc-text">缓存原理，ETAG给服务器的压力太大怎么办</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#expires的单位是"><span class="toc-number">66.</span> <span class="toc-text">expires的单位是</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP和HTTPS的区别。https怎么实现它的安全性的？"><span class="toc-number">67.</span> <span class="toc-text">HTTP和HTTPS的区别。https怎么实现它的安全性的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP2-0和HTTP1-0有什么区别呢"><span class="toc-number">68.</span> <span class="toc-text">HTTP2.0和HTTP1.0有什么区别呢</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#https怎么加密的？-加密流程-，如何通过公钥和私钥加密？"><span class="toc-number">69.</span> <span class="toc-text">https怎么加密的？(加密流程)，如何通过公钥和私钥加密？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#https加密解密过程涉及的算法，这些算法的区别"><span class="toc-number">70.</span> <span class="toc-text">https加密解密过程涉及的算法，这些算法的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTPS认证是怎么认证的？-SSL证书浏览器是怎么验证的？"><span class="toc-number">71.</span> <span class="toc-text">HTTPS认证是怎么认证的？(SSL证书浏览器是怎么验证的？)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见Http请求头"><span class="toc-number">72.</span> <span class="toc-text">常见Http请求头</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTPS原理及过程"><span class="toc-number">73.</span> <span class="toc-text">HTTPS原理及过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议有什么特点？"><span class="toc-number">74.</span> <span class="toc-text">HTTP协议有什么特点？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WebSocket和HTTP之间的关系"><span class="toc-number">75.</span> <span class="toc-text">WebSocket和HTTP之间的关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#websocket，用法，如何保证仍然连接，如何确保消息发送到了，从计网的角度来讲一讲如何保证websocket传输可靠-websocket怎么传送数据的"><span class="toc-number">76.</span> <span class="toc-text">websocket，用法，如何保证仍然连接，如何确保消息发送到了，从计网的角度来讲一讲如何保证websocket传输可靠(websocket怎么传送数据的)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#websocket是什么，原理，怎么实现"><span class="toc-number">77.</span> <span class="toc-text">websocket是什么，原理，怎么实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#websocket-为什么要加心跳-websocket-不是长连接吗，为什么还要加心跳去维持连接"><span class="toc-number">78.</span> <span class="toc-text">websocket 为什么要加心跳? websocket 不是长连接吗，为什么还要加心跳去维持连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#心跳监听机制"><span class="toc-number">79.</span> <span class="toc-text">心跳监听机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#websocket-连接成功的状态码是多少"><span class="toc-number">80.</span> <span class="toc-text">websocket 连接成功的状态码是多少</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WebSocket了解吗？用的什么协议"><span class="toc-number">81.</span> <span class="toc-text">WebSocket了解吗？用的什么协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">81.1.</span> <span class="toc-text">TCP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#说说http-与-tcp-的关系"><span class="toc-number">82.</span> <span class="toc-text">说说http 与 tcp 的关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tcp-可以建立多个连接吗？"><span class="toc-number">83.</span> <span class="toc-text">tcp 可以建立多个连接吗？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍TCP队头阻塞的问题以及如何解决的？"><span class="toc-number">84.</span> <span class="toc-text">介绍TCP队头阻塞的问题以及如何解决的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tcp-握手-回收过程，了解泛洪攻击么；"><span class="toc-number">85.</span> <span class="toc-text">tcp 握手 回收过程，了解泛洪攻击么；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tcp的拥塞控制和流量控制"><span class="toc-number">86.</span> <span class="toc-text">tcp的拥塞控制和流量控制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tcp如何保证安全连接"><span class="toc-number">87.</span> <span class="toc-text">tcp如何保证安全连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP有几层网络模型，都是做什么的"><span class="toc-number">88.</span> <span class="toc-text">TCP&#x2F;IP有几层网络模型，都是做什么的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP跟UDP的区别"><span class="toc-number">89.</span> <span class="toc-text">TCP跟UDP的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP是怎么判断丢包的？"><span class="toc-number">90.</span> <span class="toc-text">TCP是怎么判断丢包的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么情况用TCP-什么情况用UDP-为什么视频使用UDP协议-有什么负面影响"><span class="toc-number">91.</span> <span class="toc-text">什么情况用TCP,什么情况用UDP?为什么视频使用UDP协议?有什么负面影响?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#说说TCP传输的三次握手四次挥手策略"><span class="toc-number">92.</span> <span class="toc-text">说说TCP传输的三次握手四次挥手策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么是三次握手而不是两次握手"><span class="toc-number">93.</span> <span class="toc-text">为什么是三次握手而不是两次握手</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP和HTTPS的区别。https怎么实现它的安全性的？-1"><span class="toc-number">94.</span> <span class="toc-text">HTTP和HTTPS的区别。https怎么实现它的安全性的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么理解端到端的连接？"><span class="toc-number">95.</span> <span class="toc-text">怎么理解端到端的连接？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP的协议格式"><span class="toc-number">96.</span> <span class="toc-text">HTTP的协议格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么判断HTTP报文传输完成了"><span class="toc-number">97.</span> <span class="toc-text">怎么判断HTTP报文传输完成了</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对称加密和非对称加密的了解"><span class="toc-number">98.</span> <span class="toc-text">对称加密和非对称加密的了解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">98.1.</span> <span class="toc-text">  </span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSL协议是使用对称加密还是非对称加密"><span class="toc-number">99.</span> <span class="toc-text">SSL协议是使用对称加密还是非对称加密</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对称加密和非对称加密相结合"><span class="toc-number">99.1.</span> <span class="toc-text">对称加密和非对称加密相结合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#非对称加密耗时久，怎么优化"><span class="toc-number">100.</span> <span class="toc-text">非对称加密耗时久，怎么优化?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http工作原理"><span class="toc-number">101.</span> <span class="toc-text">http工作原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTPS原理及过程-1"><span class="toc-number">102.</span> <span class="toc-text">HTTPS原理及过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-2能节省连接时间吗"><span class="toc-number">103.</span> <span class="toc-text">HTTP&#x2F;2能节省连接时间吗?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-2会有队头阻塞问题吗"><span class="toc-number">104.</span> <span class="toc-text">HTTP&#x2F;2会有队头阻塞问题吗?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三次握手的过程-客户端和服务端都做了什么？"><span class="toc-number">105.</span> <span class="toc-text">三次握手的过程 客户端和服务端都做了什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http是无连接的？"><span class="toc-number">106.</span> <span class="toc-text">http是无连接的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http属于哪一层，tcp和ip呢"><span class="toc-number">107.</span> <span class="toc-text">http属于哪一层，tcp和ip呢</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tcp如何保证可靠传输"><span class="toc-number">108.</span> <span class="toc-text">Tcp如何保证可靠传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Udp如何实现可靠传输"><span class="toc-number">109.</span> <span class="toc-text">Udp如何实现可靠传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#域名解析属于udp还是tcp？"><span class="toc-number">110.</span> <span class="toc-text">域名解析属于udp还是tcp？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#udp"><span class="toc-number">110.1.</span> <span class="toc-text">udp</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#quic-协议原理"><span class="toc-number">111.</span> <span class="toc-text">quic 协议原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP2-0的多路复用和HTTP1-1的长连接有什么区别"><span class="toc-number">112.</span> <span class="toc-text">HTTP2.0的多路复用和HTTP1.1的长连接有什么区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http2和http3的区别"><span class="toc-number">113.</span> <span class="toc-text">http2和http3的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对-http-几个版本有什么区别？keep-alive-和-多路复用在性能上有什么区别？为什么-keep-alive-可以达到多路复用的效果？"><span class="toc-number">114.</span> <span class="toc-text">对 http 几个版本有什么区别？keep-alive 和 多路复用在性能上有什么区别？为什么 keep-alive 可以达到多路复用的效果？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你知道哪些常见的header中的字段"><span class="toc-number">115.</span> <span class="toc-text">你知道哪些常见的header中的字段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#说一下浏览器缓存；"><span class="toc-number">116.</span> <span class="toc-text">说一下浏览器缓存；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#强缓存和协商缓存"><span class="toc-number">117.</span> <span class="toc-text">强缓存和协商缓存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#强缓存一般放在哪里？"><span class="toc-number">118.</span> <span class="toc-text">强缓存一般放在哪里？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一般放在Memory-cache或者disk-cache"><span class="toc-number">118.1.</span> <span class="toc-text">  一般放在Memory cache或者disk cache;</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计算整个文件得到etag会耗费心力，怎么解决？"><span class="toc-number">119.</span> <span class="toc-text">计算整个文件得到etag会耗费心力，怎么解决？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如果我不想要使用缓存了，每次都请求最新的，怎么做？"><span class="toc-number">120.</span> <span class="toc-text">如果我不想要使用缓存了，每次都请求最新的，怎么做？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过url拼接rendom的方式或者设置cache-control设置为no-cache"><span class="toc-number">120.1.</span> <span class="toc-text">  通过url拼接rendom的方式或者设置cache-control设置为no-cache</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cache-control中的no-cache和no-store的差异"><span class="toc-number">121.</span> <span class="toc-text">cache-control中的no-cache和no-store的差异</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#请介绍下cache-control"><span class="toc-number">122.</span> <span class="toc-text">请介绍下cache-control</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？"><span class="toc-number">123.</span> <span class="toc-text">浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#有了-Last-Modified-为什么还要有-Etag"><span class="toc-number">124.</span> <span class="toc-text">有了 Last-Modified 为什么还要有 Etag</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么有了-Expires-还要有-Cache-Control？Expires-会造成什么问题"><span class="toc-number">125.</span> <span class="toc-text">为什么有了 Expires 还要有 Cache-Control？Expires  会造成什么问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？"><span class="toc-number">126.</span> <span class="toc-text">http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如果现在对资源启用强缓存，那如何判断资源是否更新呢（说webpack-hash），hash是如何生成的呢"><span class="toc-number">127.</span> <span class="toc-text">如果现在对资源启用强缓存，那如何判断资源是否更新呢（说webpack hash），hash是如何生成的呢</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线程与进程的区别"><span class="toc-number">128.</span> <span class="toc-text">线程与进程的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线程共享为什么比进程共享容易？"><span class="toc-number">129.</span> <span class="toc-text">线程共享为什么比进程共享容易？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#进程调度"><span class="toc-number">130.</span> <span class="toc-text">进程调度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#进程之间和线程之间如何通信"><span class="toc-number">131.</span> <span class="toc-text">进程之间和线程之间如何通信</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前端安全问题？"><span class="toc-number">132.</span> <span class="toc-text">前端安全问题？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sql注入原理"><span class="toc-number">133.</span> <span class="toc-text">sql注入原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是运营商劫持？"><span class="toc-number">134.</span> <span class="toc-text">什么是运营商劫持？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运营商劫持怎么处理"><span class="toc-number">135.</span> <span class="toc-text">运营商劫持怎么处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#请解释一下csrf-和-xss；"><span class="toc-number">136.</span> <span class="toc-text">请解释一下csrf 和 xss；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么防止-csrf-和-xss？"><span class="toc-number">137.</span> <span class="toc-text">怎么防止 csrf 和 xss？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么解决refer伪造？"><span class="toc-number">138.</span> <span class="toc-text">怎么解决refer伪造？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS是什么，攻击原理，怎么预防。"><span class="toc-number">139.</span> <span class="toc-text">XSS是什么，攻击原理，怎么预防。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS攻击的场景能描述一个么？"><span class="toc-number">140.</span> <span class="toc-text">XSS攻击的场景能描述一个么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#请说说XSS与CSRF"><span class="toc-number">141.</span> <span class="toc-text">请说说XSS与CSRF</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#服务端劫持了-token-怎么做防御"><span class="toc-number">142.</span> <span class="toc-text">服务端劫持了 token 怎么做防御</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#服务端反爬虫"><span class="toc-number">143.</span> <span class="toc-text">服务端反爬虫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#服务端跨域应该如何设置"><span class="toc-number">144.</span> <span class="toc-text">服务端跨域应该如何设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GET和POST的区别，何时使用POST？"><span class="toc-number">145.</span> <span class="toc-text">GET和POST的区别，何时使用POST？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#描述以下POST和PUT的区别"><span class="toc-number">146.</span> <span class="toc-text">描述以下POST和PUT的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍下options请求"><span class="toc-number">147.</span> <span class="toc-text">介绍下options请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#options预检请求了解吗，返回什么"><span class="toc-number">148.</span> <span class="toc-text">options预检请求了解吗，返回什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#contentType-有哪些，有什么作用"><span class="toc-number">149.</span> <span class="toc-text">contentType 有哪些，有什么作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简单请求和复杂请求的区别"><span class="toc-number">150.</span> <span class="toc-text">简单请求和复杂请求的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#x-www-urlecoded-form和application-json在post中的区别"><span class="toc-number">151.</span> <span class="toc-text">x-www-urlecoded-form和application&#x2F;json在post中的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#REST是什么-为什么使用它"><span class="toc-number">152.</span> <span class="toc-text">REST是什么, 为什么使用它?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遇到过哪些移动端兼容问题？"><span class="toc-number">153.</span> <span class="toc-text">遇到过哪些移动端兼容问题？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何优化SPA应用的首屏加载速度慢的问题？"><span class="toc-number">154.</span> <span class="toc-text">如何优化SPA应用的首屏加载速度慢的问题？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SPA理解和原理"><span class="toc-number">155.</span> <span class="toc-text">SPA理解和原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对于首屏就必须要加载的包，有什么优化手段"><span class="toc-number">156.</span> <span class="toc-text">对于首屏就必须要加载的包，有什么优化手段</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用http缓存必须使用的包，下次请求时从缓存读取"><span class="toc-number">156.1.</span> <span class="toc-text">使用http缓存必须使用的包，下次请求时从缓存读取</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么知道一个tcp请求数据已经完了呢"><span class="toc-number">157.</span> <span class="toc-text">怎么知道一个tcp请求数据已经完了呢</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目里面的鉴权和图片懒加载怎么实现的"><span class="toc-number">158.</span> <span class="toc-text">项目里面的鉴权和图片懒加载怎么实现的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#路由鉴权如何实现，如果是不同身份怎么重定向到未认证页面，死扣细节，代码实现"><span class="toc-number">159.</span> <span class="toc-text">路由鉴权如何实现，如果是不同身份怎么重定向到未认证页面，死扣细节，代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何更好的处理线上的日志？"><span class="toc-number">160.</span> <span class="toc-text">如何更好的处理线上的日志？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组件设计原则。"><span class="toc-number">161.</span> <span class="toc-text">组件设计原则。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍下web-worker，有什么用，什么样的场景比较适合？"><span class="toc-number">162.</span> <span class="toc-text">介绍下web worker，有什么用，什么样的场景比较适合？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#发布订阅模式和观察者模式的异同。"><span class="toc-number">163.</span> <span class="toc-text">发布订阅模式和观察者模式的异同。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP有几层网络模型，都是做什么的-网络层次结构"><span class="toc-number">164.</span> <span class="toc-text">TCP&#x2F;IP有几层网络模型，都是做什么的(网络层次结构)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据链路层解决什么问题"><span class="toc-number">165.</span> <span class="toc-text">数据链路层解决什么问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP怎么保证有序"><span class="toc-number">166.</span> <span class="toc-text">TCP怎么保证有序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#他必须收到上一个数据帧的ACK后才发下一个数据"><span class="toc-number">166.1.</span> <span class="toc-text">他必须收到上一个数据帧的ACK后才发下一个数据</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组和链表的区别，什么时候用链表，什么时候用数组"><span class="toc-number">167.</span> <span class="toc-text">数组和链表的区别，什么时候用链表，什么时候用数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#链表和数组进行插入和删除的时间复杂度"><span class="toc-number">168.</span> <span class="toc-text">链表和数组进行插入和删除的时间复杂度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#链表的类型以及应用场景"><span class="toc-number">169.</span> <span class="toc-text">链表的类型以及应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#树的类型以及应用场景，说一下红黑树和B-树"><span class="toc-number">170.</span> <span class="toc-text">树的类型以及应用场景，说一下红黑树和B+树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目自动部署流程"><span class="toc-number">171.</span> <span class="toc-text">项目自动部署流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网站如何反爬虫"><span class="toc-number">172.</span> <span class="toc-text">网站如何反爬虫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网页上实现VR效果的原理"><span class="toc-number">173.</span> <span class="toc-text">网页上实现VR效果的原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网页上实现VR效果的原理-1"><span class="toc-number">174.</span> <span class="toc-text">网页上实现VR效果的原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现IM聊天流程，以及做过哪些优化"><span class="toc-number">175.</span> <span class="toc-text">实现IM聊天流程，以及做过哪些优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现一个i18n国际化的思路，部分动态替换的数据如何处理"><span class="toc-number">176.</span> <span class="toc-text">实现一个i18n国际化的思路，部分动态替换的数据如何处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小组工作流程"><span class="toc-number">177.</span> <span class="toc-text">小组工作流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#登陆保持方法"><span class="toc-number">178.</span> <span class="toc-text">登陆保持方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目中最难的部分"><span class="toc-number">179.</span> <span class="toc-text">项目中最难的部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单页和多页应用差别及优缺点"><span class="toc-number">180.</span> <span class="toc-text">单页和多页应用差别及优缺点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对链表进行循环，判断是不是一个环"><span class="toc-number">181.</span> <span class="toc-text">对链表进行循环，判断是不是一个环</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现一个eventBus"><span class="toc-number">182.</span> <span class="toc-text">怎么实现一个eventBus</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二分法时间复杂度"><span class="toc-number">183.</span> <span class="toc-text">二分法时间复杂度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在https页面能不能发http请求"><span class="toc-number">184.</span> <span class="toc-text">在https页面能不能发http请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#允许在https页面插http资源吗"><span class="toc-number">185.</span> <span class="toc-text">允许在https页面插http资源吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#有了解-http-轮询吗"><span class="toc-number">186.</span> <span class="toc-text">有了解 http 轮询吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统轮询有没有可能发两次请求后发的请求先返回数据？怎么解决（如何保证响应顺序）"><span class="toc-number">187.</span> <span class="toc-text">传统轮询有没有可能发两次请求后发的请求先返回数据？怎么解决（如何保证响应顺序）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你们的代码存在哪里啊，通过什么管理的"><span class="toc-number">188.</span> <span class="toc-text">你们的代码存在哪里啊，通过什么管理的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件断点上传，怎么实现；"><span class="toc-number">189.</span> <span class="toc-text">文件断点上传，怎么实现；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git和svn的区别？"><span class="toc-number">190.</span> <span class="toc-text">git和svn的区别？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍一下git的开发流程"><span class="toc-number">191.</span> <span class="toc-text">介绍一下git的开发流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git如果commit了内容想要回退该怎么做"><span class="toc-number">192.</span> <span class="toc-text">Git如果commit了内容想要回退该怎么做</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-reset-与-revert-区别，revert-多个-mr-改如何处理；"><span class="toc-number">193.</span> <span class="toc-text">git reset 与 revert 区别，revert 多个 mr 改如何处理；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-如何撤回-add-后的内容；"><span class="toc-number">194.</span> <span class="toc-text">git 如何撤回 add 后的内容；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是“git-cherry-pick”"><span class="toc-number">195.</span> <span class="toc-text">什么是“git cherry-pick”?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-fetch和-git-pull的区别"><span class="toc-number">196.</span> <span class="toc-text">git fetch和 git pull的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git-rebase和git-merge的区别"><span class="toc-number">197.</span> <span class="toc-text">git rebase和git merge的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#谈谈git-flow"><span class="toc-number">198.</span> <span class="toc-text">谈谈git flow</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git的快照是指什么？Git的工作区域由哪三部分组成？在git中，如何为提交的版本打标签"><span class="toc-number">199.</span> <span class="toc-text">Git的快照是指什么？Git的工作区域由哪三部分组成？在git中，如何为提交的版本打标签</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#get-rebase的作用"><span class="toc-number">200.</span> <span class="toc-text">get rebase的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#讲讲二叉树"><span class="toc-number">201.</span> <span class="toc-text">讲讲二叉树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#讲讲红黑二叉树和平衡二叉树"><span class="toc-number">202.</span> <span class="toc-text">讲讲红黑二叉树和平衡二叉树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前端渲染和服务端渲染在用户体验上有什么差别？"><span class="toc-number">203.</span> <span class="toc-text">前端渲染和服务端渲染在用户体验上有什么差别？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JPG和PNG图片的应用场景，哪一个质量低，两者区别。"><span class="toc-number">204.</span> <span class="toc-text">JPG和PNG图片的应用场景，哪一个质量低，两者区别。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#登录功能怎么实现"><span class="toc-number">205.</span> <span class="toc-text">登录功能怎么实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前后端交互怎么确定用户身份？"><span class="toc-number">206.</span> <span class="toc-text">前后端交互怎么确定用户身份？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#跨域部署怎么传cookie？"><span class="toc-number">207.</span> <span class="toc-text">跨域部署怎么传cookie？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#https-blog-csdn-net-weixin-44862325-article-details-105605091"><span class="toc-number">207.1.</span> <span class="toc-text">https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_44862325&#x2F;article&#x2F;details&#x2F;105605091</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Token的机制是怎样的"><span class="toc-number">208.</span> <span class="toc-text">Token的机制是怎样的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#token存在哪里"><span class="toc-number">209.</span> <span class="toc-text">token存在哪里</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#token的产生方法与使用的原因"><span class="toc-number">210.</span> <span class="toc-text">token的产生方法与使用的原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#每次发起请求都会携带token吗"><span class="toc-number">211.</span> <span class="toc-text">每次发起请求都会携带token吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么做到关掉页面后还能维持登录状态"><span class="toc-number">212.</span> <span class="toc-text">怎么做到关掉页面后还能维持登录状态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#登录之后，每次请求一定会携带cookie吗"><span class="toc-number">213.</span> <span class="toc-text">登录之后，每次请求一定会携带cookie吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#发起请求时怎么知道携带哪个cookie，怎么匹配cookie"><span class="toc-number">214.</span> <span class="toc-text">发起请求时怎么知道携带哪个cookie，怎么匹配cookie</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#有了解过withCredentials属性吗"><span class="toc-number">215.</span> <span class="toc-text">有了解过withCredentials属性吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#互斥登录怎么实现"><span class="toc-number">216.</span> <span class="toc-text">互斥登录怎么实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单点登录（原理）"><span class="toc-number">217.</span> <span class="toc-text">单点登录（原理）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#当请求的文件很大的时候该怎么办"><span class="toc-number">218.</span> <span class="toc-text">当请求的文件很大的时候该怎么办</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对于一个盲人用户来讲，如何实现页面元素不可见，但是仍然能够被阅读器识别？"><span class="toc-number">219.</span> <span class="toc-text">对于一个盲人用户来讲，如何实现页面元素不可见，但是仍然能够被阅读器识别？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序的文件类型"><span class="toc-number">220.</span> <span class="toc-text">小程序的文件类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序数据请求怎么封装"><span class="toc-number">221.</span> <span class="toc-text">小程序数据请求怎么封装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序参数传值的方法"><span class="toc-number">222.</span> <span class="toc-text">小程序参数传值的方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序页面间传值的方式"><span class="toc-number">223.</span> <span class="toc-text">小程序页面间传值的方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序的setData-是怎么实现数据响应式的"><span class="toc-number">224.</span> <span class="toc-text">小程序的setData()是怎么实现数据响应式的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序bindtap和catchtap的区别是什么"><span class="toc-number">225.</span> <span class="toc-text">小程序bindtap和catchtap的区别是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序setData的回调函数"><span class="toc-number">226.</span> <span class="toc-text">小程序setData的回调函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序关联微信公众号如何确定用户的唯⼀性"><span class="toc-number">227.</span> <span class="toc-text">小程序关联微信公众号如何确定用户的唯⼀性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何看待小程序，它的技术原理是"><span class="toc-number">228.</span> <span class="toc-text">如何看待小程序，它的技术原理是?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序上面有做什么性能优化吗？"><span class="toc-number">229.</span> <span class="toc-text">小程序上面有做什么性能优化吗？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序的底层架构是怎么样的？"><span class="toc-number">230.</span> <span class="toc-text">小程序的底层架构是怎么样的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序生命周期"><span class="toc-number">231.</span> <span class="toc-text">小程序生命周期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序如何实现下拉刷新？"><span class="toc-number">232.</span> <span class="toc-text">小程序如何实现下拉刷新？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序的像素rpx计算方式"><span class="toc-number">233.</span> <span class="toc-text">小程序的像素rpx计算方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序双线程模型"><span class="toc-number">234.</span> <span class="toc-text">小程序双线程模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序为什么是双线程"><span class="toc-number">235.</span> <span class="toc-text">小程序为什么是双线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序项目的登录如何实现的-用户退出后下次进入还需要再次授权吗"><span class="toc-number">236.</span> <span class="toc-text">小程序项目的登录如何实现的,用户退出后下次进入还需要再次授权吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序验证授权是自动弹出还是触发的"><span class="toc-number">237.</span> <span class="toc-text">小程序验证授权是自动弹出还是触发的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序关联公众号如何确定用户的唯一性"><span class="toc-number">238.</span> <span class="toc-text">小程序关联公众号如何确定用户的唯一性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序遇到调试问题"><span class="toc-number">239.</span> <span class="toc-text">小程序遇到调试问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序的原生组件实现原理"><span class="toc-number">240.</span> <span class="toc-text">小程序的原生组件实现原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序有什么css不能用？"><span class="toc-number">241.</span> <span class="toc-text">小程序有什么css不能用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#wepy把vue语法转换成原生小程序的原理"><span class="toc-number">242.</span> <span class="toc-text">wepy把vue语法转换成原生小程序的原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序的用户鉴权机制"><span class="toc-number">243.</span> <span class="toc-text">小程序的用户鉴权机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序与H5的区别？"><span class="toc-number">244.</span> <span class="toc-text">小程序与H5的区别？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序的双向绑定和vue哪里不一样？"><span class="toc-number">245.</span> <span class="toc-text">小程序的双向绑定和vue哪里不一样？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序直接this-data的属性是不可以同步到视图的，必须调用：this-setData"><span class="toc-number">245.1.</span> <span class="toc-text">  小程序直接this.data的属性是不可以同步到视图的，必须调用：this.setData</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简述下-wx-navigateTo-wx-redirectTo-wx-switchTab-wx-navigateBack-wx-reLaunch-的区别"><span class="toc-number">246.</span> <span class="toc-text">简述下 wx.navigateTo(), wx.redirectTo(),wx.switchTab(), wx.navigateBack(), wx.reLaunch()的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#session-id状态过期怎么办"><span class="toc-number">247.</span> <span class="toc-text">session_id状态过期怎么办</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正向代理和反向代理的区别"><span class="toc-number">248.</span> <span class="toc-text">正向代理和反向代理的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用过Nginx吗？都用过哪些？"><span class="toc-number">249.</span> <span class="toc-text">用过Nginx吗？都用过哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx是一个高性能的HTTP和反向代理服务器。常使用场景：-1-反向代理-2-网站负载均衡"><span class="toc-number">249.1.</span> <span class="toc-text">nginx是一个高性能的HTTP和反向代理服务器。常使用场景： (1) 反向代理 (2) 网站负载均衡</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx跨域原理"><span class="toc-number">250.</span> <span class="toc-text">nginx跨域原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx的配置文件，它是怎么实现反向代理的"><span class="toc-number">251.</span> <span class="toc-text">nginx的配置文件，它是怎么实现反向代理的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是死锁，产生死锁的原因及必要条件"><span class="toc-number">252.</span> <span class="toc-text">什么是死锁，产生死锁的原因及必要条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E2E-测试怎么做的，怎么保证测试覆盖率和准确性；"><span class="toc-number">253.</span> <span class="toc-text">E2E 测试怎么做的，怎么保证测试覆盖率和准确性；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#说一下单元测试、E2E测试？他们有什么区别？"><span class="toc-number">254.</span> <span class="toc-text">说一下单元测试、E2E测试？他们有什么区别？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hybrid-通信原理；"><span class="toc-number">255.</span> <span class="toc-text">hybrid 通信原理；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计一个协同文档的技术流程；"><span class="toc-number">256.</span> <span class="toc-text">设计一个协同文档的技术流程；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍Oath2"><span class="toc-number">257.</span> <span class="toc-text">介绍Oath2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现前端异常监控"><span class="toc-number">258.</span> <span class="toc-text">怎么实现前端异常监控</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前端性能监控的工具有哪些，是怎么监控的？说一下见解"><span class="toc-number">259.</span> <span class="toc-text">前端性能监控的工具有哪些，是怎么监控的？说一下见解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么捕获资源异常、同步异步的错误"><span class="toc-number">260.</span> <span class="toc-text">怎么捕获资源异常、同步异步的错误</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前端错误收集（怎么记录，怎么区分是不是第三方插件的问题，怎么上报，怎么分析）"><span class="toc-number">261.</span> <span class="toc-text">前端错误收集（怎么记录，怎么区分是不是第三方插件的问题，怎么上报，怎么分析）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何理解前后端分离架构？"><span class="toc-number">262.</span> <span class="toc-text">如何理解前后端分离架构？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fetch原理-options"><span class="toc-number">263.</span> <span class="toc-text">fetch原理 options</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fetch发送2次请求的原因"><span class="toc-number">264.</span> <span class="toc-text">fetch发送2次请求的原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#axios和ajax的区别-ajax与fetch的区别）"><span class="toc-number">265.</span> <span class="toc-text">axios和ajax的区别(ajax与fetch的区别）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app-的-h5-和-小程序打包出的文件有什么区别"><span class="toc-number">266.</span> <span class="toc-text">uni-app 的 h5 和 小程序打包出的文件有什么区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uniapp多端框架的多端编译原理讲一下"><span class="toc-number">267.</span> <span class="toc-text">uniapp多端框架的多端编译原理讲一下</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app和-vue-小程序有什么不一样"><span class="toc-number">268.</span> <span class="toc-text">uni-app和 vue 小程序有什么不一样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0-1-0-2为什么不等于0-3"><span class="toc-number">269.</span> <span class="toc-text">0.1+0.2为什么不等于0.3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tab栏遇到ios的刘海屏怎么去解决"><span class="toc-number">270.</span> <span class="toc-text">tab栏遇到ios的刘海屏怎么去解决</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#serverless云开发适用于什么场景？有什么缺点？"><span class="toc-number">271.</span> <span class="toc-text">serverless云开发适用于什么场景？有什么缺点？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#serverless和传统后台的区别，好处是什么"><span class="toc-number">272.</span> <span class="toc-text">serverless和传统后台的区别，好处是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#webassembly是做什么的，适用于什么场景"><span class="toc-number">273.</span> <span class="toc-text">webassembly是做什么的，适用于什么场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#js对象和C-指针区别"><span class="toc-number">274.</span> <span class="toc-text">js对象和C++指针区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#window-onerror能不能捕获异步的错误"><span class="toc-number">275.</span> <span class="toc-text">window.onerror能不能捕获异步的错误</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如果catch中又有报错，onerror能不能捕获"><span class="toc-number">276.</span> <span class="toc-text">如果catch中又有报错，onerror能不能捕获</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么自己实现一个vue-cli"><span class="toc-number">277.</span> <span class="toc-text">怎么自己实现一个vue-cli</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#讲一讲threejs，它的兼容性怎么样"><span class="toc-number">278.</span> <span class="toc-text">讲一讲threejs，它的兼容性怎么样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#验证码怎么设置，生成验证码是在前端还是后端，在后端怎么做，在前端怎么做，怎么加密"><span class="toc-number">279.</span> <span class="toc-text">验证码怎么设置，生成验证码是在前端还是后端，在后端怎么做，在前端怎么做，怎么加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手机扫码登录是怎么实现的，原理"><span class="toc-number">280.</span> <span class="toc-text">手机扫码登录是怎么实现的，原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库范式"><span class="toc-number">281.</span> <span class="toc-text">数据库范式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库分表原则"><span class="toc-number">282.</span> <span class="toc-text">数据库分表原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#详细说一下ARP协议，ARP病毒"><span class="toc-number">283.</span> <span class="toc-text">详细说一下ARP协议，ARP病毒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mogoodb-v-s-mySql"><span class="toc-number">284.</span> <span class="toc-text">mogoodb v.s. mySql</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mySql事务"><span class="toc-number">285.</span> <span class="toc-text">mySql事务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么用requestAnimationFrame来代替setTimeout"><span class="toc-number">286.</span> <span class="toc-text">为什么用requestAnimationFrame来代替setTimeout</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解释一下requestAnimationFrame"><span class="toc-number">287.</span> <span class="toc-text">解释一下requestAnimationFrame</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#svg和canvas得区别，以及各自的优缺点"><span class="toc-number">288.</span> <span class="toc-text">svg和canvas得区别，以及各自的优缺点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#canvas的width与height属性的值可不可以带单位？"><span class="toc-number">289.</span> <span class="toc-text">canvas的width与height属性的值可不可以带单位？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#不能"><span class="toc-number">289.1.</span> <span class="toc-text">不能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#canvas怎么解决图片和文字模糊的问题？"><span class="toc-number">290.</span> <span class="toc-text">canvas怎么解决图片和文字模糊的问题？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置canvas的width和height为图片的原始尺寸，再设置css样式使得页面展示为正常尺寸。"><span class="toc-number">290.1.</span> <span class="toc-text">设置canvas的width和height为图片的原始尺寸，再设置css样式使得页面展示为正常尺寸。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bigint详解"><span class="toc-number">291.</span> <span class="toc-text">Bigint详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue项目是如何做部署的（你是用什么工具做支撑吗？还是直接传上去）"><span class="toc-number">292.</span> <span class="toc-text">Vue项目是如何做部署的（你是用什么工具做支撑吗？还是直接传上去）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#eggjs中间件了解过吗"><span class="toc-number">293.</span> <span class="toc-text">eggjs中间件了解过吗</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微信支付怎么做？说说流程"><span class="toc-number">294.</span> <span class="toc-text">微信支付怎么做？说说流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网站重构的理解"><span class="toc-number">295.</span> <span class="toc-text">网站重构的理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10个资源放在一个域名下加载和放在多个域名下加载有什么区别？"><span class="toc-number">296.</span> <span class="toc-text">10个资源放在一个域名下加载和放在多个域名下加载有什么区别？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么去设计一个组件封装"><span class="toc-number">297.</span> <span class="toc-text">怎么去设计一个组件封装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微前端是什么-有哪些特点和优势"><span class="toc-number">298.</span> <span class="toc-text">微前端是什么, 有哪些特点和优势</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微前端实现的主要原理"><span class="toc-number">299.</span> <span class="toc-text">微前端实现的主要原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么解决样式隔离"><span class="toc-number">300.</span> <span class="toc-text">怎么解决样式隔离</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何解决主应用和子应用的隔离-用-node-js-实现沙箱机制的原理"><span class="toc-number">301.</span> <span class="toc-text">如何解决主应用和子应用的隔离, 用 node.js 实现沙箱机制的原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主应用修改了路由-子应用如何感知到"><span class="toc-number">302.</span> <span class="toc-text">主应用修改了路由, 子应用如何感知到</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机的原码、反码、补码"><span class="toc-number">303.</span> <span class="toc-text">计算机的原码、反码、补码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#场景题：前端给页面加水印，说说各种编码的特点，说说数字签名的特点"><span class="toc-number">304.</span> <span class="toc-text">场景题：前端给页面加水印，说说各种编码的特点，说说数字签名的特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#场景题：实现协同编辑，说说你认为的技术关键点"><span class="toc-number">305.</span> <span class="toc-text">场景题：实现协同编辑，说说你认为的技术关键点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#32位和64位的区别？"><span class="toc-number">306.</span> <span class="toc-text">32位和64位的区别？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么32位操作系统最大支持内存为4GB"><span class="toc-number">307.</span> <span class="toc-text">为什么32位操作系统最大支持内存为4GB?</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><header class="post-bg" id="page-header" style="background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,3458128037&amp;fm=26&amp;gp=0.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">杜江的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">面试——其他篇</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-29 10:23:51"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-12-29</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history fa-fw"></i> 更新于 2024-04-18</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right post-meta__separator"></i><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/js/">js</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="询问工作经历，在项目中如何做性能优化的？"><a href="#询问工作经历，在项目中如何做性能优化的？" class="headerlink" title="询问工作经历，在项目中如何做性能优化的？"></a>询问工作经历，在项目中如何做性能优化的？</h1><ol>
+<li><p>content方面</p>
+<ul>
+<li>减少HTTP请求：合并文件、CSS精灵、inline Image</li>
+<li>减少DNS查询：DNS查询完成之前浏览器不能从这个主机下载任何任何文件。方法：DNS缓存、将资源分布到恰当数量的主机名，平衡并行下载和DNS查询</li>
+<li>避免重定向：多余的中间访问</li>
+<li>使Ajax可缓存</li>
+<li>非必须组件延迟加载</li>
+<li>未来所需组件预加载</li>
+<li>减少DOM元素数量</li>
+<li>将资源放到不同的域下：浏览器同时从一个域下载资源的数目有限，增加域可以提高并行下载量</li>
+<li>减少iframe数量</li>
+<li>不要404</li>
+</ul>
+</li>
+<li><p>Server方面</p>
+<ul>
+<li>使用CDN</li>
+<li>添加Expires或者Cache-Control响应头</li>
+<li>对组件使用Gzip压缩</li>
+<li>配置ETag</li>
+<li>Flush Buffer Early</li>
+<li>Ajax使用GET进行请求</li>
+<li>避免空src的img标签</li>
+</ul>
+</li>
+<li><p>Cookie方面</p>
+<ul>
+<li>减小cookie大小</li>
+<li>引入资源的域名不要包含cookie</li>
+</ul>
+</li>
+<li><p>css方面</p>
+<ul>
+<li>将样式表放到页面顶部</li>
+<li>不使用CSS表达式</li>
+<li>使用不使用@import</li>
+<li>不使用IE的Filter</li>
+</ul>
+</li>
+<li><p>Javascript方面</p>
+<ul>
+<li>将脚本放到页面底部</li>
+<li>将javascript和css从外部引入</li>
+<li>压缩javascript和css</li>
+<li>删除不需要的脚本</li>
+</ul>
+</li>
+<li><p>图片方面</p>
+<ul>
+<li>优化图片：根据实际颜色需要选择色深、压缩</li>
+<li>优化css精灵</li>
+<li>不要在HTML中拉伸图片</li>
+<li>保证favicon.ico小并且可缓存</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="浏览器http请求过多怎么解决？"><a href="#浏览器http请求过多怎么解决？" class="headerlink" title="浏览器http请求过多怎么解决？"></a>浏览器http请求过多怎么解决？</h1><ol>
+<li>合并JS、CSS文件 </li>
+<li>合并图片css sprite </li>
+<li>使用 Image maps </li>
+<li>4data嵌入图片：如base64 </li>
+<li>使用CDN，减少http请求头 Web安全</li>
+</ol>
+<hr>
+<h1 id="组件库如何做按需加载"><a href="#组件库如何做按需加载" class="headerlink" title="组件库如何做按需加载"></a>组件库如何做按需加载</h1><hr>
+<h1 id="聊项目：为什么做，功能是什么，你做了什么，难点是什么，怎么解决的，结果怎么样"><a href="#聊项目：为什么做，功能是什么，你做了什么，难点是什么，怎么解决的，结果怎么样" class="headerlink" title="聊项目：为什么做，功能是什么，你做了什么，难点是什么，怎么解决的，结果怎么样"></a>聊项目：为什么做，功能是什么，你做了什么，难点是什么，怎么解决的，结果怎么样</h1><hr>
+<h1 id="跨平台的框架用过哪些，这些框架的好处是什么，问题是什么，各自的区别是什么"><a href="#跨平台的框架用过哪些，这些框架的好处是什么，问题是什么，各自的区别是什么" class="headerlink" title="跨平台的框架用过哪些，这些框架的好处是什么，问题是什么，各自的区别是什么"></a>跨平台的框架用过哪些，这些框架的好处是什么，问题是什么，各自的区别是什么</h1><hr>
+<h1 id="你觉得做前端工程师需要什么能力"><a href="#你觉得做前端工程师需要什么能力" class="headerlink" title="你觉得做前端工程师需要什么能力"></a>你觉得做前端工程师需要什么能力</h1><hr>
+<h1 id="你对前端未来的发展趋势的看法"><a href="#你对前端未来的发展趋势的看法" class="headerlink" title="你对前端未来的发展趋势的看法"></a>你对前端未来的发展趋势的看法</h1><hr>
+<h1 id="你认为自己做的项目有什么值得的说道的地方吗？这里其实就是考察项目的亮点，可以说一些项目难点是如何解决的，或者介绍一些项目中用到的比较高级的技术。"><a href="#你认为自己做的项目有什么值得的说道的地方吗？这里其实就是考察项目的亮点，可以说一些项目难点是如何解决的，或者介绍一些项目中用到的比较高级的技术。" class="headerlink" title="你认为自己做的项目有什么值得的说道的地方吗？这里其实就是考察项目的亮点，可以说一些项目难点是如何解决的，或者介绍一些项目中用到的比较高级的技术。"></a>你认为自己做的项目有什么值得的说道的地方吗？这里其实就是考察项目的亮点，可以说一些项目难点是如何解决的，或者介绍一些项目中用到的比较高级的技术。</h1><hr>
+<h1 id="常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"><a href="#常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？" class="headerlink" title="常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"></a>常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？</h1><hr>
+<h1 id="除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？"><a href="#除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？" class="headerlink" title="除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？"></a>除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？</h1><hr>
+<h1 id="如何管理前端团队"><a href="#如何管理前端团队" class="headerlink" title="如何管理前端团队?"></a>如何管理前端团队?</h1><hr>
+<h1 id="你在现在的团队处于什么样的角色，起到了什么明显的作用？"><a href="#你在现在的团队处于什么样的角色，起到了什么明显的作用？" class="headerlink" title="你在现在的团队处于什么样的角色，起到了什么明显的作用？"></a>你在现在的团队处于什么样的角色，起到了什么明显的作用？</h1><hr>
+<h1 id="最近在学什么？能谈谈你未来3，5年给自己的规划吗？"><a href="#最近在学什么？能谈谈你未来3，5年给自己的规划吗？" class="headerlink" title="最近在学什么？能谈谈你未来3，5年给自己的规划吗？"></a>最近在学什么？能谈谈你未来3，5年给自己的规划吗？</h1><hr>
+<h1 id="简单描述一下你做过的移动APP项目研发流程？"><a href="#简单描述一下你做过的移动APP项目研发流程？" class="headerlink" title="简单描述一下你做过的移动APP项目研发流程？"></a>简单描述一下你做过的移动APP项目研发流程？</h1><hr>
+<h1 id="你对加班的看法？"><a href="#你对加班的看法？" class="headerlink" title="你对加班的看法？"></a>你对加班的看法？</h1><hr>
+<h1 id="你的优点是什么？缺点是什么？"><a href="#你的优点是什么？缺点是什么？" class="headerlink" title="你的优点是什么？缺点是什么？"></a>你的优点是什么？缺点是什么？</h1><hr>
+<h1 id="在项目中所承担的角色，怎样看待自己的角色"><a href="#在项目中所承担的角色，怎样看待自己的角色" class="headerlink" title="在项目中所承担的角色，怎样看待自己的角色"></a>在项目中所承担的角色，怎样看待自己的角色</h1><hr>
+<h1 id="自己有什么技术上的优势"><a href="#自己有什么技术上的优势" class="headerlink" title="自己有什么技术上的优势"></a>自己有什么技术上的优势</h1><hr>
+<h1 id="职业规划"><a href="#职业规划" class="headerlink" title="职业规划"></a>职业规划</h1><hr>
+<h1 id="工作之余，平时都做些什么"><a href="#工作之余，平时都做些什么" class="headerlink" title="工作之余，平时都做些什么"></a>工作之余，平时都做些什么</h1><hr>
+<h1 id="未来3年的打算？"><a href="#未来3年的打算？" class="headerlink" title="未来3年的打算？"></a>未来3年的打算？</h1><hr>
+<h1 id="你期望的团队和工作是什么样的？"><a href="#你期望的团队和工作是什么样的？" class="headerlink" title="你期望的团队和工作是什么样的？"></a>你期望的团队和工作是什么样的？</h1><hr>
+<h1 id="说说你对中台的理解，和后台有什么区别"><a href="#说说你对中台的理解，和后台有什么区别" class="headerlink" title="说说你对中台的理解，和后台有什么区别"></a>说说你对中台的理解，和后台有什么区别</h1><hr>
+<h1 id="如果团队成员因某种原因没有完成相应的任务，该怎么办"><a href="#如果团队成员因某种原因没有完成相应的任务，该怎么办" class="headerlink" title="如果团队成员因某种原因没有完成相应的任务，该怎么办"></a>如果团队成员因某种原因没有完成相应的任务，该怎么办</h1><hr>
+<h1 id="平时如何管理你的项目？"><a href="#平时如何管理你的项目？" class="headerlink" title="平时如何管理你的项目？"></a>平时如何管理你的项目？</h1><ol>
+<li>先期团队必须确定好全局样式（globe.css），编码模式(utf-8) 等；</li>
+<li>编写习惯必须一致（例如都是采用继承式的写法，单样式都写成一行）；</li>
+<li>标注样式编写人，各模块都及时标注（标注关键样式调用的地方）；</li>
+<li>页面进行标注（例如 页面 模块 开始和结束）；</li>
+<li>CSS跟HTML 分文件夹并行存放，命名都得统一（例如style.css）；</li>
+<li>JS 分文件夹存放 命名以该JS功能为准的英文翻译。</li>
+<li>图片采用整合的 images.png png8 格式文件使用 尽量整合在一起使用方便将来的管理 </li>
+</ol>
+<hr>
+<h1 id="对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？"><a href="#对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？" class="headerlink" title="对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？"></a>对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？</h1><pre><code>&lt;1&gt;.前端是最贴近用户的程序员，比后端、数据库、产品经理、运营、安全都近。
+    1)、实现界面交互
+    2)、提升用户体验
+    3)、有了Node.js，前端可以实现服务端的一些事情
+
+&lt;2&gt;.前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好，
+
+&lt;3&gt;.参与项目，快速高质量完成实现效果图，精确到1px；
+
+&lt;4&gt;.与团队成员，UI设计，产品经理的沟通；
+
+&lt;5&gt;.做好的页面结构，页面重构和用户体验；
+
+&lt;6&gt;.处理hack，兼容、写出优美的代码格式；
+
+&lt;7&gt;.针对服务器的优化、拥抱最新前端技术。</code></pre><hr>
+<h1 id="有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？"><a href="#有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？" class="headerlink" title="有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？"></a>有学习什么前端前沿的技术吗？canvas了解过吗？WebGL呢？</h1><ul>
+<li>WebGL: WebGL (Web图形库) 是一种JavaScript API，用于在任何兼容的Web浏览器中呈现交互式3D和2D图形，而无需使用插件。WebGL通过引入一个与OpenGL ES 2.0紧密相符合的API，可以在HTML5 元素中使用。</li>
+</ul>
+<hr>
+<h1 id="权限系统是怎么设计的"><a href="#权限系统是怎么设计的" class="headerlink" title="权限系统是怎么设计的"></a>权限系统是怎么设计的</h1><ol>
+<li>前端控制： 前端的控制比较简单，从后台获取到用户的权限之后，可以存在session或者cookie中，然后在页面加载的时候，通过session或者cookie中存的权限来选择让该功能展现或者禁用。</li>
+<li>后台控制： 仅仅依靠前端的控制是无法完美解决权限控制的问题，因为前端页面的加载过程是在浏览器中完成的，用户可以自行篡改页面；或者用户可以直接通过URI请求来获取非法权限功能。所以需要在后台实现权限控制。</li>
+<li>全局异常管理： 思路是在拦截器中权限校验失败时，抛出一个权限校验失败的异常，然后通过全局异常管理类来捕获并返回前端特定的格式。具体如下。</li>
+</ol>
+<hr>
+<h1 id="假如进入一个页面没有权限进入，如何判断"><a href="#假如进入一个页面没有权限进入，如何判断" class="headerlink" title="假如进入一个页面没有权限进入，如何判断"></a>假如进入一个页面没有权限进入，如何判断</h1><h2 id="大意在前端处理分为路由和接口两个方面，路由在vue-route中的钩子函数beforeEach，接口是通过axios响应拦截器处理"><a href="#大意在前端处理分为路由和接口两个方面，路由在vue-route中的钩子函数beforeEach，接口是通过axios响应拦截器处理" class="headerlink" title="大意在前端处理分为路由和接口两个方面，路由在vue-route中的钩子函数beforeEach，接口是通过axios响应拦截器处理"></a>大意在前端处理分为路由和接口两个方面，路由在vue-route中的钩子函数beforeEach，接口是通过axios响应拦截器处理</h2><h1 id="谈谈以前端角度出发做好SEO需要考虑什么？"><a href="#谈谈以前端角度出发做好SEO需要考虑什么？" class="headerlink" title="谈谈以前端角度出发做好SEO需要考虑什么？"></a>谈谈以前端角度出发做好SEO需要考虑什么？</h1><ol>
+<li>了解搜索引擎如何抓取网页和如何索引网页:  你需要知道一些搜索引擎的基本工作原理，各个搜索引擎之间的区别，搜索机器人（SE robot 或叫 web crawler）如何进行工作，搜索引擎如何对搜索结果进行排序等等。</li>
+<li>Meta标签优化: 主要包括主题（Title)，网站描述(Description)，和关键词（Keywords）。还有一些其它的隐藏文字比如Author（作者），Category（目录），Language（编码语种）等。</li>
+<li>如何选取关键词并在网页中放置关键词:  首先要给网站确定主关键词（一般在5个上下），然后针对这些关键词进行优化，包括关键词密度（Density），相关度（Relavancy），突出性（Prominency）等等</li>
+<li>了解主要的搜索引擎： 不同的搜索引擎对页面的抓取和索引、排序的规则都不一样。还要了解各搜索门户和搜索引擎之间的关系，比如AOL网页搜索用的是Google的搜索技术，MSN用的是Bing的技术。</li>
+<li>主要的互联网目录</li>
+<li>按点击付费的搜索引擎</li>
+<li>链接交换和链接广泛度</li>
+<li>合理的标签使用</li>
+</ol>
+<hr>
+<h1 id="WEB应用从服务器主动推送Data到客户端有那些方式？"><a href="#WEB应用从服务器主动推送Data到客户端有那些方式？" class="headerlink" title="WEB应用从服务器主动推送Data到客户端有那些方式？"></a>WEB应用从服务器主动推送Data到客户端有那些方式？</h1><ol>
+<li>html5 websoket</li>
+<li>WebSocket通过Flash</li>
+<li>XHR长时间连接</li>
+<li>XHR Multipart Streaming</li>
+<li>不可见的Iframe</li>
+<li><code>&lt;script&gt;</code>标签的长时间连接(可跨域)</li>
+</ol>
+<hr>
+<h1 id="描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的"><a href="#描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的" class="headerlink" title="描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的"></a>描述几种服务器和客户端之间的通信方式。描述一些网络协议是工作的</h1><h2 id="同上"><a href="#同上" class="headerlink" title="同上"></a>同上</h2><h1 id="移动端的点击事件的有延迟，时间是多久，为什么会有？-怎么解决这个延时？"><a href="#移动端的点击事件的有延迟，时间是多久，为什么会有？-怎么解决这个延时？" class="headerlink" title="移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？"></a>移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？</h1><h2 id="300ms"><a href="#300ms" class="headerlink" title="  300ms"></a>  300ms</h2><h1 id="什么是CDN缓存"><a href="#什么是CDN缓存" class="headerlink" title="什么是CDN缓存"></a>什么是CDN缓存</h1><ul>
+<li>CDN 是一种部署策略，根据不同的地区部署类似nginx 这种服务服务，会缓存静态资源。前端在项目优化的时候，习惯在讲台资源上加上一个 hash 值，每次更新的时候去改变这个 hash，hash 值变化的时候，服务会去重新取资源</li>
+<li>(CDN)是一个经策略性部署的整体系统，包括分布式存储、负载均衡、网络请求的重定向和内容管理4个要件</li>
+</ul>
+<hr>
+<h1 id="cdn用的是哪一种缓存？"><a href="#cdn用的是哪一种缓存？" class="headerlink" title="cdn用的是哪一种缓存？"></a>cdn用的是哪一种缓存？</h1><hr>
+<h1 id="使用CDN有什么好处"><a href="#使用CDN有什么好处" class="headerlink" title="使用CDN有什么好处"></a>使用CDN有什么好处</h1><ul>
+<li>使用CDN可以给你的网站加速，本身不影响SEO正常收录和网站优化，相反，还能提升你的网站用户体验，隐藏你的源站IP防止被黑客攻击；</li>
+</ul>
+<hr>
+<h1 id="cdn原理"><a href="#cdn原理" class="headerlink" title="cdn原理"></a>cdn原理</h1><ul>
+<li>简单概括就是负载均衡，缓存，dns解析</li>
+<li>通过dns解析到全局负载均衡服务器，然后再到区域的负载均衡，之后根据一些条件来找合适的缓存服务器，如果第一次访问就从源站拿过来缓存。需要注意的是一切都是根据请求的ip来的，如果ip不合理，那么可能起不到加速效果。缓存和负载均衡的思想在减轻服务器压力方面其实是很常见的</li>
+</ul>
+<hr>
+<h1 id="CDN什么资源都能存吗？"><a href="#CDN什么资源都能存吗？" class="headerlink" title="CDN什么资源都能存吗？"></a>CDN什么资源都能存吗？</h1><ul>
+<li>不是。</li>
+<li>CDN 可以存储网站的静态资源，如图片、视频、音频、CSS、JS 等文件。这些文件的特点是文件体积大，访问频率高，但更新不频繁。将这些静态资源缓存到 CDN 上可以降低网站的负载，提高网站的访问速度和用户体验。</li>
+<li>CDN 不能存储动态数据，如网站的数据库内容、网站程序源代码、用户上传的文件等。这些数据的特点是更新频繁，无法通过 CDN 缓存实现加速。另外，由于 CDN 缓存是公开的，存储敏感数据存在安全隐患。</li>
+</ul>
+<hr>
+<h1 id="Cdn有哪些优化静态资源加载速度的方法？"><a href="#Cdn有哪些优化静态资源加载速度的方法？" class="headerlink" title="Cdn有哪些优化静态资源加载速度的方法？"></a>Cdn有哪些优化静态资源加载速度的方法？</h1><ul>
+<li>资源调度：CDN会根据用户接入网络的ip寻找距离用户最优路径的服务器。调度的方式主要有DNS调度、http 302调度、使用 HTTP 进行的 DNS 调度（多用于移动端）； </li>
+<li>缓存策略和数据检索：CDN服务器使用高效的算法和数据结构，快速的检索资源和更新读取缓存； </li>
+<li>网络优化：从OSI七层模型进行优化，达到网络优化的目的。 L1物理层：硬件设备升级提高速度 L2数据链路层：寻找更快的网络节点、确保 Lastmile 尽量短 L3路由层：路径优化，寻找两点间最优路径 L4传输层：协议TCP优化，保持长连接、TCP快速打开 L7应用层：静态资源压缩、请求合并</li>
+</ul>
+<hr>
+<h1 id="应当什么场景下实用CDN服务器？"><a href="#应当什么场景下实用CDN服务器？" class="headerlink" title="应当什么场景下实用CDN服务器？"></a>应当什么场景下实用CDN服务器？</h1><blockquote>
+<p>我们应该在网站流量大、需要提供多媒体内容服务、需要防止网络安全问题以及电商平台需要进行大促活动等场景下考虑使用CDN。通过CDN的加速和优化，可以提高网站的性能和用户体验，提升网站的竞争力。</p>
+</blockquote>
+<hr>
+<h1 id="JWT的优缺点-使用场景"><a href="#JWT的优缺点-使用场景" class="headerlink" title="JWT的优缺点, 使用场景?"></a>JWT的优缺点, 使用场景?</h1><ul>
+<li><p>优点:</p>
+<ul>
+<li><p>可扩展性好：应用程序分布式部署的情况下，session需要做多机数据共享，通常可以存在数据库或者redis里面。而jwt不需要。</p>
+</li>
+<li><p>无状态: jwt不在服务端存储任何状态。jwt可以存储一些常用信息, 有效地使用 JWT，可以降低服务器查询数据库的次数。</p>
+</li>
+</ul>
+</li>
+<li><p>缺点:</p>
+<ul>
+<li><p>安全性： 由于jwt的payload是使用base64编码的，并没有加密，因此jwt中不能存储敏感数据。而session的信息是存在服务端的，相对来说更安全。</p>
+</li>
+<li><p>性能：<br>jwt太长。由于是无状态使用JWT，所有的数据都被放到JWT里，如果还要进行一些数据交换，那载荷会更大，经过编码之后导致jwt非常长，cookie的限制大小一般是4k，cookie很可能放不下，所以jwt一般放在local storage里面。并且用户在系统中的每一次http请求都会把jwt携带在Header里面，http请求的Header可能比Body还要大。而sessionId只是很短的一个字符串，因此使用jwt的http请求比使用session的开销大得多。</p>
+</li>
+<li><p>一次性： 无状态是jwt的特点，但也导致了这个问题，jwt是一次性的。想修改里面的内容，就必须签发一个新的jwt。</p>
+</li>
+</ul>
+</li>
+<li><p>场景:</p>
+<ul>
+<li><p>有效期短</p>
+</li>
+<li><p>只希望被使用一次。jwt具有一次性的特性。单点登录和会话管理非常不适合用jwt，如果在服务端部署额外的逻辑存储jwt的状态，那还不如使用session。</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="从浏览器地址栏输入url到显示页面的步骤-以HTTP为例"><a href="#从浏览器地址栏输入url到显示页面的步骤-以HTTP为例" class="headerlink" title="从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)"></a>从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)</h1><ol>
+<li>输入网址；</li>
+<li>发送到DNS服务器，并获取域名对应的web服务器对应的ip地址；</li>
+<li>与web服务器建立TCP连接；</li>
+<li>浏览器向web服务器发送http请求；</li>
+<li>web服务器响应请求，并返回指定url的数据（或错误信息，或重定向的新的url地址）；</li>
+<li>浏览器下载web服务器返回的数据及解析html源文件；</li>
+<li>生成DOM树，解析css和js，渲染页面，直至显示完成；</li>
+</ol>
+<hr>
+<h1 id="从接口请求到后端响应经过了什么"><a href="#从接口请求到后端响应经过了什么" class="headerlink" title="从接口请求到后端响应经过了什么"></a>从接口请求到后端响应经过了什么</h1><hr>
+<h1 id="dns查询过程，使用的协议"><a href="#dns查询过程，使用的协议" class="headerlink" title="dns查询过程，使用的协议"></a>dns查询过程，使用的协议</h1><ol>
+<li>用户主机上运行着DNS的客户端，就是我们的PC机或者手机客户端运行着DNS客户端了</li>
+<li>浏览器将接收到的url中抽取出域名字段，就是访问的主机名，比如<a href="http://www.baidu.com/" target="_blank" rel="noopener">http://www.baidu.com/</a></li>
+<li>DNS客户机端向DNS服务器端发送一份查询报文，报文中包含着要访问的主机名字段（中间包括一些列缓存查询以及分布式DNS集群的工作）</li>
+<li>该DNS客户机最终会收到一份回答报文，其中包含有该主机名对应的IP地址</li>
+<li>一旦该浏览器收到来自DNS的IP地址，就可以向该IP地址定位的HTTP服务器发起TCP连接</li>
+</ol>
+<hr>
+<h1 id="DNS解析的内部原理"><a href="#DNS解析的内部原理" class="headerlink" title="DNS解析的内部原理"></a>DNS解析的内部原理</h1><blockquote>
+<p>DNS通过域名解析系统解析找到了对应的IP地址，域</p>
+</blockquote>
+<hr>
+<h1 id="dns劫持了解吗"><a href="#dns劫持了解吗" class="headerlink" title="dns劫持了解吗"></a>dns劫持了解吗</h1><hr>
+<h1 id="HTTP-request报文结构是怎样的"><a href="#HTTP-request报文结构是怎样的" class="headerlink" title="HTTP request报文结构是怎样的"></a>HTTP request报文结构是怎样的</h1><ul>
+<li>首行是Request-Line包括：请求方法，请求URI，协议版本，CRLF</li>
+<li>首行之后是若干行请求头，包括general-header，request-header或者entity-header，每个一行以CRLF结束</li>
+<li>请求头和消息实体之间有一个CRLF分隔</li>
+<li>根据实际请求需要可能包含一个消息实体</li>
+</ul>
+<hr>
+<h1 id="HTTP-response报文结构是怎样的"><a href="#HTTP-response报文结构是怎样的" class="headerlink" title="HTTP response报文结构是怎样的"></a>HTTP response报文结构是怎样的</h1><ul>
+<li>首行是状态行包括：HTTP版本，状态码，状态描述，后面跟一个CRLF</li>
+<li>首行之后是若干行响应头，包括：通用头部，响应头部，实体头部</li>
+<li>响应头部和响应实体之间用一个CRLF空行分隔</li>
+<li>最后是一个可能的消息实体</li>
+</ul>
+<hr>
+<h1 id="http报文头部有哪些字段-有什么意义"><a href="#http报文头部有哪些字段-有什么意义" class="headerlink" title="http报文头部有哪些字段?有什么意义?"></a>http报文头部有哪些字段?有什么意义?</h1><blockquote>
+<p>请求头</p>
+</blockquote>
+<ol>
+<li>Accept: 客户端希望获得资源的类型。类似 text/html 则是 MIME 类型，接在后面的 q 代表的是优先级，q 的范围通常在 0 到 1，越大优先级越高。</li>
+<li>Accept-Encoding: 客户端支持的压缩算法。服务端可以根据它来使用压缩算法来压缩资源，降低带宽，让用户能更快加载资源。</li>
+<li>Accept-Language: 客户端支持的语言。服务端可以通过这个字段来做 国际化，根据用户设置的语言来返回不同国家文案内容。</li>
+<li>Host: 当前请求的域名。服务端可以根据这个字段来做 反向代理。</li>
+<li>Connection: 客户端是否希望使用 TCP 长连接。</li>
+<li>User-Agent: 用户代理。该字段标注了发送方的一些信息，你可以通过它来知道请求方是浏览器、爬虫、postman 还是 cURL。<blockquote>
+<p>响应头：</p>
+</blockquote>
+</li>
+<li>Content-Type：服务端返回的资源类型，可以带上使用的编码格式。</li>
+<li>Content-Encoding：返回资源使用的压缩格式。</li>
+<li>Content-Length： HTTP 消息体的长度。</li>
+<li>Date：HTTP 响应报文生成的时间，使用了 GMT 格式。</li>
+<li>Connection：服务端决定使用长连接还是短连接。</li>
+<li>Server：使用了哪种服务器。</li>
+</ol>
+<hr>
+<h1 id="和浏览器缓存相关的HTTP头有哪些"><a href="#和浏览器缓存相关的HTTP头有哪些" class="headerlink" title="和浏览器缓存相关的HTTP头有哪些"></a>和浏览器缓存相关的HTTP头有哪些</h1><blockquote>
+<p>请求头：</p>
+</blockquote>
+<ol>
+<li>Cache-Control</li>
+<li>Pragma</li>
+<li>If-Modified-Since</li>
+<li>If-None-Match<blockquote>
+<p>响应头：</p>
+</blockquote>
+</li>
+<li>Last-Modified</li>
+<li>ETag</li>
+</ol>
+<hr>
+<h1 id="http状态码有那些？分别代表是什么意思？"><a href="#http状态码有那些？分别代表是什么意思？" class="headerlink" title="http状态码有那些？分别代表是什么意思？"></a>http状态码有那些？分别代表是什么意思？</h1><ul>
+<li>100-199 用于指定客户端应相应的某些动作。 </li>
+<li>200-299 用于表示请求成功。 </li>
+<li>300-399 用于已经移动的文件并且常被包含在定位头信息中指定新的地址信息。 </li>
+<li>400-499 用于指出客户端的错误。400    1、语义有误，当前请求无法被服务器理解。401   当前请求需要用户验证 403  服务器已经理解请求，但是拒绝执行它。</li>
+<li>500-599 用于支持服务器错误。 503 – 服务不可用</li>
+</ul>
+<hr>
+<h1 id="一个http的报文的头和body之间有什么分隔"><a href="#一个http的报文的头和body之间有什么分隔" class="headerlink" title="一个http的报文的头和body之间有什么分隔"></a>一个http的报文的头和body之间有什么分隔</h1><blockquote>
+<p>HTTP协议规定,HTTP首部(headers)和HTTP主体之间是以一个空行分割的</p>
+</blockquote>
+<hr>
+<h1 id="http协议中301和302的区别"><a href="#http协议中301和302的区别" class="headerlink" title="http协议中301和302的区别"></a>http协议中301和302的区别</h1><ul>
+<li>302重定向是暂时的重定向，搜索引擎会抓取新的内容而保存旧的网址。由于效劳器前往302代码，搜索引擎以为新的网址只是暂时的。</li>
+<li>301重定向是永久的重定向，搜索引擎在抓取新内容的同时也将旧的网址交换为重定向之后的网址。</li>
+</ul>
+<hr>
+<h1 id="介绍HTTP2-0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？"><a href="#介绍HTTP2-0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？" class="headerlink" title="介绍HTTP2.0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？"></a>介绍HTTP2.0，具体是怎么实现头部压缩的呢？多路复用的过程又是怎么样的呢？</h1><hr>
+<h1 id="介绍下304过程。-原理"><a href="#介绍下304过程。-原理" class="headerlink" title="介绍下304过程。(原理)"></a>介绍下304过程。(原理)</h1><ol>
+<li>服务器首先产生ETag，服务器可在稍后使用它来判断页面是否已经被修改。本质上，客户端通过将该记号传回服务器要求服务器验证其（客户端）缓存</li>
+<li>304是HTTP状态码，服务器用来标识这个文件没修改，不返回内容，浏览器在接收到个状态码后，会使用浏览器已缓存的文件</li>
+<li>客户端请求一个页面（A）。 服务器返回页面A，并在给A加上一个ETag。 客户端展现该页面，并将页面连同ETag一起缓存。 客户再次请求页面A，并将上次请求时服务器返回的ETag一起传递给服务器。 服务器检查该ETag，并判断出该页面自上次客户端请求之后还未被修改，直接返回响应304（未修改——Not Modified）和一个空的响应体</li>
+</ol>
+<hr>
+<h1 id="说一下和304相关的几个header属性，Etag和last-modified有什么区别"><a href="#说一下和304相关的几个header属性，Etag和last-modified有什么区别" class="headerlink" title="说一下和304相关的几个header属性，Etag和last modified有什么区别"></a>说一下和304相关的几个header属性，Etag和last modified有什么区别</h1><ul>
+<li>ETag/If-None-Match</li>
+<li>Last-Modified/If-Modified-Since</li>
+<li>区别：<ol>
+<li>last-modified 的精确度是秒，相比来说，etag 更加精确。</li>
+<li>last-modified 是每次文件修改都会对应修改，即使文件内容并没有改变，相比来说，etag 可以避免部分文件内容未修改的缓存更新。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="什么时候用304？"><a href="#什么时候用304？" class="headerlink" title="什么时候用304？"></a>什么时候用304？</h1><h2 id="如果客户端发送了一个带条件的GET-请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。"><a href="#如果客户端发送了一个带条件的GET-请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。" class="headerlink" title="  如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。"></a>  如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。</h2><h1 id="301-302-304各自代表了什么，304的协商缓存怎么定义，说一下强缓存"><a href="#301-302-304各自代表了什么，304的协商缓存怎么定义，说一下强缓存" class="headerlink" title="301 302 304各自代表了什么，304的协商缓存怎么定义，说一下强缓存"></a>301 302 304各自代表了什么，304的协商缓存怎么定义，说一下强缓存</h1><ul>
+<li>301：Moved Permanently 被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个URI之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。除非额外指定，否则这个响应也是可缓存的。</li>
+<li>302：Found 请求的资源现在临时从不同的URI响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。</li>
+<li>304：如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个304状态码。</li>
+</ul>
+<hr>
+<h1 id="问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？"><a href="#问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？" class="headerlink" title="问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？"></a>问在HTTP响应Header中，Set-Cookie的选项有哪些？分别是什么含义？</h1><ul>
+<li>name=value: 表示要设置的Cookie的名称和值。</li>
+<li>expires=date: 指定Cookie的过期时间，如果不设置，Cookie默认在浏览器关闭时过期。</li>
+<li>domain=domain: 指定Cookie的有效域，控制哪些域可以访问该Cookie。</li>
+<li>path=path: 指定Cookie的有效路径，控制哪些路径下的页面可以访问该Cookie。</li>
+<li>secure: 如果设置了该选项，Cookie只能通过HTTPS协议传输。</li>
+<li>httponly: 如果设置了该选项，Cookie将无法通过JavaScript脚本访问，有助于防止跨站脚本攻击（XSS）。</li>
+<li>samesite=strict/lax/none: 该选项用于控制跨站请求伪造（CSRF）攻击。strict表示仅在同站点请求时发送Cookie，lax表示在导航到其他站点时不发送Cookie，仅在顶级导航时发送；none表示总是发送Cookie。</li>
+</ul>
+<hr>
+<h1 id="If-Modified-Since、If-Match是根据什么进行判断"><a href="#If-Modified-Since、If-Match是根据什么进行判断" class="headerlink" title="If-Modified-Since、If-Match是根据什么进行判断"></a>If-Modified-Since、If-Match是根据什么进行判断</h1><h2 id="etag"><a href="#etag" class="headerlink" title="etag"></a>etag</h2><h1 id="什么是Etag？"><a href="#什么是Etag？" class="headerlink" title="什么是Etag？"></a>什么是Etag？</h1><blockquote>
+<p>浏览器下载组件的时候，会将它们存储到浏览器缓存中。如果需要再次获取相同的组件，浏览器将检查组件的缓存时间，假如已经过期，那么浏览器将发送一个条件GET请求到服务器，服务器判断缓存还有效，则发送一个304响应，告诉浏览器可以重用缓存组件。那么服务器是根据什么判断缓存是否还有效呢?答案有两种方式，一种是前面提到的ETag，另一种是根据Last-Modified</p>
+</blockquote>
+<hr>
+<h1 id="怎么生成ETAG"><a href="#怎么生成ETAG" class="headerlink" title="怎么生成ETAG"></a>怎么生成ETAG</h1><hr>
+<h1 id="协商缓存中etag-lastmodify区别"><a href="#协商缓存中etag-lastmodify区别" class="headerlink" title="协商缓存中etag lastmodify区别"></a>协商缓存中etag lastmodify区别</h1><hr>
+<h1 id="生成ETAG的算法了解过吗-原理"><a href="#生成ETAG的算法了解过吗-原理" class="headerlink" title="生成ETAG的算法了解过吗(原理)"></a>生成ETAG的算法了解过吗(原理)</h1><hr>
+<h1 id="缓存原理，ETAG给服务器的压力太大怎么办"><a href="#缓存原理，ETAG给服务器的压力太大怎么办" class="headerlink" title="缓存原理，ETAG给服务器的压力太大怎么办"></a>缓存原理，ETAG给服务器的压力太大怎么办</h1><hr>
+<h1 id="expires的单位是"><a href="#expires的单位是" class="headerlink" title="expires的单位是"></a>expires的单位是</h1><hr>
+<h1 id="HTTP和HTTPS的区别。https怎么实现它的安全性的？"><a href="#HTTP和HTTPS的区别。https怎么实现它的安全性的？" class="headerlink" title="HTTP和HTTPS的区别。https怎么实现它的安全性的？"></a>HTTP和HTTPS的区别。https怎么实现它的安全性的？</h1><ul>
+<li>HTTP协议通常承载于TCP协议之上，在HTTP和TCP之间添加一个安全协议层（SSL或TSL），这个时候，就成了我们常说的HTTPS。默认HTTP的端口号为80，HTTPS的端口号为443。</li>
+</ul>
+<hr>
+<h1 id="HTTP2-0和HTTP1-0有什么区别呢"><a href="#HTTP2-0和HTTP1-0有什么区别呢" class="headerlink" title="HTTP2.0和HTTP1.0有什么区别呢"></a>HTTP2.0和HTTP1.0有什么区别呢</h1><hr>
+<h1 id="https怎么加密的？-加密流程-，如何通过公钥和私钥加密？"><a href="#https怎么加密的？-加密流程-，如何通过公钥和私钥加密？" class="headerlink" title="https怎么加密的？(加密流程)，如何通过公钥和私钥加密？"></a>https怎么加密的？(加密流程)，如何通过公钥和私钥加密？</h1><hr>
+<h1 id="https加密解密过程涉及的算法，这些算法的区别"><a href="#https加密解密过程涉及的算法，这些算法的区别" class="headerlink" title="https加密解密过程涉及的算法，这些算法的区别"></a>https加密解密过程涉及的算法，这些算法的区别</h1><hr>
+<h1 id="HTTPS认证是怎么认证的？-SSL证书浏览器是怎么验证的？"><a href="#HTTPS认证是怎么认证的？-SSL证书浏览器是怎么验证的？" class="headerlink" title="HTTPS认证是怎么认证的？(SSL证书浏览器是怎么验证的？)"></a>HTTPS认证是怎么认证的？(SSL证书浏览器是怎么验证的？)</h1><ul>
+<li>客户端和服务端进行数据传输之前，先通过证书对双方进行身份验证：<ol>
+<li>客户端在发送SSL握手信息给服务端要求连接</li>
+<li>服务端会将证书发送给客户端</li>
+<li>客户端检查服务端证书，确认这个这个证书的签发机构是否值得信任，如果检查有问题，客户端会将是否继续通讯的决定权交给客户端，如果检查无误，或者用户选择继续，就表现客户端认可服务端身份。</li>
+<li>服务端要求客户端发送证书，并且检查是否通过验证， 失败就关闭连接，成功的话就得到客户端的公钥</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="常见Http请求头"><a href="#常见Http请求头" class="headerlink" title="常见Http请求头"></a>常见Http请求头</h1><ul>
+<li>Host (主机和端口号)</li>
+<li>Connection (链接类型)</li>
+<li>Upgrade-Insecure-Requests (升级为 HTTPS 请求)</li>
+<li>User-Agent (浏览器名称)</li>
+<li>Accept (传输文件类型)</li>
+<li>Referer (页面跳转处)</li>
+<li>Accept-Encoding（文件编解码格式）</li>
+<li>Cookie （Cookie）</li>
+<li>x-requested-with :XMLHttpRequest (是 Ajax 异步请求)</li>
+</ul>
+<hr>
+<h1 id="HTTPS原理及过程"><a href="#HTTPS原理及过程" class="headerlink" title="HTTPS原理及过程"></a>HTTPS原理及过程</h1><ul>
+<li>客户端在使用HTTPS方式与Web服务器通信时有以下几个步骤，如图所示。<ul>
+<li>客户使用https url访问服务器，则要求web 服务器建立ssl链接。</li>
+<li>web服务器接收到客户端的请求之后，会将网站的证书（证书中包含了公钥），返回或者说传输给客户端。</li>
+<li>客户端和web服务器端开始协商SSL链接的安全等级，也就是加密等级。</li>
+<li>客户端浏览器通过双方协商一致的安全等级，建立会话密钥，然后通过网站的公钥来加密会话密钥，并传送给网站。</li>
+<li>web服务器通过自己的私钥解密出会话密钥。</li>
+<li>web服务器通过会话密钥加密与客户端之间的通信。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="HTTP协议有什么特点？"><a href="#HTTP协议有什么特点？" class="headerlink" title="HTTP协议有什么特点？"></a>HTTP协议有什么特点？</h1><ol>
+<li><p>简单快速：客户向服务器请求服务时，只    需传送请求方法和路径。请求方法常用的有GET、HEAD、POST等。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</p>
+</li>
+<li><p>灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。</p>
+</li>
+<li><p>HTTP 0.9和1.0使用非持续连接：限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。HTTP 1.1使用持续连接：不必为每个web对象创建一个新的连接，一个连接可以传送多个对象，采用这种方式可以节省传输时间。</p>
+</li>
+<li><p>无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</p>
+</li>
+<li><p>支持B/S(Browser/Server,浏览器/服务器方式的网络结构。)及C/S(Client/Server,客户/服务器方式的网络计算模式)模式。</p>
+</li>
+</ol>
+<hr>
+<h1 id="WebSocket和HTTP之间的关系"><a href="#WebSocket和HTTP之间的关系" class="headerlink" title="WebSocket和HTTP之间的关系"></a>WebSocket和HTTP之间的关系</h1><ol>
+<li><p>WebSocket和HTTP一样都是基于TCP的应用层协议。</p>
+</li>
+<li><p>WebSocket协议和HTTP协议是两种不同的东西。客户端开始建立WebSocket连接时要发送一个header标记了 Upgrade的HTTP请求，表示请求协议升级。所以服务器端做出响应的简便方法是，直接在现有的HTTP服务器软件和现有的端口上实现WebSocket协议，然后再回一个状态码为101的HTTP响应完成握手，再往后发送数据时就没 HTTP的事了。也就是说WebSocket只是使用HTTP协议来完成一部分握手。</p>
+</li>
+<li><p>http无状态、被动；ws一次握手，知道状态，可以双向通信</p>
+</li>
+</ol>
+<hr>
+<h1 id="websocket，用法，如何保证仍然连接，如何确保消息发送到了，从计网的角度来讲一讲如何保证websocket传输可靠-websocket怎么传送数据的"><a href="#websocket，用法，如何保证仍然连接，如何确保消息发送到了，从计网的角度来讲一讲如何保证websocket传输可靠-websocket怎么传送数据的" class="headerlink" title="websocket，用法，如何保证仍然连接，如何确保消息发送到了，从计网的角度来讲一讲如何保证websocket传输可靠(websocket怎么传送数据的)"></a>websocket，用法，如何保证仍然连接，如何确保消息发送到了，从计网的角度来讲一讲如何保证websocket传输可靠(websocket怎么传送数据的)</h1><hr>
+<h1 id="websocket是什么，原理，怎么实现"><a href="#websocket是什么，原理，怎么实现" class="headerlink" title="websocket是什么，原理，怎么实现"></a>websocket是什么，原理，怎么实现</h1><hr>
+<h1 id="websocket-为什么要加心跳-websocket-不是长连接吗，为什么还要加心跳去维持连接"><a href="#websocket-为什么要加心跳-websocket-不是长连接吗，为什么还要加心跳去维持连接" class="headerlink" title="websocket 为什么要加心跳? websocket 不是长连接吗，为什么还要加心跳去维持连接"></a>websocket 为什么要加心跳? websocket 不是长连接吗，为什么还要加心跳去维持连接</h1><hr>
+<h1 id="心跳监听机制"><a href="#心跳监听机制" class="headerlink" title="心跳监听机制"></a>心跳监听机制</h1><hr>
+<h1 id="websocket-连接成功的状态码是多少"><a href="#websocket-连接成功的状态码是多少" class="headerlink" title="websocket 连接成功的状态码是多少"></a>websocket 连接成功的状态码是多少</h1><hr>
+<h1 id="WebSocket了解吗？用的什么协议"><a href="#WebSocket了解吗？用的什么协议" class="headerlink" title="WebSocket了解吗？用的什么协议"></a>WebSocket了解吗？用的什么协议</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h1 id="说说http-与-tcp-的关系"><a href="#说说http-与-tcp-的关系" class="headerlink" title="说说http 与 tcp 的关系"></a>说说http 与 tcp 的关系</h1><hr>
+<h1 id="tcp-可以建立多个连接吗？"><a href="#tcp-可以建立多个连接吗？" class="headerlink" title="tcp 可以建立多个连接吗？"></a>tcp 可以建立多个连接吗？</h1><hr>
+<h1 id="介绍TCP队头阻塞的问题以及如何解决的？"><a href="#介绍TCP队头阻塞的问题以及如何解决的？" class="headerlink" title="介绍TCP队头阻塞的问题以及如何解决的？"></a>介绍TCP队头阻塞的问题以及如何解决的？</h1><hr>
+<h1 id="tcp-握手-回收过程，了解泛洪攻击么；"><a href="#tcp-握手-回收过程，了解泛洪攻击么；" class="headerlink" title="tcp 握手 回收过程，了解泛洪攻击么；"></a>tcp 握手 回收过程，了解泛洪攻击么；</h1><hr>
+<h1 id="tcp的拥塞控制和流量控制"><a href="#tcp的拥塞控制和流量控制" class="headerlink" title="tcp的拥塞控制和流量控制"></a>tcp的拥塞控制和流量控制</h1><hr>
+<h1 id="tcp如何保证安全连接"><a href="#tcp如何保证安全连接" class="headerlink" title="tcp如何保证安全连接"></a>tcp如何保证安全连接</h1><hr>
+<h1 id="TCP-IP有几层网络模型，都是做什么的"><a href="#TCP-IP有几层网络模型，都是做什么的" class="headerlink" title="TCP/IP有几层网络模型，都是做什么的"></a>TCP/IP有几层网络模型，都是做什么的</h1><hr>
+<h1 id="TCP跟UDP的区别"><a href="#TCP跟UDP的区别" class="headerlink" title="TCP跟UDP的区别"></a>TCP跟UDP的区别</h1><hr>
+<h1 id="TCP是怎么判断丢包的？"><a href="#TCP是怎么判断丢包的？" class="headerlink" title="TCP是怎么判断丢包的？"></a>TCP是怎么判断丢包的？</h1><hr>
+<h1 id="什么情况用TCP-什么情况用UDP-为什么视频使用UDP协议-有什么负面影响"><a href="#什么情况用TCP-什么情况用UDP-为什么视频使用UDP协议-有什么负面影响" class="headerlink" title="什么情况用TCP,什么情况用UDP?为什么视频使用UDP协议?有什么负面影响?"></a>什么情况用TCP,什么情况用UDP?为什么视频使用UDP协议?有什么负面影响?</h1><hr>
+<h1 id="说说TCP传输的三次握手四次挥手策略"><a href="#说说TCP传输的三次握手四次挥手策略" class="headerlink" title="说说TCP传输的三次握手四次挥手策略"></a>说说TCP传输的三次握手四次挥手策略</h1><ul>
+<li><p>三次握手:</p>
+<ol>
+<li><p>为了准确无误地把数据送达目标处，TCP协议采用了三次握手策略。用TCP协议把数据包送出去后，TCP不会对传送 后的情况置之不理，它一定会向对方确认是否成功送达。握手过程中使用了TCP的标志：SYN和ACK。</p>
+</li>
+<li><p>发送端首先发送一个带SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。</p>
+</li>
+<li><p>最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。 若在握手过程中某个阶段莫名中断，TCP协议会再次以相同的顺序发送相同的数据包。</p>
+</li>
+</ol>
+</li>
+<li><p>断开一个TCP连接则需要“四次挥手”：</p>
+<ol>
+<li><p>第一次挥手：主动关闭方发送一个FIN，用来关闭主动方到被动关闭方的数据传送，也就是主动关闭方告诉被动关闭方：我已经不 会再给你发数据了(当然，在fin包之前发送出去的数据，如果没有收到对应的ack确认报文，主动关闭方依然会重发这些数据)，但是，此时主动关闭方还可 以接受数据。</p>
+</li>
+<li><p>第二次挥手：被动关闭方收到FIN包后，发送一个ACK给对方，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号）。</p>
+</li>
+<li><p>第三次挥手：被动关闭方发送一个FIN，用来关闭被动关闭方到主动关闭方的数据传送，也就是告诉主动关闭方，我的数据也发送完了，不会再给你发数据了。</p>
+</li>
+<li><p>第四次挥手：主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。</p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="为什么是三次握手而不是两次握手"><a href="#为什么是三次握手而不是两次握手" class="headerlink" title="为什么是三次握手而不是两次握手"></a>为什么是三次握手而不是两次握手</h1><blockquote>
+<p>防止已失效的连接请求又传送到服务器端，因而产生错误。这是因为服务端的LISTEN状态下的SOCKET当收到SYN报文的连接请求后，它可以把ACK和SYN（ACK起应答作用，SYN起同步作用）房子啊一个报文里来发送，但关闭连接时，当收到对方的FIN报文通知时，它仅仅表示对方没有数据发送给你了，但未必你所有的数据都发送给对方了，所以你可能未必会马上关闭SOCKET，即你可能还需要发送一个数据给对方之后，再发送DIN报文给对方来表示你同意现在可以关闭连接了，所以他这里的ACK报文和FIN报文多数情况下都是分开发送的</p>
+</blockquote>
+<hr>
+<h1 id="HTTP和HTTPS的区别。https怎么实现它的安全性的？-1"><a href="#HTTP和HTTPS的区别。https怎么实现它的安全性的？-1" class="headerlink" title="HTTP和HTTPS的区别。https怎么实现它的安全性的？"></a>HTTP和HTTPS的区别。https怎么实现它的安全性的？</h1><ul>
+<li>HTTP协议通常承载于TCP协议之上，在HTTP和TCP之间添加一个安全协议层（SSL或TSL），这个时候，就成了我们常说的HTTPS。默认HTTP的端口号为80，HTTPS的端口号为443。</li>
+</ul>
+<hr>
+<h1 id="怎么理解端到端的连接？"><a href="#怎么理解端到端的连接？" class="headerlink" title="怎么理解端到端的连接？"></a>怎么理解端到端的连接？</h1><hr>
+<h1 id="HTTP的协议格式"><a href="#HTTP的协议格式" class="headerlink" title="HTTP的协议格式"></a>HTTP的协议格式</h1><hr>
+<h1 id="怎么判断HTTP报文传输完成了"><a href="#怎么判断HTTP报文传输完成了" class="headerlink" title="怎么判断HTTP报文传输完成了"></a>怎么判断HTTP报文传输完成了</h1><hr>
+<h1 id="对称加密和非对称加密的了解"><a href="#对称加密和非对称加密的了解" class="headerlink" title="对称加密和非对称加密的了解"></a>对称加密和非对称加密的了解</h1><h2 id=""><a href="#" class="headerlink" title="  "></a>  <img src= "/img/loading.gif" data-src="/images/vue/%E9%9D%A2%E8%AF%95%E9%A2%98.jpg" alt="面试题"></h2><h1 id="SSL协议是使用对称加密还是非对称加密"><a href="#SSL协议是使用对称加密还是非对称加密" class="headerlink" title="SSL协议是使用对称加密还是非对称加密"></a>SSL协议是使用对称加密还是非对称加密</h1><h2 id="对称加密和非对称加密相结合"><a href="#对称加密和非对称加密相结合" class="headerlink" title="对称加密和非对称加密相结合"></a>对称加密和非对称加密相结合</h2><h1 id="非对称加密耗时久，怎么优化"><a href="#非对称加密耗时久，怎么优化" class="headerlink" title="非对称加密耗时久，怎么优化?"></a>非对称加密耗时久，怎么优化?</h1><hr>
+<h1 id="http工作原理"><a href="#http工作原理" class="headerlink" title="http工作原理"></a>http工作原理</h1><ol>
+<li>客户端连接到Web服务器 </li>
+<li>发送HTTP请求</li>
+<li>服务器接受请求并返回HTTP响应</li>
+<li>释放连接TCP连接</li>
+<li>客户端浏览器解析HTML内容</li>
+</ol>
+<hr>
+<h1 id="HTTPS原理及过程-1"><a href="#HTTPS原理及过程-1" class="headerlink" title="HTTPS原理及过程"></a>HTTPS原理及过程</h1><hr>
+<h1 id="HTTP-2能节省连接时间吗"><a href="#HTTP-2能节省连接时间吗" class="headerlink" title="HTTP/2能节省连接时间吗?"></a>HTTP/2能节省连接时间吗?</h1><hr>
+<h1 id="HTTP-2会有队头阻塞问题吗"><a href="#HTTP-2会有队头阻塞问题吗" class="headerlink" title="HTTP/2会有队头阻塞问题吗?"></a>HTTP/2会有队头阻塞问题吗?</h1><hr>
+<h1 id="三次握手的过程-客户端和服务端都做了什么？"><a href="#三次握手的过程-客户端和服务端都做了什么？" class="headerlink" title="三次握手的过程 客户端和服务端都做了什么？"></a>三次握手的过程 客户端和服务端都做了什么？</h1><hr>
+<h1 id="http是无连接的？"><a href="#http是无连接的？" class="headerlink" title="http是无连接的？"></a>http是无连接的？</h1><hr>
+<h1 id="http属于哪一层，tcp和ip呢"><a href="#http属于哪一层，tcp和ip呢" class="headerlink" title="http属于哪一层，tcp和ip呢"></a>http属于哪一层，tcp和ip呢</h1><hr>
+<h1 id="Tcp如何保证可靠传输"><a href="#Tcp如何保证可靠传输" class="headerlink" title="Tcp如何保证可靠传输"></a>Tcp如何保证可靠传输</h1><hr>
+<h1 id="Udp如何实现可靠传输"><a href="#Udp如何实现可靠传输" class="headerlink" title="Udp如何实现可靠传输"></a>Udp如何实现可靠传输</h1><hr>
+<h1 id="域名解析属于udp还是tcp？"><a href="#域名解析属于udp还是tcp？" class="headerlink" title="域名解析属于udp还是tcp？"></a>域名解析属于udp还是tcp？</h1><h2 id="udp"><a href="#udp" class="headerlink" title="udp"></a>udp</h2><h1 id="quic-协议原理"><a href="#quic-协议原理" class="headerlink" title="quic 协议原理"></a>quic 协议原理</h1><hr>
+<h1 id="HTTP2-0的多路复用和HTTP1-1的长连接有什么区别"><a href="#HTTP2-0的多路复用和HTTP1-1的长连接有什么区别" class="headerlink" title="HTTP2.0的多路复用和HTTP1.1的长连接有什么区别"></a>HTTP2.0的多路复用和HTTP1.1的长连接有什么区别</h1><ul>
+<li>1.x默认开启持久连接，在一个TCP连接上可以传送多个http请求和相应，减少了简历和关闭连接的小号和延迟</li>
+<li>多路复用是长链接的升级版。多路复用，就是在一个TCP连接中可以发送多个请求，服务端可以通过帧中的标识知道该帧属于哪个请求，通过重新排序还原请求。多路复用允许并发的发起多个请求，每个请求及该请求的响应不需要等待其他的请求或响应，避免了线头阻塞问题。这样某个请求任务耗时严重，不会影响到其他链接的正常执行，极大的提高传输性能</li>
+</ul>
+<hr>
+<h1 id="http2和http3的区别"><a href="#http2和http3的区别" class="headerlink" title="http2和http3的区别"></a>http2和http3的区别</h1><hr>
+<h1 id="对-http-几个版本有什么区别？keep-alive-和-多路复用在性能上有什么区别？为什么-keep-alive-可以达到多路复用的效果？"><a href="#对-http-几个版本有什么区别？keep-alive-和-多路复用在性能上有什么区别？为什么-keep-alive-可以达到多路复用的效果？" class="headerlink" title="对 http 几个版本有什么区别？keep-alive 和 多路复用在性能上有什么区别？为什么 keep-alive 可以达到多路复用的效果？"></a>对 http 几个版本有什么区别？keep-alive 和 多路复用在性能上有什么区别？为什么 keep-alive 可以达到多路复用的效果？</h1><hr>
+<h1 id="你知道哪些常见的header中的字段"><a href="#你知道哪些常见的header中的字段" class="headerlink" title="你知道哪些常见的header中的字段"></a>你知道哪些常见的header中的字段</h1><hr>
+<h1 id="说一下浏览器缓存；"><a href="#说一下浏览器缓存；" class="headerlink" title="说一下浏览器缓存；"></a>说一下浏览器缓存；</h1><ol>
+<li>浏览器缓存分为强缓存和协商缓存，强缓存会直接从浏览器里面拿数据，协商缓存会先访问服务器看缓存是否过期，再决定是否从浏览器里面拿数据。</li>
+<li>控制强缓存的字段有：Expires和Cache-Control，Expires 和 Cache-Control。</li>
+<li>控制协商缓存的字段是：Last-Modified / If-Modified-Since 和 Etag / If-None-Match，其中 Etag / If-None-Match的优先级比Last-Modified / If-Modified-Since高。</li>
+</ol>
+<hr>
+<h1 id="强缓存和协商缓存"><a href="#强缓存和协商缓存" class="headerlink" title="强缓存和协商缓存"></a>强缓存和协商缓存</h1><hr>
+<h1 id="强缓存一般放在哪里？"><a href="#强缓存一般放在哪里？" class="headerlink" title="强缓存一般放在哪里？"></a>强缓存一般放在哪里？</h1><h2 id="一般放在Memory-cache或者disk-cache"><a href="#一般放在Memory-cache或者disk-cache" class="headerlink" title="  一般放在Memory cache或者disk cache;"></a>  一般放在Memory cache或者disk cache;</h2><h1 id="计算整个文件得到etag会耗费心力，怎么解决？"><a href="#计算整个文件得到etag会耗费心力，怎么解决？" class="headerlink" title="计算整个文件得到etag会耗费心力，怎么解决？"></a>计算整个文件得到etag会耗费心力，怎么解决？</h1><blockquote>
+<p>etag可以通过文件的lastModified和content-length计算</p>
+</blockquote>
+<hr>
+<h1 id="如果我不想要使用缓存了，每次都请求最新的，怎么做？"><a href="#如果我不想要使用缓存了，每次都请求最新的，怎么做？" class="headerlink" title="如果我不想要使用缓存了，每次都请求最新的，怎么做？"></a>如果我不想要使用缓存了，每次都请求最新的，怎么做？</h1><h2 id="通过url拼接rendom的方式或者设置cache-control设置为no-cache"><a href="#通过url拼接rendom的方式或者设置cache-control设置为no-cache" class="headerlink" title="  通过url拼接rendom的方式或者设置cache-control设置为no-cache"></a>  通过url拼接rendom的方式或者设置cache-control设置为no-cache</h2><h1 id="cache-control中的no-cache和no-store的差异"><a href="#cache-control中的no-cache和no-store的差异" class="headerlink" title="cache-control中的no-cache和no-store的差异"></a>cache-control中的no-cache和no-store的差异</h1><ul>
+<li>no-store禁止浏览器和中间服务器缓存，每次都从服务器获取</li>
+<li>no-cache每次请求都会验证该缓存是否过期，可以存在本地缓存，可以在代理服务器缓存，但是这个缓存要服务器验证才可以使用</li>
+</ul>
+<hr>
+<h1 id="请介绍下cache-control"><a href="#请介绍下cache-control" class="headerlink" title="请介绍下cache-control"></a>请介绍下cache-control</h1><ul>
+<li>cache-control是一个通用消息头字段被用于HTTP请求和响应中，通过指定指令来实现缓存机制，这个缓存指令是单向的，常见的取值有private、no-cache、max-age、must-revalidate等，默认为private。</li>
+<li>每个资源都可以通过 Cache-Control HTTP 头来定义自己的缓存策略</li>
+<li>Cache-Control 指令控制谁在什么条件下可以缓存响应以及可以缓存多久</li>
+<li>Cache-Control 头在 HTTP/1.1 规范中定义，取代了之前用来定义响应缓存策略的头（例如 Expires）。</li>
+</ul>
+<hr>
+<h1 id="浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？"><a href="#浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？" class="headerlink" title="浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？"></a>浏览器缓存机制有哪几种；HTTP缓存有几种，原理是什么？</h1><ul>
+<li>浏览器缓存机制：<ol>
+<li>http缓存</li>
+<li>websql</li>
+<li>indexDB</li>
+<li>Cookie</li>
+<li>Localstorage、Sessionstorage</li>
+<li>application cache</li>
+<li>cacheStorage</li>
+<li>flash缓存</li>
+</ol>
+</li>
+<li>HTTP缓存种类：<ol>
+<li>强缓存</li>
+<li>协商缓存</li>
+</ol>
+</li>
+<li>介绍：<ul>
+<li>缓存就是让同一份资源不再发起请求，降低网络压力和资源数量，从而让网页加载更快。 网络请求不稳定加剧了网页加载的不稳定性，所以需要缓存。 一般来说，js、css、img等静态资源可以被缓存</li>
+</ul>
+</li>
+<li>原理：<ul>
+<li>强缓存：服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略。</li>
+<li>协商缓存：将缓存信息中的Etag和Last-Modified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="有了-Last-Modified-为什么还要有-Etag"><a href="#有了-Last-Modified-为什么还要有-Etag" class="headerlink" title="有了 Last-Modified 为什么还要有 Etag"></a>有了 Last-Modified 为什么还要有 Etag</h1><hr>
+<h1 id="为什么有了-Expires-还要有-Cache-Control？Expires-会造成什么问题"><a href="#为什么有了-Expires-还要有-Cache-Control？Expires-会造成什么问题" class="headerlink" title="为什么有了 Expires 还要有 Cache-Control？Expires  会造成什么问题"></a>为什么有了 Expires 还要有 Cache-Control？Expires  会造成什么问题</h1><hr>
+<h1 id="http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？"><a href="#http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？" class="headerlink" title="http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？"></a>http的缓存，强缓存和弱缓存有什么区别？他们的一些请求头和响应头是怎么样的？强缓存命中的时候，请求回返回什么样的状态码？</h1><hr>
+<h1 id="如果现在对资源启用强缓存，那如何判断资源是否更新呢（说webpack-hash），hash是如何生成的呢"><a href="#如果现在对资源启用强缓存，那如何判断资源是否更新呢（说webpack-hash），hash是如何生成的呢" class="headerlink" title="如果现在对资源启用强缓存，那如何判断资源是否更新呢（说webpack hash），hash是如何生成的呢"></a>如果现在对资源启用强缓存，那如何判断资源是否更新呢（说webpack hash），hash是如何生成的呢</h1><hr>
+<h1 id="线程与进程的区别"><a href="#线程与进程的区别" class="headerlink" title="线程与进程的区别"></a>线程与进程的区别</h1><ul>
+<li>一个程序至少有一个进程,一个进程至少有一个线程. </li>
+<li>线程的划分尺度小于进程，使得多线程程序的并发性高。</li>
+<li>另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。 </li>
+<li>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。 </li>
+<li>从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</li>
+</ul>
+<hr>
+<h1 id="线程共享为什么比进程共享容易？"><a href="#线程共享为什么比进程共享容易？" class="headerlink" title="线程共享为什么比进程共享容易？"></a>线程共享为什么比进程共享容易？</h1><hr>
+<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1><hr>
+<h1 id="进程之间和线程之间如何通信"><a href="#进程之间和线程之间如何通信" class="headerlink" title="进程之间和线程之间如何通信"></a>进程之间和线程之间如何通信</h1><hr>
+<h1 id="前端安全问题？"><a href="#前端安全问题？" class="headerlink" title="前端安全问题？"></a>前端安全问题？</h1><ol>
+<li><p>iframe</p>
+<ul>
+<li>如何让自己的网站不被其他网站的 iframe 引用？<ul>
+<li>通过判断<code>top.location</code>是否等于<code>self.location</code>，不等让他调转到百度</li>
+</ul>
+</li>
+<li>如何禁用，被使用的 iframe 对当前网站某些操作？<ul>
+<li>可以通过设置sandbox属性。sandbox是html5的新属性，主要是提高iframe安全系数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>CSRF（跨站请求伪造）</p>
+<ul>
+<li>你可以这么理解 CSRF 攻击：攻击者盗用了你的身份，以你的名义进行恶意请求。它能做的事情有很多包括：以你的名义发送邮件、发信息、盗取账号、购买商品、虚拟货币转账等。</li>
+<li>阐述 CSRF 攻击思想：<br>1、浏览并登录信任网站（举例：淘宝）<br>2、登录成功后在浏览器产生信息存储（举例：cookie）<br>3、用户在没有登出淘宝的情况下，访问危险网站<br>4、危险网站中存在恶意代码，代码为发送一个恶意请求（举例：购买商品/余额转账）<br>5、携带刚刚在浏览器产生的信息进行恶意请求<br>6、淘宝验证请求为合法请求（区分不出是否是该用户发送）<br>7、达到了恶意目标</li>
+<li>防御措施：<ul>
+<li>涉及到数据修改操作严格使用 post 请求而不是 get 请求</li>
+<li>HTTP 协议中使用 Referer 属性来确定请求来源进行过滤（禁止外域）</li>
+<li>请求地址添加 token ，使黑客无法伪造用户请求</li>
+<li>HTTP 头自定义属性验证（类似上一条）</li>
+<li>显示验证方式：添加验证码、密码等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>XSS（跨站脚本攻击）</p>
+<ul>
+<li>跨站脚本攻击：攻击者在目标网站植入恶意脚本（js / html），用户在浏览器上运行时可以获取用户敏感信息（cookie / session）、修改web页面以欺骗用户、与其他漏洞相结合形成蠕虫等。</li>
+<li>XSS类型：<ul>
+<li>持久型XSS：将脚本植入到服务器上，从而导致每个访问的用户都会执行</li>
+<li>非持久型XSS：对个体用户某url的参数进行攻击</li>
+</ul>
+</li>
+<li>针对这种情况，我们对特殊字符进行转译就好了（vue/react等主流框架已经避免类似问题，vue举例：不能在template中写script标签，无法在js中通过ref或append等方式动态改变或添加script标签）</li>
+</ul>
+</li>
+<li><p>ClickJacking（点击劫持）</p>
+<ul>
+<li>一般会利用透明 iframe 覆盖原网页诱导用户进行某些操作达成目的。</li>
+<li>防御措施：<ul>
+<li>在HTTP投中加入 X-FRAME-OPTIONS 属性，此属性控制页面是否可被嵌入 iframe 中【DENY：不能被所有网站嵌套或加载；SAMEORIGIN：只能被同域网站嵌套或加载；ALLOW-FROM URL：可以被指定网站嵌套或加载。】 判断当前网页是否被 iframe 嵌套（详情在第一条 firame 中）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="sql注入原理"><a href="#sql注入原理" class="headerlink" title="sql注入原理"></a>sql注入原理</h1><hr>
+<h1 id="什么是运营商劫持？"><a href="#什么是运营商劫持？" class="headerlink" title="什么是运营商劫持？"></a>什么是运营商劫持？</h1><blockquote>
+<p>网页登录运营商会给你的网页页面上加上各种页面里本来没有的广告。劫持方式分为DNS劫持、HTTP劫持、HTTPS劫持3种</p>
+</blockquote>
+<hr>
+<h1 id="运营商劫持怎么处理"><a href="#运营商劫持怎么处理" class="headerlink" title="运营商劫持怎么处理"></a>运营商劫持怎么处理</h1><ul>
+<li>主要是防script、iframe注入</li>
+</ul>
+<hr>
+<h1 id="请解释一下csrf-和-xss；"><a href="#请解释一下csrf-和-xss；" class="headerlink" title="请解释一下csrf 和 xss；"></a>请解释一下csrf 和 xss；</h1><ul>
+<li><p>xss：XSS全称cross-site scripting（跨站点脚本），是一种代码注入攻击，是当前 web 应用中最危险和最普遍的漏洞之一。攻击者向网页中注入恶意脚本，当用户浏览网页时，脚本就会执行，进而影响用户**，比如关不完的网站、盗取用户的 cookie 信息从而伪装成用户去操作，危害数据安全。</p>
+</li>
+<li><p>csrf：CSRF 跨站请求伪造（英语：Cross-site request forgery），是一种挟制用户在当前已登录的 Web 应用程序上执行非本意的操作的攻击方法。如： 攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。</p>
+</li>
+</ul>
+<hr>
+<h1 id="怎么防止-csrf-和-xss？"><a href="#怎么防止-csrf-和-xss？" class="headerlink" title="怎么防止 csrf 和 xss？"></a>怎么防止 csrf 和 xss？</h1><ul>
+<li><p>XSS:</p>
+<ol>
+<li>将重要的cookie标记为http only, ，浏览器将禁止页面的 JavaScript 访问带有 HttpOly 属性的 Cookie。</li>
+<li>HttpOnly 主要是为了解决 XSS 之后的 Cookie 劫持，使用 HttpOnly 有助于缓解 XSS 攻击，防止被窃取敏感的 Cookie信息，本质上不是 为了解决 XSS。</li>
+<li>在输入输出时对数据进行转义，比如&lt;转义成&lt;,这样脚本就运行不了了</li>
+<li>录入数据设置白名单，比如javaWeb项目，设置过滤器过滤特殊字符</li>
+<li>前端页面限制用户输入数据类型，比如用户输入完年龄后验证输入内容只能是数字</li>
+<li>过滤JS事件的标签，比如onclick、load等</li>
+</ol>
+</li>
+<li><p>csrf:</p>
+<ol>
+<li>token；token 验证的 CSRF 防御机制是公认最合适的方案。但若网站同时存在 XSS 漏洞的时候，这个方法也是空谈</li>
+<li>验证码；强制用户必须与应用进行交互，才能完成最终请求。此种方式能很好的遏制 csrf，但是用户体验比较差</li>
+<li>Referer check；请求来源限制，此种方法成本最低，但是并不能保证 100% 有效，因为服务器并不是什么时候都能取到 Referer，而且低版本的浏览器存在伪造 Referer 的风险</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="怎么解决refer伪造？"><a href="#怎么解决refer伪造？" class="headerlink" title="怎么解决refer伪造？"></a>怎么解决refer伪造？</h1><hr>
+<h1 id="XSS是什么，攻击原理，怎么预防。"><a href="#XSS是什么，攻击原理，怎么预防。" class="headerlink" title="XSS是什么，攻击原理，怎么预防。"></a>XSS是什么，攻击原理，怎么预防。</h1><hr>
+<h1 id="XSS攻击的场景能描述一个么？"><a href="#XSS攻击的场景能描述一个么？" class="headerlink" title="XSS攻击的场景能描述一个么？"></a>XSS攻击的场景能描述一个么？</h1><hr>
+<h1 id="请说说XSS与CSRF"><a href="#请说说XSS与CSRF" class="headerlink" title="请说说XSS与CSRF"></a>请说说XSS与CSRF</h1><ul>
+<li><img src= "/img/loading.gif" data-src="/images/math/xss%E4%B8%8Ecsrf.png" alt="xss"></li>
+<li><img src= "/img/loading.gif" data-src="/images/math/xss%E4%B8%8Ecsrf2.png" alt="xss"></li>
+<li><img src= "/img/loading.gif" data-src="/images/math/xss%E4%B8%8Ecsrf3.png" alt="xss"></li>
+<li><img src= "/img/loading.gif" data-src="/images/math/xss%E4%B8%8Ecsrf4.png" alt="xss"></li>
+<li><img src= "/img/loading.gif" data-src="/images/math/xss%E4%B8%8Ecsrf5.png" alt="xss"></li>
+</ul>
+<hr>
+<h1 id="服务端劫持了-token-怎么做防御"><a href="#服务端劫持了-token-怎么做防御" class="headerlink" title="服务端劫持了 token 怎么做防御"></a>服务端劫持了 token 怎么做防御</h1><hr>
+<h1 id="服务端反爬虫"><a href="#服务端反爬虫" class="headerlink" title="服务端反爬虫"></a>服务端反爬虫</h1><hr>
+<h1 id="服务端跨域应该如何设置"><a href="#服务端跨域应该如何设置" class="headerlink" title="服务端跨域应该如何设置"></a>服务端跨域应该如何设置</h1><hr>
+<h1 id="GET和POST的区别，何时使用POST？"><a href="#GET和POST的区别，何时使用POST？" class="headerlink" title="GET和POST的区别，何时使用POST？"></a>GET和POST的区别，何时使用POST？</h1><ul>
+<li><p>区别:</p>
+<ol>
+<li>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在2000个字符</li>
+<li>POST：一般用于修改服务器上的资源，对所发送的信息没有限制。</li>
+<li>GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值，也就是说Get是通过地址栏来传值，而Post是通过提交表单来传值。</li>
+</ol>
+</li>
+<li><p>然而，在以下情况中，请使用 POST 请求：</p>
+<ol>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据（POST 没有数据量限制）</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="描述以下POST和PUT的区别"><a href="#描述以下POST和PUT的区别" class="headerlink" title="描述以下POST和PUT的区别"></a>描述以下POST和PUT的区别</h1><hr>
+<h1 id="介绍下options请求"><a href="#介绍下options请求" class="headerlink" title="介绍下options请求"></a>介绍下options请求</h1><hr>
+<h1 id="options预检请求了解吗，返回什么"><a href="#options预检请求了解吗，返回什么" class="headerlink" title="options预检请求了解吗，返回什么"></a>options预检请求了解吗，返回什么</h1><hr>
+<h1 id="contentType-有哪些，有什么作用"><a href="#contentType-有哪些，有什么作用" class="headerlink" title="contentType 有哪些，有什么作用"></a>contentType 有哪些，有什么作用</h1><hr>
+<h1 id="简单请求和复杂请求的区别"><a href="#简单请求和复杂请求的区别" class="headerlink" title="简单请求和复杂请求的区别"></a>简单请求和复杂请求的区别</h1><hr>
+<h1 id="x-www-urlecoded-form和application-json在post中的区别"><a href="#x-www-urlecoded-form和application-json在post中的区别" class="headerlink" title="x-www-urlecoded-form和application/json在post中的区别"></a>x-www-urlecoded-form和application/json在post中的区别</h1><ul>
+<li><p>application/x-www-form-urlencoded：我bai们form表单提交就是这个模式，du并且将zhi提交的数据进行daourlencode。默认情况下，我zhuan们所有的表单提交都是通过这种默shu认的方式实现的。最常用的一种。</p>
+</li>
+<li><p>application/json：采用json格式提交，比如我们常用的ajax，dataType:”json”</p>
+</li>
+</ul>
+<hr>
+<h1 id="REST是什么-为什么使用它"><a href="#REST是什么-为什么使用它" class="headerlink" title="REST是什么, 为什么使用它?"></a>REST是什么, 为什么使用它?</h1><hr>
+<h1 id="遇到过哪些移动端兼容问题？"><a href="#遇到过哪些移动端兼容问题？" class="headerlink" title="遇到过哪些移动端兼容问题？"></a>遇到过哪些移动端兼容问题？</h1><hr>
+<h1 id="如何优化SPA应用的首屏加载速度慢的问题？"><a href="#如何优化SPA应用的首屏加载速度慢的问题？" class="headerlink" title="如何优化SPA应用的首屏加载速度慢的问题？"></a>如何优化SPA应用的首屏加载速度慢的问题？</h1><ol>
+<li>使用webpack打包，压缩代码，实现按需加载</li>
+<li>使用缓存</li>
+<li>script 设置defer/async</li>
+<li>使用图片懒加载，对滚动事件实现防抖节流操作，防止不停触发事件</li>
+<li>减少重排重绘</li>
+<li>使用预加载preload/prefetch</li>
+</ol>
+<hr>
+<h1 id="SPA理解和原理"><a href="#SPA理解和原理" class="headerlink" title="SPA理解和原理"></a>SPA理解和原理</h1><hr>
+<h1 id="对于首屏就必须要加载的包，有什么优化手段"><a href="#对于首屏就必须要加载的包，有什么优化手段" class="headerlink" title="对于首屏就必须要加载的包，有什么优化手段"></a>对于首屏就必须要加载的包，有什么优化手段</h1><h2 id="使用http缓存必须使用的包，下次请求时从缓存读取"><a href="#使用http缓存必须使用的包，下次请求时从缓存读取" class="headerlink" title="使用http缓存必须使用的包，下次请求时从缓存读取"></a>使用http缓存必须使用的包，下次请求时从缓存读取</h2><h1 id="怎么知道一个tcp请求数据已经完了呢"><a href="#怎么知道一个tcp请求数据已经完了呢" class="headerlink" title="怎么知道一个tcp请求数据已经完了呢"></a>怎么知道一个tcp请求数据已经完了呢</h1><hr>
+<h1 id="项目里面的鉴权和图片懒加载怎么实现的"><a href="#项目里面的鉴权和图片懒加载怎么实现的" class="headerlink" title="项目里面的鉴权和图片懒加载怎么实现的"></a>项目里面的鉴权和图片懒加载怎么实现的</h1><hr>
+<h1 id="路由鉴权如何实现，如果是不同身份怎么重定向到未认证页面，死扣细节，代码实现"><a href="#路由鉴权如何实现，如果是不同身份怎么重定向到未认证页面，死扣细节，代码实现" class="headerlink" title="路由鉴权如何实现，如果是不同身份怎么重定向到未认证页面，死扣细节，代码实现"></a>路由鉴权如何实现，如果是不同身份怎么重定向到未认证页面，死扣细节，代码实现</h1><hr>
+<h1 id="如何更好的处理线上的日志？"><a href="#如何更好的处理线上的日志？" class="headerlink" title="如何更好的处理线上的日志？"></a>如何更好的处理线上的日志？</h1><ol>
+<li>日志分级输出，可以分业务日志错误日志等</li>
+<li>可以把日志交给spring管理，定期扫描配置文件达到无需重启的目的，定位到原因就可以把级别调回去</li>
+<li>把日志放到WEB目录，通过权限限制外网直接访问，达到浏览器就可以查看日志</li>
+</ol>
+<hr>
+<h1 id="组件设计原则。"><a href="#组件设计原则。" class="headerlink" title="组件设计原则。"></a>组件设计原则。</h1><ol>
+<li>层次结构和 UML 类图；</li>
+<li>扁平化、面向数据的 state/props；</li>
+<li>更加纯粹的 State 变化；</li>
+<li>低耦合；</li>
+<li>辅助代码分离；</li>
+<li>及时模块化；</li>
+<li>集中/统一的状态管理；</li>
+</ol>
+<hr>
+<h1 id="介绍下web-worker，有什么用，什么样的场景比较适合？"><a href="#介绍下web-worker，有什么用，什么样的场景比较适合？" class="headerlink" title="介绍下web worker，有什么用，什么样的场景比较适合？"></a>介绍下web worker，有什么用，什么样的场景比较适合？</h1><hr>
+<h1 id="发布订阅模式和观察者模式的异同。"><a href="#发布订阅模式和观察者模式的异同。" class="headerlink" title="发布订阅模式和观察者模式的异同。"></a>发布订阅模式和观察者模式的异同。</h1><hr>
+<h1 id="TCP-IP有几层网络模型，都是做什么的-网络层次结构"><a href="#TCP-IP有几层网络模型，都是做什么的-网络层次结构" class="headerlink" title="TCP/IP有几层网络模型，都是做什么的(网络层次结构)"></a>TCP/IP有几层网络模型，都是做什么的(网络层次结构)</h1><hr>
+<h1 id="数据链路层解决什么问题"><a href="#数据链路层解决什么问题" class="headerlink" title="数据链路层解决什么问题"></a>数据链路层解决什么问题</h1><hr>
+<h1 id="TCP怎么保证有序"><a href="#TCP怎么保证有序" class="headerlink" title="TCP怎么保证有序"></a>TCP怎么保证有序</h1><h2 id="他必须收到上一个数据帧的ACK后才发下一个数据"><a href="#他必须收到上一个数据帧的ACK后才发下一个数据" class="headerlink" title="他必须收到上一个数据帧的ACK后才发下一个数据"></a>他必须收到上一个数据帧的ACK后才发下一个数据</h2><h1 id="数组和链表的区别，什么时候用链表，什么时候用数组"><a href="#数组和链表的区别，什么时候用链表，什么时候用数组" class="headerlink" title="数组和链表的区别，什么时候用链表，什么时候用数组"></a>数组和链表的区别，什么时候用链表，什么时候用数组</h1><ol>
+<li>存储位置上：数组逻辑上相邻的元素在物理存储位置上也相邻，而链表不一定；</li>
+<li>存储空间上：链表存放的内存空间可以是连续的，也可以是不连续的，数组则是连续的一段内存空间。一般情况下存放相同多的数据数组占用较小的内存，而链表还需要存放其前驱和后继的空间。</li>
+<li>长度的可变性：链表的长度是按实际需要可以伸缩的，而数组的长度是在定义时要给定的，如果存放的数据个数超过了数组的初始大小，则会出现溢出现象。</li>
+<li>按序号查找时，数组可以随机访问，时间复杂度为O(1)，而链表不支持随机访问，平均需要O(n)；　</li>
+<li>按值查找时，若数组无序，数组和链表时间复杂度均为O(1)，但是当数组有序时，可以采用折半查找将时间复杂度降为O(logn)；　</li>
+<li>插入和删除时，数组平均需要移动n/2个元素，而链表只需修改指针即可；　</li>
+<li>空间分配方面：数组在静态存储分配情形下，存储元素数量受限制，动态存储分配情形下，虽然存储空间可以扩充，但需要移动大量元素，导致操作效率降低，而且如果内存中没有更大块连续存储空间将导致分配失败； 即数组从栈中分配空间,，对于程序员方便快速,但自由度小。链表存储的节点空间只在需要的时候申请分配，只要内存中有空间就可以分配，操作比较灵活高效；即链表从堆中分配空间, 自由度大但申请管理比较麻烦。</li>
+</ol>
+<hr>
+<h1 id="链表和数组进行插入和删除的时间复杂度"><a href="#链表和数组进行插入和删除的时间复杂度" class="headerlink" title="链表和数组进行插入和删除的时间复杂度"></a>链表和数组进行插入和删除的时间复杂度</h1><hr>
+<h1 id="链表的类型以及应用场景"><a href="#链表的类型以及应用场景" class="headerlink" title="链表的类型以及应用场景"></a>链表的类型以及应用场景</h1><hr>
+<h1 id="树的类型以及应用场景，说一下红黑树和B-树"><a href="#树的类型以及应用场景，说一下红黑树和B-树" class="headerlink" title="树的类型以及应用场景，说一下红黑树和B+树"></a>树的类型以及应用场景，说一下红黑树和B+树</h1><hr>
+<h1 id="项目自动部署流程"><a href="#项目自动部署流程" class="headerlink" title="项目自动部署流程"></a>项目自动部署流程</h1><hr>
+<h1 id="网站如何反爬虫"><a href="#网站如何反爬虫" class="headerlink" title="网站如何反爬虫"></a>网站如何反爬虫</h1><hr>
+<h1 id="网页上实现VR效果的原理"><a href="#网页上实现VR效果的原理" class="headerlink" title="网页上实现VR效果的原理"></a>网页上实现VR效果的原理</h1><hr>
+<h1 id="网页上实现VR效果的原理-1"><a href="#网页上实现VR效果的原理-1" class="headerlink" title="网页上实现VR效果的原理"></a>网页上实现VR效果的原理</h1><hr>
+<h1 id="实现IM聊天流程，以及做过哪些优化"><a href="#实现IM聊天流程，以及做过哪些优化" class="headerlink" title="实现IM聊天流程，以及做过哪些优化"></a>实现IM聊天流程，以及做过哪些优化</h1><hr>
+<h1 id="实现一个i18n国际化的思路，部分动态替换的数据如何处理"><a href="#实现一个i18n国际化的思路，部分动态替换的数据如何处理" class="headerlink" title="实现一个i18n国际化的思路，部分动态替换的数据如何处理"></a>实现一个i18n国际化的思路，部分动态替换的数据如何处理</h1><hr>
+<h1 id="小组工作流程"><a href="#小组工作流程" class="headerlink" title="小组工作流程"></a>小组工作流程</h1><ol>
+<li>拿到原型图，先自我解析需求<ul>
+<li>依赖的外部资源<ul>
+<li>后端提供的接口</li>
+<li>ui出图的大概布局</li>
+<li>后期频繁改动的地方</li>
+</ul>
+</li>
+<li>需要事先的效果<ul>
+<li>下拉刷新</li>
+<li>动画效果</li>
+<li>吸顶效果</li>
+<li>懒加载、预加载、防抖、节流</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>产品召集项目相关人员，开需求讨论会，产品讲解原型<ul>
+<li>理解产品的需求，提出疑问：这是什么功能、怎么做、为啥这么做</li>
+<li>评估实现难度和实现成本，是否有潜在技术问题/风险</li>
+<li>对比自己理解的需求图，如果有和自己想的不符合的，提出疑问</li>
+<li>理解需求方提出此次需求的目的，分清主次，可以适当取舍</li>
+<li>如果要求提供上线时间，简单项目可以预估，复杂项目要仔细评估，不可马上给出时间</li>
+</ul>
+</li>
+<li>进一步整理需求<ul>
+<li>细化细节，整理有疑问的地方，找对应的人员进行确认</li>
+<li>评估完成时间</li>
+<li>初步制定排期表</li>
+</ul>
+</li>
+<li>开发<ul>
+<li>技术选型</li>
+<li>搭建开发环境：工具链</li>
+<li>搭建项目架构</li>
+<li>业务模块划分<ul>
+<li>优先级排序</li>
+<li>新项目介入，需要当前项目和介入项目的相关负责人pk优先级，随后调整项目排期</li>
+<li>开发过程中发现工作量与预期有严重出入，需要尽早向其他项目人员反馈，方便其修改时间安排</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>顶置开发规范<ul>
+<li>开发规范<ul>
+<li>commit提交格式：[改动文件类型]：[改动说明]</li>
+<li>单分支开发或者多分支开发<ol>
+<li>小项目、并行开发少，则只在master主分支开发</li>
+<li>中大项目，需求复杂，并行功能多，则需要建多个分支,master,dev，开发者分支；需要开发者自创一个分支开发，合并到dev，确认无问题后发布到master，最后上线</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>代码规范</li>
+<li>源码管理</li>
+<li>版本管理</li>
+<li>安全管理</li>
+</ul>
+</li>
+<li>自测<ul>
+<li>手动测试</li>
+<li>单元测试</li>
+<li>集成测试</li>
+</ul>
+</li>
+<li>提测-测试人员测试<ul>
+<li>开发人员修复bug</li>
+<li>期间不可接受耗时大的需求</li>
+<li>又不确定优先级高低的需求，需要讨论，取舍</li>
+<li>测试修复bug时间可能比开发时间还长，因此开发者预估开发时间不能乐观</li>
+</ul>
+</li>
+<li>上线<ul>
+<li>上线准备：域名申请、备案申请、服务器申请、部署</li>
+<li>测试线上环境：有bug回到修复bug环节</li>
+<li>日志监控</li>
+</ul>
+</li>
+<li>维护</li>
+</ol>
+<hr>
+<h1 id="登陆保持方法"><a href="#登陆保持方法" class="headerlink" title="登陆保持方法"></a>登陆保持方法</h1><hr>
+<h1 id="项目中最难的部分"><a href="#项目中最难的部分" class="headerlink" title="项目中最难的部分"></a>项目中最难的部分</h1><hr>
+<h1 id="单页和多页应用差别及优缺点"><a href="#单页和多页应用差别及优缺点" class="headerlink" title="单页和多页应用差别及优缺点"></a>单页和多页应用差别及优缺点</h1><ul>
+<li>单页面应用（SPA），通俗一点说就是指只有一个主页面的应用，浏览器一开始要加载所有必须的 html, js, css。所有的页面内容都包含在这个所谓的主页面中。但在写的时候，还是会分开写（页面片段），然后在交互的时候由路由程序动态载入，单页面的页面跳转，仅刷新局部资源。多应用于pc端。</li>
+<li>多页面（MPA），就是指一个应用中有多个页面，页面跳转时是整页刷新</li>
+<li>单页面的优点：<ol>
+<li>用户体验好，快，内容的改变不需要重新加载整个页面，基于这一点spa对服务器压力较小</li>
+<li>前后端分离</li>
+<li>页面效果会比较炫酷（比如切换页面内容时的专场动画）</li>
+</ol>
+</li>
+<li>单页面缺点：<ol>
+<li>不利于seo</li>
+<li>导航不可用，如果一定要导航需要自行实现前进、后退。（由于是单页面不能用浏览器的前进后退功能，所以需要自己建立堆栈管理）</li>
+<li>初次加载时耗时多</li>
+<li>页面复杂度提高很多</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="对链表进行循环，判断是不是一个环"><a href="#对链表进行循环，判断是不是一个环" class="headerlink" title="对链表进行循环，判断是不是一个环"></a>对链表进行循环，判断是不是一个环</h1><hr>
+<h1 id="怎么实现一个eventBus"><a href="#怎么实现一个eventBus" class="headerlink" title="怎么实现一个eventBus"></a>怎么实现一个eventBus</h1><hr>
+<h1 id="二分法时间复杂度"><a href="#二分法时间复杂度" class="headerlink" title="二分法时间复杂度"></a>二分法时间复杂度</h1><hr>
+<h1 id="在https页面能不能发http请求"><a href="#在https页面能不能发http请求" class="headerlink" title="在https页面能不能发http请求"></a>在https页面能不能发http请求</h1><hr>
+<h1 id="允许在https页面插http资源吗"><a href="#允许在https页面插http资源吗" class="headerlink" title="允许在https页面插http资源吗"></a>允许在https页面插http资源吗</h1><hr>
+<h1 id="有了解-http-轮询吗"><a href="#有了解-http-轮询吗" class="headerlink" title="有了解 http 轮询吗"></a>有了解 http 轮询吗</h1><hr>
+<h1 id="传统轮询有没有可能发两次请求后发的请求先返回数据？怎么解决（如何保证响应顺序）"><a href="#传统轮询有没有可能发两次请求后发的请求先返回数据？怎么解决（如何保证响应顺序）" class="headerlink" title="传统轮询有没有可能发两次请求后发的请求先返回数据？怎么解决（如何保证响应顺序）"></a>传统轮询有没有可能发两次请求后发的请求先返回数据？怎么解决（如何保证响应顺序）</h1><hr>
+<h1 id="你们的代码存在哪里啊，通过什么管理的"><a href="#你们的代码存在哪里啊，通过什么管理的" class="headerlink" title="你们的代码存在哪里啊，通过什么管理的"></a>你们的代码存在哪里啊，通过什么管理的</h1><hr>
+<h1 id="文件断点上传，怎么实现；"><a href="#文件断点上传，怎么实现；" class="headerlink" title="文件断点上传，怎么实现；"></a>文件断点上传，怎么实现；</h1><ul>
+<li>前端：<ul>
+<li>前端大文件上传网上的大部分文章已经给出了解决方案，核心是利用 Blob.prototype.slice 方法，和数组的 slice 方法相似，调用的 slice 方法可以返回原文件的某个切片</li>
+<li>这样我们就可以根据预先设置好的切片最大数量将文件切分为一个个切片，然后借助 http 的可并发性，同时上传多个切片，这样从原本传一个大文件，变成了同时传多个小的文件切片，可以大大减少上传时间</li>
+<li>另外由于是并发，传输到服务端的顺序可能会发生变化，所以我们还需要给每个切片记录顺序</li>
+</ul>
+</li>
+<li>服务端：<ul>
+<li>服务端需要负责接受这些切片，并在接收到所有切片后合并切片</li>
+</ul>
+</li>
+<li>这里又引伸出两个问题。何时合并切片，即切片什么时候传输完成 如何合并切片？<ul>
+<li>第一个问题需要前端进行配合，前端在每个切片中都携带切片最大数量的信息，当服务端接受到这个数量的切片时自动合并，也可以额外发一个请求主动通知服务端进行切片的合并</li>
+<li>第二个问题，具体如何合并切片呢？这里可以使用 nodejs 的 api fs.appendFileSync，它可以同步地将数据追加到指定文件，也就是说，当服务端接受到所有切片后，先创建一个最终的文件，然后将所有切片逐步合并到这个文件中</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="git和svn的区别？"><a href="#git和svn的区别？" class="headerlink" title="git和svn的区别？"></a>git和svn的区别？</h1><ol>
+<li>最核心的区别Git是分布式的，而Svn不是分布的。</li>
+<li>Git把内容按元数据方式存储，而SVN是按文件</li>
+<li>Git没有一个全局版本号，而SVN有</li>
+<li>Git下载下来后，在OffLine状态下可以看到所有的Log,SVN不可以。</li>
+</ol>
+<hr>
+<h1 id="介绍一下git的开发流程"><a href="#介绍一下git的开发流程" class="headerlink" title="介绍一下git的开发流程"></a>介绍一下git的开发流程</h1><ol>
+<li>克隆 Git 资源作为工作目录。</li>
+<li>在克隆的资源上添加或修改文件。</li>
+<li>如果其他人修改了，你可以更新资源。</li>
+<li>在提交前查看修改。</li>
+<li>提交修改。</li>
+<li>在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。</li>
+</ol>
+<hr>
+<h1 id="Git如果commit了内容想要回退该怎么做"><a href="#Git如果commit了内容想要回退该怎么做" class="headerlink" title="Git如果commit了内容想要回退该怎么做"></a>Git如果commit了内容想要回退该怎么做</h1><hr>
+<h1 id="git-reset-与-revert-区别，revert-多个-mr-改如何处理；"><a href="#git-reset-与-revert-区别，revert-多个-mr-改如何处理；" class="headerlink" title="git reset 与 revert 区别，revert 多个 mr 改如何处理；"></a>git reset 与 revert 区别，revert 多个 mr 改如何处理；</h1><hr>
+<h1 id="git-如何撤回-add-后的内容；"><a href="#git-如何撤回-add-后的内容；" class="headerlink" title="git 如何撤回 add 后的内容；"></a>git 如何撤回 add 后的内容；</h1><hr>
+<h1 id="什么是“git-cherry-pick”"><a href="#什么是“git-cherry-pick”" class="headerlink" title="什么是“git cherry-pick”?"></a>什么是“git cherry-pick”?</h1><ul>
+<li>命令 git cherry-pick 通常用于把特定提交从存储仓库的一个分支引入到其他分支中。常见的用途是从维护的分支到开发分支进行向前或回滚提交。命令git cherry-pick可以把branch A的commit复制到branch B上</li>
+</ul>
+<hr>
+<h1 id="git-fetch和-git-pull的区别"><a href="#git-fetch和-git-pull的区别" class="headerlink" title="git fetch和 git pull的区别"></a>git fetch和 git pull的区别</h1><ul>
+<li>简单来说：git fetch branch是把名为branch的远程分支拉取到本地；而git pull branch是在fetch的基础上，把branch分支与当前分支进行merge；因此pull = fetch + merge。</li>
+</ul>
+<hr>
+<h1 id="git-rebase和git-merge的区别"><a href="#git-rebase和git-merge的区别" class="headerlink" title="git rebase和git merge的区别"></a>git rebase和git merge的区别</h1><ul>
+<li>简单的说，git merge和git rebase都是合并分支的命令。</li>
+<li>git merge branch会把branch分支的差异内容pull到本地，然后与本地分支的内容一并形成一个committer对象提交到主分支上，合并后的分支与主分支一致；</li>
+<li>git rebase branch会把branch分支优先合并到主分支，然后把本地分支的commit放到主分支后面，合并后的分支就好像从合并后主分支又拉了一个分支一样，本地分支本身不会保留提交历史。</li>
+</ul>
+<hr>
+<h1 id="谈谈git-flow"><a href="#谈谈git-flow" class="headerlink" title="谈谈git flow"></a>谈谈git flow</h1><ul>
+<li>GitFlow可以用来管理分支。GitFlow工作流中常用的分支有下面几类：<ul>
+<li>master分支：最为稳定功能比较完整的随时可发布的代码，即代码开发完成，经过测试，没有明显的bug，才能合并到 master 中。请注意永远不要在 master 分支上直接开发和提交代码，以确保 master 上的代码一直可用；</li>
+<li>develop分支；用作平时开发的主分支，并一直存在，永远是功能最新最全的分支，包含所有要发布 到下一个 release 的代码，主要用于合并其他分支，比如 feature 分支； 如果修改代码，新建 feature 分支修改完再合并到 develop 分支。所有的 feature、 release 分支都是从 develop 分支上拉的。</li>
+<li>feature分支；这个分支主要是用来开发新的功能，一旦开发完成，通过测试没问题（这个测试，测试新功能没问题），我们合并回develop 分支进入下一个 release</li>
+<li>release分支；用于发布准备的专门分支。当开发进行到一定程度，或者说快到了既定的发布日，可以发布时，建立一个 release 分支并指定版本号(可以在 finish 的时候添加)。开发人员可以对 release 分支上的代码进行集中测试和修改bug。（这个测试，测试新功能与已有的功能是否有冲突，兼容性）全部完成经过测试没有问题后，将 release分支上的代码合并到 master 分支和 develop 分支</li>
+<li>hotfix分支；用于修复线上代码的bug。从 master 分支上拉。完成 hotfix 后，打上tag 我们合并回 master 和 develop 分支。</li>
+</ul>
+</li>
+<li>GitFlow主要工作流程<ol>
+<li>初始化项目为gitflow , 默认创建master分支 , 然后从master拉取第一个develop分支</li>
+<li>从develop拉取feature分支进行编码开发(多个开发人员拉取多个feature同时进行并行开发 , 互不影响) </li>
+<li>feature分支完成后 , 合并到develop(不推送 , feature功能完成还未提测 , 推送后会影响其他功能分支的开发)；合并feature到develop , 可以选择删除当前feature , 也可以不删除。但当前feature就不可更改了，必须从release分支继续编码修改</li>
+<li>从develop拉取release分支进行提测 , 提测过程中在release分支上修改BUG </li>
+<li>release分支上线后 , 合并release分支到develop/master并推送；合并之后，可选删除当前release分支，若不删除，则当前release不可修改。线上有问题也必须从master拉取hotfix分支进行修改；</li>
+<li>上线之后若发现线上BUG , 从master拉取hotfix进行BUG修改；</li>
+<li>hotfix通过测试上线后，合并hotfix分支到develop/master并推送；合并之后，可选删除当前hotfix ，若不删除，则当前hotfix不可修改，若补丁未修复，需要从master拉取新的hotfix继续修改；</li>
+<li>当进行一个feature时 , 若develop分支有变动 , 如其他开发人员完成功能并上线 , 则需要将完成的功能合并到自己分支上，即合并develop到当前feature分支；</li>
+<li>当进行一个release分支时 , 若develop分支有变动 , 如其他开发人员完成功能并上线 , 则需要将完成的功能合并到自己分支上，即合并develop到当前release分支 (!!! 因为当前release分支通过测试后会发布到线上 , 如果不合并最新的develop分支 , 就会发生丢代码的情况)； GitFlow的好处为不同的分支分配一个明确的角色，并定义分支之间如何交互以及什么时间交互；可以帮助大型项目理清分支之间的关系，简化分支的复杂度。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="Git的快照是指什么？Git的工作区域由哪三部分组成？在git中，如何为提交的版本打标签"><a href="#Git的快照是指什么？Git的工作区域由哪三部分组成？在git中，如何为提交的版本打标签" class="headerlink" title="Git的快照是指什么？Git的工作区域由哪三部分组成？在git中，如何为提交的版本打标签"></a>Git的快照是指什么？Git的工作区域由哪三部分组成？在git中，如何为提交的版本打标签</h1><ul>
+<li><p>快照：git会把出现变更的文件直接拷贝，形成新的blob，而非与上一个版本的diff，并记录下来。并非每个当前版本都需要做备份，如果没有改变，那么快照其实是链接上一个版本。</p>
+</li>
+<li><p>三部分：</p>
+<ul>
+<li>工作区：用户本地的工作目录</li>
+<li>暂存区：一个临时的用于放置文件修改动作的缓存区域</li>
+<li>版本库：包含了所有版本及分子的仓库。该仓库里面的文件能够被git说管理，文件的添加、删除、修改都能被git所跟踪</li>
+</ul>
+</li>
+<li><p>git的工作流程：</p>
+<ul>
+<li>在工作区增删改文件；</li>
+<li>将修改后的文件放到暂存区域</li>
+<li>将暂存区域的文件提交到本地仓库</li>
+<li>将本地仓库的修改推送到远程仓库</li>
+</ul>
+</li>
+<li><p>如何打标签：</p>
+<ol>
+<li>切换到需要打标签的分支，执行add，commit操作</li>
+<li>输入git tag <code>&lt;name&gt;</code>新建标签</li>
+<li>推送到远端仓库</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="get-rebase的作用"><a href="#get-rebase的作用" class="headerlink" title="get rebase的作用"></a>get rebase的作用</h1><blockquote>
+<p>会把branch分支优先合并到主分支，然后把本地分支的commit放到主分支后面，合并后的分支就好像从合并后主分支又拉了一个分支一样，本地分支本身不会保留提交历史。</p>
+</blockquote>
+<hr>
+<h1 id="讲讲二叉树"><a href="#讲讲二叉树" class="headerlink" title="讲讲二叉树"></a>讲讲二叉树</h1><hr>
+<h1 id="讲讲红黑二叉树和平衡二叉树"><a href="#讲讲红黑二叉树和平衡二叉树" class="headerlink" title="讲讲红黑二叉树和平衡二叉树"></a>讲讲红黑二叉树和平衡二叉树</h1><hr>
+<h1 id="前端渲染和服务端渲染在用户体验上有什么差别？"><a href="#前端渲染和服务端渲染在用户体验上有什么差别？" class="headerlink" title="前端渲染和服务端渲染在用户体验上有什么差别？"></a>前端渲染和服务端渲染在用户体验上有什么差别？</h1><hr>
+<h1 id="JPG和PNG图片的应用场景，哪一个质量低，两者区别。"><a href="#JPG和PNG图片的应用场景，哪一个质量低，两者区别。" class="headerlink" title="JPG和PNG图片的应用场景，哪一个质量低，两者区别。"></a>JPG和PNG图片的应用场景，哪一个质量低，两者区别。</h1><hr>
+<h1 id="登录功能怎么实现"><a href="#登录功能怎么实现" class="headerlink" title="登录功能怎么实现"></a>登录功能怎么实现</h1><hr>
+<h1 id="前后端交互怎么确定用户身份？"><a href="#前后端交互怎么确定用户身份？" class="headerlink" title="前后端交互怎么确定用户身份？"></a>前后端交互怎么确定用户身份？</h1><hr>
+<h1 id="跨域部署怎么传cookie？"><a href="#跨域部署怎么传cookie？" class="headerlink" title="跨域部署怎么传cookie？"></a>跨域部署怎么传cookie？</h1><h2 id="https-blog-csdn-net-weixin-44862325-article-details-105605091"><a href="#https-blog-csdn-net-weixin-44862325-article-details-105605091" class="headerlink" title="https://blog.csdn.net/weixin_44862325/article/details/105605091"></a><a href="https://blog.csdn.net/weixin_44862325/article/details/105605091" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44862325/article/details/105605091</a></h2><h1 id="Token的机制是怎样的"><a href="#Token的机制是怎样的" class="headerlink" title="Token的机制是怎样的"></a>Token的机制是怎样的</h1><hr>
+<h1 id="token存在哪里"><a href="#token存在哪里" class="headerlink" title="token存在哪里"></a>token存在哪里</h1><hr>
+<h1 id="token的产生方法与使用的原因"><a href="#token的产生方法与使用的原因" class="headerlink" title="token的产生方法与使用的原因"></a>token的产生方法与使用的原因</h1><hr>
+<h1 id="每次发起请求都会携带token吗"><a href="#每次发起请求都会携带token吗" class="headerlink" title="每次发起请求都会携带token吗"></a>每次发起请求都会携带token吗</h1><hr>
+<h1 id="怎么做到关掉页面后还能维持登录状态"><a href="#怎么做到关掉页面后还能维持登录状态" class="headerlink" title="怎么做到关掉页面后还能维持登录状态"></a>怎么做到关掉页面后还能维持登录状态</h1><hr>
+<h1 id="登录之后，每次请求一定会携带cookie吗"><a href="#登录之后，每次请求一定会携带cookie吗" class="headerlink" title="登录之后，每次请求一定会携带cookie吗"></a>登录之后，每次请求一定会携带cookie吗</h1><hr>
+<h1 id="发起请求时怎么知道携带哪个cookie，怎么匹配cookie"><a href="#发起请求时怎么知道携带哪个cookie，怎么匹配cookie" class="headerlink" title="发起请求时怎么知道携带哪个cookie，怎么匹配cookie"></a>发起请求时怎么知道携带哪个cookie，怎么匹配cookie</h1><hr>
+<h1 id="有了解过withCredentials属性吗"><a href="#有了解过withCredentials属性吗" class="headerlink" title="有了解过withCredentials属性吗"></a>有了解过withCredentials属性吗</h1><hr>
+<h1 id="互斥登录怎么实现"><a href="#互斥登录怎么实现" class="headerlink" title="互斥登录怎么实现"></a>互斥登录怎么实现</h1><hr>
+<h1 id="单点登录（原理）"><a href="#单点登录（原理）" class="headerlink" title="单点登录（原理）"></a>单点登录（原理）</h1><ul>
+<li>概念：<br>单点登录SSO，是一个多系统共存的环境下，用户在统一登陆后，就不用在其他系统中登录，也就是用户的一次登录得到其他所有系统的信任</li>
+<li>单点登录有同域和跨域两种场景<ul>
+<li>同域：<ul>
+<li>试用场景：都是企业自己的系统，所有系统都使用同一个一级域名通过不同的二级域名来区分</li>
+<li>核心原理：<ol>
+<li>门户系统设置的cookie的domain为一级域名也是zit.com，这样就可以共享门户的cookie给所有的使用该域名zit.com系统</li>
+<li>使用spring session等技术让所有系统共享session</li>
+<li>这样只要门户系统登录之后无论跳转应用1或者应用2，都能通过门户Cookie中的sessionId读取到Session中的登录信息实现单点登录</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>跨域：<ul>
+<li>核心原理：<ol>
+<li>用户在第一次访问应用系统的时候，因为没有登录，会被引导到认证系统中进行登录；</li>
+<li>根据用户提供的登录信息，认证系统进行身份校验，如果通过，返回给用户一个认证凭据-令牌</li>
+<li>用户再次访问别的应用的时候，带上令牌作为认证凭证</li>
+<li>应用系统接收到请求后会把令牌送到认证服务器进行校验，如果通过，用户可以在不用登陆的情况下访问其他信任的业务服务器</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="当请求的文件很大的时候该怎么办"><a href="#当请求的文件很大的时候该怎么办" class="headerlink" title="当请求的文件很大的时候该怎么办"></a>当请求的文件很大的时候该怎么办</h1><hr>
+<h1 id="对于一个盲人用户来讲，如何实现页面元素不可见，但是仍然能够被阅读器识别？"><a href="#对于一个盲人用户来讲，如何实现页面元素不可见，但是仍然能够被阅读器识别？" class="headerlink" title="对于一个盲人用户来讲，如何实现页面元素不可见，但是仍然能够被阅读器识别？"></a>对于一个盲人用户来讲，如何实现页面元素不可见，但是仍然能够被阅读器识别？</h1><hr>
+<h1 id="小程序的文件类型"><a href="#小程序的文件类型" class="headerlink" title="小程序的文件类型"></a>小程序的文件类型</h1><ul>
+<li>WXML —— 模板文件</li>
+<li>JSON —— 配置/设置文件，如标题、tabbar、页面注册</li>
+<li>WXSS —— 样式文件，样式可直接用import导入</li>
+<li>JS —— 脚本逻辑文件，逻辑处理，网络请求</li>
+<li>app.json —— 配置文件入口，整个小程序的全局配置，网络超时时间、底部tab、页面路径，window字段是小程序所有页面的顶部背景颜色、文字颜色</li>
+<li>app.js —— 可以没有内容，可以在里边监听声明周期函数、声明全局变量</li>
+<li>app.wxss —— 全局配置样式文件</li>
+</ul>
+<hr>
+<h1 id="小程序数据请求怎么封装"><a href="#小程序数据请求怎么封装" class="headerlink" title="小程序数据请求怎么封装"></a>小程序数据请求怎么封装</h1><ul>
+<li>将所有的接口放在统一的js文件中并导出（或者将请求地址、头、方法在一个js文件里统一定义为一个常量输出）</li>
+<li>在app.js创建封装请求数据的方法</li>
+<li>在子页面中调用封装的方法请求数据</li>
+</ul>
+<hr>
+<h1 id="小程序参数传值的方法"><a href="#小程序参数传值的方法" class="headerlink" title="小程序参数传值的方法"></a>小程序参数传值的方法</h1><ul>
+<li>给html元素中添加data-*属性来传递需要的值，之后通过e.currentTarget.dataset或onload的param参数获取，注意不能有大小写字母，不可存放对象</li>
+<li>跳转页面时通过navigator传递需要的参数值</li>
+<li>设置id的方法标识，通过e.currentTarget.id获取设置的id值，然后通过设置全局变量的方法来传递数值</li>
+</ul>
+<hr>
+<h1 id="小程序页面间传值的方式"><a href="#小程序页面间传值的方式" class="headerlink" title="小程序页面间传值的方式"></a>小程序页面间传值的方式</h1><ul>
+<li>url</li>
+<li>storag（wx.storageSync）</li>
+<li>全局变量（getApp）</li>
+</ul>
+<hr>
+<h1 id="小程序的setData-是怎么实现数据响应式的"><a href="#小程序的setData-是怎么实现数据响应式的" class="headerlink" title="小程序的setData()是怎么实现数据响应式的"></a>小程序的setData()是怎么实现数据响应式的</h1><hr>
+<h1 id="小程序bindtap和catchtap的区别是什么"><a href="#小程序bindtap和catchtap的区别是什么" class="headerlink" title="小程序bindtap和catchtap的区别是什么"></a>小程序bindtap和catchtap的区别是什么</h1><ul>
+<li>bindtap不会阻止事件冒泡</li>
+<li>catchtap阻止事件冒泡</li>
+</ul>
+<hr>
+<h1 id="小程序setData的回调函数"><a href="#小程序setData的回调函数" class="headerlink" title="小程序setData的回调函数"></a>小程序setData的回调函数</h1><blockquote>
+<p>微信小程序的setData实现是和react的setState实现类似的，所以它也是一个异步函数，并且有回调函数的参数，当然平时小量数据我们可能并没有感觉到它的异步，但是为了确保逻辑的正确执行，在需要用到setData后，data里的数据的步骤，请写入setData的回调函数中，</p>
+</blockquote>
+<hr>
+<h1 id="小程序关联微信公众号如何确定用户的唯⼀性"><a href="#小程序关联微信公众号如何确定用户的唯⼀性" class="headerlink" title="小程序关联微信公众号如何确定用户的唯⼀性"></a>小程序关联微信公众号如何确定用户的唯⼀性</h1><ul>
+<li>使用wx.getUserInfo ⽅法withCredentials 为true 时可获取encryptedData ， 里面有union_id 。后端需要进行对称解密</li>
+</ul>
+<hr>
+<h1 id="如何看待小程序，它的技术原理是"><a href="#如何看待小程序，它的技术原理是" class="headerlink" title="如何看待小程序，它的技术原理是?"></a>如何看待小程序，它的技术原理是?</h1><ul>
+<li><p>微信小程序是一种运行在微信客户端，无需下载和安装。</p>
+</li>
+<li><p>优点：</p>
+<ul>
+<li>无需下载</li>
+<li>打开速度快</li>
+<li>开发成本低</li>
+<li>为用户提供良好的安全保障，发布有一套严格的审查流程，不能通过审查的程序无法发布上线</li>
+<li></li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>依托微信，不能开发后台管理功能</li>
+<li>大小不能超过2M，不能打开超过5个层级的页面</li>
+</ul>
+</li>
+<li><p>原理：小程序分为两个部分webview和appService，webview用来展现ui，appService用来处理业务逻辑、数据及接口调用，它们在两个进程中运行，通过系统层JSBridge实现通信，完成ui渲染、事件处理</p>
+</li>
+</ul>
+<hr>
+<h1 id="小程序上面有做什么性能优化吗？"><a href="#小程序上面有做什么性能优化吗？" class="headerlink" title="小程序上面有做什么性能优化吗？"></a>小程序上面有做什么性能优化吗？</h1><ul>
+<li>减少默认data的大小</li>
+<li>组件化方案，封装公用组件，减少代码量</li>
+</ul>
+<hr>
+<h1 id="小程序的底层架构是怎么样的？"><a href="#小程序的底层架构是怎么样的？" class="headerlink" title="小程序的底层架构是怎么样的？"></a>小程序的底层架构是怎么样的？</h1><hr>
+<h1 id="小程序生命周期"><a href="#小程序生命周期" class="headerlink" title="小程序生命周期"></a>小程序生命周期</h1><ul>
+<li>onload —— 页面加载，调一次</li>
+<li>onShow —— 页面显示，每次打开页面都调用（路由变化就调用）</li>
+<li>onReady —— 初次渲染完成，调一次</li>
+<li>onHide —— 页面隐藏，当navigateTo或底部tab切换时调用</li>
+<li>onUnload —— 页面卸载，当redirectTo或navigateBack时调用</li>
+</ul>
+<hr>
+<h1 id="小程序如何实现下拉刷新？"><a href="#小程序如何实现下拉刷新？" class="headerlink" title="小程序如何实现下拉刷新？"></a>小程序如何实现下拉刷新？</h1><ul>
+<li>先在app.json或page.json中配置enablePullDownRefresh:true</li>
+<li>page里用onPullDownRefresh函数，在下拉刷新时执行</li>
+<li>在下拉函数执行时发起数据请求，请求返回后，调用wx.stopPullDownRefresh停止下拉刷新的状态</li>
+</ul>
+<hr>
+<h1 id="小程序的像素rpx计算方式"><a href="#小程序的像素rpx计算方式" class="headerlink" title="小程序的像素rpx计算方式"></a>小程序的像素rpx计算方式</h1><hr>
+<h1 id="小程序双线程模型"><a href="#小程序双线程模型" class="headerlink" title="小程序双线程模型"></a>小程序双线程模型</h1><hr>
+<h1 id="小程序为什么是双线程"><a href="#小程序为什么是双线程" class="headerlink" title="小程序为什么是双线程"></a>小程序为什么是双线程</h1><ul>
+<li>小程序之所以有两个线程，是为了实现小程序的高效运行和良好的用户体验。<ol>
+<li>渲染线程（UI 线程）： 渲染线程负责小程序界面的渲染和响应用户的交互。它使用 WebView 进行页面渲染，包括解析和绘制 DOM、布局、样式计算和渲染等操作。渲染线程是单线程的，所有的界面操作都在这个线程中进行。</li>
+<li>逻辑线程（JS 线程）： 逻辑线程负责小程序的逻辑运算和数据处理。它是基于 JavaScript 运行的，负责处理用户交互、业务逻辑、数据请求、事件处理等操作。逻辑线程是独立于渲染线程的，可以并行处理多个任务，避免阻塞界面的渲染和响应。</li>
+</ol>
+</li>
+<li>好处：<ol>
+<li>响应速度：逻辑线程和渲染线程分开，可以并行执行，提高了小程序的响应速度和用户体验。</li>
+<li>防止阻塞：逻辑线程的运行不会阻塞渲染线程，避免了长时间的计算或数据处理导致界面卡顿或无响应的情况。</li>
+<li>资源隔离：渲染线程和逻辑线程是独立的，它们有各自的资源和运行环境，可以避免相互干扰和影响。</li>
+</ol>
+</li>
+<li>需要注意的是，小程序的渲染线程和逻辑线程之间通过微信客户端进行通信和交互。逻辑线程可以发送请求给微信客户端，然后客户端将渲染指令发送给渲染线程进行界面渲染，同时渲染线程可以将用户的交互事件发送给逻辑线程进行处理。这种通信方式保证了渲染和逻辑的协同工作，实现了小程序的正常运行。</li>
+<li>小程序之所以有两个线程，是为了提高渲染速度、避免阻塞和资源隔离。渲染线程负责界面渲染，逻辑线程负责业务逻辑和数据处理，两者通过微信客户端进行通信和交互，共同实现小程序的功能和性能。</li>
+</ul>
+<hr>
+<h1 id="小程序项目的登录如何实现的-用户退出后下次进入还需要再次授权吗"><a href="#小程序项目的登录如何实现的-用户退出后下次进入还需要再次授权吗" class="headerlink" title="小程序项目的登录如何实现的,用户退出后下次进入还需要再次授权吗"></a>小程序项目的登录如何实现的,用户退出后下次进入还需要再次授权吗</h1><ul>
+<li>wx.login获取到一个code，拿到code去请求后台得到openId, sessionKey, unionId</li>
+<li>调用wx.getUserInfo</li>
+<li>一次性授权</li>
+<li>永久授权：调取授权登录接口并把获取到的用户公开信息存入数据库</li>
+</ul>
+<hr>
+<h1 id="小程序验证授权是自动弹出还是触发的"><a href="#小程序验证授权是自动弹出还是触发的" class="headerlink" title="小程序验证授权是自动弹出还是触发的"></a>小程序验证授权是自动弹出还是触发的</h1><blockquote>
+<p>按钮触发的，open-type指定为getUserInfo类型</p>
+</blockquote>
+<hr>
+<h1 id="小程序关联公众号如何确定用户的唯一性"><a href="#小程序关联公众号如何确定用户的唯一性" class="headerlink" title="小程序关联公众号如何确定用户的唯一性"></a>小程序关联公众号如何确定用户的唯一性</h1><blockquote>
+<p>unionid是相同唯一的</p>
+</blockquote>
+<hr>
+<h1 id="小程序遇到调试问题"><a href="#小程序遇到调试问题" class="headerlink" title="小程序遇到调试问题"></a>小程序遇到调试问题</h1><hr>
+<h1 id="小程序的原生组件实现原理"><a href="#小程序的原生组件实现原理" class="headerlink" title="小程序的原生组件实现原理"></a>小程序的原生组件实现原理</h1><hr>
+<h1 id="小程序有什么css不能用？"><a href="#小程序有什么css不能用？" class="headerlink" title="小程序有什么css不能用？"></a>小程序有什么css不能用？</h1><hr>
+<h1 id="wepy把vue语法转换成原生小程序的原理"><a href="#wepy把vue语法转换成原生小程序的原理" class="headerlink" title="wepy把vue语法转换成原生小程序的原理"></a>wepy把vue语法转换成原生小程序的原理</h1><hr>
+<h1 id="小程序的用户鉴权机制"><a href="#小程序的用户鉴权机制" class="headerlink" title="小程序的用户鉴权机制"></a>小程序的用户鉴权机制</h1><hr>
+<h1 id="小程序与H5的区别？"><a href="#小程序与H5的区别？" class="headerlink" title="小程序与H5的区别？"></a>小程序与H5的区别？</h1><ol>
+<li>运行环境的不同<ul>
+<li>传统的HTML5的运行环境是浏览器，包括webview，而微信小程序的运行环境并非完整的浏览器，是微信开发团队基于浏览器内核完全重构的一个内置解析器，针对小程序专门做了优化，配合自己定义的开发语言标准，提升了小程序的性能。</li>
+</ul>
+</li>
+<li>开发成本的不同<ul>
+<li>只在微信中运行，所以不用再去顾虑浏览器兼容性，不用担心生产环境中出现不可预料的奇妙BUG</li>
+</ul>
+</li>
+<li>获取系统级权限的不同<ul>
+<li>系统级权限都可以和微信小程序无缝衔接</li>
+</ul>
+</li>
+<li>应用在生产环境的运行流畅度<ul>
+<li>长久以来，当HTML5应用面对复杂的业务逻辑或者丰富的页面交互时，它的体验总是不尽人意，需要不断的对项目优化来提升用户体验。但是由于微信小程序运行环境独立</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="小程序的双向绑定和vue哪里不一样？"><a href="#小程序的双向绑定和vue哪里不一样？" class="headerlink" title="小程序的双向绑定和vue哪里不一样？"></a>小程序的双向绑定和vue哪里不一样？</h1><h2 id="小程序直接this-data的属性是不可以同步到视图的，必须调用：this-setData"><a href="#小程序直接this-data的属性是不可以同步到视图的，必须调用：this-setData" class="headerlink" title="  小程序直接this.data的属性是不可以同步到视图的，必须调用：this.setData"></a>  小程序直接this.data的属性是不可以同步到视图的，必须调用：this.setData</h2><h1 id="简述下-wx-navigateTo-wx-redirectTo-wx-switchTab-wx-navigateBack-wx-reLaunch-的区别"><a href="#简述下-wx-navigateTo-wx-redirectTo-wx-switchTab-wx-navigateBack-wx-reLaunch-的区别" class="headerlink" title="简述下 wx.navigateTo(), wx.redirectTo(),wx.switchTab(), wx.navigateBack(), wx.reLaunch()的区别"></a>简述下 wx.navigateTo(), wx.redirectTo(),wx.switchTab(), wx.navigateBack(), wx.reLaunch()的区别</h1><ul>
+<li>wx.navigateTo()：保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面</li>
+<li>wx.redirectTo()：关闭当前页面，跳转到应用内的某个页面。但是不允许跳转到 tabbar 页面</li>
+<li>wx.switchTab()：跳转到 abBar 页面，并关闭其他所有非 tabBar 页面</li>
+<li>wx.navigateBack()：关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层</li>
+<li>wx.reLaunch()：关闭所有页面，打开到应用内的某个页面</li>
+</ul>
+<hr>
+<h1 id="session-id状态过期怎么办"><a href="#session-id状态过期怎么办" class="headerlink" title="session_id状态过期怎么办"></a>session_id状态过期怎么办</h1><hr>
+<h1 id="正向代理和反向代理的区别"><a href="#正向代理和反向代理的区别" class="headerlink" title="正向代理和反向代理的区别"></a>正向代理和反向代理的区别</h1><hr>
+<h1 id="用过Nginx吗？都用过哪些？"><a href="#用过Nginx吗？都用过哪些？" class="headerlink" title="用过Nginx吗？都用过哪些？"></a>用过Nginx吗？都用过哪些？</h1><h2 id="nginx是一个高性能的HTTP和反向代理服务器。常使用场景：-1-反向代理-2-网站负载均衡"><a href="#nginx是一个高性能的HTTP和反向代理服务器。常使用场景：-1-反向代理-2-网站负载均衡" class="headerlink" title="nginx是一个高性能的HTTP和反向代理服务器。常使用场景： (1) 反向代理 (2) 网站负载均衡"></a>nginx是一个高性能的HTTP和反向代理服务器。常使用场景： (1) 反向代理 (2) 网站负载均衡</h2><h1 id="nginx跨域原理"><a href="#nginx跨域原理" class="headerlink" title="nginx跨域原理"></a>nginx跨域原理</h1><hr>
+<h1 id="nginx的配置文件，它是怎么实现反向代理的"><a href="#nginx的配置文件，它是怎么实现反向代理的" class="headerlink" title="nginx的配置文件，它是怎么实现反向代理的"></a>nginx的配置文件，它是怎么实现反向代理的</h1><hr>
+<h1 id="什么是死锁，产生死锁的原因及必要条件"><a href="#什么是死锁，产生死锁的原因及必要条件" class="headerlink" title="什么是死锁，产生死锁的原因及必要条件"></a>什么是死锁，产生死锁的原因及必要条件</h1><ul>
+<li><p>是指多个进程在运行过程中因争夺资源而造成的一种僵局，当进程处于这种僵持状态时，若无外力作用，它们都将无法再向前推进。举个例子来描述，如果此时有一个线程A，按照先锁a再获得锁b的的顺序获得锁，而在此同时又有另外一个线程B，按照先锁b再锁a的顺序获得锁。</p>
+</li>
+<li><p>原因：</p>
+<ul>
+<li>竞争资源<ul>
+<li>系统中的资源可以分为两类：<ol>
+<li>可剥夺资源，是指某进程在获得这类资源后，该资源可以再被其他进程或系统剥夺，CPU和主存均属于可剥夺性资源；</li>
+<li>另一类资源是不可剥夺资源，当系统把这类资源分配给某进程后，再不能强行收回，只能在进程用完后自行释放，如磁带机、打印机等。</li>
+</ol>
+</li>
+<li>产生死锁中的竞争资源之一指的是竞争不可剥夺资源（例如：系统中只有一台打印机，可供进程P1使用，假定P1已占用了打印机，若P2继续要求打印机打印将阻塞）</li>
+<li>产生死锁中的竞争资源另外一种资源指的是竞争临时资源（临时资源包括硬件中断、信号、消息、缓冲区内的消息等），通常消息通信顺序进行不当，则会产生死锁</li>
+</ul>
+</li>
+<li>进程间推进顺序非法<ul>
+<li>若P1保持了资源R1,P2保持了资源R2，系统处于不安全状态，因为这两个进程再向前推进，便可能发生死锁</li>
+<li>例如，当P1运行到P1：Request（R2）时，将因R2已被P2占用而阻塞；当P2运行到P2：Request（R1）时，也将因R1已被P1占用而阻塞，于是发生进程死锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>4个必要条件</p>
+<ol>
+<li>互斥条件：进程要求对所分配的资源进行排它性控制，即在一段时间内某资源仅为一进程所占用。</li>
+<li>请求和保持条件：当进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不剥夺条件：进程已获得的资源在未使用完之前，不能剥夺，只能在使用完时由自己释放。</li>
+<li>环路等待条件：在发生死锁时，必然存在一个进程–资源的环形链。</li>
+</ol>
+</li>
+<li><p>如何解决</p>
+<ul>
+<li>预防死锁：破坏4个必要条件中的一个或者多个来预防<ul>
+<li>资源一次性分配：一次性分配所有资源，这样就不会再有请求了：（破坏请求条件）</li>
+<li>只要有一个资源得不到分配，也不给这个进程分配其他的资源：（破坏请保持条件）</li>
+<li>可剥夺资源：即当某进程获得了部分资源，但得不到其它资源，则释放已占有的资源（破坏不可剥夺条件）</li>
+<li>资源有序分配法：系统给每类资源赋予一个编号，每一个进程按编号递增的顺序请求资源，释放则相反（破坏环路等待条件）</li>
+</ul>
+</li>
+<li>避免死锁：在资源动态分配的过程中，用某种方式防止系统进入不安全的状态<ul>
+<li>银行家算法：首先需要定义状态和安全状态的概念。系统的状态是当前给进程分配的资源情况。因此，状态包含两个向量Resource（系统中每种资源的总量）和Available（未分配给进程的每种资源的总量）及两个矩阵Claim（表示进程对资源的需求）和Allocation（表示当前分配给进程的资源）。安全状态是指至少有一个资源分配序列不会导致死锁。当进程请求一组资源时，假设同意该请求，从而改变了系统的状态，然后确定其结果是否还处于安全状态。如果是，同意这个请求；如果不是，阻塞该进程知道同意该请求后系统状态仍然是安全的。</li>
+</ul>
+</li>
+<li>检测死锁：运行时产生死锁，及时发现思索，将程序解脱出来<ul>
+<li>首先为每个进程和每个资源指定一个唯一的号码；</li>
+<li>然后建立资源分配表和进程等待表。</li>
+</ul>
+</li>
+<li>解除死锁：发生死锁后，撤销进程，回收资源，分配给正在阻塞状态的进程（解决方法如下）<ul>
+<li>剥夺资源：从其它进程剥夺足够数量的资源给死锁进程，以解除死锁状态；</li>
+<li>撤消进程：可以直接撤消死锁进程或撤消代价最小的进程，直至有足够的资源可用，死锁状态.消除为止；所谓代价是指优先级、运行代价、进程的重要性和价值等。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="E2E-测试怎么做的，怎么保证测试覆盖率和准确性；"><a href="#E2E-测试怎么做的，怎么保证测试覆盖率和准确性；" class="headerlink" title="E2E 测试怎么做的，怎么保证测试覆盖率和准确性；"></a>E2E 测试怎么做的，怎么保证测试覆盖率和准确性；</h1><hr>
+<h1 id="说一下单元测试、E2E测试？他们有什么区别？"><a href="#说一下单元测试、E2E测试？他们有什么区别？" class="headerlink" title="说一下单元测试、E2E测试？他们有什么区别？"></a>说一下单元测试、E2E测试？他们有什么区别？</h1><ul>
+<li><p>单元测试</p>
+<ul>
+<li>站在程序员角度的测试</li>
+<li>吧代码看成是一个个的组件，从而实现每一个组件的单独测试，测试内容主要是组件内每一个函数的返回结果是不是和期望值一样</li>
+</ul>
+</li>
+<li><p>e2e测试</p>
+<ul>
+<li>站在用户角度的测试</li>
+<li>不管你内部怎么实现的，我只负责打开浏览器，把测试内容在页面输入一遍，看是不是我想要的结果</li>
+</ul>
+</li>
+<li><p>区别：单元测试程序员很容易检测自己是不是都正确。e2e是看需求是不是都正确的完成。</p>
+</li>
+</ul>
+<hr>
+<h1 id="hybrid-通信原理；"><a href="#hybrid-通信原理；" class="headerlink" title="hybrid 通信原理；"></a>hybrid 通信原理；</h1><hr>
+<h1 id="设计一个协同文档的技术流程；"><a href="#设计一个协同文档的技术流程；" class="headerlink" title="设计一个协同文档的技术流程；"></a>设计一个协同文档的技术流程；</h1><hr>
+<h1 id="介绍Oath2"><a href="#介绍Oath2" class="headerlink" title="介绍Oath2"></a>介绍Oath2</h1><hr>
+<h1 id="怎么实现前端异常监控"><a href="#怎么实现前端异常监控" class="headerlink" title="怎么实现前端异常监控"></a>怎么实现前端异常监控</h1><ol>
+<li>错误的分类<ul>
+<li>运行时报错：这种错误往往是写代码造成的。如语法、逻辑错误</li>
+<li>资源加载错误：这种错误通常是找不到文件或者文件加载超时造成的</li>
+</ul>
+</li>
+<li>错误捕获<ul>
+<li>代码错误捕获<ul>
+<li>try…catch…</li>
+<li>window.onerror</li>
+</ul>
+</li>
+<li>资源加载错误<ul>
+<li>Object.onerror</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>错误上报<ul>
+<li>常见的有ajax和image对象（推荐）</li>
+<li>ajax上报就是在上文注释错误捕获的地方发起ajax请求，来向服务器发送错误信息</li>
+</ul>
+</li>
+<li>跨域js文件错误获取<ul>
+<li>跨域文件获取是有限制的，如果想获取其他域下的js错误需要在script标签中添加crossorigin属性，然后服务器要设置header(‘Access-Control-Allor-Origin’)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="前端性能监控的工具有哪些，是怎么监控的？说一下见解"><a href="#前端性能监控的工具有哪些，是怎么监控的？说一下见解" class="headerlink" title="前端性能监控的工具有哪些，是怎么监控的？说一下见解"></a>前端性能监控的工具有哪些，是怎么监控的？说一下见解</h1><hr>
+<h1 id="怎么捕获资源异常、同步异步的错误"><a href="#怎么捕获资源异常、同步异步的错误" class="headerlink" title="怎么捕获资源异常、同步异步的错误"></a>怎么捕获资源异常、同步异步的错误</h1><hr>
+<h1 id="前端错误收集（怎么记录，怎么区分是不是第三方插件的问题，怎么上报，怎么分析）"><a href="#前端错误收集（怎么记录，怎么区分是不是第三方插件的问题，怎么上报，怎么分析）" class="headerlink" title="前端错误收集（怎么记录，怎么区分是不是第三方插件的问题，怎么上报，怎么分析）"></a>前端错误收集（怎么记录，怎么区分是不是第三方插件的问题，怎么上报，怎么分析）</h1><hr>
+<h1 id="如何理解前后端分离架构？"><a href="#如何理解前后端分离架构？" class="headerlink" title="如何理解前后端分离架构？"></a>如何理解前后端分离架构？</h1><hr>
+<h1 id="fetch原理-options"><a href="#fetch原理-options" class="headerlink" title="fetch原理 options"></a>fetch原理 options</h1><hr>
+<h1 id="fetch发送2次请求的原因"><a href="#fetch发送2次请求的原因" class="headerlink" title="fetch发送2次请求的原因"></a>fetch发送2次请求的原因</h1><blockquote>
+<p>因为你用fetch的post请求的时候，导致fetch 第一次发送了一个Options请求，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。</p>
+</blockquote>
+<hr>
+<h1 id="axios和ajax的区别-ajax与fetch的区别）"><a href="#axios和ajax的区别-ajax与fetch的区别）" class="headerlink" title="axios和ajax的区别(ajax与fetch的区别）"></a>axios和ajax的区别(ajax与fetch的区别）</h1><ul>
+<li>总结：axios是通过Promise实现对ajax技术的一种封装，就像jquery对ajax的封装一样，简单来说就是ajax技术实现了局部数据的刷新，axios实现了对ajax的封装，ajax有的axios都有，支持promise API，支持拦截请求和相应，支持自动转换为JSON数据，支持客户端支持防止CSRF/XSRF等。</li>
+</ul>
+<hr>
+<h1 id="uni-app-的-h5-和-小程序打包出的文件有什么区别"><a href="#uni-app-的-h5-和-小程序打包出的文件有什么区别" class="headerlink" title="uni-app 的 h5 和 小程序打包出的文件有什么区别"></a>uni-app 的 h5 和 小程序打包出的文件有什么区别</h1><hr>
+<h1 id="uniapp多端框架的多端编译原理讲一下"><a href="#uniapp多端框架的多端编译原理讲一下" class="headerlink" title="uniapp多端框架的多端编译原理讲一下"></a>uniapp多端框架的多端编译原理讲一下</h1><hr>
+<h1 id="uni-app和-vue-小程序有什么不一样"><a href="#uni-app和-vue-小程序有什么不一样" class="headerlink" title="uni-app和 vue 小程序有什么不一样"></a>uni-app和 vue 小程序有什么不一样</h1><hr>
+<h1 id="0-1-0-2为什么不等于0-3"><a href="#0-1-0-2为什么不等于0-3" class="headerlink" title="0.1+0.2为什么不等于0.3"></a>0.1+0.2为什么不等于0.3</h1><hr>
+<h1 id="tab栏遇到ios的刘海屏怎么去解决"><a href="#tab栏遇到ios的刘海屏怎么去解决" class="headerlink" title="tab栏遇到ios的刘海屏怎么去解决"></a>tab栏遇到ios的刘海屏怎么去解决</h1><hr>
+<h1 id="serverless云开发适用于什么场景？有什么缺点？"><a href="#serverless云开发适用于什么场景？有什么缺点？" class="headerlink" title="serverless云开发适用于什么场景？有什么缺点？"></a>serverless云开发适用于什么场景？有什么缺点？</h1><hr>
+<h1 id="serverless和传统后台的区别，好处是什么"><a href="#serverless和传统后台的区别，好处是什么" class="headerlink" title="serverless和传统后台的区别，好处是什么"></a>serverless和传统后台的区别，好处是什么</h1><hr>
+<h1 id="webassembly是做什么的，适用于什么场景"><a href="#webassembly是做什么的，适用于什么场景" class="headerlink" title="webassembly是做什么的，适用于什么场景"></a>webassembly是做什么的，适用于什么场景</h1><hr>
+<h1 id="js对象和C-指针区别"><a href="#js对象和C-指针区别" class="headerlink" title="js对象和C++指针区别"></a>js对象和C++指针区别</h1><hr>
+<h1 id="window-onerror能不能捕获异步的错误"><a href="#window-onerror能不能捕获异步的错误" class="headerlink" title="window.onerror能不能捕获异步的错误"></a>window.onerror能不能捕获异步的错误</h1><hr>
+<h1 id="如果catch中又有报错，onerror能不能捕获"><a href="#如果catch中又有报错，onerror能不能捕获" class="headerlink" title="如果catch中又有报错，onerror能不能捕获"></a>如果catch中又有报错，onerror能不能捕获</h1><hr>
+<h1 id="怎么自己实现一个vue-cli"><a href="#怎么自己实现一个vue-cli" class="headerlink" title="怎么自己实现一个vue-cli"></a>怎么自己实现一个vue-cli</h1><hr>
+<h1 id="讲一讲threejs，它的兼容性怎么样"><a href="#讲一讲threejs，它的兼容性怎么样" class="headerlink" title="讲一讲threejs，它的兼容性怎么样"></a>讲一讲threejs，它的兼容性怎么样</h1><hr>
+<h1 id="验证码怎么设置，生成验证码是在前端还是后端，在后端怎么做，在前端怎么做，怎么加密"><a href="#验证码怎么设置，生成验证码是在前端还是后端，在后端怎么做，在前端怎么做，怎么加密" class="headerlink" title="验证码怎么设置，生成验证码是在前端还是后端，在后端怎么做，在前端怎么做，怎么加密"></a>验证码怎么设置，生成验证码是在前端还是后端，在后端怎么做，在前端怎么做，怎么加密</h1><hr>
+<h1 id="手机扫码登录是怎么实现的，原理"><a href="#手机扫码登录是怎么实现的，原理" class="headerlink" title="手机扫码登录是怎么实现的，原理"></a>手机扫码登录是怎么实现的，原理</h1><ol>
+<li>每打开一次扫码页面会随机生成一个含有唯一ID的二维码</li>
+<li>当用户使用扫码登陆后的来往扫描该二维码的时候，客户端会解析出二维码中的这个唯一ID会将这个id和手机上的来往账号及密码绑定，并上传到服务器；</li>
+<li>来往网页版页面每隔1秒或2秒会get请求该id对应的来往账号及密码，如果id绑定上了来往账号和密码，那么就可以请求到账号和密码，就可以自动登陆了</li>
+</ol>
+<hr>
+<h1 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h1><hr>
+<h1 id="数据库分表原则"><a href="#数据库分表原则" class="headerlink" title="数据库分表原则"></a>数据库分表原则</h1><hr>
+<h1 id="详细说一下ARP协议，ARP病毒"><a href="#详细说一下ARP协议，ARP病毒" class="headerlink" title="详细说一下ARP协议，ARP病毒"></a>详细说一下ARP协议，ARP病毒</h1><hr>
+<h1 id="mogoodb-v-s-mySql"><a href="#mogoodb-v-s-mySql" class="headerlink" title="mogoodb v.s. mySql"></a>mogoodb v.s. mySql</h1><hr>
+<h1 id="mySql事务"><a href="#mySql事务" class="headerlink" title="mySql事务"></a>mySql事务</h1><hr>
+<h1 id="为什么用requestAnimationFrame来代替setTimeout"><a href="#为什么用requestAnimationFrame来代替setTimeout" class="headerlink" title="为什么用requestAnimationFrame来代替setTimeout"></a>为什么用requestAnimationFrame来代替setTimeout</h1><hr>
+<h1 id="解释一下requestAnimationFrame"><a href="#解释一下requestAnimationFrame" class="headerlink" title="解释一下requestAnimationFrame"></a>解释一下requestAnimationFrame</h1><ol>
+<li>浏览器专门为DOM动画，canvas动画，SVG动画等等有一个统一的刷新机制</li>
+<li>按帧对网页进行重绘，该方法告诉浏览器希望执行动画并请求浏览器在下一次重绘之前调用回调函数来更新动画</li>
+<li>由系统来决定回调函数的执行时机，在运行时浏览器会自动优化方法的调用</li>
+</ol>
+<hr>
+<h1 id="svg和canvas得区别，以及各自的优缺点"><a href="#svg和canvas得区别，以及各自的优缺点" class="headerlink" title="svg和canvas得区别，以及各自的优缺点"></a>svg和canvas得区别，以及各自的优缺点</h1><ul>
+<li><p>canvas: </p>
+<ol>
+<li>依赖分辨率</li>
+<li>不支持事件处理器</li>
+<li>弱的文本渲染能力</li>
+<li>能够以 .png 或 .jpg 格式保存结果图像</li>
+<li>最适合图像密集型的游戏，其中的许多对象会被频繁重绘</li>
+</ol>
+</li>
+<li><p>svg:</p>
+<ol>
+<li>不依赖分辨率</li>
+<li>支持事件处理器</li>
+<li>最适合带有大型渲染区域的应用程序（比如谷歌地图）</li>
+<li>复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）</li>
+<li>不适合游戏应用</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="canvas的width与height属性的值可不可以带单位？"><a href="#canvas的width与height属性的值可不可以带单位？" class="headerlink" title="canvas的width与height属性的值可不可以带单位？"></a>canvas的width与height属性的值可不可以带单位？</h1><h2 id="不能"><a href="#不能" class="headerlink" title="不能"></a>不能</h2><h1 id="canvas怎么解决图片和文字模糊的问题？"><a href="#canvas怎么解决图片和文字模糊的问题？" class="headerlink" title="canvas怎么解决图片和文字模糊的问题？"></a>canvas怎么解决图片和文字模糊的问题？</h1><h2 id="设置canvas的width和height为图片的原始尺寸，再设置css样式使得页面展示为正常尺寸。"><a href="#设置canvas的width和height为图片的原始尺寸，再设置css样式使得页面展示为正常尺寸。" class="headerlink" title="设置canvas的width和height为图片的原始尺寸，再设置css样式使得页面展示为正常尺寸。"></a>设置canvas的width和height为图片的原始尺寸，再设置css样式使得页面展示为正常尺寸。</h2><h1 id="Bigint详解"><a href="#Bigint详解" class="headerlink" title="Bigint详解"></a>Bigint详解</h1><hr>
+<h1 id="Vue项目是如何做部署的（你是用什么工具做支撑吗？还是直接传上去）"><a href="#Vue项目是如何做部署的（你是用什么工具做支撑吗？还是直接传上去）" class="headerlink" title="Vue项目是如何做部署的（你是用什么工具做支撑吗？还是直接传上去）"></a>Vue项目是如何做部署的（你是用什么工具做支撑吗？还是直接传上去）</h1><hr>
+<h1 id="eggjs中间件了解过吗"><a href="#eggjs中间件了解过吗" class="headerlink" title="eggjs中间件了解过吗"></a>eggjs中间件了解过吗</h1><hr>
+<h1 id="微信支付怎么做？说说流程"><a href="#微信支付怎么做？说说流程" class="headerlink" title="微信支付怎么做？说说流程"></a>微信支付怎么做？说说流程</h1><ol>
+<li>申请微信公众号及支付功能申请：根据公众号申请流程申请即可。 </li>
+<li>获取商户支付配置信息及支付测试配置： 支付授权目录最多可以配置三个域名，测试授权目录只可以一个，这里需要 注意的是域名大小写必须要网站URL—致，否则会无法通过授权，提示支付请求的 URL不合法。另外，测试支付的微信号必须加到测试白名单，否则无法进行支付测 试。 </li>
+<li>H5页面发起支付请求，请求生成支付订单，获取用户授权（获取用户的openid) </li>
+<li>调用统一下单API，生成预付单 </li>
+<li>生成JSAPI页面调用的支付参数并签名，注意时间戳timeStamp是32位字符串 </li>
+<li>返回支付参数prepay—id,paySign参数的html文本给前端。 </li>
+<li>微信浏览器自动调起支付JSAPI接口支付，提示用户输入密码。 </li>
+<li>确认支付，输入密码，提交支付。 </li>
+<li>步通知商户支付结果，商户收到通知返回确认信息。 </li>
+<li>返回支付结果，并发微信消息提示。 </li>
+<li>展示支付信息给用户，跳转到支付结果页面。</li>
+</ol>
+<hr>
+<h1 id="网站重构的理解"><a href="#网站重构的理解" class="headerlink" title="网站重构的理解"></a>网站重构的理解</h1><ul>
+<li>重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。<ul>
+<li>使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)</li>
+<li>对于移动平台的优化，针对于SEO进行优化</li>
+<li>减少代码间的耦合，让代码保持弹性</li>
+<li>压缩或合并JS、CSS、image等前端资源</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="10个资源放在一个域名下加载和放在多个域名下加载有什么区别？"><a href="#10个资源放在一个域名下加载和放在多个域名下加载有什么区别？" class="headerlink" title="10个资源放在一个域名下加载和放在多个域名下加载有什么区别？"></a>10个资源放在一个域名下加载和放在多个域名下加载有什么区别？</h1><ol>
+<li>更方便cdn缓存</li>
+<li>突破浏览器并发限制<ul>
+<li>在http1.x中，并发多个请求需要多个TCP连接，浏览器为了控制资源会有6个TCP连接的限制。10个同域名的资源，会并发6个请求，剩下4个排队等待；为了加快请求，会配置多域名</li>
+<li>在http2中，多路复用代理了1.x的序列和阻塞机制，所有的相同域名请求都通过同一个TCP连接并发完成</li>
+<li>10个同域名的资源，一桶并发请求</li>
+</ul>
+</li>
+<li>节省带宽</li>
+<li>节省主域名连接数</li>
+</ol>
+<hr>
+<h1 id="怎么去设计一个组件封装"><a href="#怎么去设计一个组件封装" class="headerlink" title="怎么去设计一个组件封装"></a>怎么去设计一个组件封装</h1><ul>
+<li>组件封装的目的是为了重用,提高开发效率和代码质量</li>
+<li>低耦合,单一职责,可复用性,可维护性</li>
+</ul>
+<hr>
+<h1 id="微前端是什么-有哪些特点和优势"><a href="#微前端是什么-有哪些特点和优势" class="headerlink" title="微前端是什么, 有哪些特点和优势"></a>微前端是什么, 有哪些特点和优势</h1><hr>
+<h1 id="微前端实现的主要原理"><a href="#微前端实现的主要原理" class="headerlink" title="微前端实现的主要原理"></a>微前端实现的主要原理</h1><hr>
+<h1 id="怎么解决样式隔离"><a href="#怎么解决样式隔离" class="headerlink" title="怎么解决样式隔离"></a>怎么解决样式隔离</h1><hr>
+<h1 id="如何解决主应用和子应用的隔离-用-node-js-实现沙箱机制的原理"><a href="#如何解决主应用和子应用的隔离-用-node-js-实现沙箱机制的原理" class="headerlink" title="如何解决主应用和子应用的隔离, 用 node.js 实现沙箱机制的原理"></a>如何解决主应用和子应用的隔离, 用 node.js 实现沙箱机制的原理</h1><hr>
+<h1 id="主应用修改了路由-子应用如何感知到"><a href="#主应用修改了路由-子应用如何感知到" class="headerlink" title="主应用修改了路由, 子应用如何感知到"></a>主应用修改了路由, 子应用如何感知到</h1><hr>
+<h1 id="计算机的原码、反码、补码"><a href="#计算机的原码、反码、补码" class="headerlink" title="计算机的原码、反码、补码"></a>计算机的原码、反码、补码</h1><hr>
+<h1 id="场景题：前端给页面加水印，说说各种编码的特点，说说数字签名的特点"><a href="#场景题：前端给页面加水印，说说各种编码的特点，说说数字签名的特点" class="headerlink" title="场景题：前端给页面加水印，说说各种编码的特点，说说数字签名的特点"></a>场景题：前端给页面加水印，说说各种编码的特点，说说数字签名的特点</h1><hr>
+<h1 id="场景题：实现协同编辑，说说你认为的技术关键点"><a href="#场景题：实现协同编辑，说说你认为的技术关键点" class="headerlink" title="场景题：实现协同编辑，说说你认为的技术关键点"></a>场景题：实现协同编辑，说说你认为的技术关键点</h1><hr>
+<h1 id="32位和64位的区别？"><a href="#32位和64位的区别？" class="headerlink" title="32位和64位的区别？"></a>32位和64位的区别？</h1><hr>
+<h1 id="为什么32位操作系统最大支持内存为4GB"><a href="#为什么32位操作系统最大支持内存为4GB" class="headerlink" title="为什么32位操作系统最大支持内存为4GB?"></a>为什么32位操作系统最大支持内存为4GB?</h1><hr>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">杜江</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/12/29/interview/interview-other/">http://yoursite.com/2020/12/29/interview/interview-other/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">杜江的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a class="post-meta__tags" href="/tags/js/">js</a></div><div class="post_share"><div class="social-share" data-image="/images/hexo/hexo_logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/12/29/interview/interview-typescript/"><img class="prev-cover" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3746182100,898429560&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">面试——typescript篇</div></div></a></div><div class="next-post pull-right"><a href="/2020/12/28/interview/interview-html/"><img class="next-cover" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956932538&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">面试——html篇</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/12/28/interview/interview-js/" title="面试——js篇"><img class="relatedPosts_cover" data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,3458128037&fm=26&gp=0.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-28</div><div class="relatedPosts_title">面试——js篇</div></div></a></div><div class="relatedPosts_item"><a href="/2020/12/29/interview/interview-css/" title="面试——css篇"><img class="relatedPosts_cover" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956932538&fm=26&gp=0.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-29</div><div class="relatedPosts_title">面试——css篇</div></div></a></div><div class="relatedPosts_item"><a href="/2020/12/28/interview/interview-html/" title="面试——html篇"><img class="relatedPosts_cover" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956932538&fm=26&gp=0.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-28</div><div class="relatedPosts_title">面试——html篇</div></div></a></div><div class="relatedPosts_item"><a href="/2020/12/30/interview/interview-node/" title="面试——node篇"><img class="relatedPosts_cover" data-src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4104387483,4024841696&fm=26&gp=0.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-30</div><div class="relatedPosts_title">面试——node篇</div></div></a></div><div class="relatedPosts_item"><a href="/2020/12/29/interview/interview-typescript/" title="面试——typescript篇"><img class="relatedPosts_cover" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3746182100,898429560&fm=26&gp=0.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-29</div><div class="relatedPosts_title">面试——typescript篇</div></div></a></div><div class="relatedPosts_item"><a href="/2020/12/30/interview/interview-write/" title="面试——笔试篇"><img class="relatedPosts_cover" data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,3458128037&fm=26&gp=0.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-30</div><div class="relatedPosts_title">面试——笔试篇</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC81MDYyNy8yNzExMA=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 杜江</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://dj49846917.github.io/" target="_blank" rel="noopener">blog</a>!</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/click_heart.js"></script></body></html>

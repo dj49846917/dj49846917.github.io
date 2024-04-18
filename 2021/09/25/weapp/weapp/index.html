@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>微信小程序开发总结 | 杜江的博客</title><meta name="description" content="小程序是一种新的开放能力，开发者可以快速地开发一个小程序。"><meta name="keywords" content="小程序"><meta name="author" content="杜江"><meta name="copyright" content="杜江"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2021/09/25/weapp/weapp/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="微信小程序开发总结"><meta property="og:url" content="http://yoursite.com/2021/09/25/weapp/weapp/"><meta property="og:site_name" content="杜江的博客"><meta property="og:description" content="小程序是一种新的开放能力，开发者可以快速地开发一个小程序。"><meta property="og:image" content="http://yoursite.com/images/weapp/logo.jpg"><meta property="article:published_time" content="2021-09-24T23:13:39.000Z"><meta property="article:modified_time" content="2024-04-18T03:43:57.904Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="prev" title="vueResource" href="http://yoursite.com/2021/10/14/vueResource/vueResource/"><link rel="next" title="springboot整合springSecurity" href="http://yoursite.com/2021/08/05/springSecurity/springSecurity2/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/images/hexo/avater.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">38</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">48</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序代码规范"><span class="toc-number">1.</span> <span class="toc-text">小程序代码规范</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在小程序中使用tabbar"><span class="toc-number">2.</span> <span class="toc-text">在小程序中使用tabbar</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在wxss中引入全局变量"><span class="toc-number">3.</span> <span class="toc-text">在wxss中引入全局变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何使用外部js的方法"><span class="toc-number">4.</span> <span class="toc-text">如何使用外部js的方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#js中如何使用全局变量"><span class="toc-number">5.</span> <span class="toc-text">js中如何使用全局变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量单独提取到一个文件"><span class="toc-number">6.</span> <span class="toc-text">变量单独提取到一个文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WXS文件的使用方法"><span class="toc-number">7.</span> <span class="toc-text">WXS文件的使用方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序获取顶部状态栏的高度"><span class="toc-number">8.</span> <span class="toc-text">小程序获取顶部状态栏的高度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在微信小程序中引入iconfont"><span class="toc-number">9.</span> <span class="toc-text">在微信小程序中引入iconfont</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序中使用scroll-view-横向滑动"><span class="toc-number">10.</span> <span class="toc-text">小程序中使用scroll-view(横向滑动)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微信小程序事件传递参数"><span class="toc-number">11.</span> <span class="toc-text">微信小程序事件传递参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序中如何自定义组件"><span class="toc-number">12.</span> <span class="toc-text">小程序中如何自定义组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序组件传值"><span class="toc-number">13.</span> <span class="toc-text">小程序组件传值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#父传子"><span class="toc-number">13.1.</span> <span class="toc-text">父传子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子传父"><span class="toc-number">13.2.</span> <span class="toc-text">子传父</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序解决sitemap警告提示"><span class="toc-number">14.</span> <span class="toc-text">小程序解决sitemap警告提示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序获取dom的高度"><span class="toc-number">15.</span> <span class="toc-text">小程序获取dom的高度</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><header class="post-bg" id="page-header" style="background-image: url(/images/weapp/logo.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">杜江的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">微信小程序开发总结</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-09-25 07:13:39"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2021-09-25</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history fa-fw"></i> 更新于 2024-04-18</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="小程序代码规范"><a href="#小程序代码规范" class="headerlink" title="小程序代码规范"></a>小程序代码规范</h1><ol>
+<li>书写的class类名用中划线<code>-</code>，不要用驼峰或者下划线<code>_</code>命名</li>
+<li>自定义组件的wxss文件中尽量不要使用后代选择器、id选择器、标签选择器、带驼峰或者下划线类名的选择器，最好使用class选择器。</li>
+<li>在页面级的wxss文件中，可以使用后代选择器，和class选择器，其他避免使用，以免出现警告</li>
+<li>在app.wxss中，不要使用标签选择器，不然也会出现警告</li>
+</ol>
+<h1 id="在小程序中使用tabbar"><a href="#在小程序中使用tabbar" class="headerlink" title="在小程序中使用tabbar"></a>在小程序中使用tabbar</h1><ol>
+<li>找到app.json，和window，pages属性同级的地方添加tabBar属性<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;pages&quot;:[</span><br><span class="line">    &quot;pages&#x2F;index&#x2F;index&quot;,</span><br><span class="line">    &quot;pages&#x2F;category&#x2F;category&quot;,</span><br><span class="line">    &quot;pages&#x2F;cart&#x2F;cart&quot;,</span><br><span class="line">    &quot;pages&#x2F;user&#x2F;user&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;tabBar&quot;: &#123;</span><br><span class="line">    &quot;selectedColor&quot;: &quot;#f77127&quot;,</span><br><span class="line">    &quot;color&quot;: &quot;#a8a8a8&quot;,</span><br><span class="line">    &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;index&#x2F;index&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;首页&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;home.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;home_select.png&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;category&#x2F;category&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;分类&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;category.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;category_select.png&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;cart&#x2F;cart&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;购物车&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;cart.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;cart_select.png&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;user&#x2F;user&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;我的&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;user.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;&#x2F;assets&#x2F;images&#x2F;user_select.png&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>项目结构：<img src= "/img/loading.gif" data-src="/images/weapp/%E7%BB%93%E6%9E%84.jpg" alt="项目结构"></li>
+<li>展示效果：<img src= "/img/loading.gif" data-src="/images/weapp/%E6%95%88%E6%9E%9C.jpg" alt="展示效果"><div class="note info">
+            <ul><li>注意：<ul><li>iconPath和selectedIconPath图标的路径是相对于根路径下的，在根路径下新建了assets/images文件夹， pages也是在根路径下</li></ul></li></ul>
+          </div>
+
+</li>
+</ol>
+<h1 id="在wxss中引入全局变量"><a href="#在wxss中引入全局变量" class="headerlink" title="在wxss中引入全局变量"></a>在wxss中引入全局变量</h1><ol>
+<li>在app.wxss中申明变量，使用–开头<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;* 定义变量 *&#x2F;</span><br><span class="line">.container&#123;</span><br><span class="line">  --mainColor--: #ff0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在各个页面的wxss中使用var关键字引入变量<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># index.wxml中：</span><br><span class="line"></span><br><span class="line">&lt;view class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;text class&#x3D;&quot;box&quot;&gt;pages&#x2F;index&#x2F;index.wxml&lt;&#x2F;text&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line"></span><br><span class="line"># index.wxss中：</span><br><span class="line"></span><br><span class="line">.box &#123;</span><br><span class="line">  color: var(--mainColor--)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <ul><li>注意：<ul><li>使用变量时用var关键字包裹，格式：–变量名–: 变量值</li><li>颜色不用引号，并且只能用16进制，rgba和单词(red、yellow等)都不能用</li></ul></li></ul>
+          </div>
+
+</li>
+</ol>
+<h1 id="如何使用外部js的方法"><a href="#如何使用外部js的方法" class="headerlink" title="如何使用外部js的方法"></a>如何使用外部js的方法</h1><ol>
+<li><p>在外部js文件(如：utils/util.js)中，写入一个方法parseDate,用module.exports暴露出去</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const parseData &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  return &quot;123&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  parseData</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在需要调用的js文件中，通过require引入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const utils &#x3D; require(&quot;..&#x2F;..&#x2F;utils&#x2F;util&quot;)</span><br><span class="line"></span><br><span class="line">onReady: function () &#123;</span><br><span class="line">  console.log(utils.parseData())</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="js中如何使用全局变量"><a href="#js中如何使用全局变量" class="headerlink" title="js中如何使用全局变量"></a>js中如何使用全局变量</h1><ol>
+<li><p>在app.js中，定义globalData属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">App(&#123;</span><br><span class="line">  globalData: &#123;</span><br><span class="line">    user: &quot;张三&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在其他页面js中使用这个user</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const app &#x3D; getApp();</span><br><span class="line"></span><br><span class="line">onReady: function () &#123;</span><br><span class="line">  console.log(app.globalData.user)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="变量单独提取到一个文件"><a href="#变量单独提取到一个文件" class="headerlink" title="变量单独提取到一个文件"></a>变量单独提取到一个文件</h1><ol>
+<li><p>在根路径下新建constant/constant.js，专门用来放置全局变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const Constant &#x3D; &#123;</span><br><span class="line">  url: &quot;abcde&quot;</span><br><span class="line">&#125;</span><br><span class="line">module.exports &#x3D; Constant</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在需要用到的地方(js)使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const a &#x3D; require(&quot;..&#x2F;..&#x2F;constant&#x2F;constant)</span><br><span class="line"></span><br><span class="line">onReady: function () &#123;</span><br><span class="line">  console.log(a.url)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="WXS文件的使用方法"><a href="#WXS文件的使用方法" class="headerlink" title="WXS文件的使用方法"></a>WXS文件的使用方法</h1><ol>
+<li>当wxml文件中有渲染的模板数据需要做处理的时候，就会用到wxs文件</li>
+<li>举例：在index.wxml模板中的值create_time进行时间转换（将时间戳转换为<code>yyyy-mm-dd</code>）<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 在index.js中</span><br><span class="line"></span><br><span class="line">  Page(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">      create_time: 1632527653186</span><br><span class="line">    &#125;,</span><br><span class="line">    ......</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"># 在index.wxml中</span><br><span class="line"></span><br><span class="line">  &lt;view&gt;&#123;&#123; create_time &#125;&#125;&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在index文件夹下新建index.wxs文件<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function parseDate(date) &#123;</span><br><span class="line">  var originDate &#x3D; getDate(date);</span><br><span class="line">  var year &#x3D; originDate.getFullYear()</span><br><span class="line">  var originMonth &#x3D; originDate.getMonth() + 1</span><br><span class="line">  var month &#x3D; originMonth &lt; 10 ? (&quot;0&quot; + originMonth) : originMonth</span><br><span class="line">  var originDay &#x3D; originDate.getDate()</span><br><span class="line">  var day &#x3D; originDay &lt; 10 ? (&quot;0&quot; + originDay) : originDay</span><br><span class="line">  return year + &quot;-&quot; + month + &quot;-&quot; + day</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  parseDate: parseDate</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>修改index.wxml中的模板<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 引入wxs文件 --&gt;</span><br><span class="line">&lt;wxs src&#x3D;&quot;.&#x2F;index.wxs&quot; module&#x3D;&quot;index&quot; &#x2F;&gt;</span><br><span class="line">&lt;view&gt;&#123;&#123; index.parseDate(create_time) &#125;&#125;&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<div class="note info">
+            <ul><li>注意：<ul><li>在wxs文件中，定义变量只能用var，使用const或者let会报错</li><li>也不能使用模板字符串</li><li>在模板中使用wxs文件时，一定要加上module属性</li><li>字符串拼接时，如果运算复杂，一定要用()包裹<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function parseDate(date) &#123;</span><br><span class="line">  var originDate &#x3D; getDate(date);</span><br><span class="line">  var year &#x3D; originDate.getFullYear()</span><br><span class="line">  var month &#x3D; originDate.getMonth() + 1</span><br><span class="line">  var day &#x3D; originDate.getDate()</span><br><span class="line">  return year + &quot;-&quot; + (month &lt; 10 ? (&quot;0&quot; + month) : month) + &quot;-&quot; + (day &lt; 10 ? (&quot;0&quot; + day) : day)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li></ul>
+          </div>
+
+<h1 id="小程序获取顶部状态栏的高度"><a href="#小程序获取顶部状态栏的高度" class="headerlink" title="小程序获取顶部状态栏的高度"></a>小程序获取顶部状态栏的高度</h1><ul>
+<li>通过wx.getSystemInfoSync()获取设备信息<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">onLaunch() &#123;</span><br><span class="line">  const res &#x3D; wx.getSystemInfoSync()</span><br><span class="line">  const statusBarHeight &#x3D; res.statusBarHeight</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="在微信小程序中引入iconfont"><a href="#在微信小程序中引入iconfont" class="headerlink" title="在微信小程序中引入iconfont"></a>在微信小程序中引入iconfont</h1><ol>
+<li>在iconfont官网中选择你需要的图片，添加至项目</li>
+<li>选择font class按钮，点击下方的链接，把该css文件保存到你的项目中 <img src= "/img/loading.gif" data-src="/images/weapp/iconfont.jpg" alt="引入iconfont"></li>
+<li>在app.wxss中引入该文件<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@import &quot;..&#x2F;..&#x2F;assets&#x2F;style&#x2F;iconfont.css&quot;</span><br></pre></td></tr></table></figure></li>
+<li>在页面中使用<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;text class&#x3D;&quot;iconfont icon-sousuo search_icon&quot;&gt;&lt;&#x2F;text&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="小程序中使用scroll-view-横向滑动"><a href="#小程序中使用scroll-view-横向滑动" class="headerlink" title="小程序中使用scroll-view(横向滑动)"></a>小程序中使用scroll-view(横向滑动)</h1><ul>
+<li>代码详解<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># wxml部分</span><br><span class="line"></span><br><span class="line">&lt;view class&#x3D;&quot;cate&quot;&gt;</span><br><span class="line">  &lt;scroll-view class&#x3D;&quot;cate_scroll&quot; scroll-x&gt;</span><br><span class="line">    &lt;view class&#x3D;&quot;cate_item&quot; wx:for&#x3D;&quot;&#123;&#123;dataSource.category_info&#125;&#125;&quot; wx:key&#x3D;&quot;cate_id&quot;&gt;</span><br><span class="line">      &lt;view class&#x3D;&quot;cate_item_box&quot;&gt;</span><br><span class="line">        &lt;image src&#x3D;&quot;&#123;&#123;item.img_url&#125;&#125;&quot; class&#x3D;&quot;cate_img&quot; mode&#x3D;&quot;widthFix&quot; &#x2F;&gt;</span><br><span class="line">      &lt;text class&#x3D;&quot;cate_text&quot;&gt;&#123;&#123; item.name &#125;&#125;&lt;&#x2F;text&gt;</span><br><span class="line">      &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;scroll-view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line"></span><br><span class="line"># wxss部分</span><br><span class="line"></span><br><span class="line">.cate &#123;</span><br><span class="line">  width: 750rpx;</span><br><span class="line">  height: 200rpx;</span><br><span class="line">&#125;</span><br><span class="line">.cate_scroll&#123;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.cate_item&#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  margin: 0 20rpx;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.cate_item_box &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.cate_img &#123;</span><br><span class="line">  width: 96rpx;</span><br><span class="line">  height: 96rpx;</span><br><span class="line">  margin-bottom: 6rpx;</span><br><span class="line">  border-radius: 18rpx;</span><br><span class="line">&#125;</span><br><span class="line">.cate_text &#123;</span><br><span class="line">  font-size: 28rpx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>展示效果：<img src= "/img/loading.gif" data-src="/images/weapp/scrollview.jpg" alt="scrollview"></li>
+</ul>
+<div class="note info">
+            <ul><li>注意：<ul><li>scrollview外面一定要包裹一层view做最外层，并且一定要指定宽高</li><li>scrollview里面最近的一层盒子(.cate_item)使用display:flex是没有效果的，只能设置display: inline-block</li><li>要想在scrollview里面使用flex，只能在scrollview里面第二层盒子开始使用（.cate_item_box）</li></ul></li></ul>
+          </div>
+
+<h1 id="微信小程序事件传递参数"><a href="#微信小程序事件传递参数" class="headerlink" title="微信小程序事件传递参数"></a>微信小程序事件传递参数</h1><ul>
+<li>以bindtap点击事件为例，bindtap的方法名不能使用括号，只能在标签上写data-xx属性，通过e.currentTarget.dataset.name获取值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># wxml部分</span><br><span class="line"></span><br><span class="line">&lt;view class&#x3D;&quot;list_item_box center &#123;&#123; item.tab_name &#x3D;&#x3D;&#x3D; tabActiveIndex ? &#39;active&#39; : &#39;&#39; &#125;&#125;&quot; bindtap&#x3D;&quot;handleSelect&quot; data-name&#x3D;&quot;&#123;&#123; item.tab_name &#125;&#125;&quot;&gt;</span><br><span class="line"></span><br><span class="line"># js部分</span><br><span class="line"></span><br><span class="line">data: &#123;</span><br><span class="line">  tabActiveIndex: &quot;热销好货&quot;,</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">handleSelect: function(event) &#123;</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">        tabActiveIndex: event.currentTarget.dataset.name</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="小程序中如何自定义组件"><a href="#小程序中如何自定义组件" class="headerlink" title="小程序中如何自定义组件"></a>小程序中如何自定义组件</h1><ol>
+<li>在根路径下新建components文件夹，写入对应的组件</li>
+<li>找到需要使用该组件的文件夹下面的json文件，配置usingComponents<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;usingComponents&quot;: &#123;</span><br><span class="line">    &quot;statusBar&quot;: &quot;&#x2F;components&#x2F;statusBar&#x2F;statusBar&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在wxml中使用<code>&lt;statusBar /&gt;</code>即可</li>
+</ol>
+<h1 id="小程序组件传值"><a href="#小程序组件传值" class="headerlink" title="小程序组件传值"></a>小程序组件传值</h1><h2 id="父传子"><a href="#父传子" class="headerlink" title="父传子"></a>父传子</h2><ul>
+<li>和vue完全一样<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 父组件 将list传递给子组件</span><br><span class="line"></span><br><span class="line">&lt;goods-list </span><br><span class="line">  list&#x3D;&quot;&#123;&#123; dataSource.recommend_info[tabActiveIndex].tab_list &#125;&#125;&quot; </span><br><span class="line">  wx:if&#x3D;&quot;&#123;&#123;dataSource.recommend_info[tabActiveIndex].tab_list&#125;&#125;&quot;</span><br><span class="line">  bind:setCart&#x3D;&quot;handleAddCart&quot;</span><br><span class="line">&#x2F;&gt;</span><br><span class="line"></span><br><span class="line"># 子组件</span><br><span class="line"></span><br><span class="line">&lt;view class&#x3D;&quot;tp-list verticalCenter&quot; wx:for&#x3D;&quot;&#123;&#123; list &#125;&#125;&quot; wx:key&#x3D;&quot;index&quot;&gt;&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="子传父"><a href="#子传父" class="headerlink" title="子传父"></a>子传父</h2><ul>
+<li>使用this.triggerEvent方法， 父组件先传递一个setCart属性<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 子组件</span><br><span class="line"></span><br><span class="line">  &lt;button class&#x3D;&quot;cart center&quot; bindtap&#x3D;&quot;addCart&quot; data-id&#x3D;&quot;&#123;&#123; item.goods_id &#125;&#125;&quot; wx:if&#x3D;&quot;&#123;&#123; item.cart_num &#x3D;&#x3D;&#x3D; 0 &#125;&#125;&quot;&gt;加入购物车&lt;&#x2F;button&gt;</span><br><span class="line"></span><br><span class="line">  addCart: function(event) &#123;</span><br><span class="line">      console.log(&quot;event&quot;, event.currentTarget.dataset.id)</span><br><span class="line">      this.triggerEvent(&quot;setCart&quot;, event.currentTarget.dataset.id)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"># 父组件</span><br><span class="line"></span><br><span class="line">  &lt;goods-list </span><br><span class="line">    list&#x3D;&quot;&#123;&#123; dataSource.recommend_info[tabActiveIndex].tab_list &#125;&#125;&quot; </span><br><span class="line">    wx:if&#x3D;&quot;&#123;&#123;dataSource.recommend_info[tabActiveIndex].tab_list&#125;&#125;&quot;</span><br><span class="line">    bind:setCart&#x3D;&quot;handleAddCart&quot;</span><br><span class="line">  &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="小程序解决sitemap警告提示"><a href="#小程序解决sitemap警告提示" class="headerlink" title="小程序解决sitemap警告提示"></a>小程序解决sitemap警告提示</h1><ul>
+<li><code>[sitemap 索引情况提示] 根据 sitemap 的规则[0]，当前页面 [pages/index/index] 将被索引</code></li>
+<li>解决办法：修改project.config.json,将checkSiteMap改为false</li>
+</ul>
+<h1 id="小程序获取dom的高度"><a href="#小程序获取dom的高度" class="headerlink" title="小程序获取dom的高度"></a>小程序获取dom的高度</h1>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">onLoad: function () &#123;</span><br><span class="line">    const query &#x3D; wx.createSelectorQuery()</span><br><span class="line">    const that &#x3D; this</span><br><span class="line">    query.selectAll(&#39;.header&#39;).boundingClientRect(function (obj) &#123;</span><br><span class="line">        console.log(&quot;obj&quot;, obj);</span><br><span class="line">        console.log(obj[0].height + &#39;px&#39;)</span><br><span class="line">        that.setData(&#123;</span><br><span class="line">            contentHeight: &quot;calc(100% - &quot; + obj[0].height + &quot;px - 80rpx)&quot;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;).exec();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">杜江</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2021/09/25/weapp/weapp/">http://yoursite.com/2021/09/25/weapp/weapp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">杜江的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></div><div class="post_share"><div class="social-share" data-image="/images/hexo/hexo_logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/10/14/vueResource/vueResource/"><img class="prev-cover" data-src="/images/vue/vue.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">vueResource</div></div></a></div><div class="next-post pull-right"><a href="/2021/08/05/springSecurity/springSecurity2/"><img class="next-cover" data-src="/images/springSecurity/log.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">springboot整合springSecurity</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC81MDYyNy8yNzExMA=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 杜江</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://dj49846917.github.io/" target="_blank" rel="noopener">blog</a>!</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/click_heart.js"></script></body></html>

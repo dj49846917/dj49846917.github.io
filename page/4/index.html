@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>杜江的博客</title><meta name="description"><meta name="author" content="杜江"><meta name="copyright" content="杜江"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/page/4/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="杜江的博客"><meta property="og:url" content="http://yoursite.com/page/4/"><meta property="og:site_name" content="杜江的博客"><meta property="og:description"><meta property="og:image" content="http://yoursite.com/images/hexo/avater.jpg"><meta property="article:published_time" content="2024-04-18T03:47:16.913Z"><meta property="article:modified_time" content="2024-04-18T03:47:16.913Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isSidebar: false
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/images/hexo/avater.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">38</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">48</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><header class="full_page" id="page-header" style="background-image: url(/images/hexo/timg.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">杜江的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="site-info"><h1 id="site_title">杜江的博客</h1><div id="site_subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/dj49846917" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/821084785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll_down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout_page" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/12/30/interview/interview-write/" title="面试——笔试篇">     <img class="post_bg" data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,3458128037&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——笔试篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/30/interview/interview-write/" title="面试——笔试篇">面试——笔试篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-30 15:51:46"><i class="far fa-calendar-alt"></i>2020-12-30</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/%E7%AC%94%E8%AF%95/">笔试</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/%E7%AC%94%E8%AF%95/">笔试</a></span></div><div class="content">手写函数防抖和节流
+防抖：&#x2F;&#x2F;防抖debounce代码：function debounce(fn,delay) &#123;    var timeout &#x3D; null; &#x2F;&#x2F; 创建一个标记用来存放定时器的返回值    return function (e) &#123;        &#x2F;&#x2F; 每当用户输入的时候把前一个 setTimeout clear 掉        clearTimeout(timeout);         &#x2F;&#x2F; 然后又创建一个新的 setTimeout, 这样就能保证interval 间隔内如果时间持续触发，就不会执行 fn 函数        timeout &#x3D; setTimeout(() &#x3D;&gt; &#123;            fn.apply(this, arguments);        &#125;, delay);    &#125;;&#125;&#x2F;&#x2F; 处理函数function handle() &#123;  ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/12/29/interview/interview-css/" title="面试——css篇">     <img class="post_bg" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956932538&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——css篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/29/interview/interview-css/" title="面试——css篇">面试——css篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-29 11:25:27"><i class="far fa-calendar-alt"></i>2020-12-29</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/css/">css</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/css/">css</a></span></div><div class="content">css 优先级  答：important &gt; 内联 &gt; ID选择器 &gt; 类选择器 &gt; 标签选择器
+
+避免 css 全局污染。
+通过在css文件的选择器上使用:local
+例如：:local(.className) { background: red; }
+
+
+在vue项目中使用deep
+例如：:deep(.el-carousel__arrow–right) { right: 120px; }
+
+
+在react项目中使用:global
+例如：&lt;RangePicker className&#x3D;&#123;styles.rangePick&#125; showTime format&#x3D;&quot;YYYY-MM-DD HH:mm:ss&quot; &#x2F;&gt;&lt;br&gt;.rangePick&#123;  :global &#123;    .ant-picker-input &#123;      color:red    &#125;  &#125;&#125;
+
+
+
+
+
+页面导入样式时，使用link和@import有什么区别？ ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/12/29/interview/interview-webpack/" title="面试——webpack篇">     <img class="post_bg" data-src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3813469802,1665117316&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——webpack篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/29/interview/interview-webpack/" title="面试——webpack篇">面试——webpack篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-29 10:50:01"><i class="far fa-calendar-alt"></i>2020-12-29</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/webpack/">webpack</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/webpack/">webpack</a></span></div><div class="content">webpack与grunt、gulp的不同？
+三者都是前端构建工具，grunt和gulp在早期比较流行，现在webpack相对来说比较主流，不过一些轻量化的任务还是会用gulp来处理，比如单独打包CSS文件等。
+
+grunt和gulp是基于任务和流（Task、Stream）的。类似jQuery，找到一个（或一类）文件，对其做一系列链式操作，更新流上的数据， 整条链式操作构成了一个任务，多个任务就构成了整个web的构建流程。
+
+webpack是基于入口的。webpack会自动地递归解析入口所需要加载的所有资源文件，然后用不同的Loader来处理不同的文件，用Plugin来扩展webpack功能。
+
+所以总结一下：gulp和grunt需要开发者将整个前端构建过程拆分成多个Task，并合理控制所有Task的调用关系 webpack需要开发者找到入口，并需要清楚对于不同的资源应该使用什么Loader做何种解析和加工
+
+
+
+Grunt与Gulp的区别
+书写方式：
+
+grunt 运用配置的思想来写打包脚本，一切皆配置，所以会出现比较多的配置项，诸如option,src,dest等等。而且不同的插件 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/12/29/interview/interview-typescript/" title="面试——typescript篇">     <img class="post_bg" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3746182100,898429560&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——typescript篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/29/interview/interview-typescript/" title="面试——typescript篇">面试——typescript篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-29 10:45:31"><i class="far fa-calendar-alt"></i>2020-12-29</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/typescript/">typescript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/typescript/">typescript</a></span></div><div class="content">interface 和 type 的区别
+type可以声明 基本类型，联合类型，元组 的别名，interface不行
+type 语句中可以使用 typeof 获取类型实例
+type 支持类型映射，interface不支持
+interface能够声明合并，type不能
+
+
+typescript中对抽象类和interface的理解
+ts如何对早期库比如jquery如何补充类型
+ts中的可选和必选
+动态runtime注入的类型怎样做才能静态不报错
+说说Typescript的优缺点？
+优点. 
+快速简单，易于学习。
+编译时提供错误检查， 在代码运行前就会进行错误提示。
+支持所有的JS库。
+支持ES6，提供了ES6所有优点和更高的生产力。
+使用继承提供可重用性。
+有助于代码结构。
+通过定义模块来定义命名空间。
+
+
+缺点:
+需要长时间的来编译代码。
+在使用第三方库时，需要有三方库的定义文件，并不是所有三方库都提供了定义文件，提供的定义文件是否准确也值得商榷。
+
+
+
+
+如何理解Typescript中的类？并说说它有什么特性？
+Typescript是一种面向对象的Javascript语言，和其他任何面 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/12/29/interview/interview-other/" title="面试——其他篇">     <img class="post_bg" data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,3458128037&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——其他篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/29/interview/interview-other/" title="面试——其他篇">面试——其他篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-29 10:23:51"><i class="far fa-calendar-alt"></i>2020-12-29</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/js/">js</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/js/">js</a></span></div><div class="content">询问工作经历，在项目中如何做性能优化的？
+content方面
+
+减少HTTP请求：合并文件、CSS精灵、inline Image
+减少DNS查询：DNS查询完成之前浏览器不能从这个主机下载任何任何文件。方法：DNS缓存、将资源分布到恰当数量的主机名，平衡并行下载和DNS查询
+避免重定向：多余的中间访问
+使Ajax可缓存
+非必须组件延迟加载
+未来所需组件预加载
+减少DOM元素数量
+将资源放到不同的域下：浏览器同时从一个域下载资源的数目有限，增加域可以提高并行下载量
+减少iframe数量
+不要404
+
+
+Server方面
+
+使用CDN
+添加Expires或者Cache-Control响应头
+对组件使用Gzip压缩
+配置ETag
+Flush Buffer Early
+Ajax使用GET进行请求
+避免空src的img标签
+
+
+Cookie方面
+
+减小cookie大小
+引入资源的域名不要包含cookie
+
+
+css方面
+
+将样式表放到页面顶部
+不使用CSS表达式
+使用不使用@import
+不使用IE的Filter
+
+
+Javascript方面
+
+将脚本放到页面底部
+将javascript和css ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/12/28/interview/interview-html/" title="面试——html篇">     <img class="post_bg" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2908530132,3956932538&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——html篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/28/interview/interview-html/" title="面试——html篇">面试——html篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-28 16:20:07"><i class="far fa-calendar-alt"></i>2020-12-28</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/html/">html</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/html/">html</a></span></div><div class="content">DOCTYPE有什么用? 标准模式与兼容模式各有什么区别?
+DOCTYPE是“document type”的缩写。它是 HTML 中用来区分标准模式和怪异模式的声明，用来告知浏览器使用标准模式渲染页面
+标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
+
+
+cookie和seession区别
+cookie数据存放在客户的浏览器上，session数据放在服务器上。
+cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗,考虑到安全应当使用session。
+session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能,考虑到减轻服务器性能方面，应当使用COOKIE。
+单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。
+所以个人建议：将登陆信息等重要信息存放为SESSION,其他信息如果需要保留，可以放在COOKIE中
+
+
+cookie 和 token 的区别？
+token是 服务经过计算发给客户端的，服 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/12/28/interview/interview-js/" title="面试——js篇">     <img class="post_bg" data-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=955487690,3458128037&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——js篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/28/interview/interview-js/" title="面试——js篇">面试——js篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-28 15:24:57"><i class="far fa-calendar-alt"></i>2020-12-28</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/js/">js</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/js/">js</a></span></div><div class="content">import 和 require 导入的区别
+require 是 AMD规范引入方式；import是es6的一个语法标准，如果要兼容浏览器的话必须转化成es5的语法
+require是运行时调用，所以require理论上可以运用在代码的任何地方；import是编译时调用，所以必须放在文件开头
+本质上，require是赋值过程，其实require的结果就是对象、数字、字符串、函数等，再把require的结果赋值给某个变量；而import是解构过程，但是目前所有的引擎都还没有实现import，我们在node中使用babel支持ES6，也仅仅是将ES6转码为ES5再执行，import语***被转码为require；
+
+
+import的原理
+简单说就是闭包的运用
+为了创建module的内部作用域，会调用一个包装函数
+包装函数的返回值也就是module向外公开的api,也就是所有export出去的变量
+import也就是拿到module导出变量的引用
+
+
+commonjs 和 es module区别？
+commonJs是被加载的时候运行，esModule是编译的时候运行
+commonJs输出的是值 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/12/28/interview/interview-react/" title="面试——react篇">     <img class="post_bg" data-src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1452433621,3510720345&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——react篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/28/interview/interview-react/" title="面试——react篇">面试——react篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-28 15:24:26"><i class="far fa-calendar-alt"></i>2020-12-28</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/react/">react</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/react/">react</a></span></div><div class="content">解释一下 Flux
+Flux 是一种强制单向数据流的架构模式。它控制派生数据，并使用具有所有数据权限的中心 store 实现多个组件之间的通信。整个应用中的数据更新必须只能在此处进行。 Flux 为应用提供稳定性并减少运行时的错误。
+Flux 的最大特点，就是数据的”单向流动”。
+过程：
+用户访问 View
+View 发出用户的 Action
+Dispatcher 收到 Action，要求 Store 进行相应的更新
+Store 更新后，发出一个”change”事件
+View 收到”change”事件后，更新页面
+
+
+
+
+了解redux么？说一下redux
+redux 是一个应用数据流框架，主要是解决了组件间状态共享的问题，原理是集中式管理，
+主要有三个核心方法，action，store，reducer。
+工作流程是 view 调用 store 的 dispatch 接收 action 传入 store，reducer 进行 state 操作，view 通过 store 提供的 getState 获取最新的数据，flux 也是用来进行数据操作的，有四个组成部分 action，dispa ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/12/28/interview/interview-vue/" title="面试——vue篇">     <img class="post_bg" data-src="/images/vue/vue.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面试——vue篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/28/interview/interview-vue/" title="面试——vue篇">面试——vue篇</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-28 15:06:19"><i class="far fa-calendar-alt"></i>2020-12-28</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/vue/">vue</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/vue/">vue</a></span></div><div class="content">谈谈你对MVVM、MVC开发模式的理解
+MVVM分为Model、View、ViewModel三者。
+
+Model 代表数据模型，数据和业务逻辑都在Model层中定义；
+View 代表UI视图，负责数据的展示；
+ViewModel 负责监听 Model 中数据的改变并且控制视图的更新，处理用户交互操作；
+
+
+Model 和 View 并无直接关联，而是通过 ViewModel 来进行联系的，Model 和 ViewModel 之间有着双向数据绑定的联系。因此当 Model 中的数据改变时会触发 View 层的刷新，View 中由于用户交互操作而改变的数据也会在 Model 中同步。这种模式实现了 Model 和 View 的数据自动同步，因此开发者只需要专注对数据的维护操作即可，而不需要自己操作 dom。
+
+什么是MVC：
+
+M（modal）：是应用程序中处理数据逻辑的部分。
+V （view） ：是应用程序中数据显示的部分。
+C（controller）：是应用程序中处理用户交互的地方
+
+
+
+
+简述Vue的响应式原理
+当一个Vue实例创建时，vue会遍历data选项的属性，用 Object ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/11/26/uniApp/uniApp2/" title="uni-app中nvue的开发心得">     <img class="post_bg" data-src="/images/uniApp/logo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="uni-app中nvue的开发心得"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/26/uniApp/uniApp2/" title="uni-app中nvue的开发心得">uni-app中nvue的开发心得</a><div class="article-meta-wrap"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-26 14:56:43"><i class="far fa-calendar-alt"></i>2020-11-26</span><span class="article-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history"></i>2024-04-18</span></time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/uni-app/">uni-app</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/uni-app/">uni-app</a></span></div><div class="content">介绍
+uni-app App端内置了一个基于 weex 改进的原生渲染引擎，提供了原生渲染能力。
+在App端，如果使用vue页面，则使用webview渲染；如果使用nvue页面(native vue的缩写)，则使用原生渲染。一个App中可以同时使用两种页面，比如首页使用nvue，二级页使用vue页面，hello uni-app示例就是如此。
+虽然nvue也可以多端编译，输出H5和小程序，但nvue的css写法受限，所以如果你不开发App，那么不需要使用nvue。
+
+
+使用场景
+需要高性能的区域长列表或瀑布流滚动。webview的页面级长列表滚动时没有性能问题的（就是滚动条覆盖webview整体高度），但页面中某个区域做长列表滚动，则需要使用nvue的list、recycle-list、waterfall等组件。这些组件的性能要高于vue页面里的区域滚动组件scroll-view。
+复杂高性能的自定义下拉刷新。uni-app的pages.json里可以配置原生下拉刷新，但引擎内置的下拉刷新样式只有雪花和circle圈2种样式。如果你需要自己做复杂的下拉刷新，推荐使用nvue的refres ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/images/hexo/avater.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">杜江</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives"><div class="headline">文章</div><div class="length_num">46</div></a></div><div class="card-info-data-item is-center">      <a href="/tags"><div class="headline">标签</div><div class="length_num">38</div></a></div><div class="card-info-data-item is-center">     <a href="/categories"><div class="headline">分类</div><div class="length_num">48</div></a></div></div><div class="card-info-bookmark is-center"><button class="button--animated" id="bookmark-it" title="加入书签"><i class="fas fa-bookmark"></i><span>加入书签</span></button></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/dj49846917" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/821084785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-recent-item"><div class="aside-recent-post"><a href="/2024/04/18/hexo/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/images/hexo/hexo_logo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="hexo环境搭建" alt="hexo环境搭建"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2024/04/18/hexo/" title="hexo环境搭建">hexo环境搭建</div><time class="aside-post_meta post-meta__date" title="发表于 2024-04-18 11:43:57">2024-04-18</time></div></a></div><div class="aside-recent-post"><a href="/2024/04/18/butterfly/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/images/hexo/hexo-theme-butterfly-doc-cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="butterfly主题的设置" alt="butterfly主题的设置"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2024/04/18/butterfly/" title="butterfly主题的设置">butterfly主题的设置</div><time class="aside-post_meta post-meta__date" title="发表于 2024-04-18 11:43:57">2024-04-18</time></div></a></div><div class="aside-recent-post"><a href="/2023/12/15/nvm/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="mac安装nvm" alt="mac安装nvm"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2023/12/15/nvm/" title="mac安装nvm">mac安装nvm</div><time class="aside-post_meta post-meta__date" title="发表于 2023-12-15 14:36:14">2023-12-15</time></div></a></div><div class="aside-recent-post"><a href="/2022/05/24/bpmnjs/bpmnjs/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/images/bpmn/logo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="bpmnjs" alt="bpmnjs"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2022/05/24/bpmnjs/bpmnjs/" title="bpmnjs">bpmnjs</div><time class="aside-post_meta post-meta__date" title="发表于 2022-05-24 15:10:41">2022-05-24</time></div></a></div><div class="aside-recent-post"><a href="/2022/05/20/lowcodeEngine/lowcodeEngine/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/images/lowcode/logo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" title="lowcodeEngine" alt="lowcodeEngine"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2022/05/20/lowcodeEngine/lowcodeEngine/" title="lowcodeEngine">lowcodeEngine</div><time class="aside-post_meta post-meta__date" title="发表于 2022-05-20 11:01:31">2022-05-20</time></div></a></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/bpmnjs/"><span class="card-category-list-name">bpmnjs</span><span class="card-category-list-count">1</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/bpmnjs/%E6%B5%81%E7%A8%8B%E5%9B%BE/"><span class="card-category-list-name">流程图</span><span class="card-category-list-count">1</span></a></li></ul><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/lowcodeEngine/"><span class="card-category-list-name">lowcodeEngine</span><span class="card-category-list-count">1</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/lowcodeEngine/%E4%BD%8E%E4%BB%A3%E7%A0%81/"><span class="card-category-list-name">低代码</span><span class="card-category-list-count">1</span></a></li></ul><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/vue/"><span class="card-category-list-name">vue</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="card-category-list-name">小程序</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">29</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">2</span></a></li></ul>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories">
+                <span>查看更多</span><i class="fas fa-angle-right"></i></a></li>           
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Hexo/" style="font-size: 17px; color: #999c9f">Hexo</a> <a href="/tags/aop/" style="font-size: 16px; color: #999">aop</a> <a href="/tags/bpmnjs/" style="font-size: 16px; color: #999">bpmnjs</a> <a href="/tags/css/" style="font-size: 16px; color: #999">css</a> <a href="/tags/html/" style="font-size: 16px; color: #999">html</a> <a href="/tags/ioc/" style="font-size: 16px; color: #999">ioc</a> <a href="/tags/java/" style="font-size: 22px; color: #99a9bf">java</a> <a href="/tags/jdbc/" style="font-size: 16px; color: #999">jdbc</a> <a href="/tags/js/" style="font-size: 17px; color: #999c9f">js</a> <a href="/tags/lombok/" style="font-size: 16px; color: #999">lombok</a> <a href="/tags/lowcodeEngine/" style="font-size: 16px; color: #999">lowcodeEngine</a> <a href="/tags/maven/" style="font-size: 17px; color: #999c9f">maven</a> <a href="/tags/mybatis/" style="font-size: 19px; color: #99a1ac">mybatis</a> <a href="/tags/mybatis-plus/" style="font-size: 17px; color: #999c9f">mybatis-plus</a> <a href="/tags/node/" style="font-size: 16px; color: #999">node</a> <a href="/tags/nvm/" style="font-size: 16px; color: #999">nvm</a> <a href="/tags/react/" style="font-size: 17px; color: #999c9f">react</a> <a href="/tags/react-native/" style="font-size: 19px; color: #99a1ac">react-native</a> <a href="/tags/react-navigation/" style="font-size: 16px; color: #999">react-navigation</a> <a href="/tags/spring/" style="font-size: 20px; color: #99a4b2">spring</a> <a href="/tags/spring-Security/" style="font-size: 17px; color: #999c9f">spring Security</a> <a href="/tags/springboot/" style="font-size: 18px; color: #999ea6">springboot</a> <a href="/tags/springmvc/" style="font-size: 17px; color: #999c9f">springmvc</a> <a href="/tags/ssm/" style="font-size: 16px; color: #999">ssm</a> <a href="/tags/typescript/" style="font-size: 16px; color: #999">typescript</a> <a href="/tags/uni-app/" style="font-size: 18px; color: #999ea6">uni-app</a> <a href="/tags/vue/" style="font-size: 18px; color: #999ea6">vue</a> <a href="/tags/webpack/" style="font-size: 16px; color: #999">webpack</a> <a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 16px; color: #999">事务</a> <a href="/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/" style="font-size: 16px; color: #999">低代码</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 16px; color: #999">小程序</a> <a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" style="font-size: 16px; color: #999">开发问题及解决办法</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 17px; color: #999c9f">教程</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 16px; color: #999">数据结构与算法</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" style="font-size: 16px; color: #999">流程图</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 16px; color: #999">笔试</a> <a href="/tags/%E9%80%82%E9%85%8D/" style="font-size: 16px; color: #999">适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 21px; color: #99a6b9">面试</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/10/"><span class="card-archive-list-date">十月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/09/"><span class="card-archive-list-date">九月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/07/"><span class="card-archive-list-date">七月 2021</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives">
+              <span>查看更多</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">文章数目 :</div><div class="webinfo-article-count">46</div></div><div class="webinfo-item"><div class="webinfo-runtime-name">已运行时间 :</div><div class="webinfo-runtime-count" id="webinfo-runtime-count" publish_date="2020/6/21 12:00:00">     </div></div><div class="webinfo-item">      <div class="webinfo-site-uv-name">本站访客数 :</div><div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="webinfo-site-name">本站总访问量 :</div><div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 杜江</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://dj49846917.github.io/" target="_blank" rel="noopener">blog</a>!</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/click_heart.js"></script><script src="https://cdn.jsdelivr.net/npm/typed.js"></script><script>var subtitleEffect = true
+if (subtitleEffect) { 
+  var typed = new Typed("#subtitle", {
+    strings: "非淡泊无以明志，非宁静无以致远。".split(","),
+    startDelay: 300,
+    typeSpeed: 150,
+    loop: true,
+    backSpeed: 50
+  })
+} else {
+  document.getElementById("subtitle").innerHTML = '非淡泊无以明志，非宁静无以致远。'
+}</script></body></html>

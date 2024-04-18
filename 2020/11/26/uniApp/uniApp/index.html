@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>uni-app开发总结 | 杜江的博客</title><meta name="description" content="是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序（微信&#x2F;支付宝&#x2F;百度&#x2F;头条&#x2F;QQ&#x2F;钉钉&#x2F;淘宝）、快应用等多个平台。"><meta name="keywords" content="uni-app"><meta name="author" content="杜江"><meta name="copyright" content="杜江"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/11/26/uniApp/uniApp/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="uni-app开发总结"><meta property="og:url" content="http://yoursite.com/2020/11/26/uniApp/uniApp/"><meta property="og:site_name" content="杜江的博客"><meta property="og:description" content="是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序（微信&#x2F;支付宝&#x2F;百度&#x2F;头条&#x2F;QQ&#x2F;钉钉&#x2F;淘宝）、快应用等多个平台。"><meta property="og:image" content="http://yoursite.com/images/uniApp/logo.jpg"><meta property="article:published_time" content="2020-11-26T06:38:48.000Z"><meta property="article:modified_time" content="2024-04-18T03:43:57.902Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="prev" title="uni-app中nvue的开发心得" href="http://yoursite.com/2020/11/26/uniApp/uniApp2/"><link rel="next" title="uni-app问题收集及解决" href="http://yoursite.com/2020/11/26/uniApp/uniAppProblem/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/images/hexo/avater.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">38</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">48</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开发环境搭建"><span class="toc-number">1.</span> <span class="toc-text">开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载HBuilderX"><span class="toc-number">1.1.</span> <span class="toc-text">下载HBuilderX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装插件"><span class="toc-number">1.2.</span> <span class="toc-text">安装插件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app的开发总结"><span class="toc-number">2.</span> <span class="toc-text">uni-app的开发总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#条件编译"><span class="toc-number">2.1.</span> <span class="toc-text">条件编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#写法：以-ifdef-或-ifndef-加-PLATFORM-开头，以-endif-结尾。"><span class="toc-number">2.1.1.</span> <span class="toc-text">写法：以 #ifdef 或 #ifndef 加 %PLATFORM% 开头，以 #endif 结尾。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适配"><span class="toc-number">2.2.</span> <span class="toc-text">适配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#uni-app-支持的通用-css-单位包括-px、rpx"><span class="toc-number">2.2.1.</span> <span class="toc-text">uni-app 支持的通用 css 单位包括 px、rpx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设计稿-1px-设计稿基准宽度-框架样式-1rpx-750rpx"><span class="toc-number">2.2.2.</span> <span class="toc-text">设计稿 1px &#x2F; 设计稿基准宽度 &#x3D; 框架样式 1rpx &#x2F; 750rpx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例说明："><span class="toc-number">2.2.3.</span> <span class="toc-text">举例说明：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#详细文档请看"><span class="toc-number">2.2.4.</span> <span class="toc-text">详细文档请看</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app设置底部导航栏"><span class="toc-number">3.</span> <span class="toc-text">uni-app设置底部导航栏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app隐藏顶部导航栏"><span class="toc-number">4.</span> <span class="toc-text">uni-app隐藏顶部导航栏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app中获取状态栏的高度"><span class="toc-number">5.</span> <span class="toc-text">uni-app中获取状态栏的高度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app集成vuex"><span class="toc-number">6.</span> <span class="toc-text">uni-app集成vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#集成步骤"><span class="toc-number">6.1.</span> <span class="toc-text">集成步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mapState的使用"><span class="toc-number">6.2.</span> <span class="toc-text">mapState的使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app-在js中rpx转换为px"><span class="toc-number">7.</span> <span class="toc-text">uni-app 在js中rpx转换为px</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app-监听键盘变化"><span class="toc-number">8.</span> <span class="toc-text">uni-app 监听键盘变化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app-跳转页面并传递参数"><span class="toc-number">9.</span> <span class="toc-text">uni-app 跳转页面并传递参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-navigateTo-OBJECT"><span class="toc-number">9.1.</span> <span class="toc-text">uni.navigateTo(OBJECT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-app调取相册"><span class="toc-number">9.2.</span> <span class="toc-text">uni-app调取相册</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><header class="post-bg" id="page-header" style="background-image: url(/images/uniApp/logo.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">杜江的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">uni-app开发总结</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-26 14:38:48"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-11-26</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2024-04-18 11:43:57"><i class="fas fa-history fa-fw"></i> 更新于 2024-04-18</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><i class="fas fa-angle-right post-meta__separator"></i><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/uni-app/">uni-app</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="开发环境搭建"><a href="#开发环境搭建" class="headerlink" title="开发环境搭建"></a>开发环境搭建</h1><h2 id="下载HBuilderX"><a href="#下载HBuilderX" class="headerlink" title="下载HBuilderX"></a>下载HBuilderX</h2><ul>
+<li>下载地址：<a href="https://www.dcloud.io/hbuilderx.html" target="_blank" rel="noopener">https://www.dcloud.io/hbuilderx.html</a><h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2></li>
+<li>打开菜单： 工具 &gt; 插件安装，安装以下插件<ul>
+<li>App真机运行</li>
+<li>es6编译</li>
+<li>eslint-js</li>
+<li>eslint-plugin-vue</li>
+<li>less编译</li>
+<li>scss/sass编译</li>
+<li>stylus编译</li>
+<li>uni-app App调试</li>
+<li>uni-app编译</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="uni-app的开发总结"><a href="#uni-app的开发总结" class="headerlink" title="uni-app的开发总结"></a>uni-app的开发总结</h1><h2 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h2><h3 id="写法：以-ifdef-或-ifndef-加-PLATFORM-开头，以-endif-结尾。"><a href="#写法：以-ifdef-或-ifndef-加-PLATFORM-开头，以-endif-结尾。" class="headerlink" title="写法：以 #ifdef 或 #ifndef 加 %PLATFORM% 开头，以 #endif 结尾。"></a>写法：以 #ifdef 或 #ifndef 加 %PLATFORM% 开头，以 #endif 结尾。</h3><ul>
+<li>#ifdef：if defined 仅在某平台存在</li>
+<li>#ifndef：if not defined 除了某平台均存在</li>
+<li>%PLATFORM%：平台名称</li>
+<li>详细文档请看：<a href="https://uniapp.dcloud.io/platform?id=%e6%9d%a1%e4%bb%b6%e7%bc%96%e8%af%91" target="_blank" rel="noopener">https://uniapp.dcloud.io/platform?id=%e6%9d%a1%e4%bb%b6%e7%bc%96%e8%af%91</a></li>
+</ul>
+<hr>
+<h2 id="适配"><a href="#适配" class="headerlink" title="适配"></a>适配</h2><h3 id="uni-app-支持的通用-css-单位包括-px、rpx"><a href="#uni-app-支持的通用-css-单位包括-px、rpx" class="headerlink" title="uni-app 支持的通用 css 单位包括 px、rpx"></a>uni-app 支持的通用 css 单位包括 px、rpx</h3><ul>
+<li>px 即屏幕像素</li>
+<li>rpx 即响应式px，一种根据屏幕宽度自适应的动态单位。以750宽的屏幕为基准，750rpx恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App 端和 H5 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算</li>
+</ul>
+<h3 id="设计稿-1px-设计稿基准宽度-框架样式-1rpx-750rpx"><a href="#设计稿-1px-设计稿基准宽度-框架样式-1rpx-750rpx" class="headerlink" title="设计稿 1px / 设计稿基准宽度 = 框架样式 1rpx / 750rpx"></a>设计稿 1px / 设计稿基准宽度 = 框架样式 1rpx / 750rpx</h3><h3 id="举例说明："><a href="#举例说明：" class="headerlink" title="举例说明："></a>举例说明：</h3><ul>
+<li>若设计稿宽度为 750px，元素 A 在设计稿上的宽度为 100px，那么元素 A 在 uni-app 里面的宽度应该设为：750 * 100 / 750，结果为：100rpx。</li>
+<li>若设计稿宽度为 640px，元素 A 在设计稿上的宽度为 100px，那么元素 A 在 uni-app 里面的宽度应该设为：750 * 100 / 640，结果为：117rpx。</li>
+<li>若设计稿宽度为 375px，元素 B 在设计稿上的宽度为 200px，那么元素 B 在 uni-app 里面的宽度应该设为：750 * 200 / 375，结果为：400rpx。</li>
+</ul>
+<div class="note warning">
+            <p>注意：</p><ol><li>vue页面支持普通H5单位，但在nvue里不支持：<ul><li>rem 根字体大小可以通过 page-meta 配置</li><li>vh viewpoint height，视窗高度，1vh等于视窗高度的1%</li><li>vw viewpoint width，视窗宽度，1vw等于视窗宽度的1%</li></ul></li><li>nvue还不支持百分比单位。</li><li>App端，在 pages.json 里的 titleNView 或页面里写的 plus api 中涉及的单位，只支持 px。<strong>注意此时不支持 rpx</strong></li></ol>
+          </div>
+
+<h3 id="详细文档请看"><a href="#详细文档请看" class="headerlink" title="详细文档请看"></a>详细文档请看</h3><ul>
+<li>详细文档请看: <a href="https://uniapp.dcloud.io/frame?id=%e5%b0%ba%e5%af%b8%e5%8d%95%e4%bd%8d" target="_blank" rel="noopener">https://uniapp.dcloud.io/frame?id=%e5%b0%ba%e5%af%b8%e5%8d%95%e4%bd%8d</a></li>
+</ul>
+<hr>
+<h1 id="uni-app设置底部导航栏"><a href="#uni-app设置底部导航栏" class="headerlink" title="uni-app设置底部导航栏"></a>uni-app设置底部导航栏</h1><ul>
+<li>详细文档请看: <a href="https://uniapp.dcloud.io/collocation/pages?id=tabbar" target="_blank" rel="noopener">https://uniapp.dcloud.io/collocation/pages?id=tabbar</a></li>
+<li>代码配置如下:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;tabBar&quot;: &#123;</span><br><span class="line">    &quot;color&quot;: &quot;#000000&quot;,</span><br><span class="line">    &quot;selectedColor&quot;: &quot;#07c261&quot;,</span><br><span class="line">    &quot;backgroundColor&quot;: &quot;#ffffff&quot;,</span><br><span class="line">    &quot;list&quot;: [&#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;home&#x2F;home&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;static&#x2F;images&#x2F;index.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;static&#x2F;images&#x2F;index-select.png&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;微信&quot;</span><br><span class="line">    &#125;, </span><br><span class="line">  &#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;chat&#x2F;chat&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;static&#x2F;images&#x2F;mail.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;static&#x2F;images&#x2F;mail-select.png&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;通讯录&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">      &quot;pagePath&quot;: &quot;pages&#x2F;look&#x2F;look&quot;,</span><br><span class="line">      &quot;iconPath&quot;: &quot;static&#x2F;images&#x2F;find.png&quot;,</span><br><span class="line">      &quot;selectedIconPath&quot;: &quot;static&#x2F;images&#x2F;find-select.png&quot;,</span><br><span class="line">      &quot;text&quot;: &quot;发现&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">      &quot;pagePath&quot;: &quot;pages&#x2F;account&#x2F;account&quot;,</span><br><span class="line">      &quot;iconPath&quot;: &quot;static&#x2F;images&#x2F;my.png&quot;,</span><br><span class="line">      &quot;selectedIconPath&quot;: &quot;static&#x2F;images&#x2F;my-select.png&quot;,</span><br><span class="line">      &quot;text&quot;: &quot;我&quot;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="uni-app隐藏顶部导航栏"><a href="#uni-app隐藏顶部导航栏" class="headerlink" title="uni-app隐藏顶部导航栏"></a>uni-app隐藏顶部导航栏</h1><ul>
+<li><p>在pages.json中，设置globalStyle的navigationStyle: custom</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; pages.json</span><br><span class="line"></span><br><span class="line">&quot;globalStyle&quot;: &#123;</span><br><span class="line">  ...</span><br><span class="line">  &quot;navigationStyle&quot;:&quot;custom&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在pages.json中，设置globalStyle的app-plus</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; pages.json</span><br><span class="line">    </span><br><span class="line">&quot;globalStyle&quot;: &#123;</span><br><span class="line">  ...</span><br><span class="line">  &quot;app-plus&quot;: &#123;</span><br><span class="line">    &quot;titleNView&quot;: false,</span><br><span class="line">    &quot;scrollIndicator&quot;: &quot;none&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<div class="note warning">
+            <p>navigationStyle设置成custom之后，所有端的原生导航栏都没有了，包括app和小程序，如果只想app端去掉导航栏，使用app-plus</p>
+          </div>
+
+<h1 id="uni-app中获取状态栏的高度"><a href="#uni-app中获取状态栏的高度" class="headerlink" title="uni-app中获取状态栏的高度"></a>uni-app中获取状态栏的高度</h1><ol>
+<li><p>使用plus.navigator.getStatusbarHeight()</p>
+<ul>
+<li><strong>注意，该api只在nvue里有效，一定要用条件编译</strong><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;view class&#x3D;&quot;tipBar&quot; :style&#x3D;&quot;&#39;height&#39;+ tipBarHeight + &#39;px&#39;&quot;&gt;</span><br><span class="line">  &lt;text&gt;&#123;&#123; tipBarHeight &#125;&#125;&lt;&#x2F;text&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      tipBarHeight: 0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad() &#123;</span><br><span class="line">    &#x2F;&#x2F; #ifdef APP-PLUS-NVUE</span><br><span class="line">      this.tipBarHeight &#x3D; plus.navigator.getStatusbarHeight()   &#x2F;&#x2F; 获取状态栏的高度</span><br><span class="line">    &#x2F;&#x2F; #endif</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>使用uni.getSystemInfoSync().statusBarHeight</p>
+<ul>
+<li>该api可以在所有端都有用<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;view class&#x3D;&quot;tipBar&quot; :style&#x3D;&quot;&#39;height&#39;+ tipBarHeight + &#39;px&#39;&quot;&gt;</span><br><span class="line">  &lt;text&gt;&#123;&#123; tipBarHeight &#125;&#125;&lt;&#x2F;text&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      tipBarHeight: 0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad() &#123;</span><br><span class="line">    this.tipBarHeight &#x3D; uni.getSystemInfoSync().statusBarHeight &#x2F;&#x2F; 获取状态栏高度</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="uni-app集成vuex"><a href="#uni-app集成vuex" class="headerlink" title="uni-app集成vuex"></a>uni-app集成vuex</h1><h2 id="集成步骤"><a href="#集成步骤" class="headerlink" title="集成步骤"></a>集成步骤</h2><ol>
+<li><p>在根路径下创建store文件夹，并创建modules文件夹和index.js</p>
+</li>
+<li><p>在modules文件夹下随意新建一个js文件，写入以下代码</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const home &#x3D; &#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    user: &quot;张三&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default home;</span><br></pre></td></tr></table></figure></li>
+<li><p>index.js中写入以下代码:</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import Vuex from &#39;vuex&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">import home from &quot;.&#x2F;modules&#x2F;home.js&quot;</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">  modules:&#123;</span><br><span class="line">    home</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在main.js中引入store</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import store from &quot;.&#x2F;store&#x2F;index.js&quot;</span><br><span class="line"></span><br><span class="line">Vue.prototype.$store &#x3D; store</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用：通过this.$store.state就能获取store里的值</p>
+</li>
+</ol>
+<h2 id="mapState的使用"><a href="#mapState的使用" class="headerlink" title="mapState的使用"></a>mapState的使用</h2><ul>
+<li>通过vuex存储和获取状态栏的高度<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 在App.vue中：</span><br><span class="line"></span><br><span class="line">onLaunch: function() &#123;</span><br><span class="line">  &#x2F;&#x2F; #ifdef APP-PLUS-NVUE</span><br><span class="line"> </span><br><span class="line">  &#x2F;&#x2F; 获取状态栏的高度</span><br><span class="line">  this.$store.commit(&quot;app&#x2F;setTipBarHeight&quot;, plus.navigator.getStatusbarHeight())</span><br><span class="line">  &#x2F;&#x2F; #endif</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 在store&#x2F;app.js中：</span><br><span class="line"></span><br><span class="line">const App &#x3D; &#123;</span><br><span class="line">  namespaced: true,</span><br><span class="line">  state: &#123;</span><br><span class="line">    tipBarHeight: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    setTipBarHeight: (state, payload) &#x3D;&gt; &#123;</span><br><span class="line">      state.tipBarHeight &#x3D; payload</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">export default App</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 调用，在home.nvue中：</span><br><span class="line"></span><br><span class="line">&lt;view class&#x3D;&quot;tipBar&quot; :style&#x3D;&quot;getStatusBarHeight&quot;&gt;&lt;&#x2F;view&gt;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">  ...mapState(&#123;</span><br><span class="line">    getStatusBarHeight: (state) &#x3D;&gt; &#123;</span><br><span class="line">      return &#96;height: $&#123;state.app.tipBarHeight&#125;px&#96;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;),</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="uni-app-在js中rpx转换为px"><a href="#uni-app-在js中rpx转换为px" class="headerlink" title="uni-app 在js中rpx转换为px"></a>uni-app 在js中rpx转换为px</h1><ul>
+<li>使用uni.upx2px(value)</li>
+</ul>
+<h1 id="uni-app-监听键盘变化"><a href="#uni-app-监听键盘变化" class="headerlink" title="uni-app 监听键盘变化"></a>uni-app 监听键盘变化</h1>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> &#x2F;&#x2F; 监听键盘高度变化</span><br><span class="line">uni.onKeyboardHeightChange(res &#x3D;&gt; &#123;</span><br><span class="line">	this.$store.commit(&quot;app&#x2F;setKeyBoardHeight&quot;, res.height)</span><br><span class="line">	this.keyBoardHeight &#x3D; res.height</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="uni-app-跳转页面并传递参数"><a href="#uni-app-跳转页面并传递参数" class="headerlink" title="uni-app 跳转页面并传递参数"></a>uni-app 跳转页面并传递参数</h1><h2 id="uni-navigateTo-OBJECT"><a href="#uni-navigateTo-OBJECT" class="headerlink" title="uni.navigateTo(OBJECT)"></a>uni.navigateTo(OBJECT)</h2><ul>
+<li><p>保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。</p>
+</li>
+<li><p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;在起始页面跳转到test.vue页面并传递参数</span><br><span class="line">uni.navigateTo(&#123;</span><br><span class="line">    url: &#39;test?id&#x3D;1&amp;name&#x3D;uniapp&#39;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接收参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 在test.vue页面接受参数</span><br><span class="line">export default &#123;</span><br><span class="line">    onLoad: function (option) &#123; &#x2F;&#x2F;option为object类型，会序列化上个页面传递的参数</span><br><span class="line">        console.log(option.id); &#x2F;&#x2F;打印出上个页面传递的参数。</span><br><span class="line">        console.log(option.name); &#x2F;&#x2F;打印出上个页面传递的参数。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>url有长度限制，太长的字符串会传递失败，可使用窗体通信、全局变量，或encodeURIComponent等多种方式解决，如下为encodeURIComponent示例。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;navigator :url&#x3D;&quot;&#39;&#x2F;pages&#x2F;test&#x2F;test?item&#x3D;&#39;+ encodeURIComponent(JSON.stringify(item))&quot;&gt;&lt;&#x2F;navigator&gt;  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 在test.vue页面接受参数</span><br><span class="line">onLoad: function (option) &#123;</span><br><span class="line">    const item &#x3D; JSON.parse(decodeURIComponent(option.item));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="uni-app调取相册"><a href="#uni-app调取相册" class="headerlink" title="uni-app调取相册"></a>uni-app调取相册</h2><ul>
+<li><p>使用uni.chooseImage</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uni.chooseImage(&#123;</span><br><span class="line">    count: 6, &#x2F;&#x2F;默认9</span><br><span class="line">    sizeType: [&#39;original&#39;, &#39;compressed&#39;], &#x2F;&#x2F;可以指定是原图还是压缩图，默认二者都有</span><br><span class="line">    sourceType: [&#39;album&#39;], &#x2F;&#x2F;从相册选择</span><br><span class="line">    success: function (res) &#123;</span><br><span class="line">        console.log(JSON.stringify(res.tempFilePaths));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态的自适应图片大小(保真)，最大宽度510，最大高度360</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;image </span><br><span class="line">  v-else-if&#x3D;&quot;data.type&#x3D;&#x3D;&#x3D;&#39;image&#39;&quot; </span><br><span class="line">  :src&#x3D;&quot;data.data&quot; </span><br><span class="line">  :style&#x3D;&quot;chatImg&quot; </span><br><span class="line">  class&#x3D;&quot;chat_item_other_box_content_img&quot; </span><br><span class="line">  @load&#x3D;&quot;loadImg&quot;</span><br><span class="line">&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      h: 360,</span><br><span class="line">      w: 510</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    &#x2F;&#x2F; 对图片做自适应，高度最大不高于360，宽度最大不大于510</span><br><span class="line">    chatImg() &#123;</span><br><span class="line">      return &#96;width: $&#123;this.w&#125;px; height: $&#123;this.h&#125;px;&#96;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    &#x2F;&#x2F; 动态根据图片原始宽高比计算图片的缩放宽高</span><br><span class="line">    loadImg(e) &#123;</span><br><span class="line">      &#x2F;&#x2F; 原图的宽高比</span><br><span class="line">      const compares &#x3D; e.detail.width &#x2F; e.detail.height</span><br><span class="line">      const maxHeight &#x3D; uni.upx2px(360)</span><br><span class="line">      const maxWidth &#x3D; uni.upx2px(510)</span><br><span class="line">      if(e.detail.height &gt; maxHeight) &#123;</span><br><span class="line">        if(maxHeight * compares &gt; maxWidth) &#123;</span><br><span class="line">          this.w &#x3D; maxWidth</span><br><span class="line">          this.h &#x3D; this.w &#x2F; compares</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          this.h &#x3D; maxHeight</span><br><span class="line">          this.w &#x3D; compares * maxHeight</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        &#x2F;&#x2F; 原始高度&lt;&#x3D;360并且宽度大于510</span><br><span class="line">        if(e.detail.width &gt; maxWidth) &#123;</span><br><span class="line">          this.w &#x3D; maxWidth</span><br><span class="line">          this.h &#x3D; maxWidth &#x2F; compares</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          this.h &#x3D; e.detail.height</span><br><span class="line">          this.w &#x3D; e.detail.width</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">杜江</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/11/26/uniApp/uniApp/">http://yoursite.com/2020/11/26/uniApp/uniApp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">杜江的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/uni-app/">uni-app</a></div><div class="post_share"><div class="social-share" data-image="/images/hexo/hexo_logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/26/uniApp/uniApp2/"><img class="prev-cover" data-src="/images/uniApp/logo.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">uni-app中nvue的开发心得</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/26/uniApp/uniAppProblem/"><img class="next-cover" data-src="/images/uniApp/logo.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">uni-app问题收集及解决</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/11/26/uniApp/uniApp2/" title="uni-app中nvue的开发心得"><img class="relatedPosts_cover" data-src="/images/uniApp/logo.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-26</div><div class="relatedPosts_title">uni-app中nvue的开发心得</div></div></a></div><div class="relatedPosts_item"><a href="/2020/11/26/uniApp/uniAppProblem/" title="uni-app问题收集及解决"><img class="relatedPosts_cover" data-src="/images/uniApp/logo.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-26</div><div class="relatedPosts_title">uni-app问题收集及解决</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC81MDYyNy8yNzExMA=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 杜江</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://dj49846917.github.io/" target="_blank" rel="noopener">blog</a>!</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="/js/third-party/canvas-nest.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/click_heart.js"></script></body></html>
